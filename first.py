@@ -1,161 +1,103 @@
-# ---------------------------- CLASS PURCHASE ----------------------------
+# DS111 - Lab 2
+# OOP and Files – Purchases Processing
 
-class Purchase:  
+
+# ---------------------------------------------------------
+# Question 1: Implementing Purchase class
+# ---------------------------------------------------------
+
+class Purchase:
     def __init__(self, customer_name, product, price, quantity):
-        self.__customer_name = customer_name    # حفظ اسم الزبون بشكل private
-        self.__product = product                # حفظ اسم المنتج
-        self.__price = price                    # حفظ السعر
-        self.__quantity = quantity              # حفظ الكمية
+        self.customer_name = customer_name
+        self.product = product
+        self.price = float(price)
+        self.quantity = int(quantity)
 
-    # --------------------- Getters & Setters ---------------------
-
+    # Getters and Setters
     def get_customer_name(self):
-        return self.__customer_name             # ارجاع اسم الزبون
+        return self.customer_name
 
     def set_customer_name(self, name):
-        self.__customer_name = name             # تعديل اسم الزبون
+        self.customer_name = name
 
     def get_product(self):
-        return self.__product                   # ارجاع اسم المنتج
+        return self.product
 
     def set_product(self, product):
-        self.__product = product                # تعديل اسم المنتج
+        self.product = product
 
     def get_price(self):
-        return self.__price                     # ارجاع السعر
+        return self.price
 
     def set_price(self, price):
-        self.__price = price                    # تعديل السعر
+        self.price = float(price)
 
     def get_quantity(self):
-        return self.__quantity                  # ارجاع الكمية
+        return self.quantity
 
     def set_quantity(self, quantity):
-        self.__quantity = quantity              # تعديل الكمية
+        self.quantity = int(quantity)
 
-    # --------------------- Functional Methods ---------------------
-
+    # Total price for one purchase
     def get_total(self):
-        return self.__price * self.__quantity   # حساب قيمة العملية: السعر × الكمية
-
-    def __str__(self):
-        # شكل الكتابة عند طباعة object من نوع Purchase
-        return f"{self.__customer_name} bought {self.__quantity} x {self.__product} at ${self.__price} each"
+        return self.price * self.quantity
 
 
-# ---------------------------- READ PURCHASES ----------------------------
-
-def read_purchases(filename):
-    purchases = []                              # إنشاء قائمة فارغة لتخزين الكائنات
-
-    with open(filename, 'r') as file:           # فتح ملف المشتريات للقراءة
-        for line in file:                       # قراءة الملف سطر بسطر
-            parts = line.strip().split(',')     # تقسيم السطر إلى أجزاء بناءً على الفاصلة
-
-            if len(parts) == 4:                 # التأكد أن السطر يحتوي 4 قيم
-                customer_name = parts[0]        # استخراج اسم الزبون
-                product = parts[1]              # استخراج اسم المنتج
-                price = float(parts[2])         # تحويل السعر إلى float
-                quantity = int(parts[3])        # تحويل الكمية إلى int
-
-                # إنشاء كائن Purchase
-                purchase = Purchase(customer_name, product, price, quantity)
-
-                purchases.append(purchase)      # إضافة الكائن للقائمة
-
-    return purchases                            # إرجاع القائمة كاملة
+# Create the four objects required
+obj1 = Purchase("Ahmad", "car", 999.99, 1)
+obj2 = Purchase("Rana", "Mouse", 25.50, 2)
+obj3 = Purchase("Charlie", "Keyboard", 45.00, 1)
+obj4 = Purchase("Rama", "Mouse", 25.50, 1)
 
 
-# ---------------------------- TOTAL SALES ----------------------------
+# ---------------------------------------------------------
+# Question 2a: Read purchases from file
+# ---------------------------------------------------------
 
-def compute_total_sales(purchases):
-    total = 0                                   # متغير لجمع المبيعات
-    for purchase in purchases:                  # المرور على كل عملية شراء
-        total += purchase.get_total()           # إضافة إجمالي العملية إلى المجموع
-    return total                                # إرجاع مجموع المبيعات
+def read_purchases(file_path):
+    purchases_list = []
 
+    with open(file_path, "r") as file:
+        for line in file:
+            line = line.strip()
 
-# ---------------------------- COUNT PRODUCTS ----------------------------
+            if line == "":
+                continue
 
-def count_products_sold(purchases):
-    product_counts = {}                         # قاموس: المنتج → كمية البيع
+            customer, product, price, quantity = line.split(",")
 
-    for purchase in purchases:                  # المرور على كل عملية شراء
-        product = purchase.get_product()        # استخراج اسم المنتج
-        quantity = purchase.get_quantity()      # استخراج الكمية
+            purchase_obj = Purchase(customer, product, price, quantity)
+            purchases_list.append(purchase_obj)
 
-        if product in product_counts:           # إذا المنتج موجود في القاموس
-            product_counts[product] += quantity # جمع الكمية
-        else:
-            product_counts[product] = quantity  # إضافة المنتج لأول مرة
-
-    return product_counts                       # إرجاع القاموس
+    return purchases_list
 
 
-# ---------------------------- MARKETING QUESTIONS ----------------------------
+# ---------------------------------------------------------
+# Question 2b: Find total revenue
+# ---------------------------------------------------------
 
-def get_most_sold_product(purchases):
-    products = count_products_sold(purchases)   # الحصول على عدد كل منتج
-    
-    most_product = None                         # اسم المنتج الأكثر بيعاً
-    max_qty = -1                                # أعلى كمية بيع
-    
-    for product, qty in products.items():       # المرور على القاموس
-        if qty > max_qty:                       # إيجاد أكبر كمية
-            max_qty = qty
-            most_product = product
-
-    return most_product, max_qty                # إرجاع المنتج + الكمية
+def Find_Total(purchases_list):
+    total = 0
+    for p in purchases_list:
+        total += p.get_total()
+    return total
 
 
-def get_top_customer_by_quantity(purchases):
-    customer_counts = {}                        # قاموس: زبون → مجموع الكميات
-
-    for purchase in purchases:
-        name = purchase.get_customer_name()     # استخراج اسم الزبون
-        qty = purchase.get_quantity()           # استخراج الكمية
-        
-        if name in customer_counts:
-            customer_counts[name] += qty        # جمع الكمية
-        else:
-            customer_counts[name] = qty         # إضافة زبون جديد
-
-    top_customer = None                         # اسم الزبون الأكثر شراء
-    max_qty = -1                                # أعلى كمية
-
-    for name, qty in customer_counts.items():   # المرور على القاموس
-        if qty > max_qty:                       # إيجاد أعلى كمية
-            max_qty = qty
-            top_customer = name
-
-    return top_customer, max_qty                # إرجاع الزبون والكمية
-
-
-# ---------------------------- MAIN PROGRAM ----------------------------
+# ---------------------------------------------------------
+# Question 2c: Main function
+# ---------------------------------------------------------
 
 def main():
-    purchases = read_purchases("purchases.txt")   # قراءة ملف المشتريات
+    # 1. Read dataset
+    file_path = "purchases.txt"
+    purchases = read_purchases(file_path)
 
-    print("\n--- All Purchases ---")
-    for p in purchases:                            # طباعة كل عملية
-        print(p)
+    # 2. Compute total revenue
+    total_revenue = Find_Total(purchases)
 
-    total_sales = compute_total_sales(purchases)   # حساب إجمالي المبيعات
-    print(f"\nTotal Sales: ${total_sales:.2f}")
-
-    products = count_products_sold(purchases)      # حساب الكميات لكل منتج
-    print("\n--- Products Sold ---")
-    for product, qty in products.items():
-        print(f"{product}: {qty}")
-
-    most_product, qty = get_most_sold_product(purchases)
-    print(f"\nMost Sold Product: {most_product} ({qty} units)")
-
-    top_customer, qty = get_top_customer_by_quantity(purchases)
-    print(f"Top Customer by Quantity: {top_customer} ({qty} items)")
+    print("Total Revenue =", total_revenue)
 
 
-# ---------------------------- RUN MAIN ----------------------------
-
+# Run the program
 if __name__ == "__main__":
-    main()    # تشغيل البرنامج
+    main()
