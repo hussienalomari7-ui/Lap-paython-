@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Learning & Data Preprocessing - Exam Practice</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- MathJax for rendering LaTeX formulas -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --border-color: #334155;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-color: #6366f1;
+      --accent-hover: #4f46e5;
+      --success-color: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --error-color: #ef4444;
+      --error-bg: rgba(239, 68, 68, 0.15);
+      --warning-color: #f59e0b;
+      --radius: 12px;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --accent-color: #4f46e5;
+      --accent-hover: #4338ca;
+      --success-color: #059669;
+      --success-bg: rgba(5, 150, 105, 0.1);
+      --error-color: #dc2626;
+      --error-bg: rgba(220, 38, 38, 0.1);
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .title-area h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .title-area p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .btn-primary {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      color: white;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2rem;
+      flex: 1;
+    }
+
+    @media (max-width: 992px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar-bg {
+      background: var(--border-color);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-bar-fill {
+      background: var(--accent-color);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .grid-nav {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 0.25rem;
+    }
+
+    .grid-nav-btn {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .grid-nav-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--text-primary);
+    }
+
+    .grid-nav-btn.active {
+      border-color: var(--accent-color);
+      outline: 2px solid var(--accent-color);
+    }
+
+    .grid-nav-btn.correct {
+      background: var(--success-bg);
+      border-color: var(--success-color);
+      color: var(--success-color);
+    }
+
+    .grid-nav-btn.incorrect {
+      background: var(--error-bg);
+      border-color: var(--error-color);
+      color: var(--error-color);
+    }
+
+    /* Question Card Area */
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .question-number {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .option-item {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      transition: all 0.2s;
+    }
+
+    .option-item:hover {
+      border-color: var(--accent-color);
+    }
+
+    .option-key {
+      font-weight: 700;
+      color: var(--accent-color);
+      min-width: 24px;
+    }
+
+    .option-text {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    /* Option States */
+    .option-item.selected {
+      border-color: var(--accent-color);
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    .option-item.correct {
+      border-color: var(--success-color);
+      background: var(--success-bg);
+    }
+
+    .option-item.incorrect {
+      border-color: var(--error-color);
+      background: var(--error-bg);
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      background: var(--bg-primary);
+      border-left: 4px solid var(--accent-color);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .explanation-box.show {
+      display: block;
+    }
+
+    .explanation-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .explanation-text {
+      font-size: 0.925rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* Footer Controls */
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+    }
+
+    .mode-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--border-color);
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <header>
+    <div class="header-content">
+      <div class="title-area">
+        <h1>Machine Learning & Data Preprocessing</h1>
+        <p>Interactive Question Bank (70 Questions)</p>
+      </div>
+      <div class="controls">
+        <button class="btn" id="modeToggleBtn">Mode: Practice</button>
+        <button class="btn" id="themeToggleBtn">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h3>Questions</h3>
+        <span id="scoreTracker" style="font-size: 0.85rem; color: var(--text-secondary);">0 / 70 Solved</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <div class="grid-nav" id="gridNav">
+        <!-- Buttons injected dynamically -->
+      </div>
+    </aside>
+
+    <!-- Main Question View -->
+    <main class="question-card">
+      <div class="question-header">
+        <span class="question-number" id="qNumber">Question 1 of 70</span>
+        <span class="mode-badge" id="modeBadge">Practice Mode</span>
+      </div>
+
+      <div class="question-text" id="qText">
+        Loading Question...
+      </div>
+
+      <div class="options-list" id="qOptions">
+        <!-- Options injected dynamically -->
+      </div>
+
+      <div class="explanation-box" id="explanationBox">
+        <div class="explanation-title">Explanation:</div>
+        <div class="explanation-text" id="explanationText"></div>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn" id="prevBtn">← Previous</button>
+        <button class="btn btn-primary" id="nextBtn">Next →</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Complete 70 Questions Data Structure
+    const questionsData = [
+      {
+        id: 1,
+        question: "A data scientist applies K-Means clustering to an unlabeled corporate dataset and achieves an exceptionally high Silhouette Score. However, upon manual inspection, an expert domain analyst notes that the algorithm grouped the records based on arbitrary system-generated timestamp increments rather than actual underlying operational characteristics. Which core challenge of unsupervised learning does this scenario directly illustrate?",
+        options: {
+          A: "The computational inability of distance metrics to handle high-dimensional spaces.",
+          B: "The lack of direct ground truth feedback, making models highly prone to prioritizing statistically dominant but semantically irrelevant features.",
+          C: "The complete failure of iterative model building within exploratory data analysis.",
+          D: "The architectural constraint where dimensionality reduction must precede clustering pipelines."
+        },
+        answer: "B",
+        explanation: "Unsupervised learning lacks ground truth labels to guide the algorithm toward semantically meaningful patterns. Consequently, without human validation or explicit preprocessing, the model optimizes purely for mathematical distance, which can easily be dominated by mathematically distinct but irrelevant variables like timestamps."
+      },
+      {
+        id: 2,
+        question: "An engineer is designing a failure-prediction system for an industrial turbine. They have access to a dataset containing millions of operational cycles collected during a period when the turbine was verified to be operating with 100% perfection under strict quality control. The engineer wants the system to flag any future deviations or unknown mechanical configurations. Which paradigm is most appropriate, and what is its strict data requirement?",
+        options: {
+          A: "Anomaly Detection; it must tolerate a noisy, unvetted training set containing unknown defects.",
+          B: "Novelty Detection; it requires a completely clean training set free of any anomalous or unwanted instances.",
+          C: "Out-of-Distribution Detection; it mandates a multi-class dataset containing pre-categorized failure modes.",
+          D: "Association Rule Learning; it requires establishing conditional transactions between binary features."
+        },
+        answer: "B",
+        explanation: "Novelty detection focuses on identifying new, unseen but valid patterns, which fundamentally requires a clean training dataset representing only the 'normal' class. Anomaly detection, conversely, is typically applied when the training data is noisy and contains unclassified outliers that need to be filtered out."
+      },
+      {
+        id: 3,
+        question: "A convolutional neural network is trained on the CIFAR-10 image dataset (containing 10 distinct everyday object classes) to serve as an embedded asset classifier. During deployment, the system is exposed to images from the SVHN (Street View House Numbers) dataset. To prevent the model from assigning a high-confidence, erroneous label to these digits, which framework must be implemented?",
+        options: {
+          A: "Single-Class Novelty Detection targeting semantic anomalies.",
+          B: "Association Rule Learning to establish co-occurrence dependencies between pixels.",
+          C: "Multi-Class Out-of-Distribution (OOD) Detection to flag data originating from a completely foreign distribution.",
+          D: "Hierarchical Clustering to subdivide the images into structural subgroups based on color gradients."
+        },
+        answer: "C",
+        explanation: "When a model trained on a specific set of classes (In-distribution, like CIFAR-10) is exposed to an entirely different dataset with separate semantics (Out-of-distribution, like SVHN), it requires Out-of-Distribution (OOD) detection under a multi-class paradigm to identify and reject the foreign inputs."
+      },
+      {
+        id: 4,
+        question: "Mathematically, an unscaled feature with values in the millions dominates an SVM classifier's optimization process. What is the precise geometric mechanism causing this performance degradation?",
+        options: {
+          A: "The large-magnitude feature forces the RBF kernel to artificially compress all distance computations toward infinity.",
+          B: "The SVM kernel calculates distances that skew the margin, causing the decision boundary to become highly sensitive to, and aligned with, the axis of the dominant feature.",
+          C: "The unscaled feature causes the Euclidean length of every data point to equal exactly zero, neutralizing the support vectors.",
+          D: "The optimization algorithm switches from an optimization objective to a descriptive clustering objective."
+        },
+        answer: "B",
+        explanation: "SVMs find an optimal separating hyperplane by maximizing the margin, a process highly dependent on geometric distance computations. Features with larger magnitudes dominate these distance metrics, causing the margin to warp and become heavily skewed along the dominant feature's axis, rendering smaller but potentially crucial features statistically invisible."
+      },
+      {
+        id: 5,
+        question: "A data pipeline applies MinMaxScaler to a training dataset, calculating a specific feature range. When the fitted scaler is applied via .transform() to the isolated test set, several resulting values are found to be $-0.15$ and $1.22$. What does this mathematically indicate about the test set, and how should it be resolved?",
+        options: {
+          A: "It indicates a programming bug; MinMaxScaler strictly clamps all outputs to $[0, 1]$ regardless of input characteristics.",
+          B: "It indicates that the test set features contain values that fall outside the minimum and maximum boundaries established by the training set; this is normal and prevents data leakage.",
+          C: "It indicates data leakage; the scaler should be re-fitted on the test set separately to ensure alignment.",
+          D: "It indicates that the data follows a strict Gaussian distribution and should have been processed with RobustScaler instead."
+        },
+        answer: "B",
+        explanation: "MinMaxScaler uses the training set's minimum and maximum values as constants for transformation ($x_{norm} = \\frac{x - min(X_{train})}{max(X_{train}) - min(X_{train})}$). If the test set contains values smaller than $min(X_{train})$ or larger than $max(X_{train})$, the outputs will naturally fall outside the $[0, 1]$ range. This is correct and necessary to preserve the true relative distribution without introducing data leakage."
+      },
+      {
+        id: 6,
+        question: "You are preprocessing a dataset where one specific feature represents financial transaction amounts. This feature exhibits a highly skewed distribution with extreme, valid macro-outliers due to occasional high-value institutional transfers. If you require a scaler that centers the data without allowing these extreme outliers to compress the variance of the typical consumer transactions, which tool should you select?",
+        options: {
+          A: "StandardScaler, because it guarantees a variance of exactly 1 regardless of outlier distribution.",
+          B: "MinMaxScaler, because it preserves the exact relative distances between all points in a closed range.",
+          C: "RobustScaler, because it uses the median and the interquartile range (IQR), making its scaling parameters resilient to extreme values.",
+          D: "Normalizer, because it forces each individual sample to have a Euclidean length of 1."
+        },
+        answer: "C",
+        explanation: "RobustScaler calculates scaling statistics based on the median and quartiles (IQR) rather than the mean and variance. Because the mean and variance are highly sensitive to extreme outliers, estimators like StandardScaler would be heavily distorted, whereas RobustScaler ensures the main body of the data is scaled appropriately while leaving the outliers uncompressed."
+      },
+      {
+        id: 7,
+        question: "In a natural language processing pipeline, text documents are converted into high-dimensional term-frequency vectors. The absolute word counts vary dramatically based purely on document length, but the core analytical task depends entirely on the relative angles between document vectors rather than their absolute magnitudes. Which preprocessing transformer is mathematically tailored for this task?",
+        options: {
+          A: "StandardScaler, to center the word frequencies around a mean of zero.",
+          B: "Normalizer, because it scales each data point independently so that its Euclidean length equals 1, isolating the angular relationships.",
+          C: "MinMaxScaler, to compress all token frequencies between 0 and 1 across the column axis.",
+          D: "RobustScaler, to eliminate the impact of rare vocabulary outliers across documents."
+        },
+        answer: "B",
+        explanation: "Normalizer acts horizontally across rows rather than columns, scaling each individual sample to have a unit norm (Euclidean length of 1). This is ideal when the magnitudes of the features are irrelevant or highly variable (e.g., document length), and only the direction or angle (such as Cosine Similarity) matters."
+      },
+      {
+        id: 8,
+        question: "Consider the following machine learning pipeline sequence:\n1. Load full dataset.\n2. Instantiate MinMaxScaler.\n3. Apply fit_transform() on the full dataset.\n4. Split the scaled data into training and testing sets using train_test_split.\nWhat structural flaw exists in this architectural design?",
+        options: {
+          A: "The pipeline will crash because MinMaxScaler cannot process un-split arrays.",
+          B: "It causes severe data leakage because information about the global maximum and minimum of the test set is used to transform the training set.",
+          C: "It alters the shape of the data arrays, causing a mismatch during model evaluation.",
+          D: "It forces the model to interpret the training data as an unsupervised clustering task."
+        },
+        answer: "B",
+        explanation: "Fitting a scaler on the entire dataset prior to splitting exposes the training set to statistical parameters (min/max values) belonging to the test set. This constitutes data leakage, artificially inflating validation performance while undermining the model’s true capability to generalize to independent data."
+      },
+      {
+        id: 9,
+        question: "During Exploratory Data Analysis (EDA) of a used car dataset, an analyst observes that 'Vehicle Mileage' and 'Vehicle Age (in years)' exhibit a near-perfect linear negative correlation. In terms of unsupervised data transformations, what is the most efficient architectural recommendation before feeding this data into a downstream algorithm?",
+        options: {
+          A: "Apply Normalizer to scale both features to a Euclidean length of 1.",
+          B: "Use a dimensionality reduction algorithm to merge the correlated features into a single latent feature representing 'Wear and Tear'.",
+          C: "Clone both features to double their mathematical weight during distance calculation.",
+          D: "Force the dataset through an association rule mining model to establish itemset transactions."
+        },
+        answer: "B",
+        explanation: "Strongly correlated features contain redundant information, which increases computational costs and can trigger the curse of dimensionality. Dimensionality reduction allows for feature merging (e.g., combining Mileage and Age into 'Wear and Tear'), which optimizes storage, speeds up execution, and preserves core information."
+      },
+      {
+        id: 10,
+        question: "When evaluating an unsupervised anomaly detection model during its deployment or 'Detection Phase', how does its operational mechanism contrast with its initial 'Training Phase'?",
+        options: {
+          A: "In the Training Phase, it dynamically maps labels to inputs; in the Detection Phase, it computes precision scores.",
+          B: "In the Training Phase, it learns the statistical boundaries of 'normal' data; in the Detection Phase, it evaluates new incoming instances against that established boundary to flag anomalies.",
+          C: "In the Training Phase, it clusters data using labels; in the Detection Phase, it discards those clusters entirely.",
+          D: "The phases are identical, as unsupervised models must continuously re-calculate their parameters for every new single input."
+        },
+        answer: "B",
+        explanation: "Unsupervised anomaly detection operates in a two-phase dichotomy: a Training Phase, where the system analyzes unlabeled data to establish a structural baseline of what constitutes 'normal' behavior, and a Detection Phase, where new operational instances are strictly evaluated against that baseline to determine if they deviate sufficiently to be classified as anomalies."
+      },
+      {
+        id: 11,
+        question: "An analyst is performing Exploratory Data Analysis (EDA) on a noisy sensor dataset. They draw a series of representations to search for patterns and ask, 'What shapes can I see and why?' Which statistical approach does this informal, pattern-seeking behavior characterize?",
+        options: {
+          A: "Formal Hypothesis Testing via p-values.",
+          B: "Exploratory Data Analysis (EDA) as an exploratory approach to statistics using visualizations and robust measures.",
+          C: "Supervised Decision Boundary Optimization.",
+          D: "Association Rule Learning for transaction mapping."
+        },
+        answer: "B",
+        explanation: "EDA is defined as an informal and exploratory approach to statistics characterized by drawing different representations, searching for patterns, using graphs/charts, and leveraging robust measures to comprehend the data's underlying structure before formal modeling."
+      },
+      {
+        id: 12,
+        question: "An SVM classifier utilizing an RBF kernel is trained on an unscaled dataset where Feature $X_1$ ranges from $0$ to $1$, and Feature $X_2$ ranges from $0$ to $100,000$. What is the direct operational impact on the support vectors chosen by the model?",
+        options: {
+          A: "The support vectors will be chosen completely at random due to numeric underflow.",
+          B: "Support vectors will be determined almost entirely by the values of Feature $X_2$ because its massive scale skews the distance computations inherent to the RBF kernel.",
+          C: "The model will automatically down-weight Feature $X_2$ to zero to balance the margin.",
+          D: "The decision boundary will become perfectly symmetric and centered at zero."
+        },
+        answer: "B",
+        explanation: "The RBF kernel computes exponential distance metrics between points. If features have profoundly mismatched scales, the feature with the vastly larger magnitude ($X_2$) will completely dominate the distance calculation, forcing the SVM to construct its support vectors and decision boundary almost entirely based on that single dimension, rendering $X_1$ irrelevant."
+      },
+      {
+        id: 13,
+        question: "An unsupervised learning system is applied to a retail dataset containing transaction records of customer purchases. The algorithm outputs the statement: '93% of people who purchased item A also purchased item B'. What specific category of unsupervised learning produced this result?",
+        options: {
+          A: "Dimensionality Reduction via feature extraction.",
+          B: "Anomaly Detection utilizing Z-score standardizations.",
+          C: "Association Rule Learning, aimed at finding meaningful relationships between features.",
+          D: "Single-Class Novelty Detection."
+        },
+        answer: "C",
+        explanation: "Association Rule Learning is a distinct branch of unsupervised learning explicitly designed to discover meaningful hidden dependencies, patterns, and co-occurrence relationships between different items or features in large datasets (e.g., market basket analysis)."
+      },
+      {
+        id: 14,
+        question: "A data science student decides to optimize a machine learning pipeline by executing separate scaling routines: they apply MinMaxScaler.fit_transform() to the training set, and a completely independent MinMaxScaler.fit_transform() to the test set. What is the technical consequence of this setup?",
+        options: {
+          A: "It ensures maximum accuracy because each dataset is scaled perfectly to its own native boundaries.",
+          B: "It distorts the spatial relationship between the training and testing sets, introducing artificial discrepancies that degrade model performance.",
+          C: "It changes the matrix shapes of the features, preventing the model from running.",
+          D: "It transforms the supervised learning objective into a feature merging optimization problem."
+        },
+        answer: "B",
+        explanation: "Scaling the test set independently using its own statistics shifts and stretches its points to fit a new coordinate system that is decoupled from the training set's space. This breaks the spatial consistency across the train/test split, leading to performance degradation because the model's learned decision boundaries no longer map to the same physical realities."
+      },
+      {
+        id: 15,
+        question: "You are reviewing a tabular dataset where features represent demographic metrics. Feature $A$ has a mean of 50 and a standard deviation of 5. Feature $B$ has a mean of 1000 and a standard deviation of 200. After applying StandardScaler, what will be the exact mathematical mean ($\mu$) and variance ($\sigma^2$) of both features?",
+        options: {
+          A: "Mean = 0, Variance = 1 for both features.",
+          B: "Mean = 50, Variance = 1 for Feature A; Mean = 1000, Variance = 1 for Feature B.",
+          C: "Mean = 0, Variance = 5 for Feature A; Mean = 0, Variance = 200 for Feature B.",
+          D: "The ranges will compress strictly between 0 and 1, leaving means unchanged."
+        },
+        answer: "A",
+        explanation: "StandardScaler executes standardization (Z-score normalization), which systematically transforms any numeric feature by subtracting its mean and dividing by its standard deviation ($x_{stand} = \\frac{x - \\mu}{\\sigma}$). This process guarantees that the resulting distribution will be centered around a mean ($\mu$) of exactly $0$ with a standard deviation ($\sigma$) and variance ($\sigma^2$) of exactly $1$."
+      },
+      {
+        id: 16,
+        question: "Why does MinMaxScaler pose a significant operational risk when applied to datasets that contain unvalidated, high-magnitude anomalous values (outliers)?",
+        options: {
+          A: "Outliers cause the standard deviation to drop to zero, leading to division-by-zero errors.",
+          B: "The outlier will dictate the absolute minimum or maximum bound, causing the valid, normal data points to compress into a highly squeezed, dense range, destroying feature variance.",
+          C: "It forces the data to adopt a rigid Gaussian distribution, masking non-linear patterns.",
+          D: "It horizontally aligns the rows, preventing distance computations between samples."
+        },
+        answer: "B",
+        explanation: "Because MinMaxScaler depends strictly on the absolute minimum and maximum values within a feature column, an extreme outlier will widen the denominator ($max(x) - min(x)$) artificially. This forces the remaining typical values to be compressed into a tiny, constrained fractional space close to each other, severely reducing the model's ability to differentiate between normal samples."
+      },
+      {
+        id: 17,
+        question: "A junior engineer states that data preprocessing is entirely unnecessary for Unsupervised Learning because there are no target labels $(y)$ to protect from leakage. How should you professionally correct this misconception?",
+        options: {
+          A: "Explain that preprocessing is only needed to convert classification problems into regression problems.",
+          B: "Point out that many distance-based and structure-seeking unsupervised algorithms (like K-Means and PCA) are highly sensitive to feature scales; without scaling, features with larger ranges completely bias the structural discovery.",
+          C: "Explain that preprocessing is mandatory solely to reduce the row count of the training matrix.",
+          D: "Confirm that the statement is correct, as scaling is exclusively designed for supervised neural networks."
+        },
+        answer: "B",
+        explanation: "Unsupervised learning algorithms rely heavily on mathematical metrics like Euclidean distance to find structural patterns or clusters. If feature scales vary drastically, the algorithm becomes severely biased toward larger numerical dimensions, mistaking scale magnitude for structural importance. Preprocessing ensures equitable feature contribution."
+      },
+      {
+        id: 18,
+        question: "When utilizing scikit-learn's API, what specific action is executed during the invocation of the .fit() method on a preprocessing scaler like StandardScaler?",
+        options: {
+          A: "The raw data array is instantly overwritten with standardized numbers.",
+          B: "The transformer analyzes the input array to calculate and store internal parameters, such as the mean ($\mu$) and standard deviation ($\sigma$), without altering the data.",
+          C: "The dataset is randomly split into training and test arrays using an internal seed.",
+          D: "A downstream supervised learning model is initialized and trained on the features."
+        },
+        answer: "B",
+        explanation: "The .fit() method is strictly an estimation step where the transformer observes the provided data matrix and extracts the necessary statistical properties (e.g., means, variances, min/max bounds) required for the transformation. No actual data modification or mapping occurs until a .transform() method is executed."
+      },
+      {
+        id: 19,
+        question: "A data scientist runs a t-SNE visualization algorithm on a complex, high-dimensional dataset. The resulting 2D scatter plot demonstrates that groups that were tightly clustered in the native high-dimensional space remain clustered and visibly distinct in the compressed representation. What primary purpose of unsupervised visualization does this fulfill?",
+        options: {
+          A: "It eliminates the need for any downstream supervised validation metrics.",
+          B: "It preserves essential structural relationships while reducing complexity, allowing humans to visually detect unexpected semantic patterns.",
+          C: "It forces the data into a single-class novelty distribution.",
+          D: "It merges correlated columns into a single latent index for fast memory allocation."
+        },
+        answer: "B",
+        explanation: "Visualization algorithms within unsupervised learning are explicitly designed to convert high-dimensional data into low-dimensional spaces (2D or 3D) while optimizing for the preservation of the original structure. This allows human analysts to visually interpret semantic clusters and uncover hidden structures."
+      },
+      {
+        id: 20,
+        question: "Which of the following algorithms relies on a training process where each individual training example is accompanied by an explicit ground truth label, establishing a learned decision boundary to replicate labeling on new incoming data?",
+        options: {
+          A: "Unsupervised Association Rule Mining.",
+          B: "Supervised Learning.",
+          C: "Exploratory Dimensionality Reduction.",
+          D: "Hierarchical Cluster Binning."
+        },
+        answer: "B",
+        explanation: "Supervised learning is defined by its reliance on training examples that possess explicit ground truth labels. The model's objective is to learn a mapping function or decision boundary from these inputs to outputs, allowing it to predict labels for new, unseen testing data."
+      },
+      {
+        id: 21,
+        question: "What is a key disadvantage of Supervised Learning when compared directly to the operational advantages of Unsupervised Learning?",
+        options: {
+          A: "It cannot be evaluated using metrics like Accuracy, Precision, or F1 Score.",
+          B: "No previous knowledge of the image or data area can be utilized during training.",
+          C: "It requires significant cost, human intervention, and time to select, vet, and label training data.",
+          D: "It is incapable of establishing linear decision boundaries across features."
+        },
+        answer: "C",
+        explanation: "Unlike unsupervised learning—which processes raw, unlabeled datasets directly—supervised learning requires a pre-labeled dataset. Selecting, verifying, and labeling data requires significant time, capital, and human effort, which represents a key operational disadvantage."
+      },
+      {
+        id: 22,
+        question: "An examiner presents an unlabeled data matrix consisting of features $X_1, X_2, X_3, \\dots, X_p$. There is no target column $Y$ present in the schema. Which core machine learning category is mathematically restricted to processing this specific structural layout?",
+        options: {
+          A: "Logistic Regression Analysis.",
+          B: "Linear Discriminant Evaluation.",
+          C: "Unsupervised Learning.",
+          D: "Supervised Classification."
+        },
+        answer: "C",
+        explanation: "Supervised learning requires both a feature matrix $X$ and a corresponding target/label vector $Y$. Unsupervised learning maps strictly to situations where the dataset contains no predefined outputs or targets, forcing the algorithm to find structural patterns purely from the input features."
+      },
+      {
+        id: 23,
+        question: "Under what condition is MinMaxScaler a mathematically superior choice over StandardScaler based on the assumptions of downstream models?",
+        options: {
+          A: "When the data must be centered perfectly at zero with an unconstrained variance.",
+          B: "When the downstream model makes strict assumptions regarding a Gaussian (Normal) distribution.",
+          C: "When the downstream model does not assume a specific statistical distribution but requires features bounded within a strict, uniform range, such as artificial neural networks or image processing pipelines.",
+          D: "When the data contains extreme, unvalidated macro-outliers that must be preserved without distortion."
+        },
+        answer: "C",
+        explanation: "MinMaxScaler is highly effective when the data distribution is unknown or non-Gaussian, and the downstream algorithm requires bounded inputs (e.g., neural networks to prevent gradient issues, or image processing where pixels are bound between $0$ and $1$). StandardScaler is better suited when the data is assumed to follow a Gaussian distribution."
+      },
+      {
+        id: 24,
+        question: "If an unsupervised algorithm is applied to a dataset to cluster faces, but focuses entirely on the camera angles and lighting conditions rather than the identities of the individuals, which major challenge of unsupervised learning is highlighted?",
+        options: {
+          A: "The extreme computational overhead of simple linear regression models.",
+          B: "The fact that there is no direct way to evaluate performance or guide the model toward a specific semantic interpretation without manual inspection.",
+          C: "The strict requirement that all inputs must be normalized with RobustScaler before split adjustments.",
+          D: "The system's inability to maintain a consistent matrix shape during transformations."
+        },
+        answer: "B",
+        explanation: "Because unsupervised learning algorithms operate without labels to guide them toward a specific context, they optimize purely for mathematical variation. If lighting and angles create larger statistical distances than facial identity, the model will cluster based on those features. This underscores why unsupervised tasks depend heavily on manual inspection and lack direct performance metrics."
+      },
+      {
+        id: 25,
+        question: "A diagnostic system is trained to recognize normal electrocardiogram (ECG) patterns. During an execution run, it encounters a completely new pattern that deviates significantly from the training data, and the system flags it as an outlier. Which technique does this scenario describe?",
+        options: {
+          A: "Association Rule Learning.",
+          B: "Feature Merging Optimization.",
+          C: "Anomaly Detection.",
+          D: "Supervised Regression."
+        },
+        answer: "C",
+        explanation: "Anomaly detection is defined as identifying rare or unusual instances in data that deviate significantly from established normal patterns. This process generally involves a training phase where the system learns what 'normal' data looks like, followed by a detection phase to flag anomalies."
+      },
+      {
+        id: 26,
+        question: "An engineering team decides to insert a dimensionality reduction algorithm into their production machine learning pipeline before passing the data into a high-dimensional supervised classification model. What is the primary operational and statistical justification for this specific architecture?",
+        options: {
+          A: "It changes the dataset structure by mapping labels to the feature matrix.",
+          B: "It guarantees that the data will fit a perfect Gaussian distribution.",
+          C: "It allows the pipeline to run much faster, reduces disk and memory space, and helps mitigate the risk of overfitting by fighting the curse of dimensionality.",
+          D: "It eliminates the need to execute train-test splits on the feature arrays."
+        },
+        answer: "C",
+        explanation: "Reducing the number of dimensions via an unsupervised transformation before feeding data into another algorithm allows it to run much faster, minimizes disk and memory footprint, and can improve performance by counteracting the curse of dimensionality."
+      },
+      {
+        id: 27,
+        question: "A data scientist assumes that their dataset features follow a Gaussian distribution and decides to implement Z-score normalization. Which transformer should they instantiate, and what is its underlying mathematical formula?",
+        options: {
+          A: "MinMaxScaler; $x_{norm}=\\frac{x-min(x)}{max(x)-min(x)}$",
+          B: "StandardScaler; $x_{stand}=\\frac{x-mean(x)}{standard\\ deviation(x)}$",
+          C: "RobustScaler; $x_{robust}=\\frac{x-median(x)}{IQR(x)}$",
+          D: "Normalizer; $x_{norm}=\\frac{x}{\\Vert{}x\\Vert{}}$"
+        },
+        answer: "B",
+        explanation: "Z-score normalization is identical to standardization, which centers the data around a mean of 0 and a standard deviation of 1 using the formula $x_{stand}=\\frac{x-mean(x)}{standard\\ deviation(x)}$. In scikit-learn, this is implemented using StandardScaler."
+      },
+      {
+        id: 28,
+        question: "When invoking MinMaxScaler.fit(X_train) on a training matrix, why is it considered a strictly unsupervised operation despite being part of a pipeline that eventually solves a supervised classification task?",
+        options: {
+          A: "Because it shifts the data labels horizontally into the test partition.",
+          B: "Because the calculation relies entirely on the independent feature vectors ($X_{train}$) and completely ignores the ground truth target labels ($y_{train}$).",
+          C: "Because it automatically groups the targets into discrete spectral classes.",
+          D: "Because it changes the data array shape from a 2D matrix to a 1D vector."
+        },
+        answer: "B",
+        explanation: "Data preprocessing steps like scaling are inherently unsupervised operations because they compute their geometric transformation parameters (such as the minimum and maximum boundaries of features) solely from the input features ($X_{train}$) without utilizing target labels ($y_{train}$)."
+      },
+      {
+        id: 29,
+        question: "A cybersecurity system is being trained to identify anomalous network packets. The training set contains a mix of regular traffic along with a minor, unknown percentage of malicious intrusions and system noise that have not been vetted. The model must learn the general pattern of normal traffic while isolating these rare deviations. What paradigm is being implemented?",
+        options: {
+          A: "Novelty Detection, because it assumes the training set is completely clean and pristine.",
+          B: "Association Rule Learning, because it prioritizes itemset transactions.",
+          C: "Anomaly Detection, because it deals with identifying rare or unusual instances from a noisy, unvetted dataset.",
+          D: "Dimensionality Reduction, because it combines correlated network features."
+        },
+        answer: "C",
+        explanation: "Anomaly detection is used to identify rare or unusual instances that deviate significantly from normal patterns and can handle training spaces that contain a baseline level of unvetted outliers or noise. Novelty detection, conversely, strictly mandates a clean training set free of unwanted instances."
+      },
+      {
+        id: 30,
+        question: "An analyst generates scatter plots to test scaling protocols on a dataset. When scaling the test set independently from the training set, visually, what happens to the test set points relative to the training points?",
+        options: {
+          A: "The test points remain perfectly locked in their original spatial positions relative to the training points.",
+          B: "The test points are distorted and shifted incorrectly, changing their relative spatial layout compared to the original distribution.",
+          C: "The test points are completely erased from the visualization.",
+          D: "The test points automatically align into a perfectly straight horizontal line."
+        },
+        answer: "B",
+        explanation: "Scaling the training and test sets separately shifts and scales the test points based on its own independent statistics rather than the training frame's bounds. This introduces artificial distortions, visually altering the spatial relationships and distances between the two sets."
+      },
+      {
+        id: 31,
+        question: "Why are distance-based kernel functions, such as the Support Vector Machine's Radial Basis Function (RBF) kernel, deeply sensitive to unscaled feature ranges?",
+        options: {
+          A: "Because the RBF kernel relies on labels to calculate decision hyperplanes.",
+          B: "Because the RBF kernel depends on computing geometric distances between data points; without scaling, dimensions with numerically massive ranges contribute disproportionately to the distance metric, rendering smaller ranges obsolete.",
+          C: "Because it forces all features to drop to a variance of zero.",
+          D: "Because it transforms the classification task into an association rule sequence."
+        },
+        answer: "B",
+        explanation: "The RBF kernel computes exponential distance metrics between points. If one feature has a massive scale relative to others, its values dominate the distance calculations. This makes the kernel highly sensitive to that single dimension, leading to suboptimal decision boundaries."
+      },
+      {
+        id: 32,
+        question: "A machine learning engineer is developing an image classification network where pixel intensities naturally range from 0 to 255. The downstream neural network requires all input values to sit within a strict, uniform bounded range to stabilize activation layers. Which scaling strategy should be selected?",
+        options: {
+          A: "A horizontal row-based Normalizer to enforce angular vectors.",
+          B: "MinMaxScaler, to cleanly transform the pixel feature ranges into a uniform scale between 0 and 1.",
+          C: "RobustScaler, to calculate median deviations of the pixels.",
+          D: "Avoid scaling entirely, as neural networks are immune to feature ranges."
+        },
+        answer: "B",
+        explanation: "MinMaxScaler is designed to rescale values into a common, bounded range (typically $[0,1]$ or $[-1,1]$). This is ideal for artificial neural networks and image processing tasks where bounded, uniform feature constraints are required."
+      },
+      {
+        id: 33,
+        question: "A marketing director wants to discover which products are frequently co-purchased by analyzing retail basket data. The system generates an output indicating that customers who buy steak also tend to purchase potato chips and barbecue sauce. What is the primary operational value of this unsupervised learning application?",
+        options: {
+          A: "It provides high-accuracy predictive regression models for future pricing.",
+          B: "It offers actionable marketing insights, such as optimizing physical product placement by grouping associated items closer together.",
+          C: "It filters out manufacturing outliers from the dataset.",
+          D: "It compresses the dataset columns into a single latent index."
+        },
+        answer: "B",
+        explanation: "This scenario represents Association Rule Learning, which identifies meaningful relationships between different features. Its direct practical application is providing retail or marketing insights, such as deciding to place associated items closer together to increase sales."
+      },
+      {
+        id: 34,
+        question: "You apply an unsupervised clustering algorithm to group a collection of portrait photographs. Instead of grouping the images by the identity of the person, the algorithm clusters the photos based on the angle of the camera and the intensity of the background shadows. What core challenge of unsupervised learning does this underscore?",
+        options: {
+          A: "The mathematical inability of scikit-learn to handle image shapes.",
+          B: "The fact that without ground truth labels, there is no direct feedback loop or target to guide the model toward a specific semantic interpretation, making it heavily dependent on manual inspection.",
+          C: "The fact that StandardScaler always forces data into a closed range.",
+          D: "The computational failure of decision boundary equations."
+        },
+        answer: "B",
+        explanation: "Unsupervised learning algorithms operate without labels, meaning they evaluate structure based purely on mathematical variation. If camera angles create larger statistical variances than facial features, the model optimizes for angles. This highlights the challenge of having no direct way to evaluate semantic performance, requiring human inspection."
+      },
+      {
+        id: 35,
+        question: "An analyst utilizes a t-SNE (t-Distributed Stochastic Neighbor Embedding) visualization routine on a tabular dataset. What is the exact purpose of this operation within an unsupervised learning workflow?",
+        options: {
+          A: "To train a highly accurate classifier using ground truth targets.",
+          B: "To convert high-dimensional feature spaces into 2D or 3D representations, preserving structural clusters so that humans can visually detect patterns.",
+          C: "To replace the need for separate training and testing splits.",
+          D: "To scale column means to exactly zero and variances to one."
+        },
+        answer: "B",
+        explanation: "Unsupervised visualization algorithms like t-SNE serve the explicit purpose of reducing high-dimensional data into 2D or 3D spaces. Their value lies in preserving the underlying structure, ensuring that clusters in the input space remain separate in the visualization for human pattern detection."
+      },
+      {
+        id: 36,
+        question: "If a dataset contains severe, erratic spikes due to measurement errors, why is StandardScaler considered mathematically vulnerable for this preprocessing task?",
+        options: {
+          A: "Because it strictly clamps all extreme values between 0 and 1.",
+          B: "Because it relies on the mean and standard deviation, parameters that are highly sensitive to extreme outliers, which can skew the resulting scale.",
+          C: "Because it acts horizontally across rows rather than vertically across columns.",
+          D: "Because it requires a target column $Y$ to calculate variance."
+        },
+        answer: "B",
+        explanation: "The mean and standard deviation are not robust to extreme outliers. A few massive anomalies will skew the mean and expand the standard deviation, distorting the standardization process for the normal data points. In such scenarios, RobustScaler (which uses the median and IQR) is preferred."
+      },
+      {
+        id: 37,
+        question: "A script executes X_train_scaled = scaler.transform(X_train) using a fitted MinMaxScaler. When you print the shape of X_train_scaled, it is identical to X_train.shape. What does this imply about the transformation mechanism?",
+        options: {
+          A: "The transformer failed to run and skipped the data array entirely.",
+          B: "The transformation preserves the exact matrix shape and structure; only the individual feature values within the columns are shifted and scaled.",
+          C: "The data was compressed into a single latent vector.",
+          D: "The rows were transposed into columns."
+        },
+        answer: "B",
+        explanation: "When data is transformed via a preprocessing scaler, the transformed data retains the exact same shape as the original data. The structure remains untouched; only the underlying feature values are shifted and rescaled."
+      },
+      {
+        id: 38,
+        question: "According to comparative analysis in remote sensing, what is considered a distinct disadvantage of Unsupervised Classification when contrasted with Supervised approaches?",
+        options: {
+          A: "It requires extensive human effort to select training data before the model can run.",
+          B: "The resulting spectral classes do not necessarily represent the actual features on the ground, and it can take significant time to interpret them.",
+          C: "It is incapable of minimizing human error during the processing phase.",
+          D: "It cannot be executed unless the image data area is already thoroughly understood."
+        },
+        answer: "B",
+        explanation: "A major disadvantage of unsupervised approaches is that the discovered spectral classes or mathematical clusters do not automatically correspond to real-world features on the ground, requiring post-hoc human interpretation."
+      },
+      {
+        id: 39,
+        question: "An analyst chooses to apply Hierarchical Clustering to segment visitors to a corporate blog based on browsing behavior. What unique structural advantage does this method provide over flat clustering schemes?",
+        options: {
+          A: "It automatically generates target labels for supervised regression models.",
+          B: "It can subdivide broad user groups into smaller, nested sub-categories, providing a multi-tiered structural breakdown.",
+          C: "It forces the data to sit strictly between a range of 0 and 1.",
+          D: "It relies entirely on calculating standard Z-scores across rows."
+        },
+        answer: "B",
+        explanation: "Hierarchical clustering allows for the subdivision of broad clusters into smaller, nested sub-categories. This structural feature makes it highly useful for discovering multi-tiered relationships within unlabeled data spaces."
+      },
+      {
+        id: 40,
+        question: "A pipeline fits a MinMaxScaler on a training set where a specific feature's minimum is 10 and maximum is 50. The isolated test set contains a record with a value of 55 for that feature. What is the mathematical result when .transform() is applied to this test set record?",
+        options: {
+          A: "The value will be strictly clamped to 1.0 to fit the closed range.",
+          B: "The value will scale to $1.125$, demonstrating that test values can fall outside the $[0,1]$ range to maintain consistent scaling.",
+          C: "The value will trigger a division-by-zero runtime error.",
+          D: "The value will automatically reset to 0.0."
+        },
+        answer: "B",
+        explanation: "MinMaxScaler uses training statistics: $x_{norm} = \\frac{x - min(X_{train})}{max(X_{train}) - min(X_{train})}$. Plugging in the values: $\\frac{55 - 10}{50 - 10} = \\frac{45}{40} = 1.125$. Test values outside the training range correctly produce outputs beyond $[0,1]$ to preserve consistent geometry."
+      },
+      {
+        id: 41,
+        question: "Under what scenario should an architect prioritize StandardScaler over MinMaxScaler based on the assumptions of downstream supervised learning models?",
+        options: {
+          A: "When the downstream model is a neural network requiring values strictly bounded between 0 and 1.",
+          B: "When the downstream model relies on distance or variance assumptions that perform more effectively if the features follow a Gaussian (Normal) distribution, such as linear regression, logistic regression, or linear discriminant analysis.",
+          C: "When the dataset has absolutely no outliers or noise.",
+          D: "When the absolute angles between rows are the only critical analytical metric."
+        },
+        answer: "B",
+        explanation: "StandardScaler standardizes features to follow a standard normal distribution ($\mu=0, \sigma=1$). This technique is highly effective when downstream models (like linear/logistic regression or LDA) assume or benefit from Gaussian distributions."
+      },
+      {
+        id: 42,
+        question: "How is the broad objective of Data Preprocessing formally defined as a critical step prior to machine learning?",
+        options: {
+          A: "A method to convert unsupervised clustering tasks directly into association rule mining.",
+          B: "A set of techniques applied to raw data to resolve inconsistencies, varying scales, noise, or missing values, thereby improving its quality and making it suitable for models.",
+          C: "The automated extraction of ground truth targets using unsupervised visualizations.",
+          D: "A protocol to ensure that data arrays are converted into 1D vectors."
+        },
+        answer: "B",
+        explanation: "Data Preprocessing is defined as a comprehensive set of techniques applied to raw data to improve its quality by addressing real-world data inconsistencies, noise, missing values, and varying scales, making it suitable for machine learning algorithms."
+      },
+      {
+        id: 43,
+        question: "Why does the performance evaluation of an unsupervised model represent a significantly higher challenge compared to a supervised model?",
+        options: {
+          A: "Because unsupervised models require massive amounts of pre-labeled validation data.",
+          B: "Because there are no ground truth labels or direct feedback mechanisms to measure accuracy, precision, or recall, making evaluation heavily dependent on manual inspection or structural metrics.",
+          C: "Because the data matrix changes its shape dynamically during every execution.",
+          D: "Because it is mathematically restricted from utilizing distance metrics like Euclidean space."
+        },
+        answer: "B",
+        explanation: "Supervised learning models can be verified directly against ground truth labels using metrics like accuracy, precision, and recall. Unsupervised learning models lack these labels, meaning there is no direct feedback loop on correctness, forcing reliance on manual inspection or secondary structural analysis."
+      },
+      {
+        id: 44,
+        question: "A junior developer builds a pipeline where they scale the training set and the test set independently using two separate scalers. What is the primary operational consequence during the evaluation phase?",
+        options: {
+          A: "The model will run twice as fast due to parallel memory allocation.",
+          B: "The test set will be mapped to a completely different feature range relative to what the model learned, leading directly to model performance degradation.",
+          C: "The data will automatically drop all features with zero variance.",
+          D: "The test matrix will transpose its columns into rows."
+        },
+        answer: "B",
+        explanation: "Scaling training and testing data using separate parameters breaks the consistency of the data distribution. This introduces artificial distortions and mismatched feature ranges, leading directly to model performance degradation during evaluation."
+      },
+      {
+        id: 45,
+        question: "An engineer is developing a model to evaluate if incoming telemetry data from an aircraft belongs to the known operational distribution or if it represents an entirely foreign distribution. The base training set involves a multi-class dataset. Which framework maps directly to this task?",
+        options: {
+          A: "Single-Class Novelty Detection.",
+          B: "Multi-Class Out-of-Distribution (OOD) Detection.",
+          C: "Association Rule Transaction Mining.",
+          D: "Hierarchical Dimensionality Merging."
+        },
+        answer: "B",
+        explanation: "When the baseline dataset contains multiple classes (in-distribution) and the objective is to detect if new incoming data originates from a completely foreign distribution, it requires Out-of-Distribution (OOD) detection under a multi-class paradigm."
+      },
+      {
+        id: 46,
+        question: "A baseline Support Vector Classifier (SVC) evaluated on an unscaled dataset achieves an accuracy of $0.63$. After applying proper MinMaxScaler preprocessing, accuracy increases to $0.97$. What does this massive performance leap mathematically demonstrate?",
+        options: {
+          A: "That scaling converts classification tasks into unsupervised clustering structures.",
+          B: "The immense operational impact of proper feature scaling on distance-sensitive models like SVMs, allowing them to construct balanced, optimal decision boundaries.",
+          C: "That MinMaxScaler automatically introduces ground truth labels to the dataset.",
+          D: "That unscaled datasets always cause matrix shapes to compress to zero."
+        },
+        answer: "B",
+        explanation: "Unscaled datasets can cause poor SVM performance because mismatched ranges distort distance computations. Proper scaling restores geometric balance, allowing the model to achieve an optimal decision boundary."
+      },
+      {
+        id: 47,
+        question: "When reviewing common preprocessing frameworks, which list represents techniques explicitly highlighted for data preparation?",
+        options: {
+          A: "Logistic Regression, Flat Clustering, and Hypothesis Testing.",
+          B: "Scaling, Feature Engineering, Dimensionality Reduction, Categorical Encoding, and Handling Missing Data.",
+          C: "Target Vector Extraction, Linear Spline Fitting, and p-value Optimization.",
+          D: "Gradient Descent Acceleration, t-SNE Clustering, and Supervised Margin Maximization."
+        },
+        answer: "B",
+        explanation: "Standard data preprocessing includes: Scaling (MinMax, Standardization, etc.), Feature Engineering, Dimensionality Reduction (PCA, LDA, Autoencoders), Encoding Categorical Variables, and Handling Missing Data."
+      },
+      {
+        id: 48,
+        question: "Why is the Normalizer transformer considered highly specialized compared to column-based operations like StandardScaler?",
+        options: {
+          A: "Because it strictly requires a Gaussian distribution across columns.",
+          B: "Because it operates horizontally across rows, ensuring that each individual data point has a Euclidean length of 1, making it ideal when only angles and vector directions matter rather than absolute feature magnitudes.",
+          C: "Because it relies on calculating the median and interquartile range (IQR).",
+          D: "Because it automatically deletes rows that contain extreme outliers."
+        },
+        answer: "B",
+        explanation: "Unlike column-based tools, Normalizer acts horizontally to scale each sample independently so that its Euclidean length (norm) equals 1. This is useful when feature magnitudes are highly variable or irrelevant, and analysis relies strictly on vector angles."
+      },
+      {
+        id: 49,
+        question: "During Exploratory Data Analysis (EDA), what is the specific function of utilizing robust statistical measures and graphical representations?",
+        options: {
+          A: "To guarantee that the dataset contains zero outliers before training.",
+          B: "To identify general patterns, expose outliers, and reveal unexpected features of the data as an essential first step in any analysis.",
+          C: "To automatically optimize the hyperparameter $C$ of a Support Vector Machine.",
+          D: "To split the target column $Y$ from the feature matrix $X$."
+        },
+        answer: "B",
+        explanation: "EDA is an essential first step because it uses visualization and robust statistical measures to help data scientists identify general patterns, detect outliers, and discover unexpected structures within a dataset."
+      },
+      {
+        id: 50,
+        question: "A data scientist needs to scale data where features are measured in completely different units (e.g., thousands vs. decimals). The downstream algorithm uses distance-based calculations. Why is feature scaling considered a mandatory step here?",
+        options: {
+          A: "To force all features to adopt the same standard deviation as the target column.",
+          B: "To ensure that each feature contributes equally to the model, preventing features with naturally larger numerical scales from biasing distance calculations.",
+          C: "To compress the dataset rows into a closed transaction format.",
+          D: "To convert the unsupervised structure into a multi-class novelty space."
+        },
+        answer: "B",
+        explanation: "Algorithms using distance metrics are inherently biased toward features with larger numerical magnitudes. Feature scaling standardizes these ranges, ensuring that each feature contributes equitably to geometric computations."
+      },
+      {
+        id: 51,
+        question: "Mathematical standardization transforms a feature vector $X$ into $X_{stand}$ using the formula $x_{stand} = \\frac{x - \\mu}{\\sigma}$. What are the precise statistical parameters of the resulting distribution?",
+        options: {
+          A: "$\\mu = 1$ and $\\sigma = 0$",
+          B: "$\\mu = 0$ and $\\sigma = 1$",
+          C: "$\\mu = 0$ and variance $\\sigma^2$ equal to the original feature variance",
+          D: "Bounded strictly within the range $[-1, 1]$"
+        },
+        answer: "B",
+        explanation: "StandardScaler executes Z-score normalization, which centers the feature distribution at an arithmetic mean ($\mu$) of exactly 0 and scales the standard deviation ($\sigma$) and variance ($\sigma^2$) to exactly 1."
+      },
+      {
+        id: 52,
+        question: "When data contains extreme outliers that cannot be removed, RobustScaler scales the features using which specific robust statistical metrics?",
+        options: {
+          A: "The mean ($\mu$) and the standard deviation ($\sigma$)",
+          B: "The absolute minimum $min(x)$ and maximum $max(x)$",
+          C: "The median and the Interquartile Range ($IQR = Q_3 - Q_1$)",
+          D: "The Euclidean length $\\Vert{}x\\Vert{}_2 = 1$ across rows"
+        },
+        answer: "C",
+        explanation: "RobustScaler subtracts the median and divides by the Interquartile Range (IQR). Because median and IQR are non-parametric and resilient to extreme tails, this scaler prevents macro-outliers from distorting feature scaling."
+      },
+      {
+        id: 53,
+        question: "In a production pipeline using scikit-learn, what is the correct code sequence for preprocessing the training set ($X_{train}$) and test set ($X_{test}$) using MinMaxScaler without causing data leakage?",
+        options: {
+          A: "scaler.fit_transform(X_train) followed by scaler.fit_transform(X_test)",
+          B: "scaler.fit(X_test) followed by scaler.transform(X_train)",
+          C: "scaler.fit_transform(X_train) followed by scaler.transform(X_test)",
+          D: "scaler.fit(X_train + X_test) followed by scaler.transform(X_train)"
+        },
+        answer: "C",
+        explanation: "The correct protocol requires fitting the scaler solely on the training data (or using fit_transform(X_train) as a combined step) and then applying .transform(X_test) to the test set using those frozen parameters."
+      },
+      {
+        id: 54,
+        question: "Why is executing scaler.fit_transform(X_test) on a test dataset considered a major methodology violation?",
+        options: {
+          A: "It changes the number of columns in $X_{test}$.",
+          B: "It re-computes scaling statistics based on the test set's native distribution, isolating it from the training frame and causing spatial distortion during model evaluation.",
+          C: "It converts numeric floats into categorical string objects.",
+          D: "It forces the test set labels $y_{test}$ to be overwritten."
+        },
+        answer: "B",
+        explanation: "Calling fit_transform() on $X_{test}$ calculates new means/ranges specific to the test data. This breaks spatial alignment with the training space, leading to artificial distortion and model performance degradation."
+      },
+      {
+        id: 55,
+        question: "When instantiating scaler = MinMaxScaler(), what is the default target feature range parameter configured in scikit-learn?",
+        options: {
+          A: "feature_range=(-1, 1)",
+          B: "feature_range=(0, 1)",
+          C: "feature_range=(0, 100)",
+          D: "feature_range=(-inf, +inf)"
+        },
+        answer: "B",
+        explanation: "By default in scikit-learn, MinMaxScaler scales features into the closed interval $[0, 1]$."
+      },
+      {
+        id: 56,
+        question: "In a used car database, 'Vehicle Mileage' and 'Vehicle Age' are strongly correlated. Combining them into a single latent index called 'Wear and Tear' is an example of which unsupervised technique?",
+        options: {
+          A: "Feature Merging / Dimensionality Reduction",
+          B: "Single-Class Novelty Detection",
+          C: "Association Rule Transaction Mining",
+          D: "Z-score Standard Normalization"
+        },
+        answer: "A",
+        explanation: "Dimensionality reduction can be achieved via feature merging, where highly correlated attributes (e.g., Mileage and Age) are combined into a simplified representation ('Wear and Tear') to reduce dimensionality and computational cost."
+      },
+      {
+        id: 57,
+        question: "Which of the following real-world applications maps directly to Unsupervised Anomaly Detection?",
+        options: {
+          A: "Predicting house prices using historical neighborhood sales.",
+          B: "Detecting fraudulent credit card transactions and identifying manufacturing defects.",
+          C: "Categorizing blog posts using human-assigned metadata tags.",
+          D: "Mapping street view house numbers to multi-class labels."
+        },
+        answer: "B",
+        explanation: "Detecting fraudulent transactions, identifying manufacturing defects, and filtering dataset outliers are core applications of Anomaly Detection."
+      },
+      {
+        id: 58,
+        question: "How does Novelty Detection handle rare instances compared to Anomaly Detection?",
+        options: {
+          A: "Novelty detection tolerates noisy training sets, whereas anomaly detection requires labeled target arrays.",
+          B: "Novelty detection aims to identify new, valid patterns from a clean training set, whereas anomaly detection identifies deviations from standard baseline behavior in potentially noisy data.",
+          C: "Novelty detection is strictly supervised, whereas anomaly detection is unsupervised.",
+          D: "Novelty detection forces Euclidean vector lengths to equal 1."
+        },
+        answer: "B",
+        explanation: "Novelty detection focuses on recognizing new, unseen valid patterns and mandates a clean training set free of unwanted instances. Anomaly detection identifies deviations/outliers in data that may contain background noise."
+      },
+      {
+        id: 59,
+        question: "Why do distance-based algorithms exhibit bias toward features with numerically larger magnitudes if scaling is omitted?",
+        options: {
+          A: "Because larger numbers trigger floating-point overflow in Python.",
+          B: "Because mathematical distance formulas (e.g., Euclidean distance) assign greater weight to dimensions with larger absolute differences, allowing them to dominate the metric.",
+          C: "Because decision trees split exclusively on large ranges.",
+          D: "Because larger features automatically increase the row count of the array."
+        },
+        answer: "B",
+        explanation: "Unscaled distance calculations are dominated by features with large absolute ranges (e.g., salary in thousands vs. age in tens), biasing the model toward larger numerical features."
+      },
+      {
+        id: 60,
+        question: "How does scaling features influence the optimization hyperplane of a Support Vector Machine (SVM)?",
+        options: {
+          A: "It converts linear hyperplanes into non-linear decision trees.",
+          B: "It prevents large-magnitude features from skewing distance metrics, resulting in a balanced, symmetric decision boundary and optimal margin separation.",
+          C: "It eliminates the need to calculate support vectors.",
+          D: "It forces all support vectors to lie on the origin $(0,0)$."
+        },
+        answer: "B",
+        explanation: "Feature scaling prevents dominant features from distorting distance metrics, allowing SVMs to find optimal separating hyperplanes with balanced, symmetric margins."
+      },
+      {
+        id: 61,
+        question: "In classical machine learning, what fundamentally distinguishes Supervised Learning from Unsupervised Learning regarding dataset structure?",
+        options: {
+          A: "Supervised learning operates on feature matrices $X$ paired with target labels $Y$; Unsupervised learning processes feature matrices $X$ with no target $Y$.",
+          B: "Supervised learning processes un-split arrays; Unsupervised learning requires train-test splits.",
+          C: "Supervised learning uses unlabeled images; Unsupervised learning uses text labels.",
+          D: "Supervised learning is limited to 2D matrices; Unsupervised learning requires 3D tensors."
+        },
+        answer: "A",
+        explanation: "Supervised learning utilizes labeled datasets containing both inputs $X$ and ground truth targets $Y$. Unsupervised learning operates exclusively on unlabeled input features $X$ to uncover hidden structure."
+      },
+      {
+        id: 62,
+        question: "Which of the following is an explicit operational benefit of Dimensionality Reduction prior to model training?",
+        options: {
+          A: "It increases data disk storage requirements to preserve raw fidelity.",
+          B: "It reduces computational cost, speeds up training time, saves memory, and mitigates overfitting.",
+          C: "It generates synthetic ground-truth labels for unlabeled arrays.",
+          D: "It ensures all features follow a perfect normal distribution."
+        },
+        answer: "B",
+        explanation: "Dimensionality reduction simplifies data structures, making algorithms run faster, reducing memory/disk consumption, and improving model generalization by mitigating the curse of dimensionality."
+      },
+      {
+        id: 63,
+        question: "In the Breast Cancer dataset case study, what are the exact sample counts after executing a standard train_test_split (80/20 or default 75/25 with random state 1 on 569 samples)?",
+        options: {
+          A: "500 training samples, 69 test samples",
+          B: "426 training samples, 143 test samples (out of 569 total samples)",
+          C: "300 training samples, 300 test samples",
+          D: "250 training samples, 250 test samples"
+        },
+        answer: "B",
+        explanation: "Loading the 569-sample Breast Cancer dataset and running standard train_test_split with random_state=1 yields 426 training samples and 143 test samples."
+      },
+      {
+        id: 64,
+        question: "When visual output of feature scaling is analyzed, how does Normalizer alter the geometric layout of 2D data points compared to MinMaxScaler?",
+        options: {
+          A: "It stretches points into a wide rectangle spanning $-10$ to $+10$.",
+          B: "It projects data points onto a unit circle/arc where each point has a Euclidean norm of 1.",
+          C: "It arranges points in a vertical straight line along the Y-axis.",
+          D: "It groups points into discrete square bins."
+        },
+        answer: "B",
+        explanation: "Normalizer scales each individual sample (row) to have unit norm ($\Vert{}x\Vert{}_2 = 1$), transforming data points onto a circular arc or spherical boundary centered at the origin."
+      },
+      {
+        id: 65,
+        question: "What mathematical formula defines the row-wise transformation executed by Normalizer under the L2 norm?",
+        options: {
+          A: "$x_{new} = \\frac{x - \\mu}{\\sigma}$",
+          B: "$x_{new} = \\frac{x}{\\sqrt{\\sum x_i^2}}$",
+          C: "$x_{new} = \\frac{x - min(x)}{max(x) - min(x)}$",
+          D: "$x_{new} = x \\times \\sigma + \\mu$"
+        },
+        answer: "B",
+        explanation: "L2 normalization divides each feature vector by its Euclidean length ($\sqrt{\sum x_i^2}$), constraining each sample to a unit vector of length 1."
+      },
+      {
+        id: 66,
+        question: "Which of the following scenarios represents an application of Unsupervised Clustering?",
+        options: {
+          A: "Predicting house prices based on bedroom counts.",
+          B: "Automatically grouping social media photographs based on facial similarity.",
+          C: "Flagging spam emails using pre-labeled user feedback.",
+          D: "Fitting a linear regression line to stock market data."
+        },
+        answer: "B",
+        explanation: "Grouping unlabeled social media photographs into clusters based on facial features without predefined categories is a classic application of Unsupervised Clustering."
+      },
+      {
+        id: 67,
+        question: "What is an advantage of Unsupervised Classification over Supervised Classification?",
+        options: {
+          A: "Classes guaranteed to match real-world ground features perfectly.",
+          B: "No prior knowledge of the data area is required, and human error during initial processing is minimized.",
+          C: "Zero computational time required for interpretation.",
+          D: "Direct availability of accuracy metrics during training."
+        },
+        answer: "B",
+        explanation: "An advantage of unsupervised approaches is that no prior domain knowledge of the region/data is required, and potential human bias or labeling error during initial processing is minimized."
+      },
+      {
+        id: 68,
+        question: "In Supervised Learning, what does 'consistency in classes' refer to?",
+        options: {
+          A: "Ensuring all feature columns are scaled with MinMaxScaler.",
+          B: "The distribution, quality, and distinguishability of labeled data across different categories.",
+          C: "Forcing equal sample sizes across all feature matrices.",
+          D: "Removing all unscaled numeric values from $X_{train}$."
+        },
+        answer: "B",
+        explanation: "Consistency in classes refers to the degree of uniformity, quality, distribution, and distinguishability present within labeled target categories across tasks."
+      },
+      {
+        id: 69,
+        question: "What structural paradigm applies when an Out-of-Distribution (OOD) detection model evaluates data from an unknown distribution against a multi-class dataset like CIFAR-10?",
+        options: {
+          A: "Single-Class Anomaly Paradigm",
+          B: "Multi-Class Out-of-Distribution Paradigm",
+          C: "Bounded Association Rule Paradigm",
+          D: "Horizontal Row-Normalization Paradigm"
+        },
+        answer: "B",
+        explanation: "Evaluating whether unseen samples belong to a known multi-class dataset or an entirely foreign distribution falls under the Multi-Class Out-of-Distribution (OOD) Detection paradigm."
+      },
+      {
+        id: 70,
+        question: "You are designing an end-to-end Machine Learning pipeline handling real-world tabular data. What is the correct, leak-free sequence of preprocessing and modeling steps?",
+        options: {
+          A: "Fit Scaler on Full Dataset → Train Model → Split Data → Evaluate",
+          B: "Split Data (Train/Test) → Fit Scaler on Train → Transform Train & Test → Train Model on Scaled Train → Evaluate on Scaled Test",
+          C: "Transform Test Set → Fit Scaler on Test Set → Train Model → Evaluate",
+          D: "Fit Scaler on Test Set → Transform Train Set → Evaluate Model"
+        },
+        answer: "B",
+        explanation: "The strictly correct sequence to avoid data leakage is: Split Data into Train/Test, Fit Scaler solely on Train, Transform both Train and Test with that fitted Scaler, Train model on Scaled Train, and Evaluate on Scaled Test."
+      }
+    ];
+
+    // State Management
+    let currentIndex = 0;
+    let isPracticeMode = true;
+    let userAnswers = {}; // { questionId: "A" | "B" | "C" | "D" }
+
+    // DOM Elements
+    const qNumberEl = document.getElementById('qNumber');
+    const qTextEl = document.getElementById('qText');
+    const qOptionsEl = document.getElementById('qOptions');
+    const explanationBoxEl = document.getElementById('explanationBox');
+    const explanationTextEl = document.getElementById('explanationText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const gridNavEl = document.getElementById('gridNav');
+    const scoreTrackerEl = document.getElementById('scoreTracker');
+    const progressBarEl = document.getElementById('progressBar');
+    const modeToggleBtn = document.getElementById('modeToggleBtn');
+    const modeBadgeEl = document.getElementById('modeBadge');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+
+    // Initialize Sidebar Grid Navigation
+    function initSidebar() {
+      gridNavEl.innerHTML = '';
+      questionsData.forEach((q, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'grid-nav-btn';
+        btn.innerText = q.id;
+        btn.id = `nav-btn-${q.id}`;
+        btn.addEventListener('click', () => jumpToQuestion(index));
+        gridNavEl.appendChild(btn);
+      });
+    }
+
+    // Render Question
+    function renderQuestion() {
+      const q = questionsData[currentIndex];
+
+      // Update Question Number & Text
+      qNumberEl.innerText = `Question ${q.id} of ${questionsData.length}`;
+      qTextEl.innerText = q.question;
+
+      // Render Options
+      qOptionsEl.innerHTML = '';
+      const selectedAns = userAnswers[q.id];
+
+      Object.entries(q.options).forEach(([key, text]) => {
+        const optionItem = document.createElement('div');
+        optionItem.className = 'option-item';
+
+        if (selectedAns) {
+          if (key === selectedAns) optionItem.classList.add('selected');
+          if (isPracticeMode) {
+            if (key === q.answer) optionItem.classList.add('correct');
+            if (key === selectedAns && selectedAns !== q.answer) optionItem.classList.add('incorrect');
+          }
+        }
+
+        optionItem.innerHTML = `
+          <span class="option-key">${key}.</span>
+          <span class="option-text">${text}</span>
+        `;
+
+        optionItem.addEventListener('click', () => selectAnswer(q.id, key));
+        qOptionsEl.appendChild(optionItem);
+      });
+
+      // Explanation Box
+      if (isPracticeMode && selectedAns) {
+        explanationTextEl.innerText = q.explanation;
+        explanationBoxEl.classList.add('show');
+      } else {
+        explanationBoxEl.classList.remove('show');
+      }
+
+      // Sidebar Active Highlight
+      document.querySelectorAll('.grid-nav-btn').forEach(btn => btn.classList.remove('active'));
+      const activeNavBtn = document.getElementById(`nav-btn-${q.id}`);
+      if (activeNavBtn) activeNavBtn.classList.add('active');
+
+      // Re-trigger MathJax typesetting for equations
+      if (window.MathJax) {
+        MathJax.typesetPromise([qTextEl, qOptionsEl, explanationBoxEl]).catch(err => console.log(err));
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.innerText = currentIndex === questionsData.length - 1 ? 'Finish' : 'Next →';
+    }
+
+    // Handle Option Selection
+    function selectAnswer(qId, key) {
+      userAnswers[qId] = key;
+      updateStatus();
+      renderQuestion();
+    }
+
+    // Update Progress and Sidebar Styles
+    function updateStatus() {
+      let solvedCount = 0;
+
+      questionsData.forEach(q => {
+        const userAns = userAnswers[q.id];
+        const btn = document.getElementById(`nav-btn-${q.id}`);
+
+        if (userAns && btn) {
+          solvedCount++;
+          if (isPracticeMode) {
+            if (userAns === q.answer) {
+              btn.className = 'grid-nav-btn correct';
+            } else {
+              btn.className = 'grid-nav-btn incorrect';
+            }
+          } else {
+            btn.className = 'grid-nav-btn active';
+          }
+        }
+      });
+
+      scoreTrackerEl.innerText = `${solvedCount} / ${questionsData.length} Solved`;
+      progressBarEl.style.width = `${(solvedCount / questionsData.length) * 100}%`;
+    }
+
+    // Jump to specific question
+    function jumpToQuestion(index) {
+      currentIndex = index;
+      renderQuestion();
+    }
+
+    // Next/Prev Listeners
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < questionsData.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    });
+
+    // Toggle Practice / Exam Mode
+    modeToggleBtn.addEventListener('click', () => {
+      isPracticeMode = !isPracticeMode;
+      modeToggleBtn.innerText = isPracticeMode ? 'Mode: Practice' : 'Mode: Exam';
+      modeBadgeEl.innerText = isPracticeMode ? 'Practice Mode' : 'Exam Mode';
+      updateStatus();
+      renderQuestion();
+    });
+
+    // Toggle Theme
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', newTheme);
+      themeToggleBtn.innerText = newTheme === 'dark' ? '🌙 Dark' : '☀️ Light';
+    });
+
+    // Init App
+    initSidebar();
+    renderQuestion();
+  </script>
+</body>
+</html>
