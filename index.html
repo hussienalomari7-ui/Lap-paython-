@@ -1,1573 +1,1849 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>امتحان التربية الإسلامية - الصف الحادي عشر الأكاديمي | الفصل الدراسي الأول</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1e3a8a;
-            --primary-dark: #0f172a;
-            --accent: #047857;
-            --accent-light: #10b981;
-            --danger: #b91c1c;
-            --warning: #b45309;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border: #e2e8f0;
-            --border-hover: #94a3b8;
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 70px;
-        }
-
-        /* Fixed Top Navigation Bar */
-        .fixed-header {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            background: #ffffff;
-            border-bottom: 2px solid var(--border);
-            box-shadow: var(--shadow);
-            z-index: 1000;
-            padding: 10px 20px;
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .header-title-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .header-emblem {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-        }
-
-        .header-text h1 {
-            font-size: 15px;
-            font-weight: 800;
-            color: var(--primary-dark);
-        }
-
-        .header-text p {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .timer-badge {
-            background: #f1f5f9;
-            border: 2px solid #cbd5e1;
-            padding: 6px 14px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--primary-dark);
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .timer-badge.warning {
-            background: #fef2f2;
-            border-color: #f87171;
-            color: var(--danger);
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-        }
-
-        .progress-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            min-width: 140px;
-        }
-
-        .progress-text {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .progress-bar-track {
-            height: 7px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            transition: width 0.3s ease;
-        }
-
-        /* Main Container */
-        .main-container {
-            max-width: 1200px;
-            margin: 95px auto 40px;
-            padding: 0 15px;
-            display: grid;
-            grid-template-columns: 1fr 310px;
-            gap: 25px;
-        }
-
-        @media (max-width: 992px) {
-            .main-container {
-                grid-template-columns: 1fr;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>امتحان التربية الإسلامية الوزاري المعياري | الصف الحادي عشر الأكاديمي</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#0f5132',
+              dark: '#083320',
+              light: '#e8f5ee',
+              gold: '#c59b27',
+              goldLight: '#fdf8ee',
             }
-            .sidebar {
-                order: -1;
-            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+          }
         }
-
-        /* Exam Introduction Card */
-        .exam-banner {
-            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
-            color: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow-lg);
-            border-right: 6px solid #fbbf24;
-        }
-
-        .exam-banner h2 {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .exam-banner p {
-            font-size: 13px;
-            color: #cbd5e1;
-            margin-bottom: 12px;
-        }
-
-        .exam-meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .exam-meta-item {
-            background: rgba(255,255,255,0.08);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Questions List */
-        .questions-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .question-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 22px 24px;
-            box-shadow: var(--shadow);
-            transition: border-color 0.2s, box-shadow 0.2s;
-            position: relative;
-        }
-
-        .question-card:hover {
-            box-shadow: var(--shadow-lg);
-        }
-
-        .question-card.answered {
-            border-right: 5px solid var(--accent);
-        }
-
-        .q-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 16px;
-        }
-
-        .q-number {
-            background: #eff6ff;
-            color: var(--primary);
-            border: 1px solid #bfdbfe;
-            min-width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .q-text {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1e293b;
-            line-height: 1.7;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            padding-right: 50px;
-        }
-
-        @media (max-width: 640px) {
-            .options-grid {
-                padding-right: 0;
-            }
-        }
-
-        .option-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: #f8fafc;
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
-        }
-
-        .option-label:hover {
-            background: #f1f5f9;
-            border-color: var(--border-hover);
-        }
-
-        .option-label input[type="radio"] {
-            display: none;
-        }
-
-        .opt-indicator {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            background: #ffffff;
-            border: 1.5px solid #cbd5e1;
-            color: var(--text-muted);
-            font-weight: 800;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: all 0.2s ease;
-        }
-
-        .option-label.selected {
-            background: #eff6ff;
-            border-color: #3b82f6;
-        }
-
-        .option-label.selected .opt-indicator {
-            background: #2563eb;
-            border-color: #2563eb;
-            color: #ffffff;
-        }
-
-        .opt-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: #334155;
-            flex: 1;
-        }
-
-        /* Review Styles applied after finish */
-        .question-card.review-correct {
-            border: 2px solid var(--accent-light);
-            background: #f0fdf4;
-        }
-
-        .question-card.review-wrong {
-            border: 2px solid #f87171;
-            background: #fef2f2;
-        }
-
-        .option-label.is-correct {
-            background: #dcfce7 !important;
-            border-color: #22c55e !important;
-            color: #14532d !important;
-        }
-
-        .option-label.is-correct .opt-indicator {
-            background: #16a34a !important;
-            border-color: #16a34a !important;
-            color: #ffffff !important;
-        }
-
-        .option-label.is-wrong {
-            background: #fee2e2 !important;
-            border-color: #ef4444 !important;
-            color: #7f1d1d !important;
-        }
-
-        .option-label.is-wrong .opt-indicator {
-            background: #dc2626 !important;
-            border-color: #dc2626 !important;
-            color: #ffffff !important;
-        }
-
-        .review-explanation {
-            margin-top: 14px;
-            padding: 12px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            background: #ffffff;
-            border: 1px dashed #cbd5e1;
-            display: none;
-        }
-
-        /* Sidebar & Question Palette */
-        .sidebar {
-            position: sticky;
-            top: 95px;
-            height: calc(100vh - 120px);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .palette-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 18px;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            overflow: hidden;
-        }
-
-        .palette-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .palette-header h3 {
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--primary-dark);
-        }
-
-        .palette-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 7px;
-            overflow-y: auto;
-            padding-right: 4px;
-            flex: 1;
-        }
-
-        .palette-btn {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            height: 34px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s ease;
-        }
-
-        .palette-btn:hover {
-            border-color: #94a3b8;
-            background: #e2e8f0;
-        }
-
-        .palette-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #ffffff;
-        }
-
-        .palette-btn.current {
-            outline: 2px solid #2563eb;
-            outline-offset: 1px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            color: #ffffff;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(5,150,105,0.25);
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(5,150,105,0.35);
-        }
-
-        /* Modal Results View */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 20px;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            background: #ffffff;
-            width: 100%;
-            max-width: 580px;
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            text-align: center;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-badge {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 38px;
-        }
-
-        .score-circle {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--primary-dark);
-            margin: 10px 0;
-            line-height: 1;
-        }
-
-        .score-circle span {
-            font-size: 24px;
-            color: var(--text-muted);
-            font-weight: 700;
-        }
-
-        .results-details {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-            padding: 15px;
-            background: #f8fafc;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .res-box h4 {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .res-box p {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .btn-modal {
-            flex: 1;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-
-        .btn-modal-primary {
-            background: var(--primary);
-            color: #ffffff;
-        }
-
-        .btn-modal-secondary {
-            background: #e2e8f0;
-            color: var(--text-main);
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f3f6f4;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Pulsing timer alert */
+    @keyframes pulseAlert {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.02); }
+    }
+    .timer-danger {
+      background-color: #991b1b !important;
+      color: #ffffff !important;
+      animation: pulseAlert 1s infinite ease-in-out;
+    }
+    /* Radio styling */
+    .custom-radio:checked {
+      border-color: #0f5132;
+      background-color: #0f5132;
+      box-shadow: inset 0 0 0 3px #ffffff;
+    }
+    /* Print media style */
+    @media print {
+      header, aside, .no-print {
+        display: none !important;
+      }
+      main {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .question-card {
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #e2e8f0 !important;
+        margin-bottom: 1rem !important;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="text-slate-800 antialiased min-h-screen flex flex-direction-col flex-col">
 
-    <!-- Fixed Header -->
-    <header class="fixed-header">
-        <div class="header-container">
-            <div class="header-title-box">
-                <div class="header-emblem">ق</div>
-                <div class="header-text">
-                    <h1>امتحان التربية الإسلامية - الصف الحادي عشر الأكاديمي</h1>
-                    <p>الفصل الدراسي الأول | المنهاج المطور (100 سؤال معياري)</p>
-                </div>
+  <header class="sticky top-0 z-50 bg-white border-b-2 border-brand-gold shadow-md">
+    <div class="bg-gradient-to-r from-brand-dark via-brand to-brand-dark text-white px-4 py-3 sm:px-6">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+        <!-- Official Emblem & Header Info -->
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-white/10 border border-brand-gold flex items-center justify-center text-brand-gold text-2xl font-black shadow-inner">
+            <span>⚜</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="bg-brand-gold/20 text-brand-gold text-xs px-2 py-0.5 rounded font-bold border border-brand-gold/30">المنهاج الرسمي الأردني</span>
+              <h1 class="text-base sm:text-lg font-bold">اختبار التربية الإسلامية المعياري | الصف الحادي عشر</h1>
             </div>
-
-            <div class="header-controls">
-                <div class="progress-wrapper">
-                    <div class="progress-text">
-                        <span>الإنجاز: <span id="answered-count">0</span>/100</span>
-                        <span id="progress-percent">0%</span>
-                    </div>
-                    <div class="progress-bar-track">
-                        <div class="progress-bar-fill" id="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="timer-badge" id="timer-badge">
-                    <span>⏱️</span>
-                    <span id="timer-display">40:00</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-container">
-        <!-- Questions Area -->
-        <div class="content-area">
-            <div class="exam-banner">
-                <h2>الاختبار الوزاري الشامل في مادة التربية الإسلامية</h2>
-                <p>اختبار تقويمي إلكتروني قياسي يحاكي الاختبارات الوطنية والوزارية المؤتمتة وفق مصفوفة نواتج التعلم ومستويات التفكير العليا.</p>
-                <div class="exam-meta-grid">
-                    <div class="exam-meta-item"><span>📋</span> عدد الأسئلة: 100 سؤال MCQ</div>
-                    <div class="exam-meta-item"><span>⏳</span> الزمن المحدد: 40 دقيقة</div>
-                    <div class="exam-meta-item"><span>⚖️</span> وزن الإجابات: 25% متساوٍ</div>
-                    <div class="exam-meta-item"><span>🎯</span> التصحيح: إلكتروني مباشر</div>
-                </div>
-            </div>
-
-            <div class="questions-wrapper" id="questions-container">
-                <!-- 100 Questions dynamically injected here -->
-            </div>
+            <p class="text-xs text-emerald-200">المركز الوطني لتطوير المناهج والتقويم - الفصل الدراسي الأول (100 سؤال شامل)</p>
+          </div>
         </div>
 
-        <!-- Sticky Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="palette-card">
-                <div class="palette-header">
-                    <h3>لوحة التنقل السريع</h3>
-                    <span style="font-size: 11px; font-weight:700; color:var(--text-muted);">100 فقرة</span>
-                </div>
-                <div class="palette-grid" id="palette-grid">
-                    <!-- 1-100 buttons -->
-                </div>
-            </div>
-
-            <button class="submit-btn" id="finish-btn" onclick="confirmFinishExam()">
-                <span>✅</span> إنهاء الامتحان واحتساب النتيجة
-            </button>
-        </aside>
-    </main>
-
-    <!-- Results Modal -->
-    <div class="modal-overlay" id="results-modal">
-        <div class="modal-content">
-            <div class="modal-badge" id="modal-badge-icon">🏆</div>
-            <h2 id="modal-feedback-title" style="font-size: 22px; font-weight: 800; color: var(--primary-dark);">نتيجة الاختبار الوزاري</h2>
-            <p id="modal-feedback-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">تم تصحيح كافة إجاباتك إلكترونياً ومطابقتها بمفاتيح الإجابة النموذجية</p>
-            
-            <div class="score-circle">
-                <span id="final-score">0</span><span> / 100</span>
-            </div>
-            
-            <div class="results-details">
-                <div class="res-box">
-                    <h4>الإجابات الصحيحة</h4>
-                    <p style="color: var(--accent);" id="res-correct">0</p>
-                </div>
-                <div class="res-box">
-                    <h4>الإجابات الخاطئة</h4>
-                    <p style="color: var(--danger);" id="res-wrong">0</p>
-                </div>
-                <div class="res-box">
-                    <h4>الوقت المستغرق</h4>
-                    <p style="color: var(--primary);" id="res-time">00:00</p>
-                </div>
-            </div>
-
-            <p id="evaluation-text" style="font-weight: 700; font-size: 14px; margin-bottom: 15px; color: var(--primary);"></p>
-
-            <div class="modal-actions">
-                <button class="btn-modal btn-modal-primary" onclick="closeModalAndReview()">مراجعة الإجابات والحلول</button>
-                <button class="btn-modal btn-modal-secondary" onclick="window.location.reload()">إعادة الاختبار</button>
-            </div>
+        <!-- Real-time Exam Timer -->
+        <div class="flex items-center gap-3 bg-black/30 border border-white/20 px-4 py-1.5 rounded-full backdrop-blur-sm" id="timerBox">
+          <span class="text-lg">⏳</span>
+          <div class="text-xs sm:text-sm font-semibold text-emerald-100">الوقت المتبقي:</div>
+          <div id="timerDisplay" class="font-mono text-lg sm:text-xl font-black text-white tracking-widest min-w-[65px] text-center">40:00</div>
         </div>
+      </div>
     </div>
 
-    <script>
-        // Strictly balanced 100 authentic questions based on Grade 11 Islamic Education NCCD Textbook
-        // Total options: exactly 25 (أ=0), 25 (ب=1), 25 (ج=2), 25 (د=3)
-        const examQuestions = [
-            // Q1 - Key: أ (0)
-            {
-                q: "جاء التعبير في قوله تعالى: ﴿وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا﴾ بلفظ (وَاعْتَصِمُوا) مقترناً بلفظ (جَمِيعًا)؛ للدلالة التربوية على أن:",
-                options: [
-                    "التمسك بالدين هو عصمة للأمة وحماية لها، وأن التمسك به مسؤولية تقع على عاتق كل فرد فيها",
-                    "الدعوة إلى الخير لا تجب إلا على الحكام وولاة الأمور دون غيرهم من أفراد المجتمع",
-                    "التفرق والاختلاف في الفروع الفقهية يوجب العذاب الشديد في الدنيا والآخرة بالضرورة",
-                    "إنقاذ الأمة من النار منوط فقط بطائفة خاصة تقوم بالأمر بالمعروف والنهي عن المنكر"
-                ],
-                correct: 0,
-                exp: "يوضح منهاج الصف الحادي عشر أن التعبير بـ (وَاعْتَصِمُوا) يشير إلى أن التمسك بالدين عصمة وحماية للأمة، بينما لفظ (جَمِيعًا) يدل على مسؤولية كل فرد من أفراد الأمة في التمسك بالإسلام."
-            },
-            // Q2 - Key: ج (2)
-            {
-                q: "مرّ رجل يهودي من بني قينقاع بنفر من الأوس والخزرج فغاظه ألفتهم فذكرهم بحروبهم قبل الإسلام حتى كادوا يقتتلون، وكان هذا الحدث سبب نزول آيات سورة آل عمران، هذا الرجل هو:",
-                options: [
-                    "كعب بن الأشرف",
-                    "حيي بن أخطب",
-                    "شاس بن قيس",
-                    "مرحب اليهودي"
-                ],
-                correct: 2,
-                exp: "ورد في إضاءة (الإثراء والتوسع) لدرس سورة آل عمران (102-105) أن شاس بن قيس - وكان يهودياً من قبيلة بني قينقاع - هو من أحدث الفتنة وذكرهم بيوم بعاث وحروب الجاهلية."
-            },
-            // Q3 - Key: ب (1)
-            {
-                q: "يُستنبط من قوله تعالى: ﴿وَلْتَكُن مِّنكُمْ أُمَّةٌ يَدْعُونَ إِلَى الْخَيْرِ وَيَأْمُرُونَ بِالْمَعْرُوفِ وَيَنْهَوْنَ عَنِ الْمُنكَرِ﴾ أن حكم القيام بهذه المهمة العظيمة هو:",
-                options: [
-                    "فرض عين على كل مسلم ومسلمة في المجتمع كالصلاة والصيام",
-                    "فرض كفاية، إذا قامت به طائفة مؤهلة سقط الإثم عن باقي الأمة",
-                    "سنة مؤكدة لا يأثم تاركها في جميع الأحوال والظروف المجتمعية",
-                    "مباح يستوي فيه الفعل والترك بحسب رغبة الفرد وميوله الخاصة"
-                ],
-                correct: 1,
-                exp: "بين الكتاب في تفسير الآية 104 وإضاءة (أتوقف) أن الخطاب موجه لطائفة متأهلة بالعلم والحكمة، مما يدل على أن حكم الأمر بالمعروف والنهي عن المنكر هو فرض كفاية."
-            },
-            // Q4 - Key: د (3)
-            {
-                q: "التوجيه الإيماني المستنبط من قوله تعالى: ﴿وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ﴾ [آل عمران: 102] يتمثل في:",
-                options: [
-                    "الاطمئنان إلى طول الأجل وتأجيل التوبة إلى مراحل الشيخوخة المتقدمة",
-                    "أن الموت لا يقع للمؤمن إلا إذا بلغ درجة العصمة التامة من الذنوب",
-                    "جواز ترك الواجبات الشرعية للمسلم إذا كان في حالة السفر أو المرض",
-                    "وجوب التزام مبادئ الدين وأحكامه بصورة دائمة ومستمرة حتى آخر لحظة من الحياة"
-                ],
-                correct: 3,
-                exp: "تنص إضاءة الدرس على أن قوله تعالى ﴿وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ﴾ يوجه المسلم إلى جعل الاستقامة حالة دائمة حتى آخر لحظة من حياته."
-            },
-            // Q5 - Key: ج (2)
-            {
-                q: "راوي حديث «إِنَّ الْحَلالَ بَيِّنٌ، وَإِنَّ الْحَرامَ بَيِّنٌ، وَبَيْنَهُما أُمورٌ مُشْتَبِهَاتٌ» هو الصحابي الجليل النعمان بن بشير رضي الله عنه، ومما عُرف من سيرته في المنهاج أنه:",
-                options: [
-                    "تولى إمارة البحرين زمن الخليفة عمر بن الخطاب وتوفي سنة 57 هـ",
-                    "ولد في السنة السابعة للهجرة عام فتح خيبر وتوفي في دمشق",
-                    "ولد في السنة الثانية للهجرة، وتولى قضاء دمشق وحكم الكوفة وحمص زمن الدولة الأموية وتوفي سنة 65 هـ",
-                    "كان أول ممرض في الإسلام واستشهد يوم مؤتة سنة 8 للهجرة"
-                ],
-                correct: 2,
-                exp: "في التعريف براوي الحديث: النعمان بن بشير الأنصاري ولد سنة 2 هـ، عمل قاضياً لدمشق، وتولى حكم الكوفة وحمص زمن الدولة الأموية، وتوفي سنة 65 هـ."
-            },
-            // Q6 - Key: أ (0)
-            {
-                q: "وفق ما قرره منهاج التربية الإسلامية في شأن الأمور المشتبهات، فإن وقوع الاشتباه لا يكون في أصل الشريعة نفسها، وإنما منشؤه:",
-                options: [
-                    "في فهم العلماء ومجتهدي الأمة للنصوص والأدلة الشرعية ومقاصدها",
-                    "في وجود تناقض حقيقي بين نصوص القرآن الكريم وصحيح السنة النبوية",
-                    "في قصور أحكام الشريعة عن استيعاب الوقائع والنوازل المستجدة",
-                    "في عجز العقل البشري بالكلية عن التمييز بين الحلال والحرام"
-                ],
-                correct: 0,
-                exp: "بين الكتاب صراحة: 'وهذا الاشتباه لا يقع في الشريعة الإسلامية نفسها، وإنما يكون في فهم العلماء لها'، ويعرفها الراسخون في العلم بالنظر في الأدلة والمقاصد."
-            },
-            // Q7 - Key: د (3)
-            {
-                q: "حين سُئل الإمام مالك رحمه الله عن حكم أكل 'خنزير البحر'، توقف عن الإجابة في المسألة؛ وعلة توقفه وفق المنهج هي:",
-                options: [
-                    "عدم وجود أي نص في القرآن الكريم أو السنة يتعرض للحيوانات البحرية",
-                    "تحريمه القاطع لكل حيوان يعيش في الماء قياساً على ميتة البر",
-                    "اعتقاده بنجاسة ماء البحر وعدم طهوريته لصيد الحيوانات",
-                    "تعارض الأدلة عنده بين عموم حل صيد البحر وطعامه، وبين عموم تحريم لحم الخنزير"
-                ],
-                correct: 3,
-                exp: "ضرب المنهاج مثالاً على المشتبهات بتوقف الإمام مالك لتعارض الأدلة: قوله تعالى ﴿حُرِّمَتْ عَلَيْكُمُ الْمَيْتَةُ وَالدَّمُ وَلَحْمُ الْخِنزِيرِ﴾ وقوله ﴿أُحِلَّ لَكُمْ صَيْدُ الْبَحْرِ وَطَعَامُهُ﴾."
-            },
-            // Q8 - Key: ب (1)
-            {
-                q: "المفهوم الاصطلاحي الذي عُرّف في المنهاج بأنه: «اجتناب الشبهات خوفاً من الوقوع في المحرمات» هو:",
-                options: [
-                    "الإحسان",
-                    "الورع",
-                    "الاستبراء",
-                    "الحمى"
-                ],
-                correct: 1,
-                exp: "في إضاءة (أتوقف) بدرس اتقاء الشبهات: 'الورع: اجتناب الشبهات خوفاً من الوقوع في المحرمات'."
-            },
-            // Q9 - Key: أ (0)
-            {
-                q: "أيٌّ من التصرفات الآتية يُعد من قبيل 'الكفر العملي المُخرِج من ملة الإسلام' وفق المنهاج المقرّر:",
-                options: [
-                    "سب الذات الإلهية أو شتم أحد الرسل الكرام أو الاستهزاء بالقرآن الكريم",
-                    "ترك صيام شهر رمضان تكاسلاً مع الإقرار بفرضيته ووجوبه الشرعي",
-                    "وقوع المسلم في قتال أخيه المسلم لخصومة دنيوية دون استحلال ذلك",
-                    "الامتناع عن دفع الزكاة بخلاً مع الاعتراف بوجوبها على المسلم الموسر"
-                ],
-                correct: 0,
-                exp: "قسّم الكتاب الكفر العملي لقسمين: كفر يخرج من الإسلام كمَنْ سب الذات الإلهية أو شتم الرسل أو استهزأ بالقرآن، وكفر لا يخرج كارتكاب الكبائر والقتال دون استحلال."
-            },
-            // Q10 - Key: ج (2)
-            {
-                q: "صنّف المنهاج المدرسي 'إطالة المرء لصلاته بقصد نيل مدح الناس وثنائهم' بأنها صورة من صور:",
-                options: [
-                    "الشرك الأكبر المخرج من ملة الإسلام والمخلد في النار",
-                    "الكفر الاعتقادي الذي يحبط جميع الأعمال بالكلية",
-                    "الشرك الأصغر المتمثل في الرياء وهو لا يخرج من الملة بل يجعله عاصياً",
-                    "البدعة السيئة التي تمثل إحداث ركعات زائدة لم تشرع أصلًا"
-                ],
-                correct: 2,
-                exp: "بيّن الدرس أن الرياء هو الشرك الأصغر، لقول النبي ﷺ: 'إن أخوف ما أخاف عليكم الشرك الأصغر: الرياء'، وهو لا يخرج من الملة بل يجعله عاصياً لله تعالى."
-            },
-            // Q11 - Key: د (3)
-            {
-                q: "ظهر 'النفاق الاعتقادي' أول مرة في التاريخ الإسلامي في المدينة المنورة بعد الهجرة النبوية، وكان زعيمه:",
-                options: [
-                    "شاس بن قيس",
-                    "حاطب بن أبي بلتعة",
-                    "أبو سفيان بن حرب",
-                    "عبد الله بن أُبيّ بن سلول"
-                ],
-                correct: 3,
-                exp: "أكد الكتاب أن النفاق الاعتقادي ظهر أول مرة في المدينة المنورة بعد الهجرة وتمثله زعيم المنافقين عبد الله بن أبي بن سلول الذي كان يظهر الإيمان ويبطن الكفر."
-            },
-            // Q12 - Key: ب (1)
-            {
-                q: "الضابط الدقيق الذي يُميز 'استحداث الوسائل المعينة على أمر الدين' عن 'البدعة السيئة' وفق المنهاج هو:",
-                options: [
-                    "أن تكون الوسيلة قد مورست حصراً في العهد النبوي الشريف",
-                    "أن لا تتعارض الوسيلة المستحدثة مع مقاصد الدين وأصوله الشرعية بل تعين عليها",
-                    "أن يشترط إجماع كافة الأمة الإسلامية عليها دون أي خلاف",
-                    "أن ترتبط بالشعائر التعبدية المحضة كزيادة عدد الصلوات المفروضة"
-                ],
-                correct: 1,
-                exp: "أوضح المنهاج أن استحداث الوسائل المعينة على الدين التي لا تتعارض معه ليست بدعة سيئة، كجمع القرآن، وجمع التراويح على إمام، واستخدام السبحة الإلكترونية."
-            },
-            // Q13 - Key: أ (0)
-            {
-                q: "يتسم التصور الإسلامي للكرامة الإنسانية بأنه 'مطلق للبشرية جمعاء'، وهذا يعني أنه:",
-                options: [
-                    "يثبت لكل فرد لإنسانيته دون تمييز بسبب الدين أو اللون أو العرق أو القدرة الجسدية والعقلية",
-                    "يقتصر على المسلمين الملتزمين بالفرائض والواجبات الدينية في دار الإسلام",
-                    "حق مشروط بمدى انتماء الفرد للقبيلة والنسب الرفيع ومكانته الاجتماعية",
-                    "ينتهي بمجرد موت الإنسان وانقطاع عمله في الحياة الدنيا"
-                ],
-                correct: 0,
-                exp: "في إضاءة (أتوقف) بدرس كرامة الإنسان: يتسم التصور الإسلامي بالعموم، فالتكريم مطلق للبشرية جمعاء دون تمييز بسبب الدين أو اللون أو العرق أو القدرة الجسدية أو العقلية."
-            },
-            // Q14 - Key: ج (2)
-            {
-                q: "يُستدل بقوله تعالى: ﴿لَا إِكْرَاهَ فِي الدِّينِ قَد تَّبَيَّنَ الرُّشْدُ مِنَ الْغَيِّ﴾ [البقرة: 256] على أحد المبادئ الإسلامية لتحقيق الكرامة الإنسانية وهو:",
-                options: [
-                    "المساواة في الحقوق والواجبات والفرص الوظيفية",
-                    "توفير الأمن الاقتصادي والغذائي لكافة المواطنين",
-                    "الحرية وتحديداً حرية الإنسان في الاعتقاد وممارسة شعائره الدينية",
-                    "المسؤولية الاجتماعية والتكافل بين الطبقات الغنية والفقيرة"
-                ],
-                correct: 2,
-                exp: "ربط الدرس صراحة بين قوله تعالى ﴿لَا إِكْرَاهَ فِي الدِّينِ﴾ ومبدأ الحرية، وتحديداً حرية الاعتقاد التي هي من أبرز صور الحرية الأساسية للإنسان."
-            },
-            // Q15 - Key: د (3)
-            {
-                q: "امتداد الكرامة الإنسانية في الشريعة لما بعد وفاة الإنسان يظهر في جملة من التشريعات، ليس منها:",
-                options: [
-                    "وجوب تغسيله وتطييبه وتكفينه باللباس الطاهر",
-                    "تشييع جثمانه والصلاة عليه ودفنه في المقابر ومواساة أهله",
-                    "تحريم كسر عظامه والاعتداء على حرمة قبره أو نبشه",
-                    "جواز التمثيل بجثث الأعداء في الحروب لترهيبهم وبث الرعب فيهم"
-                ],
-                correct: 3,
-                exp: "بينت إضاءة (الإثراء والتوسع) وأخلاقيات الجهاد تحريم التمثيل بالجثث نهائياً، وأن الكرامة الإنسانية بعد الوفاة تتجلى في الغسل والتطييب والتكفين والدفن والتعزية."
-            },
-            // Q16 - Key: ب (1)
-            {
-                q: "المبدأ الذي أرساه النبي ﷺ في خطبة حجة الوداع بقوله: «النَّاسُ مِنْ آدَمَ، وَآدَمُ مِنْ تُرَابٍ» هو مبدأ:",
-                options: [
-                    "الاستخلاف في عمارة الأرض",
-                    "المساواة بين الناس وإلغاء التمايز العرقي والطبقي",
-                    "الشورى في اتخاذ القرارات السياسية والعسكرية",
-                    "التعاون الاقتصادي وتبادل الخبرات بين الشعوب"
-                ],
-                correct: 1,
-                exp: "استدل الكتاب بالحديث الشريف: 'لا فضل لعربي على أعجمي... الناس من آدم وآدم من تراب' على مبدأ المساواة بين الناس كافة."
-            },
-            // Q17 - Key: أ (0)
-            {
-                q: "عُرّف الزواج في نص قانون الأحوال الشخصية الأردني المعتمد في المنهاج بأنه:",
-                options: [
-                    "عقد بين رجل وامرأة تحل له شرعاً لتكوين أسرة",
-                    "وعد متبادل بالزواج ومرحلة تمهيدية تسبق توثيق المعاملة في المحكمة",
-                    "اتفاق بين أولي التراضي لإنجاب الذرية وحفظ الأنساب فقط",
-                    "عقد لازم بمجرد قراءة الفاتحة وتبادل الهدايا الرمزية بين الطرفين"
-                ],
-                correct: 0,
-                exp: "نص الكتاب حرفياً: 'عرف قانون الأحوال الشخصية الأردني الزواج بأنه عقد بين رجل وامرأة تحل له شرعاً لتكوين أسرة'."
-            },
-            // Q18 - Key: ب (1)
-            {
-                q: "خاطب شاب فتاة وقرأ الطرفان الفاتحة، ثم رغب أحد الخاطبين في العدول عن الخطبة قبل كتابة العقد الشرعي؛ التكييف الفقهي الصحيح لهذا التصرف هو:",
-                options: [
-                    "يعد طلاقاً واقعاً يوجب على الفتاة الاعتداد لمدة ثلاثة قروء",
-                    "فعل مباح، ولا يعد طلاقاً لأن عقد الزواج لم ينعقد بمجرد الخطبة والفاتحة",
-                    "تصرف محرم شرعاً ويجبر الطرف العادل على إتمام مراسم الزواج",
-                    "يفسخ العقد ويلزم الخاطب بدفع نصف المهر المسمى للعروس فوراً"
-                ],
-                correct: 1,
-                exp: "قرر الدرس أن الخطبة وعد بالزواج ومقدمة له ولا ينعقد بها الزواج ولا بقراءة الفاتحة، ويباح عدول أي من الخاطبين ولا يعد ذلك طلاقاً ولا يترتب عليه أي أثر من آثار العقد."
-            },
-            // Q19 - Key: ج (2)
-            {
-                q: "الحكمة التوجيهية من سنّ نظر الخاطبين أحدهما إلى الآخر كما وردت في حديث النبي ﷺ للمغيرة بن شعبة: «انْظُرْ إِلَيْهَا؛ فَإِنَّهُ أَحْرَى أَنْ يُؤْدَمَ بَيْنَكُمَا» هي:",
-                options: [
-                    "تحديد مقدار المهر المعجل والمؤجل الواجب دفعه في المحكمة",
-                    "التأكد من خلو الطرفين من الأمراض الوراثية والمعدية",
-                    "حصول الألفة والمحبة والوفاق واستقرار الحياة الزوجية في المستقبل",
-                    "إلزام الطرفين بعدم العدول عن الخطبة بعد الرؤية الشرعية"
-                ],
-                correct: 2,
-                exp: "بين الحديث النبوي وشرحه في الكتاب أن معنى 'يُؤْدَمَ بَيْنَكُمَا' هو أن تكون بينهما المحبة والألفة والاتفاق."
-            },
-            // Q20 - Key: د (3)
-            {
-                q: "إلزام المقبلين على الزواج بإجراء 'الفحص الطبي قبل الزواج' في التشريع الأردني غايته الوقائية الأساسية:",
-                options: [
-                    "معرفة الحالة المالية للخاطب ومدى قدرته على دفع تكاليف النفقة",
-                    "التأكد من بلوغ الخاطبين سن الثامنة عشرة سنة شمسية",
-                    "تحديد جنس المولود المستقبلي وضمان إنجاب الذكور في العائلة",
-                    "ضمان استقرار الزواج ومنع انتشار الأمراض الوراثية التي تضر بالنسل وتكلف المجتمع"
-                ],
-                correct: 3,
-                exp: "في إضاءة (الإثراء والتوسع) بدرس الزواج ومقدماته: الفحص الطبي ملزم لضمان استقرار الزواج وسعادة الزوجين ومنع انتشار الأمراض الوراثية المضرة بالنسل والمكلفة اقتصادياً واجتماعياً."
-            },
-            // Q21 - Key: د (3)
-            {
-                q: "خوض غمار القتال بالنفس ومباشرة الحرب دفاعاً عن الدين والوطن هو مرتبة من مراتب الجهاد بالمعنى الخاص تقع مسؤولية إعلانها حصراً على:",
-                options: [
-                    "الأفراد والجماعات الأهلية متى رأوا مصلحة في ذلك",
-                    "المؤسسات الخيرية ومنظمات المجتمع المدني المستقلة",
-                    "مجالس العائلات والعشائر عند وقوع أي تهديد خارجي",
-                    "الدولة وولي الأمر، ولا يحق للأفراد خوضه دون إذن رسمي صادر عنه"
-                ],
-                correct: 3,
-                exp: "أكد الكتاب نصاً في الجهاد بالنفس: 'وهذه المرتبة من الجهاد هي من مسؤولية الدولة لا الأفراد؛ إذ لا يحق لهم خوض غماره من دون إذن ولي الأمر'."
-            },
-            // Q22 - Key: أ (0)
-            {
-                q: "الأصل في الجهاد في سبيل الله أنه فرض كفاية، غير أنه يتحول ليصبح 'فرض عين' في إحدى الحالات الآتية المحددة في المنهاج:",
-                options: [
-                    "إذا أعلنت الدولة النفير العام رسمياً أو كلف ولي الأمر أشخاصاً محددين بذلك",
-                    "عند توفر فائض مالي في خزينة الدولة يسمح ببناء المستشفيات العسكرية",
-                    "إذا كان العدو مجاوراً في الحدود دون وقوع أي عدوان أو احتلال فعلي",
-                    "عند رغبة الشباب في تحصيل الأجر والمغانم دون وجود خطر يهدد الأوطان"
-                ],
-                correct: 0,
-                exp: "بين المنهاج أن الأصل في الجهاد فرض كفاية، لكنه يصبح فرض عين في حالات معينة منها: إذا أعلنت الدولة النفير العام رسمياً، أو كلفت أشخاصاً بعينهم، مستدلاً بآية التوبة: ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا مَا لَكُمْ إِذَا قِيلَ لَكُمُ انفِرُوا فِي سَبِيلِ اللَّهِ اثَّاقَلْتُمْ إِلَى الْأَرْضِ﴾."
-            },
-            // Q23 - Key: ب (1)
-            {
-                q: "حين وجد رسول الله ﷺ امرأة مقتولة في إحدى الغزوات غضب ونهى أصحابه قائلاً: «لَا تَقْتُلُوا ذُرِّيَّةً وَلَا عَسِيفًا»، والمقصود بـ (الْعَسِيف) في هذا النص الشرعي هو:",
-                options: [
-                    "الشيخ الكبير الطاعن في السن العاجز عن القتال",
-                    "الأجير المستأجر لحفظ الدواب وخدمة الجيش غير المقاتل",
-                    "الراهب المنقطع للعبادة في الصوامع والأديرة",
-                    "الأسير الذي استسلم وألقى سلاحه طواعية في المعركة"
-                ],
-                correct: 1,
-                exp: "وضح الهامش اللغوي في درس الجهاد: 'ذُرِّيَّةً: نسل الإنسان والمراد النساء، عَسِيفًا: أجيراً على حفظ الدواب'."
-            },
-            // Q24 - Key: ج (2)
-            {
-                q: "المرحلة الأولى من مراحل تشريع الجهاد في الإسلام والتي امتدت ثلاثة عشر عاماً في مكة المكرمة تميزت بـ:",
-                options: [
-                    "الإذن باستخدام السلاح والقتال لرد اعتداء مشركي قريش بالمثل",
-                    "فرض الجهاد المالي لبناء القوة والمصانع الحربية في دار الأرقم",
-                    "الجهاد بالدعوة والكلمة والصبر والكف التام عن استخدام القوة والسلاح",
-                    "إعلان النفير العام وخوض معارك بدر وأحد والخندق لحماية المستضعفين"
-                ],
-                correct: 2,
-                exp: "في إضاءة (الإثراء والتوسع): المرحلة الأولى كانت الجهاد بالدعوة والكلمة وعدم اللجوء للقوة واستخدام السلاح، ومكث النبي فيها بمكة يربي الصحابة ويأمرهم بالصبر والكف عن قتال المشركين."
-            },
-            // Q25 - Key: أ (0)
-            {
-                q: "الصحابي الجليل الذي أشار على الخليفة أبي بكر الصديق بجمع القرآن الكريم بعد حروب الردة هو (...)، بينما الصحابي الذي كُلّف بمهمة الجمع هو (...):",
-                options: [
-                    "عمر بن الخطاب / زيد بن ثابت",
-                    "عثمان بن عفان / عبد الله بن مسعود",
-                    "حذيفة بن اليمان / أبيّ بن كعب",
-                    "علي بن أبي طالب / أبو موسى الأشعري"
-                ],
-                correct: 0,
-                exp: "أشار عمر بن الخطاب على أبي بكر الصديق بجمع القرآن خشية ضياعه بعد استشهاد القراء، وأمر أبو بكر الصحابي زيد بن ثابت بمهمة الجمع لملازمته للنبي وحفظه."
-            },
-            // Q26 - Key: د (3)
-            {
-                q: "تم ضبط المصحف الشريف عبر مرحلتين تاريخيتين؛ حيث وضع (...) علامات تدل على الإعراب زمن علي رضي الله عنه، بينما قام (...) بنقط الحروف المتشابهة زمن عبد الملك بن مروان:",
-                options: [
-                    "الخليل بن أحمد الفراهيدي / سيبويه",
-                    "نصر بن عاصم / أبو الأسود الدؤلي",
-                    "زيد بن ثابت / حذيفة بن اليمان",
-                    "أبو الأسود الدؤلي / يحيى بن يعمر ونصر بن عاصم"
-                ],
-                correct: 3,
-                exp: "نص الكتاب: في زمن علي بن أبي طالب ضبط أبو الأسود الدؤلي المصحف بوضع علامات حركات الإعراب، وفي عهد الخليفة الأموي عبد الملك بن مروان قام التابعيان يحيى بن يعمر ونصر بن عاصم بنقط الحروف المتشابهة."
-            },
-            // Q27 - Key: ج (2)
-            {
-                q: "المؤلف الذي صنّفه الإمام الزركشي ويُعد من أبرز المصنفات التي عنيت بجمع علوم القرآن الكريم المتنوعة هو:",
-                options: [
-                    "الجامع لأحكام القرآن",
-                    "أنوار التنزيل وأسرار التأويل",
-                    "البرهان في علوم القرآن",
-                    "تفسير القرآن العظيم"
-                ],
-                correct: 2,
-                exp: "بينت إضاءة (الإثراء والتوسع) بدرس جهود العلماء: القرطبي ألف (الجامع لأحكام القرآن - فقهي)، البيضاوي (أنوار التنزيل - بلاغي)، ابن كثير (تفسير القرآن العظيم - بالمأثور)، والزركشي (البرهان في علوم القرآن)."
-            },
-            // Q28 - Key: ب (1)
-            {
-                q: "تقتصر الترجمة المعتمدة للقرآن الكريم إلى اللغات العالمية على 'ترجمة معاني القرآن الكريم' دون الترجمة الحرفية للألفاظ، والعلة المنهجية في ذلك هي:",
-                options: [
-                    "صعوبة طباعة الحروف اللاتينية في المصاحف الشريفة القديمة",
-                    "استحالة مطابقة الترجمة الحرفية لدقة ألفاظ القرآن وبلاغته وإعجازه الإلهي المعجز",
-                    "نهي الفقهاء عن تعريف غير المسلمين بمبادئ وأحكام الشريعة الإسلامية",
-                    "اقتصار خطاب القرآن الكريم على العرب المقيمين في شبه الجزيرة حصراً"
-                ],
-                correct: 1,
-                exp: "وضح درس جهود العلماء أن الترجمة تقتصر على ترجمة المعاني لنقل الرسالة والدعوة، لأن ترجمة الألفاظ حرفياً مستحيلة لبلاغة وإعجاز النظم القرآني ولأن كلام الله معجز بألفاظه ومعانيه العربية."
-            },
-            // Q29 - Key: أ (0)
-            {
-                q: "المفهوم الأصولي لـ 'العزيمة' وحكم العمل بها في الشريعة الإسلامية وفق المنهاج هما:",
-                options: [
-                    "أخذ المكلف بالأحكام الأصلية العامة، وحكم العمل بها واجب لا يجوز تركها إلا لعذر شرعي",
-                    "ما شرعه الله تخفيفاً في حالات خاصة، وحكم العمل بها مندوب مستحب في كل حال",
-                    "الأحكام الاستثنائية المؤقتة، والعمل بها مباح يخير فيه المكلف مطلقاً",
-                    "ما أمر الشارع بتركه على وجه الإلزام الجازم، وحكم العمل بها محرم كالميتة والخمر"
-                ],
-                correct: 0,
-                exp: "العزيمة: أخذ المكلف بالأحكام الأصلية التي شرعها الله تشريعاً عاماً لجميع المسلمين كالصلوات الخمس وصوم رمضان، وحكم العمل بها واجب لأنها الأصل ولا تترك إلا لعذر."
-            },
-            // Q30 - Key: د (3)
-            {
-                q: "المشقة المعتبرة شرعاً التي توجب الانتقال من العزيمة إلى الأخذ بالرخصة هي المشقة التي:",
-                options: [
-                    "تحدث بطبيعة الحال في أداء العبادات المعتادة كالصوم في الأيام الحارة",
-                    "تتمثل في الصداع الخفيف العارض أو الزكام اليسير الذي لا يعيق العمل",
-                    "يشعر بها الإنسان تكاسلاً عن الاستيقاظ لأداء صلاة الفجر في وقتها",
-                    "تُفضي إلى ضرر بالإنسان كذهاب النفس أو تلف عضو أو زيادة المرض أو ألم شديد لا يُحتمل"
-                ],
-                correct: 3,
-                exp: "في إضاءة (الإثراء والتوسع) لدرس العزيمة والرخصة: المشقة الموجبة للتخفيف هي التي تفضي لضرر كذهاب النفس أو تلف عضو أو زيادة مرض أو تأخر شفاء أو ألم شديد لا يحتمل، أما المشقة المعتادة كالزكام اليسير فليست سبباً للرخصة."
-            },
-            // Q31 - Key: ج (2)
-            {
-                q: "من الصور المشرقة في درس العزيمة والرخصة موقف الصحابي عمار بن ياسر رضي الله عنه أثناء تعذيب قريش له، حيث إنه:",
-                options: [
-                    "رفض التلفظ بأي كلمة حتى قتله أبو جهل كما فعل بأبويه أخذاً بالعزيمة",
-                    "وافق المشركين ظاهراً وباطناً واعتقد بآلهتهم لكي ينجو من القتل والعذاب",
-                    "أخذ بالرخصة فذكر آلهة قريش بخير بلسانه ليدفع العذاب وقلبه مطمئن بالإيمان",
-                    "قام بإعلان الردة الحقيقية عن الإسلام ثم استتيب بعد الهجرة إلى المدينة"
-                ],
-                correct: 2,
-                exp: "بين الكتاب أن آل ياسر مثلوا العزيمة والرخصة: ياسر وسمية أخذا بالعزيمة واستشهدا، بينما عمار أخذ بالرخصة فتلفظ بلسانه وقلبه مطمئن بالإيمان، وأنزل الله فيه: ﴿إِلَّا مَنْ أُكْرِهَ وَقَلْبُهُ مُطْمَئِنٌّ بِالْإِيمَانِ﴾."
-            },
-            // Q32 - Key: ب (1)
-            {
-                q: "القاعدة الفقهية الأساسية المستنبطة من قوله تعالى: ﴿يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ﴾ [البقرة: 185] هي:",
-                options: [
-                    "الأمور بمقاصدها والنيات معتبرة في المعاملات",
-                    "المشقة تجلب التيسير ورفع الحرج عن المكلفين",
-                    "اليقين لا يزول بالشك الطارئ في العبادات",
-                    "العادة محكمة في تحديد مقدار النفقة والمهر"
-                ],
-                correct: 1,
-                exp: "نص الكتاب في الإثراء والتوسع: 'تُعد قاعدة (المشقة تجلب التيسير) إحدى القواعد الفقهية الأساسية... وقد استنبطت هذه القاعدة من قول الله تعالى: ﴿يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ﴾'."
-            },
-            // Q33 - Key: أ (0)
-            {
-                q: "السبب المباشر لخروج جيش المسلمين وخوض معركة مؤتة في السنة الثامنة للهجرة هو:",
-                options: [
-                    "اعتراض أحد أمراء الروم في الطفيلة لرسول النبي الحارث بن عمير الأزدي وقتله",
-                    "نقض قبيلة قريش لبنود صلح الحديبية وإمداد بني بكر بالسلاح ضد خزاعة",
-                    "رغبة المسلمين في فتح بلاد الشام وإسقاط الإمبراطورية البيزنطية دون إنذار",
-                    "محاصرة الروم للمدينة المنورة وتجهيزهم جيشاً لاحتلال المسجد النبوي"
-                ],
-                correct: 0,
-                exp: "بعث النبي الحارث بن عمير الأزدي برسالته إلى حاكم بصرى بالشام، فلما وصل أرض الطفيلة اعترضه أحد أمراء الروم على الشام فقتله، وهو سلوك مخالف للأعراف المتبعة في عدم قتل الرسل، فجهز النبي جيش مؤتة تأديباً لهم."
-            },
-            // Q34 - Key: ج (2)
-            {
-                q: "لما بلغ جيش المسلمين أرض مَعان وعلموا بضخامة جيش الروم، تشاوروا في الموقف، فكان الصحابي الذي شجعهم وحفزهم على المضي للقتال قائلاً: «وَاللهِ إِنَّ الَّتِي تَكْرَهُونَ لَلَّتِي خَرَجْتُمْ تَطْلُبُونَ الشَّهَادَةَ...» هو:",
-                options: [
-                    "زيد بن حارثة رضي الله عنه",
-                    "جعفر بن أبي طالب رضي الله عنه",
-                    "عبد الله بن رواحة رضي الله عنه",
-                    "خالد بن الوليد رضي الله عنه"
-                ],
-                correct: 2,
-                exp: "نص الكتاب صراحة على أن الصحابي الذي شجع الجيش في معان وحفزهم على التقدم هو القائد الثالث عبد الله بن رواحة رضي الله عنه."
-            },
-            // Q35 - Key: ب (1)
-            {
-                q: "تجلت عبقرية القائد خالد بن الوليد رضي الله عنه في معركة مؤتة حين تولى الإمارة؛ إذ أنقذ الجيش بإعداد خطة تكتيكية تمثلت في:",
-                options: [
-                    "مباغتة الروم بهجوم ليلي شامل أدى إلى إبادة جيشهم بالكامل والسيطرة على معسكرهم",
-                    "تغيير مواقع الجيش بجعل الميمنة ميسرة والمقدمة مؤخرة وإثارة الغبار لإيهام الروم بقدوم مدد ثم الانسحاب المنظم",
-                    "التحصن في قلاع الكرك والانتظار حتى وصول إمدادات جديدة من المدينة المنورة",
-                    "عقد معاهدة صلح فورية مع قادة الروم ودفع جزية سنوية لتأمين الرجوع بسلام"
-                ],
-                correct: 1,
-                exp: "وضح المنهاج خطة خالد المحكمة: غير ترتيب الجيش (المقدمة مؤخرة والمؤخرة مقدمة والميمنة ميسرة والميسرة ميمنة) وأثار الغبار بالخيول من بعيد ليوهمهم بقدوم مدد، ثم انسحب تدريجياً بأقل الخسائر."
-            },
-            // Q36 - Key: د (3)
-            {
-                q: "يقع مقام الصحابي الجليل الحارث بن عمير الأزدي رضي الله عنه في بلدة (...) بمحافظة الطفيلة، بينما شُيدت مقامات قادة مؤتة الثلاثة في بلدة (...) بمحافظة الكرك:",
-                options: [
-                    "الربة / القصر",
-                    "الرشادية / الهاشمية",
-                    "وادي موسى / عي",
-                    "بصيرا / المزار الجنوبي"
-                ],
-                correct: 3,
-                exp: "في إضاءة (الإثراء والتوسع) لدرس معركة مؤتة: مقام الحارث بن عمير الأزدي في بلدة بصيرا بمحافظة الطفيلة، ومقامات قادة معركة مؤتة في بلدة المزار الجنوبي بمحافظة الكرك."
-            },
-            // Q37 - Key: د (3)
-            {
-                q: "المرأة المحرمة على التأبيد بسبب 'المصاهرة' والتي لا يثبت تحريمها إلا بشرط 'الدخول بأمها' هي:",
-                options: [
-                    "أم الزوجة وجداتها من جهة الأب والأم",
-                    "زوجة الأب التي فارقها الأب بوفاة أو طلاق",
-                    "زوجة الابن الذي هو من الصلب",
-                    "بنت الزوجة من زوج سابق (الربيبة)"
-                ],
-                correct: 3,
-                exp: "بين المنهاج في المحرمات بالمصاهرة أن الربيبة تحرم بالدخول بالزوجة لا بمجرد العقد لقوله تعالى: ﴿وَرَبَائِبُكُمُ اللَّاتِي فِي حُجُورِكُم مِّن نِّسَائِكُمُ اللَّاتِي دَخَلْتُم بِهِنَّ فَإِن لَّمْ تَكُونُوا دَخَلْتُم بِهِنَّ فَلَا جُنَاحَ عَلَيْكُمْ﴾، بخلاف أم الزوجة وزوجات الآباء والأبناء فتحريمهن بمجرد العقد."
-            },
-            // Q38 - Key: أ (0)
-            {
-                q: "المعيار الشرعي المعتمد لثبوت التحريم بالرضاع بين الطفل والمرأة المرضعة هو:",
-                options: [
-                    "خمس رضعات متفرقات مشبعات خلال العامين الأولين (الحولين) من عمر الطفل",
-                    "أي رضعة ولو كانت قطرة واحدة في أي مرحلة من عمر الإنسان",
-                    "ثلاث رضعات متتالية في جلسة واحدة قبل بلوغ سن الفطام",
-                    "عشر رضعات كاملات متفرقات حتى بلوغ الطفل سن السابعة"
-                ],
-                correct: 0,
-                exp: "نص الكتاب صراحة: 'ولا يثبت التحريم بالرضاع إلا بخمس رضعات متفرقات خلال العامين الأولين من عمر الطفل'."
-            },
-            // Q39 - Key: ج (2)
-            {
-                q: "إذا أراد رجل أن يتزوج بأخت زوجته، فإن حكم هذا الزواج، والتصنيف الفقهي لتحريم هذه المرأة هو:",
-                options: [
-                    "جائز مطلقاً ولا حرج فيه شرعاً كبنات العم والخال",
-                    "محرم تحريماً مؤبداً بسبب صلة المصاهرة والقرابة",
-                    "محرم تحريماً مؤقتاً، وتزول الحرمة إذا طلق زوجته وانتهت عدتها أو ماتت",
-                    "باطل تحريماً مؤبداً بسبب الرضاع الذي سرى بين العائلتين"
-                ],
-                correct: 2,
-                exp: "الجمع بين الأختين تحريم مؤقت لقوله تعالى ﴿وَأَن تَجْمَعُوا بَيْنَ الْأُخْتَيْنِ إِلَّا مَا قَدْ سَلَفَ﴾، فإذا ماتت الزوجة أو طلقت وانقضت عدتها زال سبب التحريم وجاز الزواج بأختها."
-            },
-            // Q40 - Key: ب (1)
-            {
-                q: "من أصناف النساء اللاتي يَحِلُّ للرجل الزواج بإحداهن شرعاً ولا مانع من التحريم يمنعه:",
-                options: [
-                    "بنت الأخ وبنت الأخت من النسب",
-                    "بنت العمة وبنت الخالة من جهة الأب أو الأم",
-                    "العمة والخالة لأبيه أو لأمه",
-                    "أم الزوجة بمجرد العقد على ابنتها"
-                ],
-                correct: 1,
-                exp: "بين درس المحرمات من النساء أن عمات الرجل وخالاته محرمات مؤبداً، 'أما بنات العمات والخالات فيجوز الزواج بهن'."
-            },
-            // Q41 - Key: أ (0)
-            {
-                q: "وفاة سيدنا رسول الله ﷺ ودِرعه مرهونة عند رجل يهودي بثلاثين صاعاً من شعير تُعد في المنهاج دليلاً تاريخياً وتطبيقياً على:",
-                options: [
-                    "التعايش الاقتصادي وجواز المعاملات المالية كالشراء والرهن مع غير المسلمين في المجتمع",
-                    "عجز بيت مال المسلمين عن سداد نفقات القتال وتجهيز الجيوش",
-                    "وجوب التعامل الحصري مع أهل الكتاب في المعاملات التجارية دون غيرهم",
-                    "تحريم امتلاك الأسلحة والدروع الشخصية لعامة الصحابة في المدينة"
-                ],
-                correct: 0,
-                exp: "استدل المنهاج بحديث رهن النبي درعه عند يهودي على مجال 'التعايش الاقتصادي'، وكفالة الإسلام لغير المسلمين حق المشاركة في الحياة الاقتصادية."
-            },
-            // Q42 - Key: د (3)
-            {
-                q: "أعطى أمير المؤمنين عمر بن الخطاب رضي الله عنه أهل إيلياء وثيقة أمان تاريخية عُرفت بـ 'العهدة العمرية'، ومما نصت عليه صراحة:",
-                options: [
-                    "إلزامهم باعتناق الإسلام أو الخروج الفوري من بيت المقدس خلال ثلاثة أيام",
-                    "تحويل الكنائس الكبرى إلى مساجد للمسلمين في أوقات الصلوات المفروضة",
-                    "إسقاط الجزية بالكلية عن كافة المقاتلين المحاربين في صفوف الروم",
-                    "أعطاهم أماناً لأنفسهم وأموالهم ولكنائسهم وصلبانهم، وألا تُهدم ولا يُكرهوا على دينهم"
-                ],
-                correct: 3,
-                exp: "نصت العهدة العمرية في المنهاج على: 'أعطاهم أماناً لأنفسهم وأموالهم، ولكنائسهم وصلبانهم... أنه لا تسكن كنائسهم ولا تهدم، ولا يكرهون على دينهم ولا يضار أحد منهم'."
-            },
-            // Q43 - Key: ب (1)
-            {
-                q: "المظهر التطبيقي للتعايش الإنساني الذي يتجسد في 'كفالة حق المواطنة لغير المسلمين داخل الدولة ومشاركتهم في الحقوق والواجبات' كما نصت وثيقة المدينة هو:",
-                options: [
-                    "التعايش الديني المحض",
-                    "التعايش السياسي",
-                    "التعايش الدولي الخارجي",
-                    "التعايش الاقتصادي المالي"
-                ],
-                correct: 1,
-                exp: "نص الكتاب في التعايش السياسي: 'كفل الإسلام حق المواطنة لغير المسلمين داخل الدولة... ومن ذلك ما نصت عليه وثيقة المدينة المنورة إذ شملت غير المسلمين بمقتضى الإقامة والالتزام بأحكامها'."
-            },
-            // Q44 - Key: ج (2)
-            {
-                q: "المبادرة الأردنية العالمية التي تبنتها الجمعية العامة للأمم المتحدة وأعلنها جلالة الملك عبد الله الثاني ابن الحسين للوئام بين الأديان تُقام في:",
-                options: [
-                    "الأسبوع الأخير من شهر رمضان المبارك من كل عام",
-                    "اليوم الحادي والعشرين من شهر آذار تخليداً لمعركة الكرامة",
-                    "الأسبوع الأول من شهر شباط من كل عام على المستوى العالمي",
-                    "العاشر من شهر ذي الحجة تزامناً مع خطبة حجة الوداع"
-                ],
-                correct: 2,
-                exp: "في إضاءة (الإثراء والتوسع) بدرس التعايش الإنساني: المبادرة التي قدمها الأردن للوئام وتبنتها الأمم المتحدة عالمياً تكون في 'الأسبوع الأول من شهر شباط من كل عام'."
-            },
-            // Q45 - Key: د (3)
-            {
-                q: "وفق ما قرره منهاج التربية الإسلامية، فإن الحكم الشرعي لقيام الزوج أو الوالد بأخذ شيء من الراتب الشهري أو المال الخاص للمرأة العاملة دون رضاها هو:",
-                options: [
-                    "جائز شرعاً لأن نفقة المرأة تسقط تلقائياً بمجرد خروجها للعمل خارج المنزل",
-                    "مستحب للزوج ليتمكن من تغطية تكاليف الأثاث ونفقات المعيشة المشتركة",
-                    "مباح قانوناً بشرط أن لا يتجاوز المال المأخوذ نصف راتبها الإجمالي",
-                    "محرم شرعاً، فللمرأة ذمة مالية مستقلة ولا يحل لأحد أخذ مالها إلا بطيب نفس منها"
-                ],
-                correct: 3,
-                exp: "أكد الكتاب أن الإسلام منح المرأة الأهلية الكاملة وحق التملك والتصرف، وليس لأحد من زوج أو أب أو أخ أن يأخذ من مالها شيئاً إلا بطيب نفس منها لقوله تعالى: ﴿فَإِن طِبْنَ لَكُمْ عَن شَيْءٍ مِّنْهُ نَفْسًا فَكُلُوهُ هَنِيئًا مَّرِيئًا﴾."
-            },
-            // Q46 - Key: أ (0)
-            {
-                q: "نص قانون الأحوال الشخصية الأردني المعتمد في المنهاج بخصوص نفقة الزوجة الموسرة (الغنية) على أن:",
-                options: [
-                    "نفقة كل إنسان في ماله، إلا الزوجة؛ فنفقتها واجبة على زوجها ولو كانت موسرة",
-                    "تسقط نفقة الزوجة الموسرة بالكامل ويلزمها الإنفاق على زوجها المعسر",
-                    "تتقاسم الزوجة الموسرة تكاليف المسكن والطعام مناصفة مع زوجها وجوباً",
-                    "تنتقل مسؤولية نفقة الزوجة الموسرة إلى والدها وإخوانها الذكور حكماً"
-                ],
-                correct: 0,
-                exp: "في إضاءة (أربط مع القانون) بدرس الحقوق المالية للمرأة: 'نفقة كل إنسان في ماله، إلا الزوجة؛ فنفقتها على زوجها، ولو كانت موسرة'."
-            },
-            // Q47 - Key: ج (2)
-            {
-                q: "الحق المالي للمرأة المستنبط من قوله تعالى: ﴿لِّلرِّجَالِ نَصِيبٌ مِّمَّا تَرَكَ الْوَالِدَانِ وَالأَقْرَبُونَ وَلِلنِّسَاءِ نَصِيبٌ مِّمَّا تَرَكَ الْوَالِدَانِ وَالأَقْرَبُونَ مِمَّا قَلَّ مِنْهُ أَوْ كَثُرَ نَصِيبًا مَّفْرُوضًا﴾ هو:",
-                options: [
-                    "المهر المعجل والمؤجل",
-                    "النفقة الزوجية في المسكن والمأكل",
-                    "حق الميراث الشرعي المفروض بصرف النظر عن حالتها المادية",
-                    "الحق في التملك العقاري وممارسة التجارة الحرة"
-                ],
-                correct: 2,
-                exp: "استدل المنهاج بهذه الآية الكريمة (النساء: 7) على حق المرأة في الميراث بوصفه حقاً واجباً مشروعاً لها بصرف النظر عن حالتها المادية."
-            },
-            // Q48 - Key: ب (1)
-            {
-                q: "واحدة من الآتية لَيْسَتْ من الضوابط الشرعية التي وضعها الإسلام لعمل المرأة خارج بيتها وفق المنهاج:",
-                options: [
-                    "الالتزام بالأحكام والآداب واللباس الشرعي الساتر",
-                    "اشتراط التنازل الإلزامي عن حقها في المهر والنفقة لصالح زوجها",
-                    "مناسبة العمل لطبيعة المرأة وخصوصيتها الفطرية",
-                    "عدم تسبب العمل في التقصير بواجباتها ومسؤولياتها الأسرية الأساسية"
-                ],
-                correct: 1,
-                exp: "بينت إضاءة (الإثراء والتوسع) الضوابط الشرعية لعمل المرأة: الالتزام بالآداب الشرعية، مناسبة العمل لطبيعتها، وعدم التقصير بواجباتها الأسرية. ولم يشترط التنازل عن المهر أو النفقة إطلاقاً."
-            },
-            // Q49 - Key: د (3)
-            {
-                q: "دلالة التعبير القرآني بقوله تعالى: ﴿عِندَ رَبِّهِمْ يُرْزَقُونَ﴾ [آل عمران: 169] في وصف الشهداء تتمثل في:",
-                options: [
-                    "بيان أن أجسادهم لا تدفن في الأرض بل ترفع للسماء مباشرة",
-                    "حصر رزقهم في النعيم المادي الدنيوي الذي خلفوه لأولادهم",
-                    "الإشارة إلى عجز الأحياء عن إيصال الدعاء والاستغفار إليهم",
-                    "زيادة التكريم والتشريف للشهداء ببيان قربهم العظيم من الله تعالى ورضوانه"
-                ],
-                correct: 3,
-                exp: "نص الكتاب في الفهم والتحليل لآيات آل عمران (169-174): 'والتعبير بقوله تعالى: ﴿عِندَ رَبِّهِمْ يُرْزَقُونَ﴾ فيه زيادة تكريم للشهداء؛ فهم في قرب من الله تعالى'."
-            },
-            // Q50 - Key: أ (0)
-            {
-                q: "خروج الصحابة الكرام مع النبي ﷺ إلى 'حمراء الأسد' في صبيحة اليوم التالي لمعركة أحد بالرغم من إصابتهم بالجراح كان هدفه الأساسي:",
-                options: [
-                    "إظهار قوة المسلمين وبث الرعب في قريش لكيلا يفكروا بالرجوع لمهاجمة المدينة",
-                    "البحث عن الغنائم التي خلفها جيش المشركين في سهول أحد بعد انسحابهم",
-                    "تتبع فلول جيش المشركين لفتح مكة المكرمة ودخولها فوراً",
-                    "إقامة صلاة الخوف جماعة في تلك المنطقة لتحديد اتجاه القبلة"
-                ],
-                correct: 0,
-                exp: "أوضح المنهاج أن قريشاً فكرت في إعادة الكرة واستئصال المسلمين، فأمر النبي بالخروج لملاقاتهم بحمراء الأسد (12 كم جنوب المسجد النبوي) ليعلموا أن المسلمين ما زالوا أقوياء، فخاف المشركون ورجعوا لمكة."
-            },
-            // Q51 - Key: ب (1)
-            {
-                q: "الصحابي الجليل الذي قال يوم أحد: «اللَّهُمَّ إِنِّي أَعْتَذِرُ إِلَيْكَ مِمَّا صَنَعَ هَؤُلَاءِ، وَأَبْرَأُ إِلَيْكَ مِمَّا صَنَعَ هَؤُلَاءِ»، ثم قال لسعد: «وَاهاً لِرِيحِ الْجَنَّةِ إِنِّي أَجِدُهُ دُونَ أُحُدٍ» وقاتل حتى استشهد هو:",
-                options: [
-                    "حمزة بن عبد المطلب رضي الله عنه",
-                    "أنس بن النضر رضي الله عنه",
-                    "عبد الله بن جبير رضي الله عنه",
-                    "مصعب بن عمير رضي الله عنه"
-                ],
-                correct: 1,
-                exp: "في إضاءة (صور مشرقة) بدرس آل عمران (169-174): هو الصحابي أنس بن النضر رضي الله عنه، قاتل حتى قتل ولم يعرف من كثرة الجراح حتى عرفته أخته ببنانه."
-            },
-            // Q52 - Key: ج (2)
-            {
-                q: "من خصال الشهيد التي وردت في الحديث الشريف في إضاءة (الإثراء والتوسع) لدرس الشهادة، أن الشهيد:",
-                options: [
-                    "يُسقط عنه الحساب بالكلية ولا يحضر أرض المحشر يوم القيامة",
-                    "يُعطى مفاتيح الجنان يدخل منها من يشاء بغير حساب",
-                    "يُجار من عذاب القبر، ويأمن من الفزع الأكبر، ويشفع في سبعين إنساناً من أقاربه",
-                    "يُكتب له أجر حجة مبرورة مع النبي ﷺ عن كل قطرة دم سالت منه"
-                ],
-                correct: 2,
-                exp: "ورد في الحديث النبوي الشريف برواية ابن ماجه في الإثراء والتوسع: 'يُغْفَرُ لَهُ فِي أَوَّلِ دَفْعَةٍ مِنْ دَمِهِ، وَيَرَى مَقْعَدَهُ مِنَ الْجَنَّةِ، وَيُجَارُ مِنْ عَذَابِ الْقَبْرِ، وَيَأْمَنُ مِنَ الْفَزَعِ الْأَكْبَرِ... وَيُشَفَّعُ فِي سَبْعِينَ إِنْسَانًا مِنْ أَقَارِبِهِ'."
-            },
-            // Q53 - Key: د (3)
-            {
-                q: "راوي حديث: «إِنَّ اللَّهَ يَرْضَى لَكُمْ ثَلَاثًا، وَيَسْخَطُ لَكُمْ ثَلاثًا...» هو الصحابي الجليل أبو هريرة رضي الله عنه، ومما عُرف في ترجمته بالمنهاج:",
-                options: [
-                    "أنه أسلم على يد أبي بكر الصديق في مكة في العام الأول للبعثة",
-                    "أنه ولد في الكوفة واستشهد في معركة اليرموك سنة 15 للهجرة",
-                    "أنه تولى قضاء حمص ودمشق زمن معاوية وتوفي سنة 65 للهجرة",
-                    "أنه عبد الرحمن بن صخر الدوسي، قدم عام خيبر (7 هـ)، ولاه عمر على البحرين وتوفي سنة 57 هـ"
-                ],
-                correct: 3,
-                exp: "في التعريف براوي الحديث: هو عبد الرحمن بن صخر الدوسي، أسلم على يد الطفيل بن عمرو الدوسي، هاجر في السنة السابعة للهجرة يوم خيبر، ولاه عمر على البحرين وتوفي سنة 57 للهجرة."
-            },
-            // Q54 - Key: أ (0)
-            {
-                q: "الفرق الدقيق بين مفهومي 'التبذير' و'الإسراف' في صور إضاعة المال التي نهى عنها النبي ﷺ يتمثل في أن:",
-                options: [
-                    "التبذير إنفاق المال في المحرمات مهما قل مقداره، بينما الإسراف إنفاقه في المباحات زيادة عن الحاجة",
-                    "التبذير خاص بالأموال العامة للدولة، بينما الإسراف خاص بأموال الزكاة والصدقات",
-                    "التبذير مباح في الأعياد والأعراس، بينما الإسراف محرم في جميع الأوقات",
-                    "التبذير يخرج صاحبه من ملة الإسلام، بينما الإسراف كبيرة تقتضي إقامة الحد الشرعي"
-                ],
-                correct: 0,
-                exp: "فرق المنهاج بوضوح: 'التبذير: هو إنفاق المال في المحرمات بصرف النظر عن مقداره (كالخمر والمخدرات والرشوة)'، بينما 'الإسراف: هو إنفاق المال في الأمور المشروعة بما يزيد على الحاجة'."
-            },
-            // Q55 - Key: ج (2)
-            {
-                q: "التوفيق المنهجي الصحيح بين قوله تعالى: ﴿فَاسْأَلُوا أَهْلَ الذِّكْرِ إِن كُنتُم لَا تَعْلَمُونَ﴾ ونهي الحديث عن 'كثرة السؤال' هو أن النهي ينصرف إلى:",
-                options: [
-                    "السؤال عن أحكام الصلاة والزكاة والمعاملات المالية المعاصرة",
-                    "الاستفسار عن تفسير آيات القرآن الكريم وعلل الأحكام الفقهية",
-                    "كثرة السؤال في غير حاجة أو فائدة، والتدخل في خصوصيات الناس وأسرارهم المحرجة",
-                    "سؤال القضاة والمفتين في قضايا الميراث والطلاق المعروضة على المحاكم"
-                ],
-                correct: 2,
-                exp: "أوضح المنهاج أن السؤال المأمور به هو بقصد التعلم وطلب العلم الشرعي، أما السؤال المنهي عنه في الحديث فهو كثرة السؤال في غير حاجة أو فائدة والبحث في أحوال الناس الخاصة التي تحرجهم وتوقعهم في ضيق."
-            },
-            // Q56 - Key: ب (1)
-            {
-                q: "موقف الخليفة هارون الرشيد حين قال له رجل: 'إني أريد أن أكلمك بكلام فيه غلظة'، فرد عليه الخليفة: «لَا؛ قَدْ بَعَثَ اللَّهُ مَنْ هُوَ خَيْرٌ مِنْكَ إِلَى مَنْ هُوَ شَرٌّ مِنِّي...» يعبر عن أدب:",
-                options: [
-                    "حفظ المال العام وعدم تبذيره في مشاريع الدولة",
-                    "مناصحة ولي الأمر بالحكمة والموعظة والقول اللين بعيداً عن الغلظة والتشهير",
-                    "الجهاد بالكلمة في مواجهة الأعداء والمحاربين لبلاد المسلمين",
-                    "تحقيق التعايش السياسي بين المذاهب الفقهية المتعددة في الدولة"
-                ],
-                correct: 1,
-                exp: "ساق المنهاج هذه القصة في الفهم والتحليل تحت عنوان (مناصحة ولي الأمر) لبيان وجوب التناصح بالحكمة والقول اللين كما أمر الله موسى وهارون مع فرعون."
-            },
-            // Q57 - Key: أ (0)
-            {
-                q: "السبب المباشر لغزوة فتح مكة في السنة الثامنة للهجرة يتمثل في:",
-                options: [
-                    "نقض قريش لصلح الحديبية بإمدادها قبيلة بني بكر بالرجال والسلاح في اعتدائها على خزاعة حليفة المسلمين",
-                    "قتل أمير الروم للحارث بن عمير الأزدي في أرض الطفيلة",
-                    "منع قريش للنبي وأصحابه من أداء عمرة القضاء في شهر ذي القعدة",
-                    "مهاجمة جيش مكة للمدينة المنورة وحصار المسجد النبوي في نهار رمضان"
-                ],
-                correct: 0,
-                exp: "دخلت بنو بكر في حلف قريش، ودخلت خزاعة في حلف النبي، فأغارت بنو بكر على خزاعة وقتلت منهم، وأمدت قريش بني بكر بالسلاح والرجال فكان ذلك نقضاً لصلح الحديبية."
-            },
-            // Q58 - Key: د (3)
-            {
-                q: "المظهر الحربي والتنظيمي الذي اتبعه النبي ﷺ لتحقيق عنصر المباغتة ودخول مكة المكرمة دون إراقة للدماء هو:",
-                options: [
-                    "إرسال رسائل علنية لزعماء قريش يخبرهم فيها بموعد وصول الجيش",
-                    "التحالف مع قبائل نجران لشن هجوم بحري عبر البحر الأحمر",
-                    "الانتظار في المدينة حتى انقضاء الأشهر الحرم في شوال وذي القعدة",
-                    "الكتمان التام لوجهته، وإيقاد النيران العظيمة في مر الظهران، وتقسيم الجيش للدخول من كافة الجهات"
-                ],
-                correct: 3,
-                exp: "اتخذ النبي خطة محكمة: دعا 'اللهم خذ العيون والأخبار عن قريش'، عسكر بمر الظهران وأمر بإشعال النيران لإرهابهم، وقسم الجيش لفرق تدخل من جهات مكة الأربع وأمرهم ألا يبدؤوا بقتال."
-            },
-            // Q59 - Key: ج (2)
-            {
-                q: "حين قال سعد بن عبادة رضي الله عنه يوم فتح مكة: 'اليوم يوم الملحمة، اليوم تستحل الحرمة'، رد عليه النبي ﷺ بحزم مصححاً:",
-                options: [
-                    "«اليوم يوم القتال، اليوم نثأر لشهداء أحد وبدر»",
-                    "«اليوم يوم الغنائم، اليوم نقتسم أموال قريش وسلاحها»",
-                    "«الْيَوْمَ يَوْمُ الْمَرْحَمَةِ، الْيَوْمَ يُعِزُّ اللَّهُ قُرَيْشًا، وَيُعَظَّمُ اللَّهُ الْكَعْبَةَ»",
-                    "«اليوم يوم السيف، لا نبقي من كفار مكة أحداً في ديارهم»"
-                ],
-                correct: 2,
-                exp: "في إضاءة (صور مشرقة) بدرس فتح مكة: شكا أبو سفيان مقولة سعد للنبي، فرد ﷺ قائلاً: 'الْيَوْمَ يَوْمُ الْمَرْحَمَةِ، الْيَوْمَ يُعِزُّ اللَّهُ قُرَيْشًا، وَيُعَظِّمُ اللَّهُ الْكَعْبَةَ'."
-            },
-            // Q60 - Key: ب (1)
-            {
-                q: "تجلّى خلق الوفاء وحفظ أقدار الناس في فتح مكة حين أبقى النبي ﷺ مفاتيح الكعبة المشرفة مع الصحابي:",
-                options: [
-                    "بلال بن رباح رضي الله عنه",
-                    "عثمان بن طلحة رضي الله عنه",
-                    "عمرو بن سالم الخزاعي رضي الله عنه",
-                    "العباس بن عبد المطلب رضي الله عنه"
-                ],
-                correct: 1,
-                exp: "دعا النبي عثمان بن طلحة رضي الله عنه بعد فتح مكة وأعاد له مفاتيح الكعبة قائلاً: 'هاكَ مِفْتَاحُكَ يَا عُثْمَانُ، الْيَوْمُ يَوْمُ بِرٍّ وَوَفَاءٍ'."
-            },
-            // Q61 - Key: د (3)
-            {
-                q: "المفهوم الاصطلاحي لخاصية 'الإيجابية' في الشريعة الإسلامية كما عُرّف في المنهاج هو:",
-                options: [
-                    "اقتصار التشريعات على تنظيم الشعائر التعبدية دون المعاملات اليومية",
-                    "دعوة المسلم إلى العزلة والانقطاع التام عن الحياة الدنيا في المساجد",
-                    "التسليم المطلق للظروف القاهرة دون محاولة لتغيير الواقع أو إصلاحه",
-                    "قدرة الشريعة الإسلامية على التفاعل مع الواقع وتقديم حلول لمشكلات الناس ليسعدوا بها"
-                ],
-                correct: 3,
-                exp: "نص الكتاب في الفهم والتحليل لدرس الإيجابية: 'تعد الإيجابية سمة من سمات الشريعة الإسلامية، وهي تعني قدرة الشريعة الإسلامية على التفاعل مع الواقع، وتقديم حلول للمشكلات التي يعانيها الناس؛ ما يؤدي إلى عيشهم بسعادة'."
-            },
-            // Q62 - Key: أ (0)
-            {
-                q: "دلالة قول النبي ﷺ: «إِنْ قَامَتِ السَّاعَةُ وَبِيَدِ أَحَدِكُمْ فَسِيلَةٌ، فَإِنِ اسْتَطَاعَ أَنْ لَا يَقُومَ حَتَّى يَغْرِسَهَا فَلْيَفْعَلْ» في إبراز خصائص الشريعة تتمثل في:",
-                options: [
-                    "إيجابية النظرة إلى الحياة الدنيا، واعتبار عمارة الأرض والعمل والإنتاج عبادة حتى آخر لحظة",
-                    "إيجابية النظرة إلى المستقبل من خلال التنبؤ بيوم القيامة وأشراطها الكبرى",
-                    "وجوب التصدق بالأشجار والنخيل لكفالة الفقراء والمحتاجين في المجتمعات",
-                    "إسقاط التكاليف الشرعية عند قيام علامات الساعة وأهوال القيامة"
-                ],
-                correct: 0,
-                exp: "ربط المنهاج هذا الحديث النبوي بمظهر 'إيجابية النظرة إلى الحياة الدنيا'، حيث ينظر الإسلام للدنيا نظرة ملؤها المسؤولية والعمل، وجعل عمارة الأرض عبادة يتقرب بها المسلم إلى ربه."
-            },
-            // Q63 - Key: ب (1)
-            {
-                q: "مظهر الإيجابية الذي يشير إليه حديث النبي ﷺ: «لَيَبْلُغَنَّ هَذَا الْأَمْرُ مَا بَلَغَ اللَّيْلُ وَالنَّهَارُ، وَلَا يَتْرُكُ اللَّهُ بَيْتَ مَدَرٍ وَلَا وَبَرٍ إِلَّا أَدْخَلَهُ اللَّهُ هَذَا الدِّينَ...» هو:",
-                options: [
-                    "إيجابية النظرة إلى النفس والرضا بالقضاء والقدر",
-                    "إيجابية النظرة إلى المستقبل والتفاؤل والاستبشار بانتشار الخير والتمكين",
-                    "إيجابية النظرة إلى الحياة الدنيا واعتبارها دار جزاء لا دار عمل",
-                    "إيجابية التفاعل مع البيئة والمحافظة على مصادر الثروة الحيوانية"
-                ],
-                correct: 1,
-                exp: "استدل الكتاب بهذا الحديث الشريف على مظهر 'إيجابية النظرة إلى المستقبل'، حيث دعت الشريعة إلى الاستبشار والتفاؤل بالخير وبلوغ الدين الآفاق."
-            },
-            // Q64 - Key: ج (2)
-            {
-                q: "حين دخل أبو بكر الصديق على عائشة رضي الله عنهما فوجد جاريتين تغنيان فانتهرهما، فقال النبي ﷺ: «دَعْهُمَا يَا أَبَا بَكْرٍ، فَإِنَّهَا أَيَّامُ عِيدٍ»؛ استنبط المنهاج من ذلك مظهر الإيجابية المتمثل في:",
-                options: [
-                    "إلغاء قيود اللباس الشرعي والضوابط الأخلاقية في المناسبات السعيدة",
-                    "جواز التخلف عن صلاة العيدين في المصلى للرجال والنساء على حد سواء",
-                    "إدخال الفرح والسرور في قلوب الناس وإشاعة البهجة في الأعياد وفق الضوابط الشرعية",
-                    "تحريم التناصح والأمر بالمعروف والنهي عن المنكر في أيام الأعياد والمواسم"
-                ],
-                correct: 2,
-                exp: "استدل الدرس بهذا الموقف النبوي على مظهر 'إيجابية النظرة إلى الناس' ومنها إدخال الفرح والسرور في قلوبهم وإشاعة البهجة في المناسبات كالأعياد وإشهار الزواج."
-            },
-            // Q65 - Key: أ (0)
-            {
-                q: "حدّد قانون الأحوال الشخصية الأردني سن أهلية الزواج المعتمد لاكتمال أهلية الزوجين بـ:",
-                options: [
-                    "بلوغ ثماني عشرة سنة شمسية لكل من الفتى والفتاة",
-                    "بلوغ خمس عشرة سنة قمرية بمجرد ظهور علامات البلوغ الجسدي",
-                    "بلوغ إحدى وعشرين سنة شمسية شريطة الحصول على موافقة خطية من القاضي",
-                    "بلوغ سن التكليف الشرعي دون تحديد لعدد السنوات الشمسية في الوثائق"
-                ],
-                correct: 0,
-                exp: "نص الكتاب صراحة في شروط صحة عقد الزواج: 'وقد حدد قانون الأحوال الشخصية الأردني الأهلية بثماني عشرة سنة شمسية'."
-            },
-            // Q66 - Key: د (3)
-            {
-                q: "يشترط لصحة الإشهاد على عقد الزواج في الشريعة الإسلامية حضور ومصادقة:",
-                options: [
-                    "أربع نساء بالغات عاقلات من أقارب العروسين",
-                    "رجل واحد عدل شريطة أن يكون من موظفي المحكمة الشرعية حصراً",
-                    "شاهدين أحدهما مسلم والآخر غير مسلم لتوثيق التعددية",
-                    "شاهدين رجلين، أو رجل وامرأتين، وتُشترط فيهم: الإسلام، والبلوغ، والعقل"
-                ],
-                correct: 3,
-                exp: "بين المنهاج أن عقد الزواج يشترط لصحته أن يشهده شاهدان رجلان، أو رجل وامرأتان، ويشترط في الشاهد: الإسلام، والبلوغ، والعقل."
-            },
-            // Q67 - Key: ب (1)
-            {
-                q: "جاءت فتاة إلى رسول الله ﷺ فقالت: 'إن أبي زوجني ابن أخيه ليرفع بي خسيسته'، فكان الحكم النبوي في تصرف أبيها أن النبي ﷺ:",
-                options: [
-                    "ألزمها بالاستمرار في الزواج طاعةً لوالدها وبرّاً به",
-                    "جعل الأمر إليها وخيّرها بين فسخ الزواج أو إمضائه لبيان عدم جواز إجبار الفتاة",
-                    "عاقب والدها بالسجن وغرّمه كامل المهر المسمى لابنته",
-                    "حكم ببطلان نكاح الأقارب بالكلية في الشريعة الإسلامية"
-                ],
-                correct: 1,
-                exp: "ساق الدرس هذا الحديث الشريف للدلالة على شرط (رضا الزوجين)، حيث جعل النبي الأمر إليها، فقالت: 'قد أجزت ما صنع أبي، ولكن أردت أن تعلم النساء أن ليس للآباء من الأمر شيء'."
-            },
-            // Q68 - Key: ج (2)
-            {
-                q: "إذا اشترطت المرأة في صلب عقد الزواج 'إكمال دراستها الجامعية' أو اشترط الزوج 'إقامة والديه معه في بيت الزوجية دون ضرر' ورضي الطرف الآخر؛ فإن التكييف الشرعي لهذا الشرط هو:",
-                options: [
-                    "شرط باطل ومفسد لعقد الزواج بالكامل لتنافيه مع عقد النكاح",
-                    "شرط لغو لا قيمة له شرعاً ولا يلزم الوفاء به بعد الدخول",
-                    "شرط صحيح ومعتبر شرعاً ويصير لازماً للطرفين ما دام مدوناً في العقد",
-                    "شرط محرم شرعاً ويستوجب دفع تعويض مالي فوري للطرف المشترط عليه"
-                ],
-                correct: 2,
-                exp: "أوضح المنهاج في 'الاشتراط في عقد الزواج' أنه إذا كان الشرط ينفعه ولا يضر بالآخر ولا يتعارض مع الشرع، ورضي به الطرف الآخر، فإنه يكون معتبراً ولازماً على أن يدون في العقد."
-            },
-            // Q69 - Key: د (3)
-            {
-                q: "نص قانون الأحوال الشخصية الأردني في المادة (170) على أن أولى الأشخاص وأحقهم بحضانة الطفل وتربيته حال قيام الزوجية وبعد الفرقة هي:",
-                options: [
-                    "الجدة لأب باعتبارها امتداداً لنسب العائلة والإنفاق المالي",
-                    "الأب بصفته الولي الطبيعي والمسؤول المالي عن نفقة الصغير",
-                    "العمة الشقيقة شريطة أن تكون غير متزوجة ومقيمة في البلد",
-                    "الأم، لما يوفره ذلك من تلبية حاجة نفسية ملحة للطفل ولأنها أكثر عطفاً وشفقة"
-                ],
-                correct: 3,
-                exp: "نص الكتاب في الحقوق الاجتماعية للمرأة: 'نص قانون الأحوال الشخصية الأردني في المادة (170) على أن الأم أحق بحضانة ولدها وتربيته حال الزوجية وبعد الفرقة'."
-            },
-            // Q70 - Key: أ (0)
-            {
-                q: "جاء رجل إلى النبي ﷺ يريد الجهاد، فقال له: «أَحَيَّةٌ أُمُّكَ؟»، قال: نعم، قال: «الْزَمْ رِجْلَيْهَا؛ فَثَمَّ الْجَنَّةُ»؛ استنبط العلماء من هذا التوجيه النبوي:",
-                options: [
-                    "أن بر الأم والإحسان إليها ورعايتها أعظم درجة من نافلة الجهاد في سبيل الله",
-                    "تحريم خروج الرجال للجهاد دفاعاً عن الوطن في حال غياب الأمهات",
-                    "أن ثواب الجهاد ينقص تلقائياً إذا كانت الأم على قيد الحياة في بلد آخر",
-                    "سقوط كافة الواجبات والفرائض الشرعية عن الابن البار بوالدته"
-                ],
-                correct: 0,
-                exp: "بين الدرس في حق (التكريم والتقدير والرعاية) أن الإسلام جعل بر الأم ورعايتها أعظم درجة من الجهاد في سبيل الله مستدلاً بهذا الحديث النبوي الشريف."
-            },
-            // Q71 - Key: ب (1)
-            {
-                q: "الصحابية الجليلة التي كلفها النبي ﷺ بتمريض الصحابي سعد بن معاذ رضي الله عنه بعد إصابته في غزوة الخندق وتُعد أول ممرضة في الإسلام هي:",
-                options: [
-                    "أم عمارة نسيبة المازنية رضي الله عنها",
-                    "رُفيدة الأسلمية رضي الله عنها",
-                    "الشفاء بنت عبد الله العدوية رضي الله عنها",
-                    "أسماء بنت عميس رضي الله عنها"
-                ],
-                correct: 1,
-                exp: "في إضاءة (صور مشرقة) بدرس الحقوق الاجتماعية للمرأة: كلف النبي صلى الله عليه وسلم رُفيدة الأسلمية (أول ممرضة في الإسلام) بتمريض سعد بن معاذ رضي الله عنه."
-            },
-            // Q72 - Key: ج (2)
-            {
-                q: "أُقر قانون الجرائم الإلكترونية الأردني عام 2023م، وتضمن نصوصاً تجرم أي اعتداء إلكتروني على خصوصية الآخرين لاسيما الفتيات والنساء؛ ووجه ارتباط هذا القانون بالمنهاج يتمثل في:",
-                options: [
-                    "منع المرأة من استخدام الحواسيب والهواتف الذكية حمايةً لها من الفتن",
-                    "إلغاء حق المرأة في التملك والتصرف المالي في الحسابات البنكية الرقمية",
-                    "تعزيز حق المرأة في المحافظة على عرضها وسمعتها وكرامتها وصيانة خصوصيتها",
-                    "إلزام المرأة بنشر تفاصيل حياتها الاجتماعية على المنصات الحكومية"
-                ],
-                correct: 2,
-                exp: "في
+    <div class="bg-slate-50 border-t border-slate-200 px-4 py-2 sm:px-6">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs sm:text-sm">
+        <div class="flex-1 max-w-xl flex items-center gap-3">
+          <span class="font-bold text-slate-600 whitespace-nowrap">نسبة الإنجاز:</span>
+          <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="progressBar" class="bg-gradient-to-l from-brand to-brand-gold h-full w-0 transition-all duration-300"></div>
+          </div>
+          <span id="progressStats" class="font-bold text-brand min-w-[70px] text-left">0 / 100</span>
+        </div>
+        <button id="toggleNavDrawerBtn" class="lg:hidden bg-brand-light text-brand px-3 py-1.5 rounded-lg border border-emerald-300 font-bold hover:bg-emerald-100 transition flex items-center gap-1.5">
+          <span>قائمة الأسئلة (100)</span>
+          <span id="mobileBadge" class="bg-brand text-white text-[10px] px-1.5 py-0.5 rounded-full">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 w-full flex-1 flex flex-col">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start flex-1">
+      
+      <!-- Primary Main Column (Questions Feed & Results) -->
+      <main class="lg:col-span-3 flex flex-col gap-5">
+        
+        <!-- Results Dashboard (Hidden initially) -->
+        <section id="resultsSection" class="hidden bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xl transition-all">
+          <div class="text-center pb-6 border-b border-dashed border-slate-200">
+            <span class="inline-block bg-brand-light text-brand text-xs sm:text-sm font-extrabold px-3 py-1 rounded-full mb-3 border border-brand/20">تقرير النتيجة المعيارية الرسمية</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-brand-dark mb-2">نتيجة اختبار التربية الإسلامية</h2>
+            <p id="gradeFeedback" class="font-bold text-base sm:text-lg mb-6"></p>
+
+            <!-- Circular Score Display -->
+            <div class="w-36 h-36 mx-auto rounded-full bg-gradient-to-tr from-brand-dark via-brand to-emerald-700 text-white flex flex-col items-center justify-center shadow-lg border-4 border-brand-gold">
+              <span id="finalScore" class="text-4xl font-black tracking-tight leading-none">0</span>
+              <span class="text-xs font-semibold text-brand-gold mt-1">من 100 علامة</span>
+            </div>
+            <div id="finalPercentage" class="text-xl font-black text-brand-dark mt-3">0%</div>
+          </div>
+
+          <!-- Quantitative Breakdown Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-center">
+              <div class="text-xs text-emerald-800 font-bold">الإجابات الصحيحة</div>
+              <div id="statCorrect" class="text-2xl font-black text-emerald-700 mt-1">0</div>
+            </div>
+            <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-center">
+              <div class="text-xs text-rose-800 font-bold">الإجابات الخاطئة</div>
+              <div id="statWrong" class="text-2xl font-black text-rose-700 mt-1">0</div>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-center">
+              <div class="text-xs text-amber-800 font-bold">الأسئلة المتروكة</div>
+              <div id="statSkipped" class="text-2xl font-black text-amber-700 mt-1">0</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+              <div class="text-xs text-slate-600 font-bold">الوقت المستغرق</div>
+              <div id="statTimeSpent" class="text-2xl font-black text-slate-800 mt-1">00:00</div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap items-center justify-center gap-3 no-print">
+            <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-5 py-2.5 rounded-xl transition flex items-center gap-2 text-sm shadow">
+              <span>🖨️ طباعة تقرير الامتحان الكامل</span>
+            </button>
+            <button onclick="location.reload()" class="bg-brand-gold hover:bg-amber-600 text-white font-bold px-5 py-2.5 rounded-xl transition flex items-center gap-2 text-sm shadow">
+              <span>🔄 إعادة الاختبار من البداية</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Exam Instructions Card -->
+        <div id="examBanner" class="bg-gradient-to-r from-emerald-50 via-white to-amber-50 border border-emerald-200 rounded-xl p-4 shadow-sm flex items-start gap-3">
+          <div class="text-2xl">📋</div>
+          <div class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <strong class="text-brand-dark block text-sm font-bold mb-1">تعليمات الاختبار الوزاري المحاكي:</strong>
+            يتكون هذا الاختبار من <strong>100 سؤال اختيار من متعدد</strong> تغطي جميع محاور كتاب التربية الإسلامية للفصل الأول (25 درساً). زمن الاختبار <strong>40 دقيقة</strong>. تنتهي الجلسة تلقائياً بانتهاء الوقت. يُنصح بالتحقق من الإجابة في لوحة التنقل الجانبية قبل الضغط على زر الإنهاء.
+          </div>
+        </div>
+
+        <!-- Questions Dynamic Container -->
+        <div id="questionsContainer" class="flex flex-col gap-4"></div>
+      </main>
+
+      <aside id="navPalette" class="hidden lg:flex flex-col bg-white border border-slate-200 rounded-2xl p-4 shadow-md sticky top-[135px] max-h-[calc(100vh-155px)] overflow-hidden">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-3">
+          <div>
+            <h3 class="font-extrabold text-sm text-slate-800">لوحة الأسئلة</h3>
+            <p class="text-[11px] text-slate-500" id="sideAnsweredStatus">تمت الإجابة: 0 من 100</p>
+          </div>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        </div>
+
+        <!-- 100-Question Grid Buttons -->
+        <div id="navGrid" class="grid grid-cols-5 gap-1.5 overflow-y-auto pr-1 flex-1 mb-4 select-none"></div>
+
+        <!-- Submit Button -->
+        <button id="submitExamBtn" class="w-full bg-gradient-to-l from-brand to-emerald-700 hover:from-brand-dark hover:to-emerald-800 text-white font-black py-3 px-4 rounded-xl shadow-md transition duration-200 text-sm flex items-center justify-center gap-2">
+          <span>إنهاء الامتحان واحتساب النتيجة</span>
+          <span>✓</span>
+        </button>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Submit Confirmation Modal (No native alert/confirm) -->
+  <div id="modalConfirm" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 text-center">
+      <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto text-2xl mb-3">⚠️</div>
+      <h3 class="text-lg font-black text-slate-800 mb-2">تأكيد إنهاء الاختبار وتسليمه</h3>
+      <p id="modalConfirmText" class="text-sm text-slate-600 leading-relaxed mb-6"></p>
+      <div class="flex items-center justify-center gap-3">
+        <button id="modalCancelBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-sm transition">العودة للاختبار</button>
+        <button id="modalProceedBtn" class="bg-brand hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm transition shadow">نعم، تسليم واحتساب النتيجة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Alert Modal (Timeout / Information) -->
+  <div id="modalNotice" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 text-center">
+      <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto text-2xl mb-3">⏰</div>
+      <h3 id="modalNoticeTitle" class="text-lg font-black text-slate-800 mb-2">انتهى الوقت المحدد!</h3>
+      <p id="modalNoticeText" class="text-sm text-slate-600 leading-relaxed mb-6">لقد انتهت الـ 40 دقيقة المخصصة للامتحان، وتم إقفال الإجابات تلقائياً واحتساب نتيجتك النهائية.</p>
+      <button id="modalNoticeCloseBtn" class="bg-brand hover:bg-brand-dark text-white font-bold px-6 py-2.5 rounded-xl text-sm transition shadow">عرض التقرير والنتيجة</button>
+    </div>
+  </div>
+
+  <script>
+    // 100 Authentic Questions strictly matching Grade 11 Islamic Education - First Semester (Jordan Curriculum)
+    // Statistical balance: Exactly 25 for option 0 (أ), 25 for option 1 (ب), 25 for option 2 (ج), 25 for option 3 (د).
+    const examQuestions = [
+      // Unit 1 - Lesson 1: آل عمران (102-105)
+      {
+        id: 1,
+        text: "دلالة قوله تعالى: ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ﴾ تتمثل في:",
+        options: [
+          "توجيه المسلم إلى تمثل السلوك القويم بصورة دائمة والالتزام بأحكام الدين حتى آخر لحظة من حياته",
+          "وجوب الاستجابة للنفير العام وقت إعلان الجهاد الدفاعي فقط دون سائر الأوقات",
+          "قصر العمل بأحكام الإسلام على العبادات الشعائرية دون المعاملات المالية",
+          "جواز التهاون في أداء الفرائض والواجبات عند بدء مرحلة الشباب"
+        ],
+        correct: 0,
+        rationale: "أكد الكتاب أن قوله تعالى ﴿وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ﴾ يوجه المسلم لتمثل السلوك القويم بصورة دائمة والالتزام حتى آخر لحظة من حياته."
+      },
+      {
+        id: 2,
+        text: "الحكم الشرعي للأمر بالمعروف والنهي عن المنكر المستفاد من قوله تعالى: ﴿وَلْتَكُن مِّنكُمْ أُمَّةٌ يَدْعُونَ إِلَى الْخَيْرِ وَيَأْمُرُونَ بِالْمَعْرُوفِ وَيَنْهَوْنَ عَنِ الْمُنكَرِ﴾ هو:",
+        options: [
+          "فرض عين على كل مسلم ومسلمة كالصلوات الخمس",
+          "سنة مستحبة يثاب فاعلها ولا يعاقب تاركها",
+          "فرض كفاية إذا قامت به فئة كافية سقط الإثم عن الباقين",
+          "مباح يعود تقديره إلى رغبة المكلف وظروفه الشخصية"
+        ],
+        correct: 2,
+        rationale: "الخطاب موجه إلى طائفة تمتلك العلم والحكمة والمهارة لإيصال الرسالة، وفي هذا دلالة صريحة على أنه فرض كفاية."
+      },
+      {
+        id: 3,
+        text: "الأسلوب الماكر الذي استخدمه شاس بن قيس (اليهودي) لمحاولة إيقاع الفتنة والفرقة بين الأوس والخزرج في مجلسهم هو:",
+        options: [
+          "التشكيك في صحة القرآن الكريم ونبوة محمد ﷺ علناً في مجلسهم",
+          "تذكيرهم بحروبهم في الجاهلية وإثارة النعرات القديمة لإشعال الخصومة بينهم",
+          "مقاطعتهم تجارياً وإغلاق سوق بني قينقاع في وجوههم",
+          "نشر الشائعات حول قيادة جيش المسلمين وتوزيع الغنائم"
+        ],
+        correct: 1,
+        rationale: "مر شاس بن قيس بمجلس الأوس والخزرج فغاظه ألفتهم واجتماعهم، فأحدث فتنة بتذكيرهم بحروب الجاهلية حتى تنادوا بالسلاح."
+      },
+      {
+        id: 4,
+        text: "دلالة ورود لفظ ﴿جَمِيعًا﴾ في قوله تعالى: ﴿وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا﴾ تدل على:",
+        options: [
+          "أن التمسك بالدين واجب مقتصر على الحكام والعلماء",
+          "أن العصمة خاصة بالأمم السابقة قبل نزول القرآن الكريم",
+          "أن التفرق في الفروع الفقهية الاجتهادية يوجب العذاب الأليم",
+          "مسؤولية كل فرد من أفراد الأمة في وجوب التمسك بالإسلام والمحافظة على الوحدة"
+        ],
+        correct: 3,
+        rationale: "بين الكتاب المدرسي صراحة أن لفظ (جميعاً) جاء للدلالة على مسؤولية كل فرد من أفراد الأمة في وجوب التمسك بالإسلام."
+      },
+
+      // Unit 1 - Lesson 2: الحديث الشريف (اتقاء الشبهات)
+      {
+        id: 5,
+        text: "الصحابي الجليل راوي حديث «إن الحلال بين وإن الحرام بين» هو النعمان بن بشير الأنصاري رضي الله عنه، ومن سيرته المقررة أنه:",
+        options: [
+          "هاجر إلى المدينة المنورة سنة 7هـ وكان من أهل الصفة وتوفي سنة 57هـ",
+          "وُلد في السنة الثانية للهجرة، وتولى القضاء بدمشق وحكم الكوفة وحمص زمن الأمويين",
+          "كان كاتب الوحي الأول وأحد القادة الأربعة في معركة مؤتة",
+          "استشهد رضي الله عنه في غزوة أحد بعد أن أثخنته الجراح"
+        ],
+        correct: 1,
+        rationale: "النعمان بن بشير الأنصاري وُلد سنة 2هـ، تولى قضاء دمشق وحكم الكوفة وحمص زمن الدولة الأموية وتوفي سنة 65هـ."
+      },
+      {
+        id: 6,
+        text: "توقف الإمام مالك رحمه الله عن الإفتاء في حكم أكل 'خنزير البحر' لتعارض الأدلة عنده بين:",
+        options: [
+          "قوله تعالى ﴿فَاسْتَقِمْ كَمَا أُمِرْتَ﴾ وأحاديث الصيد في الإحرام",
+          "قوله تعالى ﴿يَسْأَلُونَكَ عَنِ الْخَمْرِ وَالْمَيْسِرِ﴾ ونصوص الأطعمة",
+          "أحاديث النهي عن كل ذي ناب من السباع وعموم حل بهيمة الأنعام",
+          "عموم تحريم لحم الخنزير في سورة المائدة وعموم حل صيد البحر وطعامه"
+        ],
+        correct: 3,
+        rationale: "توقف الإمام مالك لتعارض الأدلة عنده: خوفاً من أن يكون مثل خنزير البر فيحرم ﴿حُرِّمَتْ عَلَيْكُمُ الْمَيْتَةُ وَالدَّمُ وَلَحْمُ الْخِنزِيرِ﴾ أو من صيد البحر فيحل ﴿أُحِلَّ لَكُمْ صَيْدُ الْبَحْرِ وَطَعَامُهُ﴾."
+      },
+      {
+        id: 7,
+        text: "المفهوم الاصطلاحي لخُلق 'الورع' كما نص عليه كتاب التربية الإسلامية في إضاءة (أتوقف) هو:",
+        options: [
+          "اجتناب الشبهات خوفاً من الوقوع في المحرمات",
+          "ترك الفرائض والواجبات خشية الوقوع في الرياء أمام الناس",
+          "التشدد في تحريم الطيبات والمباحات التي أحلها الله تعالى",
+          "الأخذ بالرخص الفقهية دائماً حتى في غير حالات الضرورة"
+        ],
+        correct: 0,
+        rationale: "الورع في إضاءة الدرس: اجتناب الشبهات خوفاً من الوقوع في المحرمات."
+      },
+      {
+        id: 8,
+        text: "شبه النبي ﷺ من يقع في الشبهات بالراعي يرعى حول الحمى يوشك أن يرتع فيه؛ والعلة التربوية من ضرب هذا المثل:",
+        options: [
+          "أن رعي الماشية يتطلب مهارة عالية في اختيار المراعي الخصبة",
+          "أن الحمى خاص بالأمراء والملوك ولا يجوز لعامة الناس دخوله",
+          "أن من اعتاد التساهل في المشتبهات جرّته نفسه وسهل عليه الوقوع في الحرام المحض",
+          "إباحة ارتكاب الصغائر ما دامت نية المسلم سليمة وخالصة"
+        ],
+        correct: 2,
+        rationale: "بين الحديث أن النفس تسول للإنسان وتجره شيئاً فشيئاً؛ فمن اعتاد التساهل في المشتبهات يوشك أن يقع في الحرام."
+      },
+
+      // Unit 1 - Lesson 3: من صور الضلال
+      {
+        id: 9,
+        text: "كل الصور الآتية تُعد من صور 'الكفر الاعتقادي الأكبر' المخرج من ملة الإسلام، ما عدا:",
+        options: [
+          "إنكار ركن من أركان الإيمان كالإيمان بالملائكة أو باليوم الآخر",
+          "إنكار ركن من أركان الإسلام كفريضة الصلاة أو فريضة الزكاة",
+          "إنكار حكم قطعي معلوم من الدين بالضرورة كحرمة الربا أو الزنا",
+          "ترك صيام شهر رمضان تكاسلاً مع الإقرار بفرضيته ووجوبه"
+        ],
+        correct: 3,
+        rationale: "من ارتكب الذنوب أو ترك الواجبات تكاسلاً دون إنكار لها ليس بكافر، وإنما هو عاصٍ ومذنب مرتكب لكبيرة."
+      },
+      {
+        id: 10,
+        text: "شخص يطيل في صلاته ويحسن ركوعها وسجودها فقط حينما يراه الناس لينال مدحهم وثناءهم؛ هذا العمل يمثل شرعاً صورة من صور:",
+        options: [
+          "الشرك الأصغر (الرياء)",
+          "الشرك الأكبر المخرج من الملة",
+          "النفاق الاعتقادي المستوجب للخلود في النار",
+          "البدعة السيئة التي لا أصل لها"
+        ],
+        correct: 0,
+        rationale: "الرياء هو أن يقصد الإنسان بعبادته مدح الناس، وهو شرك أصغر لا يخرج صاحبه من الإسلام ولكنه معصية."
+      },
+      {
+        id: 11,
+        text: "من أمثلة 'الكفر العملي الذي يُخرج فاعله من ملة الإسلام' كما نص المنهاج:",
+        options: [
+          "اقتتال المسلمين فيما بينهم وتنازعهم لقوله ﷺ: «وقتاله كفر»",
+          "شرب الخمر والسرقة مع إقرار مرتكبها بحرمتها وذنبه",
+          "سبّ الذات الإلهية، أو شتم أحد الرسل الكرام، أو الاستهزاء بالقرآن الكريم",
+          "عقوق الوالدين وشهادة الزور في المحاكم"
+        ],
+        correct: 2,
+        rationale: "الكفر العملي ينقسم إلى: كفر يخرج من الإسلام كمن سب الذات الإلهية أو شتم الرسل أو استهزأ بالقرآن، وكفر لا يخرج كارتكاب الكبائر."
+      },
+      {
+        id: 12,
+        text: "الموقف الشرعي الدقيق من استخدام 'السُبحة الإلكترونية' أو السُبحة التقليدية في ذكر الله تعالى:",
+        options: [
+          "بدعة ضلالة سيئة محرمة لأنها لم تكن مستخدمة زمن النبي ﷺ",
+          "استحداث لوسيلة تعين على أمر الدين ولا تتعارض معه فليست من البدعة السيئة",
+          "شرك أصغر يلحق بالتمائم والتعاليق المنهي عنها",
+          "مكروهة تحريماً ويجب الاقتصار على الأصابع في كل الأحوال"
+        ],
+        correct: 1,
+        rationale: "بين الكتاب في (أطبق تعلمي) أن السبحة ليست بدعة ضلالة لأنها وسيلة تعين على الذكر وأمر الدين ولا تتعارض معه."
+      },
+
+      // Unit 1 - Lesson 4: كرامة الإنسان في الشريعة
+      {
+        id: 13,
+        text: "يتسم التصور الإسلامي للكرامة الإنسانية في الشريعة الإسلامية بأنه:",
+        options: [
+          "مقصور على المسلمين دون غيرهم من أتباع الأديان الأخرى",
+          "مرتبط بالمكانة الاجتماعية والثروة المادية للشخص",
+          "مطلق للبشرية جمعاء دون تمييز بسبب الدين أو اللون أو العرق أو القدرة الجسدية والعقلية",
+          "خاص بالرجال دون النساء في الحقوق العامة"
+        ],
+        correct: 2,
+        rationale: "نص الكتاب في إضاءة (أتوقف) على أن التصور الإسلامي يتسم بالعموم؛ فالتكريم مطلق للبشرية جمعاء دون أي تمييز."
+      },
+      {
+        id: 14,
+        text: "دلالة قوله تعالى: ﴿إِنَّا عَرَضْنَا الْأَمَانَةَ عَلَى السَّمَاوَاتِ وَالْأَرْضِ وَالْجِبَالِ فَأَبَيْنَ أَن يَحْمِلْنَهَا وَأَشْفَقْنَ مِنْهَا وَحَمَلَهَا الْإِنسَانُ﴾ على مظاهر تكريم الله للإنسان:",
+        options: [
+          "خلق الإنسان في أحسن تقويم ومنحه الفصاحة والبيان",
+          "تكليفه بحمل الرسالة وتبليغها وتحمل المسؤولية",
+          "أمر الملائكة الكرام بالسجود لآدم عليه السلام",
+          "تسخير الأفلاك والبحار والمخلوقات لمنفعته"
+        ],
+        correct: 1,
+        rationale: "الآية صريحة في مظهر تكريم الإنسان بتكليفه بحمل الرسالة وتبليغها وتحمل الأمانة."
+      },
+      {
+        id: 15,
+        text: "تمتد الكرامة الإنسانية في الشريعة الإسلامية إلى ما بعد وفاة الإنسان، ويتجلى ذلك في تشريع:",
+        options: [
+          "إلزام الورثة ببناء النصب والتماثيل التذكارية للفقيد",
+          "حرمان الزوجة من الميراث إكراماً لأبناء المتوفى",
+          "منع التصرف في تركة الميت وتجميدها بصورة دائمة",
+          "تغسيله وتطييبه وتكفينه والصلاة عليه وتشييعه ودفنه وتعزية أهله"
+        ],
+        correct: 3,
+        rationale: "ذكر المنهاج في الإثراء والتوسع أحكام تكريم الإنسان بعد موته: تغسيله وتطييبه وتكفينه والصلاة عليه وتشييعه ودفنه وتعزية أهله."
+      },
+      {
+        id: 16,
+        text: "المبدأ الإسلامي لتحقيق الكرامة الإنسانية الذي يشير إليه قوله تعالى: ﴿لَا إِكْرَاهَ فِي الدِّينِ﴾ هو مبدأ:",
+        options: [
+          "الحرية (حرية الاعتقاد وممارسة الشعائر الدينية)",
+          "المساواة بين الناس في تولي الوظائف",
+          "العدالة في توزيع الأموال والغنائم",
+          "الأمن الداخلي من الجرائم والسرقات"
+        ],
+        correct: 0,
+        rationale: "أعلى الإسلام من قيمة الحرية وجعل أبرز صورها حرية الإنسان في الاعتقاد واختيار دينه وممارسة شعائره، واستدل بالآية."
+      },
+
+      // Unit 1 - Lesson 5: الزواج: مشروعيته ومقدماته
+      {
+        id: 17,
+        text: "عرّف قانون الأحوال الشخصية الأردني عقد الزواج بأنه:",
+        options: [
+          "عقد بين رجل وامرأة تحل له شرعاً لتكوين أسرة",
+          "وعد بالزواج ومرحلة تمهيدية تسبق توثيق المحكمة الشرعية",
+          "اتفاق مالي يمنح الرجل حق إدارة أموال المرأة",
+          "رابطة مدنية مؤقتة تنتهي بانتهاء مدة العقد المحددة"
+        ],
+        correct: 0,
+        rationale: "نص قانون الأحوال الشخصية الأردني الوارد بالكتاب: الزواج عقد بين رجل وامرأة تحل له شرعاً لتكوين أسرة."
+      },
+      {
+        id: 18,
+        text: "الحكم الشرعي لعدول أحد الخاطبين عن الخِطبة إذا اعتقد عدم وجود مصلحة في هذا الزواج، والأثر المترتب عليه:",
+        options: [
+          "حرام شرعاً ويترتب عليه وقوع طلقة بائنة بينهما",
+          "مكروه ويترتب عليه إلزام الخاطب بدفع نصف المهر للزوجة فوراً",
+          "مندوب ولا يصح إلا بعد صدور قرار فسخ من القاضي الشرعي",
+          "مباح ولا يُعد ذلك طلاقاً؛ لأن عقد الزواج لم ينعقد بعد بالخطبة"
+        ],
+        correct: 3,
+        rationale: "الخطبة وعد بالزواج ومقدمة له ولا ينعقد بها الزواج؛ لذا يباح العدول عنها في حال عدم المصلحة ولا يعد طلاقاً."
+      },
+      {
+        id: 19,
+        text: "الحكمة الشرعية من سُنّية نظر الخاطبين أحدهما إلى الآخر كما جاء في حديث المغيرة رضي الله عنه: «انْظُرْ إِلَيْهَا فَإِنَّهُ أَحْرَى أَنْ يُؤْدَمَ بَيْنَكُمَا» هي:",
+        options: [
+          "استيفاء الشروط القانونية لتوثيق العقد بالمحكمة",
+          "أن النظر أدعى إلى حصول الألفة والمحبة والاتفاق بينهما",
+          "معرفة الأملاك والمقتنيات المادية للخاطبين",
+          "إسقاط حق أي طرف في العدول عن الخطبة"
+        ],
+        correct: 1,
+        rationale: "بين الحديث النبوي أن النظر أحفظ للألفة؛ أي تكون بينهما المحبة والمودة والاتفاق."
+      },
+      {
+        id: 20,
+        text: "الحكمة من إلزام المقبلين على الزواج في الأردن بإجراء الفحص الطبي قبل الزواج كما ورد في الكتاب:",
+        options: [
+          "تحديد عدد الأبناء وتنظيم النسل بصورة إجبارية",
+          "التأكد من التكافؤ المالي والاجتماعي بين الطرفين",
+          "ضمان استقرار الزواج وسعادة الزوجين ومنع انتشار الأمراض الوراثية التي تضر بالنسل",
+          "استيفاء أركان صيغة الإيجاب والقبول في مجلس العقد"
+        ],
+        correct: 2,
+        rationale: "في الإثراء والتوسع: الفحص الطبي لضمان استقرار الزواج وسعادة الزوجين ومنع انتشار الأمراض التي تضر بالنسل وعلاجها مكلف."
+      },
+
+      // Unit 1 - Lesson 6: الجهاد في الإسلام
+      {
+        id: 21,
+        text: "مرتبة 'الجهاد بالنفس' (بمباشرة القتال وبذل الروح في سبيل الله دفاعاً عن الدين والوطن) هي مسؤولية:",
+        options: [
+          "الأفراد والجماعات بصفة شخصية دون الحاجة لإذن أحد",
+          "المنظمات الإنسانية والجمعيات الأهلية المستقلة",
+          "الدولة لا الأفراد؛ إذ لا يحق لهم خوض غماره دون إذن ولي الأمر",
+          "العشائر والقبائل بالتنسيق مع شيوخها فقط"
+        ],
+        correct: 2,
+        rationale: "نص الكتاب صراحة: 'وهذه المرتبة من الجهاد هي من مسؤولية الدولة لا الأفراد؛ إذ لا يحق لهم خوض غماره من دون إذن ولي الأمر'."
+      },
+      {
+        id: 22,
+        text: "الأصل في الجهاد في سبيل الله أنه فرض كفاية، ولكنه يصبح 'فرض عين' في حالات محددة، منها:",
+        options: [
+          "إعلان الدولة النفير العام رسمياً أو تكليفها أشخاصاً محددين بذلك",
+          "وجود فائض مالي لدى الدولة يتيح تجهيز الجيوش",
+          "رغبة المقاتل في السفر لطلب العلم الشرعي خارج وطنه",
+          "إبداء الرأي والمشورة في وسائل الإعلام والتعبئة المعنوية"
+        ],
+        correct: 0,
+        rationale: "يصبح فرض عين في حالات معينة مثل إعلان الدولة النفير العام رسمياً أو تكليفها أشخاصاً بذلك لقوله تعالى ﴿مَا لَكُمْ إِذَا قِيلَ لَكُمُ انفِرُوا فِي سَبِيلِ اللَّهِ﴾."
+      },
+      {
+        id: 23,
+        text: "ورد في وصية النبي ﷺ للمجاهدين قوله: «... وَلا تَغْدِرُوا، وَلا تَغُلُّوا، وَلا تُمَثِّلُوا، وَلا تَقْتُلُوا وَلِيدًا». معنى «لا تَغُلُّوا» هو:",
+        options: [
+          "لا تتشددوا في الدين بالصوم المتواصل",
+          "لا تشوهوا جثث القتلى بعد المعركة",
+          "لا تقتلوا الأجراء العاملين على حفظ الدواب",
+          "لا تأخذوا من الغنائم دون علم ولي الأمر وإذنه"
+        ],
+        correct: 3,
+        rationale: "بين المعجم الصغير للحديث: تَغُلُّوا: تأخذوا من الغنائم دون علم ولي الأمر."
+      },
+      {
+        id: 24,
+        text: "في الحادي والعشرين من آذار عام 1968م، سطرت القوات المسلحة الأردنية (الجيش العربي) ملحمة بطولية ردت فيها العدوان وألحقت بالاحتلال هزيمة مذلة في:",
+        options: [
+          "معركة باب الواد",
+          "معركة الكرامة",
+          "معركة حمراء الأسد",
+          "معركة مؤتة"
+        ],
+        correct: 1,
+        rationale: "وردت في صور مشرقة: معركة الكرامة في 21 آذار 1968م وتصدي القوات المسلحة الأردنية (الجيش العربي) ببسالة للعدوان الإسرائيلي."
+      },
+
+      // Unit 2 - Lesson 1: جهود علماء المسلمين في خدمة القرآن
+      {
+        id: 25,
+        text: "الصحابي الجليل الذي أشار على الخليفة أبي بكر الصديق رضي الله عنه بجمع القرآن الكريم في مصحف واحد بعد حروب الردة هو:",
+        options: [
+          "عمر بن الخطاب رضي الله عنه",
+          "عثمان بن عفان رضي الله عنه",
+          "حذيفة بن اليمان رضي الله عنه",
+          "زيد بن ثابت رضي الله عنه"
+        ],
+        correct: 0,
+        rationale: "أشار عمر بن الخطاب رضي الله عنه على أبي بكر الصديق بجمع القرآن الكريم خشية ضياعه بعد استشهاد عدد كبير من الحفاظ في حروب الردة."
+      },
+      {
+        id: 26,
+        text: "التابعيان اللذان قاما بنقط الحروف المتشابهة في المصحف الشريف لتمييز بعضها من بعض في عهد الخليفة عبد الملك بن مروان هما:",
+        options: [
+          "أبو الأسود الدؤلي وسعيد بن المسيب",
+          "الحسن البصري ومجاهد بن جبر",
+          "القرطبي وفخر الدين الرازي",
+          "يحيى بن يعمر ونصر بن عاصم"
+        ],
+        correct: 3,
+        rationale: "في عهد عبد الملك بن مروان، قام التابعيان يحيى بن يعمر ونصر بن عاصم بنقط الحروف المتشابهة."
+      },
+      {
+        id: 27,
+        text: "كتاب التفسير الذي اهتم مؤلفه بالجانب البلاغي في القرآن الكريم وفق ما ورد في درس جهود العلماء هو:",
+        options: [
+          "الجامع لأحكام القرآن للقرطبي",
+          "أنوار التنزيل وأسرار التأويل للبيضاوي",
+          "تفسير القرآن العظيم لابن كثير",
+          "البرهان في علوم القرآن للزركشي"
+        ],
+        correct: 1,
+        rationale: "ذكر الكتاب: واهتم آخرون بالجانب البلاغي مثل البيضاوي في كتابه (أنوار التنزيل)."
+      },
+      {
+        id: 28,
+        text: "المصحف الشريف الذي جمعه زيد بن ثابت رضي الله عنه حُفِظ بعد وفاة أبي بكر وعمر رضي الله عنهما عند أم المؤمنين السيدة:",
+        options: [
+          "عائشة بنت أبي بكر رضي الله عنها",
+          "ميمونة بنت الحارث رضي الله عنها",
+          "حفصة بنت عمر رضي الله عنها",
+          "أم سلمة هند بنت أبي أمية رضي الله عنها"
+        ],
+        correct: 2,
+        rationale: "حُفظ المصحف الشريف عند أبي بكر الصديق، ثم عند عمر بن الخطاب، ثم عند أم المؤمنين السيدة حفصة بنت عمر رضي الله عنها."
+      },
+
+      // Unit 2 - Lesson 2: العزيمة والرخصة
+      {
+        id: 29,
+        text: "المفهوم الاصطلاحي لـ 'العزيمة' في الشريعة الإسلامية هو:",
+        options: [
+          "ما شرعه الله تعالى تخفيفاً على العباد في حالات خاصة استثناءً من الأصل",
+          "التطوع بالأعمال الصالحة والنوافل الزائدة عن الفرائض",
+          "أخذ المكلف بالأحكام الأصلية التي شرعها الله تعالى تشريعاً عاماً لجميع المسلمين",
+          "استنباط الأحكام التقديرية بالرأي والاجتهاد الفردي"
+        ],
+        correct: 2,
+        rationale: "العزيمة: أخذ المكلف بالأحكام الأصلية التي شرعها الله تعالى تشريعاً عاماً لجميع المسلمين."
+      },
+      {
+        id: 30,
+        text: "حكم العمل بـ 'العزيمة' في الشريعة الإسلامية كأصل عام هو:",
+        options: [
+          "واجب؛ لأنها الأصل الثابت بالدليل الشرعي ولا يجوز تركها إلا لعذر شرعي",
+          "مندوب يثاب فاعله ولا يعاقب تاركه مطلقاً",
+          "مباح متساوٍ في الرتبة مع الرخصة في جميع الأحوال",
+          "مكروه عند وجود أي مشقة يسيرة كالصداع الخفيف"
+        ],
+        correct: 0,
+        rationale: "العمل بالعزيمة واجب؛ لأنها الأصل الثابت بالدليل الشرعي ولا يجوز تركها إلا لعذر شرعي."
+      },
+      {
+        id: 31,
+        text: "في حادثة تعذيب آل ياسر رضي الله عنهم على يد قريش، الموقف الذي يمثل 'الأخذ بالرخصة الشرعية' هو:",
+        options: [
+          "رفض ياسر رضي الله عنه النطق بكلمة الكفر واختياره الموت في سبيل الله",
+          "رفض سمية رضي الله عنها سب النبي ﷺ حتى نالت الشهادة بأول طعنة",
+          "صبر عمار على العذاب وموته تحت وطأة التعذيب دون كلام",
+          "تلفظ عمار رضي الله عنه بكلمة الكفر بلسانه ليفلت من العذاب مع اطمئنان قلبه بالإيمان"
+        ],
+        correct: 3,
+        rationale: "أخذ عمار بالرخصة فأجاب أبا جهل بلسانه وقلبه مطمئن بالإيمان، وأنزل الله فيه: ﴿إِلَّا مَنْ أُكْرِهَ وَقَلْبُهُ مُطْمَئِنٌّ بِالْإِيمَانِ﴾."
+      },
+      {
+        id: 32,
+        text: "ضابط المشقة المعتبرة شرعاً التي تجلب التيسير وتوجب الرخصة والتخفيف:",
+        options: [
+          "المشقة المعتادة واليسيرة كالصداع الخفيف والزكام اليسير",
+          "المشقة غير المعتادة التي تفضي إلى ضرر فادح كذهاب النفس أو تلف عضو أو زيادة المرض",
+          "كراهية النفس لأداء الطاعات والتكاليف الشرعية",
+          "طلب الإنسان للراحة والتخلص من مشقة الوضوء بالماء البارد دون عذر"
+        ],
+        correct: 1,
+        rationale: "المشقة التي توجب التخفيف هي التي تفضي إلى ضرر بالإنسان مثل ذهاب نفسه أو تلف عضو أو زيادة مرضه أو تأخر شفائه."
+      },
+
+      // Unit 2 - Lesson 3: معركة مؤتة (8هـ)
+      {
+        id: 33,
+        text: "السبب المباشر لوقوع معركة مؤتة في السنة الثامنة للهجرة هو:",
+        options: [
+          "اعتراض أحد أمراء الروم طريق الحارث بن عمير الأزدي (رسول النبي ﷺ لحاكم بصرى) وقتله",
+          "نقض قريش لصلح الحديبية بإعانة بني بكر على خزاعة",
+          "اعتداء يهود خيبر على نساء المسلمين وقوافلهم التجارية",
+          "تحريض نصارى نجران للقبائل العربية على حصار المدينة المنورة"
+        ],
+        correct: 0,
+        rationale: "اعترض أحد أمراء الروم طريق الحارث بن عمير الأزدي في أرض الطفيلة فقتله، مخالفاً عرف الرسل، فأمر النبي بتجهيز الجيش تأديباً وحفظاً للهيبة."
+      },
+      {
+        id: 34,
+        text: "قال رسول الله ﷺ موصياً جيش مؤتة بترتيب القيادة: «إِنْ قُتِلَ زَيْدٌ فَجَعْفَرٌ، وَإِنْ قُتِلَ جَعْفَرٌ فَـ...»:",
+        options: [
+          "خالد بن الوليد رضي الله عنه",
+          "عبد الله بن رواحة رضي الله عنه",
+          "سعد بن عبادة رضي الله عنه",
+          "الحارث بن عمير الأزدي رضي الله عنه"
+        ],
+        correct: 1,
+        rationale: "نص الحديث الصحيح في الكتاب: «إن قتل زيد فجعفر، وإن قتل جعفر فعبد الله بن رواحة»."
+      },
+      {
+        id: 35,
+        text: "الموقف البطولي الدال على الشجاعة الفائقة لعبد الله بن رواحة رضي الله عنه في مؤتة حين تشاور الجيش في معان:",
+        options: [
+          "اقتراحه إرسال وفد إلى قيصر الروم لعقد هدنة سريعة",
+          "إشارته بضرورة الانسحاب الفوري إلى المدينة لعدم التكافؤ",
+          "تغيير مواقع الجيش وتبديل الميمنة بالميسرة ليلاً",
+          "تحفيزه للجيش بقوله: «والله إن التي تكرهون للتي خرجتم تطلبون الشهادة.. فإنما هي إحدى الحسنيين»"
+        ],
+        correct: 3,
+        rationale: "شجع ابن رواحة الجيش في معان بقوله: «إن التي تكرهون للتي خرجتم تطلبون الشهادة... فإنما هي إحدى الحسنيين؛ إما ظهور وإما شهادة»."
+      },
+      {
+        id: 36,
+        text: "الخطة المحكمة التي اتبعها القائد خالد بن الوليد رضي الله عنه في مؤتة لإنقاذ جيش المسلمين والانسحاب بسلام:",
+        options: [
+          "الاحتماء في حصون الكرك وطلب الإمدادات من المدينة المنورة",
+          "مباغتة جيش الروم ليلاً وإحراق معسكراتهم وخيامهم",
+          "تغيير ترتيب الجيش (المقدمة مؤخرة والميمنة ميسرة) وإثارة الغبار بالخيول لإيهامهم بوصول إمدادات",
+          "حفر خندق عميق حول سهل مؤتة لمنع خيول الروم من التقدم"
+        ],
+        correct: 2,
+        rationale: "غير ترتيب الجيش فجعل المقدمة مؤخرة والمؤخرة مقدمة والميمنة ميسرة وأثار الغبار، فظن الروم أن مدداً وصل فأحجموا عن ملاحقتهم."
+      },
+
+      // Unit 2 - Lesson 4: المحرمات من النساء
+      {
+        id: 37,
+        text: "إحدى المحرمات من النساء حُرمة مؤبدة بسبب 'المصاهرة'، ويثبت تحريمها بمجرد العقد على ابنتها ولو لم يدخل بها الزوج:",
+        options: [
+          "بنت الزوجة من زوج سابق (الربيبة)",
+          "أم الزوجة وجداتها",
+          "أخت الزوجة",
+          "عمة الزوجة"
+        ],
+        correct: 1,
+        rationale: "أم الزوجة وجداتها يحصل التحريم بمجرد العقد على الزوجة وإن لم يدخل بها لقوله تعالى ﴿وَأُمَّهَاتُ نِسَائِكُمْ﴾، بخلاف الربيبة التي يشترط فيها الدخول."
+      },
+      {
+        id: 38,
+        text: "الشروط المقررة في الشريعة الإسلامية لثبوت التحريم بالرضاع بين الطفل والمرأة المرضعة:",
+        options: [
+          "ثلاث رضعات مشبعات في أي مرحلة من مراحل عمر الإنسان",
+          "عشر رضعات متفرقات قبل بلوغ سن الفطام في خمس سنوات",
+          "رضعة واحدة تسد الجوع وتغني عن الطعام في العام الأول",
+          "خمس رضعات متفرقات خلال العامين الأولين من عمر الطفل"
+        ],
+        correct: 3,
+        rationale: "نص الكتاب صراحة: 'ولا يثبت التحريم بالرضاع إلا بخمس رضعات متفرقات خلال العامين الأولين من عمر الطفل'."
+      },
+      {
+        id: 39,
+        text: "رجل طلق زوجته طلاقاً بائناً وانقضت عدتها، وأراد بعد ذلك الزواج بأختها. الحكم الشرعي لهذا الزواج:",
+        options: [
+          "يصح ومباح شرعاً؛ لأن تحريم الجمع بين الأختين تحريم مؤقت يزول بفراق الأولى وانقضاء عدتها",
+          "محرم تحريماً مؤبداً كالأم والبنت ولا يحل له أبداً",
+          "باطل ولا يصح إلا بعد أن تتزوج أختها المطلقة من رجل آخر",
+          "مكروه كراهة تحريمية ويوجب كفارة عتق رقبة"
+        ],
+        correct: 0,
+        rationale: "الجمع بين الأختين تحريم مؤقت لسبب عارض، فإذا زال السبب بطلاق الأولى وانقضاء عدتها أو موتها أصبح الزواج بالأخرى مباحاً."
+      },
+      {
+        id: 40,
+        text: "رضع 'خالد' من السيدة 'فاطمة' خمس رضعات متفرقات في شهره السادس. أي حالات الزواج الآتية تُعد 'صحيحة ومباحة شرعاً' وفق أحكام الرضاع:",
+        options: [
+          "زواج خالد بـ 'عبير' ابنة السيدة فاطمة المرضعة",
+          "زواج خالد بأخت السيدة فاطمة (خالته من الرضاع)",
+          "زواج شقيق خالد من النسب بابنة فاطمة التي لم يرضع منها الشقيق",
+          "زواج خالد بأم فاطمة (جدته من الرضاع)"
+        ],
+        correct: 2,
+        rationale: "التحريم يقتصر فقط على الرضيع نفسه دون بقية إخوته من النسب؛ فيجوز لشقيق الرضيع الزواج بابنة المرضعة."
+      },
+
+      // Unit 2 - Lesson 5: التعايش الإنساني
+      {
+        id: 41,
+        text: "توفي رسول الله ﷺ ودرعه مرهونة عند يهودي بثلاثين صاعاً من شعير؛ هذا الحدث دليل شرعي وتاريخي على مجال:",
+        options: [
+          "التعايش الديني وحرية العبادة",
+          "التعايش السياسي وإقرار المواطنة",
+          "التعايش الدولي وقواعد الحرب",
+          "التعايش الاقتصادي وإجازة التعامل المالي والمشاركة الاقتصادية مع غير المسلمين"
+        ],
+        correct: 3,
+        rationale: "استدل الكتاب برهن النبي درعه عند يهودي على 'التعايش الاقتصادي' وحق غير المسلمين في المشاركة بالحياة الاقتصادية."
+      },
+      {
+        id: 42,
+        text: "تضمنت 'العهدة العمرية' التي كتبها أمير المؤمنين عمر بن الخطاب رضي الله عنه لأهل إيلياء أماناً شاملاً لكنائسهم وصلبانهم وأن لا يُكرهوا على دينهم. يجسد هذا الموقف مبدأ:",
+        options: [
+          "التعايش الإنساني وحرية الاعتقاد والكرامة الإنسانية لغير المسلمين",
+          "فرض الجزية التعسفية لإجبار الناس على الهجرة",
+          "التعايش المشروط بتبديل لغة أهل إيلياء وثقافتهم",
+          "العدالة القضائية في شؤون المعاملات التجارية فقط"
+        ],
+        correct: 0,
+        rationale: "العهدة العمرية أعطتهم أماناً لأنفسهم وأموالهم وكنائسهم وصلبانهم وألا يكرهوا على دينهم، وهي تجسيد لمبادئ التعايش الإنساني."
+      },
+      {
+        id: 43,
+        text: "البند الذي ورد في وثيقة المدينة المنورة: «وإنه من تبعنا من يهود فإن له النصر والأسوة غير مظلومين ولا متناصر عليهم» يرسخ مفهوم:",
+        options: [
+          "التعايش الاقتصادي في الأسواق المشتركة",
+          "إسقاط القصاص والدية عن الجرائم الواقعة على غير المسلمين",
+          "التعايش السياسي وكفالة حق المواطنة لغير المسلمين داخل الدولة",
+          "التبعية الدينية وإلزامهم بأداء شعائر الإسلام"
+        ],
+        correct: 2,
+        rationale: "بين المنهاج في التعايش السياسي أن وثيقة المدينة كفلت حق المواطنة لغير المسلمين وأن لهم النصر والأسوة بمقتضى الإقامة."
+      },
+      {
+        id: 44,
+        text: "المبادرة العالمية التي قدمتها المملكة الأردنية الهاشمية وأعلنها جلالة الملك عبد الله الثاني وتبنتها الأمم المتحدة في الأسبوع الأول من شهر شباط سنوياً هي:",
+        options: [
+          "رسالة عمان للحوار الإنساني",
+          "مبادرة أسبوع الوئام بين الأديان",
+          "مبادرة كلمة سواء لتقارب الأديان",
+          "مبادرة إعمار مساجد الصحابة ومقاماتهم"
+        ],
+        correct: 1,
+        rationale: "في الإثراء والتوسع: أسبوع الوئام بين الأديان أعلنه جلالة الملك عبد الله الثاني في الأمم المتحدة وتبنته عالمياً في الأسبوع الأول من شهر شباط."
+      },
+
+      // Unit 2 - Lesson 6: الحقوق المالية للمرأة
+      {
+        id: 45,
+        text: "دلالة قوله تعالى: ﴿وَآتُوا النِّسَاءَ صَدُقَاتِهِنَّ نِحْلَةً فَإِن طِبْنَ لَكُمْ عَن شَيْءٍ مِّنْهُ نَفْسًا فَكُلُوهُ هَنِيئًا مَّرِيئًا﴾:",
+        options: [
+          "حق المرأة في المهر وأنه عطية وهبة خالصة لها ليس لأحد أخذ شيء منه إلا بطيب نفس منها",
+          "وجوب تسليم المهر لوالد الزوجة ليتصرف فيه كيف يشاء",
+          "جواز إسقاط المهر في عقد الزواج إذا رغب الزوجان بذلك",
+          "اقتسام المهر مناصفة بين الزوج وأهل الزوجة عند الدخول"
+        ],
+        correct: 0,
+        rationale: "الآية صريحة في حق المرأة المالي المستقل بالمهر (الصداق)، وأنه نِحلة (عطية وهبة عن طيب نفس) وليس لأحد أخذه إلا برضاها."
+      },
+      {
+        id: 46,
+        text: "نص قانون الأحوال الشخصية الأردني بخصوص نفقة الزوجة العاملة ذات المال (الموسرة) على أن:",
+        options: [
+          "نفقتها تسقط تماماً وتلزم بالإنفاق على البيت مناصفة مع زوجها",
+          "نفقتها واجبة على زوجها ولو كانت موسرة، ونفقة كل إنسان في ماله إلا الزوجة",
+          "نفقتها تنتقل إلى والدها أو إخوانها من الذكور في حال عملها",
+          "تستحق ربع النفقة فقط تقديراً لغيابها عن منزل الزوجية"
+        ],
+        correct: 1,
+        rationale: "نص القانون الوارد في إضاءة (أربط مع القانون): 'نفقة كل إنسان في ماله، إلا الزوجة؛ فنفقتها على زوجها، ولو كانت موسرة'."
+      },
+      {
+        id: 47,
+        text: "تُعد كل الآتية من الضوابط الشرعية المعتبرة لعمل المرأة في الإسلام، ما عدا:",
+        options: [
+          "الالتزام بالأحكام والآداب الشرعية في اللباس والتعامل",
+          "مناسبة العمل لطبيعة المرأة وخصوصيتها",
+          "ألا يتسبب العمل في التقصير بواجباتها الأسرية الأساسية",
+          "إلزام المرأة بالتنازل عن كامل راتبها لزوجها أو أبيها كشرط لعملها"
+        ],
+        correct: 3,
+        rationale: "المرأة لها ذمة مالية مستقلة، وإلزامها بالتنازل عن مالها باطل ومحرم شرعاً وليس من الضوابط الشرعية لعملها."
+      },
+      {
+        id: 48,
+        text: "الحكم الشرعي لحرمان بعض الأسر بناتها من نصيبهن في الميراث الشرعي بحجة بقاء العقار داخل العشيرة:",
+        options: [
+          "مباح عرفاً إذا وافقت غالبية العشيرة وكبارها",
+          "مكروه وتصح قسمة التركة وتلزم البنات بالصبر",
+          "محرم شرعاً واعتداء صريح على حق قطعي قرره الله تعالى في القرآن الكريم",
+          "جائز استثناءً إذا كانت البنات متزوجات من رجال موسرين"
+        ],
+        correct: 2,
+        rationale: "أقرت الشريعة للمرأة حقها في الميراث بصرف النظر عن حالتها، وليس لأحد حرمانها لقوله تعالى ﴿لِّلرِّجَالِ نَصِيبٌ... وَلِلنِّسَاءِ نَصِيبٌ﴾."
+      },
+
+      // Unit 3 - Lesson 1: آل عمران (169-174)
+      {
+        id: 49,
+        text: "دلالة التعبير القرآني بقوله تعالى: ﴿عِندَ رَبِّهِمْ يُرْزَقُونَ﴾ في وصف مكانة الشهداء:",
+        options: [
+          "بيان أن الشهداء يتناولون طعام أهل الدنيا وشرابهم بذاته",
+          "بيان أن الشهداء يرزقون النصر العسكري السريع في الدنيا",
+          "زيادة تكريم وتشريف للشهداء؛ فهم في منزلة القرب والفضل من الله تعالى",
+          "الدعوة إلى ترك العمل المادي وطلب الشهادة لضمان الرزق"
+        ],
+        correct: 2,
+        rationale: "بين الكتاب أن التعبير بـ ﴿عِندَ رَبِّهِمْ يُرْزَقُونَ﴾ فيه زيادة تكريم للشهداء؛ فهم في قرب من الله تعالى."
+      },
+      {
+        id: 50,
+        text: "الهدف والغاية التي من أجلها أمر النبي ﷺ المسلمين بالخروج إلى 'حمراء الأسد' غداة معركة أُحد بالرغم من جراحهم:",
+        options: [
+          "إرهاب قريش وإظهار قوة المسلمين وبأسهم وأن الجراح لم تفتّ في عضدهم، وثنيهم عن إعادة مهاجمة المدينة",
+          "جمع السلاح والغنائم التي تركها المشركون وراءهم في الوادي",
+          "محاصرة قوافل قريش التجارية المتجهة إلى بلاد الشام",
+          "عقد صلح تجاري جديد مع سادات مكة لتأمين حدود المدينة"
+        ],
+        correct: 0,
+        rationale: "أمر النبي بالخروج ليعلم المشركون أن المسلمين ما يزالون أقوياء، فلما تناهى الخبر للمشركين خافوا ورجعوا لمكة."
+      },
+      {
+        id: 51,
+        text: "قال تعالى: ﴿الَّذِينَ قَالَ لَهُمُ النَّاسُ إِنَّ النَّاسَ قَدْ جَمَعُوا لَكُمْ فَاخْشَوْهُمْ فَزَادَهُمْ إِيمَانًا وَقَالُوا حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ﴾، معنى ﴿حَسْبُنَا اللَّهُ﴾:",
+        options: [
+          "نرجو من الله العفو عن تقصيرنا في المعركة",
+          "نسأل الله تعالى زيادة الأموال والعتاد العسكري",
+          "ننتظر معجزة خارقة تهلك المشركين دون قتال",
+          "يكفينا الله ناصراً ومعيناً وقادراً على كفايتنا شرور الأعداء"
+        ],
+        correct: 3,
+        rationale: "المعجم اللغوي في الآيات: حسبنا الله: يكفينا الله ناصراً ومعيناً."
+      },
+      {
+        id: 52,
+        text: "الصحابي الجليل الذي قال يوم أُحد حين انهزم الناس: «واهاً لريح الجنة يا سعد؛ إني لأجد ريحها دون أُحد»، ثم انغمس يقاتل حتى استشهد:",
+        options: [
+          "سعد بن معاذ رضي الله عنه",
+          "أنس بن النضر رضي الله عنه",
+          "عبد الله بن جبير رضي الله عنه",
+          "حمزة بن عبد المطلب رضي الله عنه"
+        ],
+        correct: 1,
+        rationale: "وردت في صور مشرقة: هو الصحابي الجليل أنس بن النضر رضي الله عنه، قاتل حتى قُتل فما عرفته إلا أخته ببنانه لكثرة جراحه."
+      },
+
+      // Unit 3 - Lesson 2: حديث رضا الله تعالى
+      {
+        id: 53,
+        text: "الفرق الاصطلاحي الدقيق بين 'التبذير' و'الإسراف' في ضوء حديث النهي عن إضاعة المال:",
+        options: [
+          "التبذير خاص بإنفاق المال العام، بينما الإسراف خاص بإنفاق المال الخاص",
+          "التبذير إنفاق المال في المحرمات مهما قل، والإسراف إنفاقه في الأمور المشروعة بما يزيد على الحاجة",
+          "التبذير إنفاق المال الكثير في التجارة، بينما الإسراف الامتناع عن أداء الزكاة",
+          "التبذير خاص بتبديد الطعام، بينما الإسراف مقصور على استهلاك الكهرباء والماء"
+        ],
+        correct: 1,
+        rationale: "التبذير: إنفاق المال في المحرمات بصرف النظر عن مقداره. الإسراف: إنفاق المال في الأمور المشروعة بما يزيد على الحاجة."
+      },
+      {
+        id: 54,
+        text: "تتحقق 'مناصحة ولي الأمر' المشروعة التي يرضاها الله تعالى في حديث أبي هريرة رضي الله عنه من خلال:",
+        options: [
+          "التشهير بالحكام في منصات التواصل وبث مقاطع التخوين",
+          "الخروج المسلح على المجتمع وتعطيل المرافق والمنشآت العامة",
+          "اعتزال الشأن العام والسكوت التام عن المشورة والرأي",
+          "تقديم المشورة الصادقة النافعة بالحكمة والموعظة الحسنة وعبر المؤسسات الدستورية كالبرلمان"
+        ],
+        correct: 3,
+        rationale: "بين الدرس أن المناصحة تكون بتقديم الرأي الصائب والمشورة بالحكمة والموعظة، وتكون عبر مؤسسات الدولة كالبرلمان والأحزاب."
+      },
+      {
+        id: 55,
+        text: "راوي حديث رضا الله تعالى «إن الله يرضى لكم ثلاثاً ويسخط لكم ثلاثاً» هو أبو هريرة رضي الله عنه، واسمه وتاريخ قدومه مهاجراً:",
+        options: [
+          "عبد الرحمن بن صخر الدوسي، وقدم مهاجراً في السنة السابعة للهجرة عام خيبر",
+          "النعمان بن بشير الأنصاري، وقدم مهاجراً في السنة الثانية للهجرة",
+          "عبد الله بن مسعود الهذلي، وقدم مهاجراً قبل فتح مكة بسنتين",
+          "زيد بن حارثة الكلبي، وكان رضي الله عنه أول من أسلم من الموالي"
+        ],
+        correct: 0,
+        rationale: "التعريف بالراوي: عبد الرحمن بن صخر الدوسي رضي الله عنه، قدم المدينة مهاجراً سنة 7هـ يوم خيبر وكان من أهل الصفة وتوفي سنة 57هـ."
+      },
+      {
+        id: 56,
+        text: "المقصود بـ 'كنز المال' المحرم شرعاً كما أوضحه درس الحديث الشريف:",
+        options: [
+          "ادخار جزء من المال المشروع لتزويج الأبناء أو بناء مسكن للأسرة",
+          "استثمار الأموال في المصانع والشركات الإنتاجية الوطنية",
+          "حبس المال وتجميده وعدم أداء زكاته المفروضة بعد وجوبها فيه",
+          "إنفاق المال في شراء الأطعمة والكماليات الزائدة عن الحاجة"
+        ],
+        correct: 2,
+        rationale: "كنز المال المحرم هو المال الذي لم تُؤدَّ زكاته بعد وجوبها فيه؛ أما الادخار لتحقيق غرض مع أداء الزكاة فليس كنـزاً."
+      },
+
+      // Unit 3 - Lesson 3: فتح مكة (8هـ)
+      {
+        id: 57,
+        text: "السبب المباشر الذي دفع النبي ﷺ إلى العزم على فتح مكة في السنة الثامنة للهجرة هو:",
+        options: [
+          "إعانة قريش لحلفائها بني بكر بالسلاح والرجال في اعتدائهم على خزاعة حليفة المسلمين فنقضوا صلح الحديبية",
+          "منع قريش للمسلمين من أداء مناسك الحج في العام الثامن للهجرة",
+          "مقتل سفير النبي ﷺ الحارث بن عمير الأزدي في وادي مر الظهران",
+          "تحريض أبي سفيان لقبائل هوازن وثقيف على غزو المدينة المنورة"
+        ],
+        correct: 0,
+        rationale: "أغارت بنو بكر على خزاعة وقتلت منهم وأمدتهم قريش بالسلاح والرجال فنقضت قريش صلح الحديبية، فغضب النبي وعزم على الفتح."
+      },
+      {
+        id: 58,
+        text: "حين مر سعد بن عبادة رضي الله عنه بأبي سفيان يوم الفتح وقال: «اليوم يوم الملحمة اليوم تستحل الحرمة»، صحح النبي ﷺ هذا المفهوم قائلاً:",
+        options: [
+          "«اليوم يوم الغنائم ويوم الانتقام لشهداء أحد وبدر»",
+          "«اليوم نفتح مكة بالسيف ولا أمان لأحد من المشركين»",
+          "«اليوم يوم المرحمة، اليوم يُعز الله قريشاً، ويُعظم الله الكعبة»",
+          "«اليوم نضع الجزية على أهل مكة صاغرين»"
+        ],
+        correct: 2,
+        rationale: "في صور مشرقة: قال النبي ﷺ رداً على سعد: «اليوم يوم المرحمة، اليوم يعز الله قريشاً، ويعظم الله الكعبة»."
+      },
+      {
+        id: 59,
+        text: "الموقف النبوي الكريم الذي تجلى فيه خُلق الوفاء وإنزال الناس منازلهم يوم فتح مكة مع سدنة البيت الحرام:",
+        options: [
+          "أخذ مفاتيح الكعبة وتسليمها للعباس بن عبد المطلب رضي الله عنه",
+          "إبقاء مفاتيح الكعبة مع عثمان بن طلحة رضي الله عنه وقوله: «هاك مفتاحك يا عثمان اليوم يوم بر ووفاء»",
+          "تعيين بلال بن رباح رضي الله عنه سادناً ومسؤولاً عن مفاتيح الكعبة المشرفة",
+          "توزيع مفاتيح الكعبة بالتناوب بين قبائل مكة الكبرى"
+        ],
+        correct: 1,
+        rationale: "في صور مشرقة: دعا النبي عثمان بن طلحة وأبقى معه مفتاح الكعبة وقال له: «هاك مفتاحك يا عثمان اليوم يوم بر ووفاء»."
+      },
+      {
+        id: 60,
+        text: "الشيخ الكبير المسنّ الذي أتى به ابنه أبو بكر الصديق رضي الله عنه إلى النبي ﷺ يوم الفتح ليعلن إسلامه، فقال النبي متواضعاً: «هلا تركت الشيخ في بيته حتى أكون أنا آتيه فيه»:",
+        options: [
+          "أبو سفيان بن حرب رضي الله عنه",
+          "سهيل بن عمرو رضي الله عنه",
+          "صفوان بن أمية رضي الله عنه",
+          "أبو قحافة (والد أبي بكر الصديق رضي الله عنه)"
+        ],
+        correct: 3,
+        rationale: "الشيخ المسن هو أبو قحافة والد أبي بكر الصديق رضي الله عنه، جلس بين يدي النبي ومسح صدره وأسلم."
+      },
+
+      // Unit 3 - Lesson 4: من خصائص الشريعة: الإيجابية
+      {
+        id: 61,
+        text: "المفهوم الاصطلاحي لخاصية 'الإيجابية' في الشريعة الإسلامية كما ورد في الكتاب:",
+        options: [
+          "التساهل في إسقاط التكاليف الشرعية عند رغبة عامة الناس",
+          "حصر الاهتمام بأمور العبادات والشعائر التعبدية دون شؤون الدنيا",
+          "الجمود على التطبيقات التراثية القديمة ورفض التفاعل مع مستجدات العصر",
+          "قدرة الشريعة الإسلامية على التفاعل مع الواقع، وتقديم حلول للمشكلات التي يعانيها الناس لإسعادهم"
+        ],
+        correct: 3,
+        rationale: "نص الكتاب: الإيجابية تعني قدرة الشريعة الإسلامية على التفاعل مع الواقع وتقديم حلول للمشكلات التي يعانيها الناس؛ ما يؤدي إلى عيشهم بسعادة."
+      },
+      {
+        id: 62,
+        text: "مظهر الإيجابية الذي يدل عليه قوله ﷺ: «إِنْ قَامَتِ السَّاعَةُ وَبِيَدِ أَحَدِكُمْ فَسِيلَةٌ فَلْيَغْرِسْهَا» هو:",
+        options: [
+          "إيجابية النظرة إلى النفس وبث الطمأنينة فيها",
+          "إيجابية النظرة إلى الحياة الدنيا بأنها دار عمل وعمارة مستمرة وعبادة لله تعالى",
+          "إيجابية النظرة إلى العلاقات الاجتماعية وإظهار الفرح في الأعياد",
+          "إيجابية التعامل مع المخالفين في العقيدة بالرفق والإحسان"
+        ],
+        correct: 1,
+        rationale: "استدل الكتاب بالحديث على 'إيجابية النظرة إلى الحياة الدنيا' وأن عمارة الأرض عبادة يتقرب بها المسلم إلى ربه."
+      },
+      {
+        id: 63,
+        text: "دلالة قوله تعالى: ﴿قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَى أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا﴾ على مظاهر الإيجابية:",
+        options: [
+          "إيجابية النظرة إلى النفس ببث الرجاء ونبذ اليأس والقنوط عبر فتح باب التوبة دائماً للمذنبين",
+          "إيجابية النظرة إلى المستقبل بانتشار الإسلام في بيوت المدر والوبر",
+          "إيجابية النظرة إلى الناس بإدخال السرور على قلوبهم في المناسبات السعيدة",
+          "إيجابية الحوار بالحسنى مع أهل الكتاب في المجالس العامة"
+        ],
+        correct: 0,
+        rationale: "الآية استدل بها الكتاب على 'إيجابية النظرة إلى النفس' بنفي القنوط واليأس وقبول توبة العاصي."
+      },
+      {
+        id: 64,
+        text: "المبادرة التطوعية التي أطلقتها 'مؤسسة ولي العهد' في الأردن لتفعيل مشاركة الشباب في العمل التطوعي كأحد مظاهر الإيجابية هي:",
+        options: [
+          "منصة إدراك للتعليم المفتوح",
+          "مبادرة كلمة سواء للحوار الفكري",
+          "منصة نوى للعمل التطوعي",
+          "مبادرة حقك تعرف للتربية الإعلامية"
+        ],
+        correct: 2,
+        rationale: "ذكر الإثراء والتوسع: أطلقت مؤسسة ولي العهد مبادرة تطوعية (منصة نوى) تهدف إلى تفعيل مشاركة الشباب في العمل التطوعي."
+      },
+
+      // Unit 3 - Lesson 5: شروط صحة عقد الزواج
+      {
+        id: 65,
+        text: "سن أهلية الزواج المعتمد وفق أحكام قانون الأحوال الشخصية الأردني هو أن يكون الخاطبان قد أتما:",
+        options: [
+          "16 سنة شمسية",
+          "17 سنة شمسية",
+          "18 سنة شمسية",
+          "20 سنة شمسية"
+        ],
+        correct: 2,
+        rationale: "حدد قانون الأحوال الشخصية الأردني سن الأهلية بثماني عشرة سنة شمسية لكلا الزوجين."
+      },
+      {
+        id: 66,
+        text: "يصح عقد الزواج في الشريعة الإسلامية بحضور وإشهاد:",
+        options: [
+          "شاهدين رجلين، أو رجل وامرأتين، تتوافر فيهم شروط الإسلام والبلوغ والعقل",
+          "شاهد واحد عدل بشرط أن يكون من محارم الزوجة",
+          "أربع نساء بالغات عاقلات مسلمات دون حضور أي رجل",
+          "شاهدين عدلين غير مسلمين في حال كان الزوجان مسلمين"
+        ],
+        correct: 0,
+        rationale: "اشترط الإسلام أن يشهد على كتابته شاهدان رجلان، أو رجل وامرأتان، والشروط: الإسلام، والبلوغ، والعقل."
+      },
+      {
+        id: 67,
+        text: "زوجة اشترطت في عقد زواجها شرطاً مباحاً ينفعها ولا يضر بزوجها ولا يتعارض مع مقتضى العقد؛ كأن تكمل دراستها الجامعية، ورضي الزوج بذلك. الحكم الشرعي لهذا الشرط وأثره:",
+        options: [
+          "باطل ولاغٍ ولا يلزم الوفاء به لأن الزواج يلغي الشروط السابقة",
+          "مكروه شرعاً ويفسد عقد الزواج من أصله",
+          "مستحب للزوج إن شاء وفى به وإن شاء تركه دون أي أثر قانوني",
+          "شرط صحيح ومعتبر شرعاً وقانوناً ويصبح ملزماً للزوج يجب عليه الوفاء به"
+        ],
+        correct: 3,
+        rationale: "نص الكتاب: فإن رضي الطرف الآخر بذلك صار الشرط ملزماً؛ لقوله ﷺ: «أحق الشروط أن توفوا به ما استحللتم به الفروج»."
+      },
+      {
+        id: 68,
+        text: "جاءت فتاة إلى النبي ﷺ تشكو أن أباها زوجها من ابن أخيه ليرفع به خسيسته دون رضاها؛ فكان قضاء رسول الله ﷺ في أمرها:",
+        options: [
+          "إلزامها بطاعة والدها حتماً لأن للأب ولاية الإجبار المطلقة",
+          "أنه جعل الأمر إليها وخيّرها بين فسخ الزواج أو إمضائه واستمراره",
+          "معاقبة أبيها بالحبس وتغريم الزوج كامل المهر",
+          "إلزام الزوج بتطليقها دون النظر إلى رغبتها الشخصية"
+        ],
+        correct: 1,
+        rationale: "في الحديث الشريف: 'فجعل النبي ﷺ الأمر إليها، فقالت: قد أجزت ما صنع أبي، ولكن أردت أن تعلم النساء أن ليس للآباء من الأمر شيء'."
+      },
+
+      // Unit 3 - Lesson 6: الحقوق الاجتماعية للمرأة
+      {
+        id: 69,
+        text: "نص قانون الأحوال الشخصية الأردني في المادة (170) على أن أولى الأشخاص وأحقهم بحضانة الطفل وتربيته حال قيام الزوجية وبعد الفرقة هي:",
+        options: [
+          "الأب في جميع الأحوال",
+          "الأم",
+          "الجدة لأب",
+          "العمة الشقيقة"
+        ],
+        correct: 1,
+        rationale: "نصت المادة (170) على أن الأم أحق بحضانة ولدها وتربيته حال قيام الزوجية وبعد الفرقة لما توفره من عطف ورعاية نفسية."
+      },
+      {
+        id: 70,
+        text: "الصحابية الجليلة التي عُرفت بأنها 'أول ممرضة في الإسلام'، وكلفها النبي ﷺ بمداواة الصحابي سعد بن معاذ رضي الله عنه في غزوة الخندق هي:",
+        options: [
+          "أم سليم بنت ملحان رضي الله عنها",
+          "أسماء بنت عميس رضي الله عنها",
+          "سكينة بنت الحسين رضي الله عنها",
+          "رفيدة الأسلمية رضي الله عنها"
+        ],
+        correct: 3,
+        rationale: "في صور مشرقة: كلف النبي رفيدة الأسلمية رضي الله عنها (أول ممرضة في الإسلام) بتمريض سعد بن معاذ رضي الله عنه."
+      },
+      {
+        id: 71,
+        text: "من مظاهر التخفيف والتيسير التي راعتها الشريعة الإسلامية في عبادة المرأة حفاظاً على حالتها الصحية والجسدية:",
+        options: [
+          "إسقاط وجوب إخراج زكاة أموالها وحليها نهائياً",
+          "منعها من حضور صلاة العيدين مع جماعة المسلمين في المصلى",
+          "عدم إيجاب صلاة الجمعة عليها، وإعفاؤها من الصوم والصلاة في الحيض والنفاس مع قضاء الصوم لاحقاً",
+          "إسقاط فريضة الحج عنها مطلقاً حتى مع الاستطاعة المالية والبدنية"
+        ],
+        correct: 2,
+        rationale: "خفف عنها فلم يوجب حضور صلاة الجمعة، وأعفاها من الصوم والصلاة في النفاس والحيض على أن تقضي الصوم بعد ذلك."
+      },
+      {
+        id: 72,
+        text: "دلالة قوله تعالى: ﴿وَالَّذِينَ يَرْمُونَ الْمُحْصَنَاتِ ثُمَّ لَمْ يَأْتُوا بِأَرْبَعَةِ شُهَدَاءَ فَاجْلِدُوهُمْ ثَمَانِينَ جَلْدَةً وَلَا تَقْبَلُوا لَهُمْ شَهَادَةً أَبَدًا وَأُولَئِكَ هُمُ الْفَاسِقُونَ﴾ في الحقوق الاجتماعية للمرأة:",
+        options: [
+          "المحافظة على عرض المرأة وسمعتها وحمايتها من الافتراء والطعن بعقوبة رادعة",
+          "حرمان المرأة من حق التعليم والعمل في المؤسسات العامة",
+          "اشتراط أربعة شهداء في صحة عقد زواج الفتاة البكر",
+          "منع النساء من الإدلاء بالشهادة في القضايا المالية والحقوقية"
+        ],
+        correct: 0,
+        rationale: "استدل الكتاب بالآية على حق 'المحافظة على عرضها وسمعتها' وردع من يتهم الطاهرات العفيفات بعقوبة 80 جلدة ورد الشهادة."
+      },
+
+      // Unit 4 - Lesson 1: سورة الروم (21-24)
+      {
+        id: 73,
+        text: "خُتمت الآية الكريمة الدالة على خلق السماوات والأرض واختلاف ألسنة الناس وألوانهم بقوله تعالى: ﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّلْعَالِمِينَ﴾ للدلالة على:",
+        options: [
+          "أن إدراك الحكمة من هذا الخلق العظيم والتنوع البشري يختص به أصحاب العلم والبصيرة",
+          "أن التفكر في آيات الكون مقتصر على علماء الفلك واللغات فقط دون غيرهم",
+          "أن اختلاف اللغات والألوان هو علة الشقاق والحروب بين البشر",
+          "وجوب تعلم المسلمين لغة واحدة فقط ونبذ سائر اللغات الأخرى"
+        ],
+        correct: 0,
+        rationale: "نص الكتاب: خُتمت بقوله ﴿لِّلْعَالِمِينَ﴾ أي إن في خلق السماوات واختلاف الألوان واللغات عبرة لكل ذي علم وبصيرة؛ ليدرك الحكمة من ذلك."
+      },
+      {
+        id: 74,
+        text: "الآية الكريمة من سورة الروم التي تشير إلى أن العلاقة الأصلية واللازمة للزواج هي السكن والمودة والرحمة هي:",
+        options: [
+          "﴿وَمِنْ آيَاتِهِ مَنَامُكُم بِاللَّيْلِ وَالنَّهَارِ وَابْتِغَاؤُكُم مِّن فَضْلِهِ﴾",
+          "﴿وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً﴾",
+          "﴿وَمِنْ آيَاتِهِ يُرِيكُمُ الْبَرْقَ خَوْفًا وَطَمَعًا وَيُنَزِّلُ مِنَ السَّمَاءِ مَاءً﴾",
+          "﴿وَمِنْ آيَاتِهِ خَلْقُ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافُ أَلْسِنَتِكُمْ وَأَلْوَانِكُمْ﴾"
+        ],
+        correct: 1,
+        rationale: "الآية (21) من سورة الروم صريحة في المودة والرحمة والسكنى الزوجية."
+      },
+      {
+        id: 75,
+        text: "في قوله تعالى: ﴿وَمِنْ آيَاتِهِ يُرِيكُمُ الْبَرْقَ خَوْفًا وَطَمَعًا﴾، المقصود بـ 'الخوف والطمع' عند تشكل البرق:",
+        options: [
+          "الخوف من الأعداء المتربصين، والطمع في الغنائم المادية",
+          "الخوف من الموت فجأة، والطمع في طول العمر بالدنيا",
+          "الخوف من الفقر والحاجة، والطمع في كنز الذهب والفضة",
+          "الخوف من أذى الصواعق والحرائق، والطمع في نزول الغيث وإحياء الأرض بالمطر"
+        ],
+        correct: 3,
+        rationale: "بين تفسير الآية أن الناس يخافون من الصواعق والضوء الذي يحدث من البرق، ويطمعون في الوقت نفسه في الغيث ونزول الماء وإحياء الأرض."
+      },
+      {
+        id: 76,
+        text: "خُتمت الآية الكريمة الدالة على نعمة النوم ونعمة السعي في طلب الرزق بقوله تعالى:",
+        options: [
+          "﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ﴾",
+          "﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَعْقِلُونَ﴾",
+          "﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَسْمَعُونَ﴾",
+          "﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّلْعَالِمِينَ﴾"
+        ],
+        correct: 2,
+        rationale: "آية النوم والسعي ﴿وَمِنْ آيَاتِهِ مَنَامُكُم بِاللَّيْلِ وَالنَّهَارِ...﴾ خُتمت بـ ﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَسْمَعُونَ﴾ لبيان أن التوجيهات لا يعقلها إلا من يسمع ويتدبر."
+      },
+
+      // Unit 4 - Lesson 2: مكانة السنة النبوية
+      {
+        id: 77,
+        text: "الحكم الشرعي للأخذ بالسنة النبوية الشريفة والعمل بأحكامها وهديها في الشريعة الإسلامية:",
+        options: [
+          "مستحب يثاب فاعله ولا يأثم من تركها مكتفياً بالقرآن",
+          "مباح متساوٍ مع الأخذ بالأعراف والتقاليد المحلية",
+          "واجب ومصدر ثانٍ ملزم للتشريع بإجماع علماء الأمة ولا يجوز تركها بدعوى الاكتفاء بالقرآن",
+          "خاص بالصحابة الكرام في حياة النبي ﷺ دون من بعدهم"
+        ],
+        correct: 2,
+        rationale: "أجمعت الأمة على حجية السنة وأنها المصدر الثاني بعد القرآن الكريم، وأنه لا يجوز تركها بدعوى الاكتفاء بالقرآن لأن تركها يؤدي لتضييع الأحكام."
+      },
+      {
+        id: 78,
+        text: "من الأمثلة الصحيحة على دور السنة النبوية الشريفة في 'إضافة أحكام جديدة لم ترد في القرآن الكريم':",
+        options: [
+          "تحريم الجمع بين المرأة وعمتها أو خالتها في الزواج، وتحريم أكل الحُمُر الأهلية وكل ذي ناب من السباع",
+          "بيان كيفية أداء الصلوات الخمس وتحديد عدد ركعاتها وأوقاتها",
+          "تأكيد تحريم أكل أموال الناس بالباطل لقوله تعالى ﴿لَا تَأْكُلُوا أَمْوَالَكُم بَيْنَكُم بِالْبَاطِلِ﴾",
+          "تحديد مقدار الوصية بألا تزيد على الثلث"
+        ],
+        correct: 0,
+        rationale: "الجمع بين المرأة وعمتها أو خالتها، وتحريم الحمر الأهلية، وذي ناب من السباع، هي أحكام شرعية جديدة أضافتها السنة النبوية."
+      },
+      {
+        id: 79,
+        text: "بينت السنة النبوية الشريفة حكم 'الوصية' الذي ورد مجملاً في قوله تعالى ﴿مِن بَعْدِ وَصِيَّةٍ يُوصِي بِهَا أَوْ دَيْنٍ﴾، فقيدت مقدارها بألا تزيد عن:",
+        options: [
+          "نصف التركة المتروكة",
+          "ربع التركة المتروكة",
+          "خُمس التركة للفقراء والمساكين",
+          "الثلث لقوله ﷺ لسعد بن أبي وقاص: «الثُّلُثُ، وَالثُّلُثُ كَثِيرٌ»"
+        ],
+        correct: 3,
+        rationale: "حددت السنة النبوية الشريفة مقدار الوصية وبَيّنت ألا تزيد على الثلث كما في الحديث المتفق عليه: «الثلث، والثلث كثير»."
+      },
+      {
+        id: 80,
+        text: "استثنت السنة النبوية الشريفة من عموم تحريم الميتة والدم الوارد في القرآن الكريم ميتتين ودمين هما:",
+        options: [
+          "ميتة الطيور الجارحة والدم المسفوح",
+          "السمك (الحوت) والجراد، والكبد والطحال لقوله ﷺ: «أُحِلَّتْ لَنَا مَيْتَتَانِ وَدَمَانِ...»",
+          "ميتة الأنعام إذا تردت من جبل مع الدم الجامد",
+          "حيوانات البر الميتة بسبب الجوع مع الدم الخفيف"
+        ],
+        correct: 1,
+        rationale: "نص الحديث في الكتاب: «أحلت لنا ميتتان ودمان؛ فأما الميتتان فالحوت والجراد، وأما الدمان فالكبد والطحال»."
+      },
+
+      // Unit 4 - Lesson 3: مراعاة الأعراف في الشريعة
+      {
+        id: 81,
+        text: "المفهوم الاصطلاحي لـ 'العُرف' في الشريعة الإسلامية هو:",
+        options: [
+          "اتفاق جميع المجتهدين في عصر من العصور على حكم واقعة مستجدة",
+          "كل ما شاع بين الناس وتقبلوه من أقوال وأفعال وتصرفات لا تتعارض مع مبادئ الشريعة وأحكامها",
+          "ما يفرضه الحاكم على الرعية لتحقيق مصلحة مالية محددة",
+          "التقليد الأعمى للعادات الموروثة ولو خالفت النصوص القطعية"
+        ],
+        correct: 1,
+        rationale: "العرف: هو كل ما شاع بين الناس، وتقبلوه من أقوال وأفعال وتصرفات لا تتعارض مع مبادئ الشريعة الإسلامية وأحكامها."
+      },
+      {
+        id: 82,
+        text: "عادة جاهلية قديمة تعارف عليها بعض الناس ولكن الشريعة الإسلامية أبطلتها واعتبرتها 'عرفاً فاسداً' لمخالفتها لقوله تعالى ﴿وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَى﴾:",
+        options: [
+          "التعاون في دفع الدية في القتل الخطأ",
+          "تقسيم المهر في عقد الزواج إلى معجل ومؤجل",
+          "عادة 'الثأر' بقتل غير القاتل من أقاربه وعشيرته",
+          "حلف الفضول لنصرة المظلوم ورد الحقوق"
+        ],
+        correct: 2,
+        rationale: "عادة الثأر بقتل غير القاتل عرف فاسد باطل؛ لأنه يصادم النص القرآني الصريح ﴿وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَى﴾."
+      },
+      {
+        id: 83,
+        text: "القاعدة الفقهية الأساسية الدالة على حجية العرف واعتباره مصدراً معتبراً في المعاملات:",
+        options: [
+          "المعروف عُرفاً كالمشروط شَرطاً",
+          "اليقين لا يزول بالشك",
+          "المشقة تجلب التيسير",
+          "الضرورات تبيح المحظورات"
+        ],
+        correct: 0,
+        rationale: "القاعدة الفقهية المستندة للعرف: 'المعروف عُرفاً كالمشروط شَرطاً'؛ أي ما تعارف عليه الناس ينزل منزلة الشرط الصريح."
+      },
+      {
+        id: 84,
+        text: "قال النبي ﷺ لهند بنت عتبة رضي الله عنها حين اشتكت شح زوجها: «خُذِي مَا يَكْفِيكِ وَوَلَدَكِ بِالْمَعْرُوفِ». دلالة لفظ 'بالمعروف' في الحديث:",
+        options: [
+          "بأخذ نصف ماله المودع سراً دون علمه",
+          "بالطلب منه بالحسنى أمام الناس في السوق",
+          "بالرجوع إلى القاضي لتحديد فلس واحد يومياً",
+          "بالمقدار الذي تعارف عليه الناس وأهل المجتمع في النفقة بما يلائم الحال"
+        ],
+        correct: 3,
+        rationale: "المعروف هنا هو العرف، أي المقدار الذي يتعارف عليه الناس في تقدير النفقة بحسب الكفاية وحال الزوج."
+      },
+
+      // Unit 4 - Lesson 4: حقوق الزوجين في الإسلام
+      {
+        id: 85,
+        text: "تُعد كل الآتية من 'الحقوق المشتركة بين الزوجين' في الإسلام، ما عدا:",
+        options: [
+          "حسن المعاشرة والمعاملة بالمعروف والرفق المتبادل",
+          "حفظ خصوصية العلاقة الزوجية وكتمان أسرار البيت",
+          "ثبوت التوارث بينهما عند الوفاة",
+          "وجوب النفقة وتوفير المسكن والكسوة والعلاج"
+        ],
+        correct: 3,
+        rationale: "النفقة حق خاص بالزوجة على زوجها وليست من الحقوق المشتركة بينهما."
+      },
+      {
+        id: 86,
+        text: "قال رسول الله ﷺ: «إِنَّ مِنْ أَشَرِّ النَّاسِ عِنْدَ اللهِ مَنْزِلَةً يَوْمَ الْقِيَامَةِ، الرَّجُلَ يُفْضِي إِلَى امْرَأَتِهِ، وَتُفْضِي إِلَيْهِ، ثُمَّ يَنْشُرُ سِرَّهَا». يدل الحديث على حق مشترك هو:",
+        options: [
+          "حق الإنفاق المالي على طعام الأسرة",
+          "وجوب حفظ خصوصية العلاقة الزوجية وكتمان أسرارها",
+          "حق الاستئذان قبل الخروج من المنزل",
+          "حق السكن في بيت مستقل عن الأقارب"
+        ],
+        correct: 1,
+        rationale: "الحديث صريح في تجريم إفشاء أسرار العلاقة الزوجية ووجوب حفظ خصوصية الفراش والبيت."
+      },
+      {
+        id: 87,
+        text: "دلالة قول الصحابي الجليل عبد الله بن عباس رضي الله عنهما: «إِنِّي لَأُحِبُّ أَنْ أَتَزَيَّنَ لِلْمَرْأَةِ كَمَا أُحِبُّ أَنْ تَتَزَيَّنَ لِي»:",
+        options: [
+          "الاهتمام المتبادل والتجمل وحرص كل من الزوجين على أن يكون موضع اهتمام شريكه وسروره",
+          "وجوب شراء الحلي الذهبية للزوجة في كل عيد",
+          "كراهة تزيّن الرجل لزوجته والاقتصار على الثياب المبتذلة",
+          "إباحة لبس الحرير والذهب الطبيعي للرجال داخل المنزل"
+        ],
+        correct: 0,
+        rationale: "بين المنهاج أن دلالة قول ابن عباس هي الاهتمام المتبادل بين الزوجين وحرص كل منهما على إدخال السرور على قلب الآخر بالتجمل."
+      },
+      {
+        id: 88,
+        text: "حدود طاعة الزوجة لزوجها في الشريعة الإسلامية منضبطة شرعاً بـ:",
+        options: [
+          "الطاعة العمياء المطلقة حتى لو أمرها بقطيعة والديها أو ارتكاب المعاصي",
+          "طاعته في الشؤون المالية فقط دون إدارة شؤون المنزل والأبناء",
+          "طاعته بالمعروف فيما يرضي الله تعالى، ولا تجوز طاعته في معصية الخالق ولا بما لا تطيق",
+          "اشتراط موافقة أخيها الأكبر قبل امتثال أي أمر لزوجها"
+        ],
+        correct: 2,
+        rationale: "على الزوجة طاعة زوجها بالمعروف فيما يرضي الله، ولا تجوز طاعته في معصية الله لقوله ﷺ: «لا طاعة لمخلوق في معصية الخالق» ولا بما فيه عسف فوق طاقتها."
+      },
+
+      // Unit 4 - Lesson 5: تنظيم النسل وتحديده
+      {
+        id: 89,
+        text: "المفهوم الاصطلاحي لـ 'تنظيم النسل' في الشريعة الإسلامية هو:",
+        options: [
+          "اتخاذ إجراءات طبية تمنع الحمل بصفة دائمة كاستئصال الرحم",
+          "تعمد إسقاط الحمل في غير موعده الطبيعي وبلا ضرورة طبية بأي وسيلة",
+          "اتخاذ وسيلة مشروعة لإيجاد مُدد زمنية متباعدة بين مرات الحمل لمصلحة معتبرة",
+          "إلزام الأسر بتشريع قانوني بعدم إنجاب أكثر من طفلين"
+        ],
+        correct: 2,
+        rationale: "تنظيم النسل: اتخاذ وسيلة مشروعة لإيجاد مدد زمنية متباعدة بين مرات الحمل."
+      },
+      {
+        id: 90,
+        text: "الحكم الشرعي لـ 'تحديد النسل' (اتخاذ إجراءات تمنع الحمل بصفة دائمة كاستئصال الرحم دون ضرورة طبية):",
+        options: [
+          "حرام شرعاً؛ لمخالفته مقاصد الشريعة في استمرار النسل، وتعارضه مع العقيدة إن كان خشية الفقر والرزق",
+          "مباح في جميع الأحوال متى رغبت المرأة في ذلك للتفرغ للعمل",
+          "سنة مستحبة لتوفير تكاليف المعيشة وضمان رفاهية الأولاد",
+          "مكروه كراهة تنزيهية ولا إثم على فاعله مطلقاً"
+        ],
+        correct: 0,
+        rationale: "تحديد النسل الدائم محرم لمناقضته مقصد حفظ النسل وتعارضه مع العقيدة إن كان خشية الرزق لقوله تعالى ﴿نَّحْنُ نَرْزُقُهُمْ وَإِيَّاكُمْ﴾."
+      },
+      {
+        id: 91,
+        text: "حالة معتبرة شرعاً يُباح فيها 'تحديد النسل الدائم' استثناءً عملاً بقاعدة (الضرورات تبيح المحظورات):",
+        options: [
+          "رغبة الزوجين في عدم الإنجاب للحفاظ على رشاقة الزوجة ومظهرها",
+          "وجود مرض ضار ومُعدٍ في الزوجين أو أحدهما لا يمكن شفاؤه وينتقل للأولاد، أو خوف مؤكد على حياة الأم بتقرير طبيب ثقة",
+          "ضيق مساحة المنزل الحالي وتكاليف المدارس المرتفعة",
+          "إنجاب أربعة ذكور والرغبة في الاكتفاء بهم"
+        ],
+        correct: 1,
+        rationale: "يباح تحديد النسل عند الضرورة الملجئة: كمرض معدٍ لا يرجى شفاؤه وينتقل للأولاد أو خطر محقق على حياة الأم يقرره طبيب ثقة."
+      },
+      {
+        id: 92,
+        text: "فاطمة امرأة تلد بعمليات قيصرية وتتابع الحمل يهدد صحتها، فاتفقت مع زوجها على استخدام وسيلة طبية آمنة للمباعدة بين الأحمال مدة 3 سنوات. يندرج هذا الفعل تحت:",
+        options: [
+          "الإجهاض المحرم شرعاً",
+          "تحديد النسل الممنوع شرعاً",
+          "العزل المحرم الذي نهت عنه السنة",
+          "تنظيم النسل المباح شرعاً لدفع الضرر ورعاية صحة الأم والطفل"
+        ],
+        correct: 3,
+        rationale: "المباعدة بين الأحمال بوسيلة مشروعة مؤقتة لدفع الضرر عن الأم ورعاية الطفل هو تنظيم نسل مباح شرعاً."
+      },
+
+      // Unit 4 - Lesson 6: الأمن الغذائي في الإسلام
+      {
+        id: 93,
+        text: "المفهوم الاصطلاحي لـ 'الأمن الغذائي في الإسلام' هو:",
+        options: [
+          "تخزين جميع المحاصيل الزراعية في صوامع الدولة وبيعها عند اشتداد الغلاء",
+          "الاعتماد الكامل على استيراد الحبوب والمواد الأساسية من الأسواق العالمية",
+          "حظر تصدير المواد التموينية خارج حدود الدولة في جميع الأوقات",
+          "توفير الغذاء الصحي الكافي الذي يلبي حاجات أفراد المجتمع في مختلف الظروف"
+        ],
+        correct: 3,
+        rationale: "الأمن الغذائي: توفير الغذاء الصحي الكافي الذي يلبي حاجات أفراد المجتمع في مختلف الظروف."
+      },
+      {
+        id: 94,
+        text: "مر النبي ﷺ على كومة طعام فأدخل يده فيها فنالت أصابعه بللاً، فقال: «أَفَلَا جَعَلْتَهُ فَوْقَ الطَّعَامِ كَيْ يَرَاهُ النَّاسُ، مَنْ غَشَّ فَلَيْسَ مِنِّي». يدل هذا الموقف على تدبير لحفظ الأمن الغذائي من خلال:",
+        options: [
+          "تحريم الاحتكار وتحديد الأسعار جبرياً",
+          "منع البيع على البيع والنجش في الأسواق",
+          "ضبط الأسواق وحمايتها من الغش والتدليس في جودة السلع الغذائية",
+          "فرض رسوم وضرائب جمركية على الحبوب المبللة"
+        ],
+        correct: 2,
+        rationale: "الحديث صريح في ضبط الأسواق وتحريم الغش والتدليس لضمان سلامة الأقوات وثقة المستهلك في الغذاء."
+      },
+      {
+        id: 95,
+        text: "تُشير وصية الخليفة أبي بكر الصديق رضي الله عنه للجيش: «لا تُغْرِقُوا نَحْلاً وَلا تُحْرِقُوهُ، وَلا تَعْقِرُوا بَهِيمَةً، وَلا شَجَرَةً مُثْمِرَةً» إلى تشريع إسلامي يخدم الأمن الغذائي وهو:",
+        options: [
+          "حماية الثروة الزراعية والحيوانية والبيئية ومنع تدمير مصادر الغذاء حتى في ظروف الحرب",
+          "إلزام الأعداء بدفع غرامات مالية بدل الأشجار التالفة",
+          "تشجيع المقاتلين على صيد الطيور والبهائم في ساحة المعركة",
+          "قصر العمل في الزراعة على الأسرى والعمال الأجراء"
+        ],
+        correct: 0,
+        rationale: "وصية الصديق تدل على حماية مصادر الأمن الغذائي (الزراعة والأشجار والبهائم) والنهي عن إتلافها زمن الحرب."
+      },
+      {
+        id: 96,
+        text: "قال رسول الله ﷺ: «مَنْ أَصْبَحَ مِنْكُمْ آمِنًا فِي سِرْبِهِ، مُعَافًى فِي جَسَدِهِ، عِنْدَهُ قُوتُ يَوْمِهِ، فَكَأَنَّمَا حِيزَتْ لَهُ الدُّنْيَا». معنى 'فِي سِرْبِهِ' في الحديث الشريف هو:",
+        options: [
+          "في ماشيته وإبله في المرعى الخصيب",
+          "في نفسه وأهله ومجتمعه وبيئته",
+          "في حانوته ودكانه التجاري في السوق",
+          "في سفره وترحاله بين المدن"
+        ],
+        correct: 1,
+        rationale: "معنى (آمناً في سربه): أي آمناً في نفسه وأهله ومجتمعه."
+      },
+
+      // Unit 4 - Lesson 7: الإسلام والوحدة الوطنية
+      {
+        id: 97,
+        text: "المفهوم الاصطلاحي لـ 'الوحدة الوطنية' كما بينه المنهاج المدرسي هو:",
+        options: [
+          "تماسك أبناء الوطن وتحابهم وانتماؤهم لبلدهم والتفاني في خدمته والدفاع عنه دون النظر للاختلافات العرقية والدينية",
+          "إلغاء الخصوصيات الثقافية لجميع المكونات وإجبارهم على مذهب فقهي واحد",
+          "توحيد الأنظمة السياسية في العالم العربي تحت إدارة مركزية واحدة",
+          "تقديم مصلحة القبيلة والعشيرة على مصلحة أمن واستقرار الدولة"
+        ],
+        correct: 0,
+        rationale: "تعريف الوحدة الوطنية: تماسك أبناء الوطن وتحابهم وانتماؤهم لبلدهم والتفاني في خدمته والدفاع عنه دون النظر للاختلافات العرقية والدينية."
+      },
+      {
+        id: 98,
+        text: "قال رسول الله ﷺ محذراً من العصبية القبلية والنعرات العرقية: «دَعُوهَا فَإِنَّهَا مُنْتِنَةٌ». يدل هذا التوجيه النبوي على مبدأ وطني راسخ هو:",
+        options: [
+          "تحقيق التكافل المالي الموسمي في الأعياد",
+          "تطبيق مبدأ الشورى في تعيين القضاة والولاة",
+          "تشجيع التنافس القبلي في الانتخابات المحلية",
+          "محاربة كل صور التعصب والعنصرية والتمييز التي تمزق نسيج الوطن الواحد"
+        ],
+        correct: 3,
+        rationale: "الحديث صريح في محاربة التعصب والعنصرية والتفاخر بالأنساب لحفظ تماسك ووحدة المجتمع."
+      },
+      {
+        id: 99,
+        text: "من أبرز دعائم الوحدة الوطنية في الأردن التي نذرت نفسها للدفاع عن الوطن والتصدي لكل من يحاول المساس بأمنه واستقراره ومحاربة الفتن:",
+        options: [
+          "الشركات والمؤسسات الاستثمارية الخاصة",
+          "المجالس البلدية والغرف التجارية",
+          "القوات المسلحة الأردنية (الجيش العربي) والأجهزة الأمنية المختلفة",
+          "وسائل الإعلام الأجنبية المعتمدة في المملكة"
+        ],
+        correct: 2,
+        rationale: "نص الكتاب في دعائم الوحدة الوطنية على دور القوات المسلحة الأردنية (الجيش العربي) والأجهزة الأمنية في صون الوحدة والدفاع عن الوطن."
+      },
+      {
+        id: 100,
+        text: "أرسى النبي ﷺ الدعامة الأولى للوحدة الوطنية والمواطنة الصالحة عقب هجرته للمدينة المنورة من خلال وثيقة المدينة التي قررت أن:",
+        options: [
+          "المواطنة مقصورة على المهاجرين والأنصار فقط دون غيرهم من السكان",
+          "المسلمين وغيرهم من سكان المدينة كاليهود يشكلون مجتمعاً واحداً متكافئاً في الحقوق والواجبات بمقتضى الإقامة والالتزام بالوثيقة",
+          "غير المسلمين يُمنعون من تملك العقارات والعمل التجاري في المدينة",
+          "الخلافات القضائية تُحل وفق الأعراف الجاهلية السابقة دون الرجوع لحكم الشرع"
+        ],
+        correct: 1,
+        rationale: "وثيقة المدينة شملت المسلمين وغيرهم، وقررت أنهم مجتمع واحد متكافئ في الحقوق والواجبات بمقتضى الإقامة والالتزام بالوثيقة وحفظت حقوق الجميع."
+      }
+    ];
+
+    // State variables
+    const TOTAL_QUESTIONS = examQuestions.length; // 100
+    const EXAM_DURATION_SECONDS = 40 * 60; // 40 minutes = 2400 seconds
+    let timeRemaining = EXAM_DURATION_SECONDS;
+    let timerInterval = null;
+    let studentAnswers = {}; // { questionId: selectedIndex }
+    let isExamFinished = false;
+
+    // Option Letters Representation
+    const OPTION_KEYS = ['أ', 'ب', 'ج', 'د'];
+
+    // DOM Elements Cache
+    const questionsContainer = document.getElementById('questionsContainer');
+    const navGrid = document.getElementById('navGrid');
+    const progressBar = document.getElementById('progressBar');
+    const progressStats = document.getElementById('progressStats');
+    const sideAnsweredStatus = document.getElementById('sideAnsweredStatus');
+    const mobileBadge = document.getElementById('mobileBadge');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerBox = document.getElementById('timerBox');
+    const submitExamBtn = document.getElementById('submitExamBtn');
+    const resultsSection = document.getElementById('resultsSection');
+    const examBanner = document.getElementById('examBanner');
+    const toggleNavDrawerBtn = document.getElementById('toggleNavDrawerBtn');
+    const navPalette = document.getElementById('navPalette');
+
+    // Modals DOM
+    const modalConfirm = document.getElementById('modalConfirm');
+    const modalConfirmText = document.getElementById('modalConfirmText');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalProceedBtn = document.getElementById('modalProceedBtn');
+    const modalNotice = document.getElementById('modalNotice');
+    const modalNoticeTitle = document.getElementById('modalNoticeTitle');
+    const modalNoticeText = document.getElementById('modalNoticeText');
+    const modalNoticeCloseBtn = document.getElementById('modalNoticeCloseBtn');
+
+    // Build Question Cards
+    function renderAllQuestions() {
+      questionsContainer.innerHTML = '';
+      examQuestions.forEach((q, index) => {
+        const card = document.createElement('article');
+        card.className = "question-card bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm transition hover:shadow-md scroll-mt-28";
+        card.id = `card-q-${q.id}`;
+
+        // Question Header
+        const header = document.createElement('div');
+        header.className = "flex items-start gap-3 mb-4";
+        header.innerHTML = `
+          <span class="bg-brand-light text-brand font-black text-xs sm:text-sm px-3 py-1 rounded-lg border border-emerald-200 shrink-0">سؤال ${q.id}</span>
+          <h2 class="text-slate-800 text-sm sm:text-base font-bold leading-relaxed">${q.text}</h2>
+        `;
+        card.appendChild(header);
+
+        // Options List
+        const optionsList = document.createElement('div');
+        optionsList.className = "flex flex-col gap-2.5";
+
+        q.options.forEach((optText, optIdx) => {
+          const label = document.createElement('label');
+          label.className = "option-wrapper flex items-center gap-3 p-3 sm:p-3.5 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-xs sm:text-sm text-slate-700 select-none";
+          label.id = `label-opt-${q.id}-${optIdx}`;
+          label.innerHTML = `
+            <input type="radio" name="question_${q.id}" value="${optIdx}" class="custom-radio w-5 h-5 text-brand shrink-0 cursor-pointer" onchange="onSelectOption(${q.id}, ${optIdx})">
+            <span class="opt-badge w-6 h-6 rounded-md bg-slate-100 text-slate-600 font-extrabold flex items-center justify-center text-xs shrink-0">${OPTION_KEYS[optIdx]}</span>
+            <span class="opt-content leading-snug">${optText}</span>
+          `;
+          optionsList.appendChild(label);
+        });
+
+        card.appendChild(optionsList);
+
+        // Feedback / Rationale Container (populated after submission)
+        const rationaleContainer = document.createElement('div');
+        rationaleContainer.id = `rationale-box-${q.id}`;
+        card.appendChild(rationaleContainer);
+
+        questionsContainer.appendChild(card);
+      });
+    }
+
+    // Build Navigation Grid
+    function renderNavigationGrid() {
+      navGrid.innerHTML = '';
+      examQuestions.forEach(q => {
+        const btn = document.createElement('button');
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = q.id;
+        btn.type = 'button';
+        btn.className = "nav-btn h-9 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center transition";
+        btn.onclick = () => {
+          scrollToQuestion(q.id);
+          // If mobile drawer open, close it
+          if (window.innerWidth < 1024) {
+            navPalette.classList.add('hidden');
+          }
+        };
+        navGrid.appendChild(btn);
+      });
+    }
+
+    // Scroll to specific question smoothly
+    function scrollToQuestion(qid) {
+      const targetCard = document.getElementById(`card-q-${qid}`);
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Handle Option Click
+    window.onSelectOption = function(qid, optIndex) {
+      if (isExamFinished) return;
+
+      studentAnswers[qid] = optIndex;
+
+      // Update Card Visuals
+      const card = document.getElementById(`card-q-${qid}`);
+      if (card) {
+        card.classList.add('border-brand', 'ring-1', 'ring-brand/30');
+        const labels = card.querySelectorAll('.option-wrapper');
+        labels.forEach((lbl, idx) => {
+          const badge = lbl.querySelector('.opt-badge');
+          if (idx === optIndex) {
+            lbl.classList.add('bg-brand-light', 'border-brand', 'text-brand-dark', 'font-semibold');
+            if (badge) {
+              badge.classList.remove('bg-slate-100', 'text-slate-600');
+              badge.classList.add('bg-brand', 'text-white');
+            }
+          } else {
+            lbl.classList.remove('bg-brand-light', 'border-brand', 'text-brand-dark', 'font-semibold');
+            if (badge) {
+              badge.classList.remove('bg-brand', 'text-white');
+              badge.classList.add('bg-slate-100', 'text-slate-600');
+            }
+          }
+        });
+      }
+
+      // Update Nav Palette Button
+      const navBtn = document.getElementById(`nav-btn-${qid}`);
+      if (navBtn) {
+        navBtn.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+        navBtn.classList.add('bg-brand', 'text-white', 'border-brand');
+      }
+
+      updateProgressBar();
+    };
+
+    // Update Progress Metrics
+    function updateProgressBar() {
+      const answeredCount = Object.keys(studentAnswers).length;
+      const percentage = Math.round((answeredCount / TOTAL_QUESTIONS) * 100);
+
+      progressBar.style.width = `${percentage}%`;
+      progressStats.textContent = `${answeredCount} / ${TOTAL_QUESTIONS}`;
+      sideAnsweredStatus.textContent = `تمت الإجابة: ${answeredCount} من ${TOTAL_QUESTIONS}`;
+      mobileBadge.textContent = answeredCount;
+    }
+
+    // Countdown Timer logic
+    function startExamTimer() {
+      updateTimerUI();
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        // 5 Minutes Warning
+        if (timeRemaining <= 300 && timeRemaining > 0) {
+          timerBox.classList.add('timer-danger');
+        }
+
+        // Time Expired
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          timeRemaining = 0;
+          updateTimerUI();
+          autoExpireExam();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const mins = Math.floor(timeRemaining / 60);
+      const secs = timeRemaining % 60;
+      timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function autoExpireExam() {
+      modalNoticeTitle.textContent = "انتهى الوقت المحدد!";
+      modalNoticeText.textContent = "لقد انتهت الـ 40 دقيقة المخصصة للامتحان. تم إغلاق الاختبار تلقائياً واحتساب النتيجة.";
+      modalNotice.classList.remove('hidden');
+      modalNoticeCloseBtn.onclick = () => {
+        modalNotice.classList.add('hidden');
+        finalizeSubmission();
+      };
+      finalizeSubmission();
+    }
+
+    // Prompt Submit Modal
+    submitExamBtn.addEventListener('click', () => {
+      if (isExamFinished) return;
+      const answeredCount = Object.keys(studentAnswers).length;
+      const remaining = TOTAL_QUESTIONS - answeredCount;
+
+      if (remaining > 0) {
+        modalConfirmText.innerHTML = `لقد أجبت عن <strong>${answeredCount}</strong> سؤالاً، وما زال لديك <strong>${remaining}</strong> سؤالاً دون إجابة.<br><br>هل تريد بالتأكيد إنهاء الاختبار الآن واحتساب النتيجة؟`;
+      } else {
+        modalConfirmText.innerHTML = `رائع! لقد أجبت عن كافة الأسئلة الـ <strong>100</strong> بالكامل.<br><br>هل أنت متأكد من تسليم الإجابات وإنهاء الامتحان؟`;
+      }
+
+      modalConfirm.classList.remove('hidden');
+    });
+
+    modalCancelBtn.addEventListener('click', () => {
+      modalConfirm.classList.add('hidden');
+    });
+
+    modalProceedBtn.addEventListener('click', () => {
+      modalConfirm.classList.add('hidden');
+      finalizeSubmission();
+    });
+
+    // Mobile nav drawer toggle
+    toggleNavDrawerBtn.addEventListener('click', () => {
+      navPalette.classList.toggle('hidden');
+      if (!navPalette.classList.contains('hidden')) {
+        navPalette.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // Finalize Exam Submission
+    function finalizeSubmission() {
+      if (isExamFinished) return;
+      isExamFinished = true;
+      clearInterval(timerInterval);
+
+      // Disable inputs & submit button
+      document.querySelectorAll('input[type="radio"]').forEach(radio => radio.disabled = true);
+      submitExamBtn.disabled = true;
+      submitExamBtn.classList.remove('from-brand', 'to-emerald-700', 'hover:from-brand-dark');
+      submitExamBtn.classList.add('bg-slate-400', 'cursor-not-allowed');
+      submitExamBtn.innerHTML = `<span>تم تسليم الامتحان</span>`;
+
+      // Scoring
+      let correctTotal = 0;
+      let wrongTotal = 0;
+      let skippedTotal = 0;
+
+      examQuestions.forEach(q => {
+        const userChoice = studentAnswers[q.id];
+        const card = document.getElementById(`card-q-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const rationaleDiv = document.getElementById(`rationale-box-${q.id}`);
+
+        if (card) {
+          card.classList.remove('ring-1', 'ring-brand/30');
+
+          const correctWrapper = document.getElementById(`label-opt-${q.id}-${q.correct}`);
+
+          if (userChoice === undefined) {
+            skippedTotal++;
+            card.classList.add('border-amber-400', 'bg-amber-50/20');
+            if (correctWrapper) {
+              correctWrapper.classList.add('bg-emerald-100', 'border-emerald-600', 'text-emerald-900', 'font-bold');
+            }
+            if (navBtn) {
+              navBtn.className = "nav-btn h-9 rounded-lg bg-amber-400 text-white font-black text-xs flex items-center justify-center";
+            }
+          } else if (userChoice === q.correct) {
+            correctTotal++;
+            card.classList.add('border-emerald-500', 'bg-emerald-50/20');
+            if (correctWrapper) {
+              correctWrapper.classList.add('bg-emerald-100', 'border-emerald-600', 'text-emerald-900', 'font-bold');
+            }
+            if (navBtn) {
+              navBtn.className = "nav-btn h-9 rounded-lg bg-emerald-600 text-white font-black text-xs flex items-center justify-center";
+            }
+          } else {
+            wrongTotal++;
+            card.classList.add('border-rose-400', 'bg-rose-50/20');
+            const wrongWrapper = document.getElementById(`label-opt-${q.id}-${userChoice}`);
+            if (wrongWrapper) {
+              wrongWrapper.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900', 'line-through');
+            }
+            if (correctWrapper) {
+              correctWrapper.classList.add('bg-emerald-100', 'border-emerald-600', 'text-emerald-900', 'font-bold');
+            }
+            if (navBtn) {
+              navBtn.className = "nav-btn h-9 rounded-lg bg-rose-600 text-white font-black text-xs flex items-center justify-center";
+            }
+          }
+
+          // Inject detailed educational justification
+          if (rationaleDiv) {
+            rationaleDiv.className = "mt-4 p-3.5 bg-slate-50 border-r-4 border-brand-gold rounded-lg text-xs sm:text-sm text-slate-700 leading-relaxed";
+            rationaleDiv.innerHTML = `
+              <div class="flex items-center gap-1.5 font-black text-brand-dark mb-1">
+                <span>📖 الإجابة النموذجية المعتمدة:</span>
+                <span class="bg-brand text-white px-2 py-0.5 rounded text-xs">الفرع (${OPTION_KEYS[q.correct]})</span>
+              </div>
+              <p><strong class="text-slate-800">السند الفقهي والتوجيه من المنهاج:</strong> ${q.rationale}</p>
+            `;
+          }
+        }
+      });
+
+      // Populate and reveal results
+      const totalScore = correctTotal; // Each question = 1 mark
+      const timeSpentSeconds = EXAM_DURATION_SECONDS - Math.max(0, timeRemaining);
+      const spentMins = Math.floor(timeSpentSeconds / 60);
+      const spentSecs = timeSpentSeconds % 60;
+
+      document.getElementById('finalScore').textContent = totalScore;
+      document.getElementById('finalPercentage').textContent = `النسبة المئوية: ${totalScore}%`;
+      document.getElementById('statCorrect').textContent = correctTotal;
+      document.getElementById('statWrong').textContent = wrongTotal;
+      document.getElementById('statSkipped').textContent = skippedTotal;
+      document.getElementById('statTimeSpent').textContent = `${String(spentMins).padStart(2, '0')}:${String(spentSecs).padStart(2, '0')}`;
+
+      // Feedback Rating
+      const feedbackEl = document.getElementById('gradeFeedback');
+      if (totalScore >= 90) {
+        feedbackEl.textContent = "تقدير: ممتاز مرتفع (أداء وزاري استثنائي يعكس استيعاباً فقهياً ومعرفياً شاملاً لمنهاج الكتاب)";
+        feedbackEl.className = "font-extrabold text-emerald-700 text-base sm:text-lg mb-6";
+      } else if (totalScore >= 80) {
+        feedbackEl.textContent = "تقدير: جيد جداً (مستوى متميز وإتقان عالٍ لمتون النصوص والأحكام التفصيلية)";
+        feedbackEl.className = "font-extrabold text-emerald-600 text-base sm:text-lg mb-6";
+      } else if (totalScore >= 70) {
+        feedbackEl.textContent = "تقدير: جيد (أداء طيب مع وجود بعض الفروق الدقيقة والمفاهيم التي تستوجب التدقيق والمراجعة)";
+        feedbackEl.className = "font-extrabold text-amber-600 text-base sm:text-lg mb-6";
+      } else if (totalScore >= 50) {
+        feedbackEl.textContent = "تقدير: مقبول (ناجح؛ يُنصح بمراجعة إضاءات 'أتوقف' ونصوص القوانين والعلل الشرعية)";
+        feedbackEl.className = "font-extrabold text-orange-600 text-base sm:text-lg mb-6";
+      } else {
+        feedbackEl.textContent = "تقدير: دون المستوى المطلوب (يُنصح بإعادة قراءة الكتاب المدرسي بتركيز عالٍ وحل الأسئلة مجدداً)";
+        feedbackEl.className = "font-extrabold text-rose-600 text-base sm:text-lg mb-6";
+      }
+
+      examBanner.classList.add('hidden');
+      resultsSection.classList.remove('hidden');
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Initialize upon page load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAllQuestions();
+      renderNavigationGrid();
+      startExamTimer();
+      updateProgressBar();
+    });
+  </script>
+</body>
+</html>
