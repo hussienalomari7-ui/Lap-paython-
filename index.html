@@ -1,1454 +1,2265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Machine Learning & Data Preprocessing - Exam Practice</title>
-  <!-- Google Fonts -->
+  <title>امتحان التربية الإسلامية - الصف الحادي عشر الأكاديمي | الفصل الدراسي الأول</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- MathJax for rendering LaTeX formulas -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
-      }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #0f172a;
-      --bg-secondary: #1e293b;
-      --bg-card: #1e293b;
-      --border-color: #334155;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --accent-color: #6366f1;
-      --accent-hover: #4f46e5;
-      --success-color: #10b981;
-      --success-bg: rgba(16, 185, 129, 0.15);
-      --error-color: #ef4444;
-      --error-bg: rgba(239, 68, 68, 0.15);
-      --warning-color: #f59e0b;
-      --radius: 12px;
-      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-    }
-
-    [data-theme="light"] {
-      --bg-primary: #f8fafc;
-      --bg-secondary: #ffffff;
-      --bg-card: #ffffff;
-      --border-color: #e2e8f0;
-      --text-primary: #0f172a;
-      --text-secondary: #64748b;
-      --accent-color: #4f46e5;
-      --accent-hover: #4338ca;
-      --success-color: #059669;
-      --success-bg: rgba(5, 150, 105, 0.1);
-      --error-color: #dc2626;
-      --error-bg: rgba(220, 38, 38, 0.1);
-      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      --primary: #104c38;
+      --primary-dark: #092c20;
+      --primary-light: #e8f5ee;
+      --accent: #c49a45;
+      --accent-light: #fdf8ed;
+      --bg-body: #f4f7f6;
+      --surface: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #4b5563;
+      --border: #d1d5db;
+      --correct: #15803d;
+      --correct-bg: #dcfce7;
+      --wrong: #b91c1c;
+      --wrong-bg: #fee2e2;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
     }
 
     body {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      transition: background-color 0.3s, color 0.3s;
     }
 
-    header {
-      background-color: var(--bg-secondary);
-      border-bottom: 1px solid var(--border-color);
-      padding: 1rem 2rem;
+    /* Fixed Header & Dashboard */
+    header.sticky-header {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 2px solid var(--accent);
       box-shadow: var(--shadow);
     }
 
-    .header-content {
-      max-width: 1400px;
-      margin: 0 auto;
+    .header-top {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 10px;
     }
 
-    .title-area h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .title-area p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-
-    .controls {
+    .branding {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 14px;
     }
 
-    .btn {
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      background: var(--bg-primary);
-      color: var(--text-primary);
+    .emblem-badge {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--accent);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--accent);
+    }
+
+    .branding-text h1 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .branding-text p {
+      font-size: 0.8rem;
+      color: #d1fae5;
+    }
+
+    .timer-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 16px;
+      border-radius: 50px;
+    }
+
+    .timer-icon {
+      font-size: 1.2rem;
+    }
+
+    .timer-digits {
+      font-family: monospace;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #ffffff;
+      min-width: 65px;
+      text-align: center;
+    }
+
+    .timer-warning {
+      background: #7f1d1d !important;
+      border-color: #ef4444 !important;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    .header-subbar {
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      gap: 16px;
+    }
+
+    .progress-wrapper {
+      flex: 1;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      transition: width 0.3s ease;
+    }
+
+    .nav-toggle-btn {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid #bbf7d0;
+      padding: 4px 14px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: all 0.2s;
+      font-weight: 700;
+      font-size: 0.85rem;
     }
 
-    .btn:hover {
-      border-color: var(--accent-color);
-      color: var(--accent-color);
-    }
-
-    .btn-primary {
-      background: var(--accent-color);
-      color: white;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      color: white;
-    }
-
+    /* Main Container & Layout */
     .container {
-      max-width: 1400px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
+      max-width: 1300px;
+      margin: 20px auto;
+      padding: 0 16px;
       display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 2rem;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
       flex: 1;
     }
 
     @media (max-width: 992px) {
-  .container {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    margin: 1rem auto;
-    padding: 0 1rem;
-  }
-
-  /* 1. عرض السؤال أولاً في الأعلى على الجوال */
-  .question-card {
-    order: 1;
-  }
-
-  /* 2. نقل قائمة أرقام الأسئلة لأسفل كارت السؤال وإلغاء التثبيت المزعج */
-  .sidebar {
-    order: 2;
-    position: static;
-  }
-
-  /* 3. جعل أزرار الأرقام تتوزع بـ 7 أعمدة وتقليل ارتفاع القائمة لتناسب الشاشة */
-  .grid-nav {
-    grid-template-columns: repeat(7, 1fr);
-    max-height: 180px;
-  }
-}
-
-
-    /* Sidebar Navigation */
-    .sidebar {
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      height: fit-content;
-      position: sticky;
-      top: 90px;
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .nav-panel {
+        display: none;
+      }
+      .nav-panel.open {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 120px;
+        z-index: 999;
+        overflow-y: auto;
+      }
     }
 
-    .sidebar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .progress-bar-bg {
-      background: var(--border-color);
-      height: 8px;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-    }
-
-    .progress-bar-fill {
-      background: var(--accent-color);
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-
-    .grid-nav {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0.5rem;
-      max-height: 400px;
-      overflow-y: auto;
-      padding-right: 0.25rem;
-    }
-
-    .grid-nav-btn {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-      background: var(--bg-primary);
-      color: var(--text-secondary);
-      font-weight: 600;
-      font-size: 0.8rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .grid-nav-btn:hover {
-      border-color: var(--accent-color);
-      color: var(--text-primary);
-    }
-
-    .grid-nav-btn.active {
-      border-color: var(--accent-color);
-      outline: 2px solid var(--accent-color);
-    }
-
-    .grid-nav-btn.correct {
-      background: var(--success-bg);
-      border-color: var(--success-color);
-      color: var(--success-color);
-    }
-
-    .grid-nav-btn.incorrect {
-      background: var(--error-bg);
-      border-color: var(--error-color);
-      color: var(--error-color);
-    }
-
-    /* Question Card Area */
-    .question-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 2rem;
-      box-shadow: var(--shadow);
+    /* Questions Section */
+    .questions-feed {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 20px;
     }
 
-    .question-header {
+    .question-card {
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      scroll-margin-top: 140px;
+    }
+
+    .question-card:hover {
+      border-color: #94a3b8;
+    }
+
+    .question-card.answered {
+      border-right: 5px solid var(--primary);
+    }
+
+    .q-header {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 1rem;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
-    .question-number {
-      font-size: 0.9rem;
+    .q-number {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 4px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .q-text {
+      font-size: 1.05rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent-color);
-    }
-
-    .question-text {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      font-weight: 500;
-      color: var(--text-primary);
+      color: #111827;
+      line-height: 1.7;
+      flex: 1;
     }
 
     .options-list {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 10px;
     }
 
-    .option-item {
-      padding: 1rem 1.25rem;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      background: var(--bg-primary);
-      cursor: pointer;
+    .option-label {
       display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      transition: all 0.2s;
+      align-items: center;
+      padding: 12px 16px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      gap: 12px;
+      font-size: 0.98rem;
     }
 
-    .option-item:hover {
-      border-color: var(--accent-color);
+    .option-label:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
     }
 
-    .option-key {
+    .option-label input[type="radio"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #94a3b8;
+      border-radius: 50%;
+      outline: none;
+      margin: 0;
+      cursor: pointer;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    .option-label input[type="radio"]:checked {
+      border-color: var(--primary);
+      background: var(--primary);
+      box-shadow: inset 0 0 0 3px #ffffff;
+    }
+
+    .option-label.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .opt-symbol {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 700;
-      color: var(--accent-color);
-      min-width: 24px;
-    }
-
-    .option-text {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: var(--text-primary);
-    }
-
-    /* Option States */
-    .option-item.selected {
-      border-color: var(--accent-color);
-      background: rgba(99, 102, 241, 0.1);
-    }
-
-    .option-item.correct {
-      border-color: var(--success-color);
-      background: var(--success-bg);
-    }
-
-    .option-item.incorrect {
-      border-color: var(--error-color);
-      background: var(--error-bg);
-    }
-
-    /* Explanation Box */
-    .explanation-box {
-      background: var(--bg-primary);
-      border-left: 4px solid var(--accent-color);
-      padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-top: 1rem;
-      display: none;
-    }
-
-    .explanation-box.show {
-      display: block;
-    }
-
-    .explanation-title {
       font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--accent-color);
-      margin-bottom: 0.5rem;
+      color: var(--text-muted);
     }
 
-    .explanation-text {
-      font-size: 0.925rem;
-      line-height: 1.6;
-      color: var(--text-secondary);
+    .option-label.selected .opt-symbol {
+      background: var(--primary);
+      color: #ffffff;
     }
 
-    /* Footer Controls */
-    .card-footer {
+    /* Nav Sidebar */
+    .nav-panel {
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 130px;
+      max-height: calc(100vh - 150px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-panel h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e5e7eb;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 1rem;
-      border-top: 1px solid var(--border-color);
-      padding-top: 1.5rem;
     }
 
-    .mode-badge {
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 16px;
+    }
+
+    .nav-btn {
+      aspect-ratio: 1;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.15s;
+    }
+
+    .nav-btn:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .nav-btn.answered {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .submit-exam-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent), #a1782a);
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, filter 0.15s;
+    }
+
+    .submit-exam-btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+
+    .modal-card h2 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+
+    .modal-card p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #374151;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Results Dashboard */
+    .results-dashboard {
+      display: none;
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 24px;
+    }
+
+    .results-hero {
+      text-align: center;
+      border-bottom: 2px dashed #e2e8f0;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+
+    .score-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff;
+      box-shadow: 0 8px 16px rgba(16, 76, 56, 0.25);
+    }
+
+    .score-num {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .score-total {
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
       font-weight: 600;
-      background: var(--border-color);
-      color: var(--text-secondary);
+    }
+
+    .stat-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .results-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Review Card Modifiers */
+    .review-card.correct-ans {
+      border: 2px solid var(--correct);
+      background: #fcfdfc;
+    }
+
+    .review-card.wrong-ans {
+      border: 2px solid var(--wrong);
+      background: #fffcfc;
+    }
+
+    .option-label.is-correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct) !important;
+      color: var(--correct) !important;
+      font-weight: 700;
+    }
+
+    .option-label.is-wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong) !important;
+      color: var(--wrong) !important;
+      text-decoration: line-through;
+    }
+
+    .rationale-box {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-right: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      color: #334155;
+    }
+
+    .rationale-box strong {
+      color: var(--primary-dark);
+    }
+
+    /* Print styles */
+    @media print {
+      header.sticky-header, .nav-panel, .results-actions, .modal-overlay {
+        display: none !important;
+      }
+      .container {
+        display: block;
+        padding: 0;
+        margin: 0;
+      }
+      .question-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+        margin-bottom: 12px;
+      }
     }
   </style>
 </head>
-<body data-theme="dark">
+<body>
 
-  <header>
-    <div class="header-content">
-      <div class="title-area">
-        <h1>Machine Learning & Data Preprocessing</h1>
-        <p>Interactive Question Bank (70 Questions)</p>
+  <!-- Fixed Official Header -->
+  <header class="sticky-header">
+    <div class="header-top">
+      <div class="branding">
+        <div class="emblem-badge">⚜</div>
+        <div class="branding-text">
+          <h1>امتحان التربية الإسلامية - الصف الحادي عشر الأكاديمي</h1>
+          <p>الفصل الدراسي الأول | الاختبار الوزاري الشامل المعياري (100 سؤال)</p>
+        </div>
       </div>
-      <div class="controls">
-        <button class="btn" id="modeToggleBtn">Mode: Practice</button>
-        <button class="btn" id="themeToggleBtn">🌙 Dark</button>
+      <div class="timer-container" id="timerContainer">
+        <span class="timer-icon">⏳</span>
+        <span class="timer-label" style="font-size: 0.85rem; font-weight: 700;">الوقت المتبقي:</span>
+        <span class="timer-digits" id="timerDisplay">40:00</span>
       </div>
+    </div>
+    <div class="header-subbar">
+      <div class="progress-wrapper">
+        <span>الإنجاز:</span>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <span id="progressText">0 / 100</span>
+      </div>
+      <button class="nav-toggle-btn" id="navToggle">لوحة الأسئلة (100)</button>
     </div>
   </header>
 
-  <div class="container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <h3>Questions</h3>
-        <span id="scoreTracker" style="font-size: 0.85rem; color: var(--text-secondary);">0 / 70 Solved</span>
-      </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressBar"></div>
-      </div>
-      <div class="grid-nav" id="gridNav">
-        <!-- Buttons injected dynamically -->
-      </div>
+  <!-- Main Content Layout -->
+  <main class="container">
+    <section class="main-content">
+      
+      <!-- Results Section (hidden initially) -->
+      <section class="results-dashboard" id="resultsDashboard">
+        <div class="results-hero">
+          <h2>لوحة النتيجة الرسمية للاختبار</h2>
+          <p id="resultFeedback" style="font-weight: 700; margin-top: 6px;"></p>
+          <div class="score-circle">
+            <span class="score-num" id="scoreNum">0</span>
+            <span class="score-total">من 100</span>
+          </div>
+          <span id="scorePercentage" style="font-size: 1.2rem; font-weight: 800; color: var(--primary);"></span>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">الإجابات الصحيحة</div>
+            <div class="stat-val" id="correctCount" style="color: var(--correct);">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">الإجابات الخاطئة</div>
+            <div class="stat-val" id="wrongCount" style="color: var(--wrong);">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">الأسئلة المتروكة</div>
+            <div class="stat-val" id="skippedCount" style="color: #64748b;">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">الوقت المستغرق</div>
+            <div class="stat-val" id="timeSpent">00:00</div>
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button class="btn-action" onclick="window.print()">🖨️ طباعة تقرير الامتحان والنتيجة</button>
+          <button class="btn-action" style="background: var(--accent);" onclick="location.reload()">🔄 إعادة المحاولة من جديد</button>
+        </div>
+      </section>
+
+      <!-- Questions List -->
+      <div class="questions-feed" id="questionsContainer"></div>
+    </section>
+
+    <!-- Side Question Navigation Grid -->
+    <aside class="nav-panel" id="navPanel">
+      <h3>
+        <span>جدول الأسئلة</span>
+        <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);" id="answeredCounterText">تمت الإجابة: 0</span>
+      </h3>
+      <div class="nav-grid" id="navGrid"></div>
+      <button class="submit-exam-btn" id="finishExamBtn">إنهاء الامتحان واحتساب النتيجة</button>
     </aside>
+  </main>
 
-    <!-- Main Question View -->
-    <main class="question-card">
-      <div class="question-header">
-        <span class="question-number" id="qNumber">Question 1 of 70</span>
-        <span class="mode-badge" id="modeBadge">Practice Mode</span>
+  <!-- Submit Confirmation Modal -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-card">
+      <h2>تأكيد تسليم الامتحان</h2>
+      <p id="modalMsg">هل أنت متأكد من إنهاء الامتحان وتسليم الإجابات الآن؟</p>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="cancelSubmitBtn">الرجوع للمتابعة</button>
+        <button class="btn-danger" id="confirmSubmitBtn">نعم، إنهاء وتسليم</button>
       </div>
-
-      <div class="question-text" id="qText">
-        Loading Question...
-      </div>
-
-      <div class="options-list" id="qOptions">
-        <!-- Options injected dynamically -->
-      </div>
-
-      <div class="explanation-box" id="explanationBox">
-        <div class="explanation-title">Explanation:</div>
-        <div class="explanation-text" id="explanationText"></div>
-      </div>
-
-      <div class="card-footer">
-        <button class="btn" id="prevBtn">← Previous</button>
-        <button class="btn btn-primary" id="nextBtn">Next →</button>
-      </div>
-    </main>
+    </div>
   </div>
 
   <script>
-    // Complete 70 Questions Data Structure
+    // 100 Authentic Questions Strictly Sourced from Jordan Grade 11 Curriculum (Semester 1)
+    // 25 per option strictly: أ: 25, ب: 25, ج: 25, د: 25.
     const questionsData = [
+      // Block 1 (Q1-4): أ, ج, ب, د
       {
         id: 1,
-        question: "A data scientist applies K-Means clustering to an unlabeled corporate dataset and achieves an exceptionally high Silhouette Score. However, upon manual inspection, an expert domain analyst notes that the algorithm grouped the records based on arbitrary system-generated timestamp increments rather than actual underlying operational characteristics. Which core challenge of unsupervised learning does this scenario directly illustrate?",
-        options: {
-          A: "The computational inability of distance metrics to handle high-dimensional spaces.",
-          B: "The lack of direct ground truth feedback, making models highly prone to prioritizing statistically dominant but semantically irrelevant features.",
-          C: "The complete failure of iterative model building within exploratory data analysis.",
-          D: "The architectural constraint where dimensionality reduction must precede clustering pipelines."
-        },
-        answer: "B",
-        explanation: "Unsupervised learning lacks ground truth labels to guide the algorithm toward semantically meaningful patterns. Consequently, without human validation or explicit preprocessing, the model optimizes purely for mathematical distance, which can easily be dominated by mathematically distinct but irrelevant variables like timestamps."
+        q: "دلالة قوله تعالى: ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ﴾ تتمثل في:",
+        options: [
+          "توجيه المسلم إلى تمثل السلوك القويم بصورة دائمة والالتزام بأحكام الدين حتى آخر لحظة من حياته",
+          "استجابة المسلم للجهاد بالنفس والمال عند إعلان النفير العام فقط",
+          "فرضية الأمر بالمعروف والنهي عن المنكر كفرض عين على كل فرد مسلم دون استثناء",
+          "الحث على تأخير الفرائض والتوبة عند مشارف الموت وانقضاء أجل الإنسان"
+        ],
+        correct: 0,
+        rationale: "أكد الكتاب أن قوله تعالى: ﴿وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ﴾ يوجه المسلم إلى التزام السلوك القويم بصورة دائمة حتى آخر لحظة من حياته."
       },
       {
         id: 2,
-        question: "An engineer is designing a failure-prediction system for an industrial turbine. They have access to a dataset containing millions of operational cycles collected during a period when the turbine was verified to be operating with 100% perfection under strict quality control. The engineer wants the system to flag any future deviations or unknown mechanical configurations. Which paradigm is most appropriate, and what is its strict data requirement?",
-        options: {
-          A: "Anomaly Detection; it must tolerate a noisy, unvetted training set containing unknown defects.",
-          B: "Novelty Detection; it requires a completely clean training set free of any anomalous or unwanted instances.",
-          C: "Out-of-Distribution Detection; it mandates a multi-class dataset containing pre-categorized failure modes.",
-          D: "Association Rule Learning; it requires establishing conditional transactions between binary features."
-        },
-        answer: "B",
-        explanation: "Novelty detection focuses on identifying new, unseen but valid patterns, which fundamentally requires a clean training dataset representing only the 'normal' class. Anomaly detection, conversely, is typically applied when the training data is noisy and contains unclassified outliers that need to be filtered out."
+        q: "قوله تعالى: ﴿وَلْتَكُن مِّنكُمْ أُمَّةٌ يَدْعُونَ إِلَى الْخَيْرِ وَيَأْمُرُونَ بِالْمَعْرُوفِ وَيَنْهَوْنَ عَنِ الْمُنكَرِ﴾ يفيد أن حكم الأمر بالمعروف والنهي عن المنكر كأصل عام هو:",
+        options: [
+          "فرض عين على كل مسلم ومسلمة كالصلوات الخمس",
+          "سنة مؤكدة يثاب فاعلها ولا يعاقب تاركها مطلقاً",
+          "فرض كفاية إذا قامت به مجموعة كافية سقط الإثم عن الباقين",
+          "مباح يعود تقديره إلى رغبة الفرد ومصلحته الدنيوية"
+        ],
+        rationale: "الخطاب موجه إلى طائفة تتوافر فيها الشروط (العلم والحكمة والمهارة)، وفي هذا دلالة على أنه فرض كفاية.",
+        correct: 2
       },
       {
         id: 3,
-        question: "A convolutional neural network is trained on the CIFAR-10 image dataset (containing 10 distinct everyday object classes) to serve as an embedded asset classifier. During deployment, the system is exposed to images from the SVHN (Street View House Numbers) dataset. To prevent the model from assigning a high-confidence, erroneous label to these digits, which framework must be implemented?",
-        options: {
-          A: "Single-Class Novelty Detection targeting semantic anomalies.",
-          B: "Association Rule Learning to establish co-occurrence dependencies between pixels.",
-          C: "Multi-Class Out-of-Distribution (OOD) Detection to flag data originating from a completely foreign distribution.",
-          D: "Hierarchical Clustering to subdivide the images into structural subgroups based on color gradients."
-        },
-        answer: "C",
-        explanation: "When a model trained on a specific set of classes (In-distribution, like CIFAR-10) is exposed to an entirely different dataset with separate semantics (Out-of-distribution, like SVHN), it requires Out-of-Distribution (OOD) detection under a multi-class paradigm to identify and reject the foreign inputs."
+        q: "الأسلوب الماكر الذي استخدمه شاس بن قيس (اليهودي) لمحاولة إيقاع الفتنة والفرقة بين الأوس والخزرج في مجلسهم بعد إسلامهم هو:",
+        options: [
+          "التشكيك في صحة القرآن الكريم ونبوة محمد ﷺ علناً في مجلسهم",
+          "تذكيرهم بحروبهم في الجاهلية وإثارة النعرات القديمة لإشعال الخصومة",
+          "مقاطعتهم اقتصادياً ومنع البيع والشراء في أسواق المدينة المنورة",
+          "نشر الشائعات حول قيادة جيش المسلمين والغنائم"
+        ],
+        correct: 1,
+        rationale: "مر شاس بن قيس بمجلس الأوس والخزرج فغاظه ألفتهم، فأحدث فتنة بتذكيرهم بحروبهم قبل الإسلام حتى تنادوا بالسلاح."
       },
       {
         id: 4,
-        question: "Mathematically, an unscaled feature with values in the millions dominates an SVM classifier's optimization process. What is the precise geometric mechanism causing this performance degradation?",
-        options: {
-          A: "The large-magnitude feature forces the RBF kernel to artificially compress all distance computations toward infinity.",
-          B: "The SVM kernel calculates distances that skew the margin, causing the decision boundary to become highly sensitive to, and aligned with, the axis of the dominant feature.",
-          C: "The unscaled feature causes the Euclidean length of every data point to equal exactly zero, neutralizing the support vectors.",
-          D: "The optimization algorithm switches from an optimization objective to a descriptive clustering objective."
-        },
-        answer: "B",
-        explanation: "SVMs find an optimal separating hyperplane by maximizing the margin, a process highly dependent on geometric distance computations. Features with larger magnitudes dominate these distance metrics, causing the margin to warp and become heavily skewed along the dominant feature's axis, rendering smaller but potentially crucial features statistically invisible."
+        q: "دلالة ورود لفظ ﴿جَمِيعًا﴾ في قوله تعالى: ﴿وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا﴾ تدل على:",
+        options: [
+          "أن التمسك بالدين واجب على فئة العلماء والحكام دون غيرهم",
+          "أن العصمة خاصة بالأمم السابقة قبل نزول القرآن الكريم",
+          "أن التفرق في المسائل الفقهية الاجتهادية يوجب العذاب الأليم",
+          "مسؤولية كل فرد من أفراد الأمة في وجوب التمسك بالإسلام والمحافظة على الوحدة"
+        ],
+        correct: 3,
+        rationale: "بين الكتاب المدرسي صراحة أن لفظ (جميعاً) جاء للدلالة على مسؤولية كل فرد من أفراد الأمة في وجوب التمسك بالإسلام."
       },
+
+      // Block 2 (Q5-8): ب, د, أ, ج
       {
         id: 5,
-        question: "A data pipeline applies MinMaxScaler to a training dataset, calculating a specific feature range. When the fitted scaler is applied via .transform() to the isolated test set, several resulting values are found to be $-0.15$ and $1.22$. What does this mathematically indicate about the test set, and how should it be resolved?",
-        options: {
-          A: "It indicates a programming bug; MinMaxScaler strictly clamps all outputs to $[0, 1]$ regardless of input characteristics.",
-          B: "It indicates that the test set features contain values that fall outside the minimum and maximum boundaries established by the training set; this is normal and prevents data leakage.",
-          C: "It indicates data leakage; the scaler should be re-fitted on the test set separately to ensure alignment.",
-          D: "It indicates that the data follows a strict Gaussian distribution and should have been processed with RobustScaler instead."
-        },
-        answer: "B",
-        explanation: "MinMaxScaler uses the training set's minimum and maximum values as constants for transformation ($x_{norm} = \\frac{x - min(X_{train})}{max(X_{train}) - min(X_{train})}$). If the test set contains values smaller than $min(X_{train})$ or larger than $max(X_{train})$, the outputs will naturally fall outside the $[0, 1]$ range. This is correct and necessary to preserve the true relative distribution without introducing data leakage."
+        q: "الصحابي الجليل راوي حديث «إن الحلال بين وإن الحرام بين» هو النعمان بن بشير الأنصاري رضي الله عنه، ومن سيرته أنه:",
+        options: [
+          "هاجر إلى المدينة المنورة في السنة السابعة للهجرة وكان من أهل الصفة",
+          "وُلِد في السنة الثانية للهجرة، وتولى القضاء بدمشق وحكم الكوفة وحمص زمن الأمويين",
+          "كان كاتب الوحي الأول والمسؤول عن نسخ المصحف الشريف",
+          "استشهد قائداً في معركة مؤتة سنة 8 للهجرة"
+        ],
+        correct: 1,
+        rationale: "النعمان بن بشير رضي الله عنه وُلد سنة 2هـ، وعمل قاضياً لدمشق وتولى حكم الكوفة وحمص وتوفي سنة 65هـ."
       },
       {
         id: 6,
-        question: "You are preprocessing a dataset where one specific feature represents financial transaction amounts. This feature exhibits a highly skewed distribution with extreme, valid macro-outliers due to occasional high-value institutional transfers. If you require a scaler that centers the data without allowing these extreme outliers to compress the variance of the typical consumer transactions, which tool should you select?",
-        options: {
-          A: "StandardScaler, because it guarantees a variance of exactly 1 regardless of outlier distribution.",
-          B: "MinMaxScaler, because it preserves the exact relative distances between all points in a closed range.",
-          C: "RobustScaler, because it uses the median and the interquartile range (IQR), making its scaling parameters resilient to extreme values.",
-          D: "Normalizer, because it forces each individual sample to have a Euclidean length of 1."
-        },
-        answer: "C",
-        explanation: "RobustScaler calculates scaling statistics based on the median and quartiles (IQR) rather than the mean and variance. Because the mean and variance are highly sensitive to extreme outliers, estimators like StandardScaler would be heavily distorted, whereas RobustScaler ensures the main body of the data is scaled appropriately while leaving the outliers uncompressed."
+        q: "توقف الإمام مالك رحمه الله عن الإفتاء في حكم أكل 'خنزير البحر' لتعارض الأدلة عنده بين:",
+        options: [
+          "قوله تعالى ﴿فَاسْتَقِمْ كَمَا أُمِرْتَ﴾ والحديث النبوي في صيد البر",
+          "قوله تعالى ﴿يَسْأَلُونَكَ عَنِ الْخَمْرِ وَالْمَيْسِرِ﴾ وآيات الأطعمة",
+          "قوله تعالى ﴿وَأَقِمِ الصَّلَاةَ﴾ وقوله تعالى ﴿كُلُوا مِنَ الطَّيِّبَاتِ﴾",
+          "عموم تحريم لحم الخنزير في سورة المائدة وعموم حل صيد البحر وطعامه"
+        ],
+        correct: 3,
+        rationale: "توقف الإمام مالك لخوفه أن يدخل في تحريم الخنزير ﴿حُرِّمَتْ عَلَيْكُمُ الْمَيْتَةُ وَالدَّمُ وَلَحْمُ الْخِنزِيرِ﴾ أو حل صيد البحر ﴿أُحِلَّ لَكُمْ صَيْدُ الْبَحْرِ وَطَعَامُهُ﴾."
       },
       {
         id: 7,
-        question: "In a natural language processing pipeline, text documents are converted into high-dimensional term-frequency vectors. The absolute word counts vary dramatically based purely on document length, but the core analytical task depends entirely on the relative angles between document vectors rather than their absolute magnitudes. Which preprocessing transformer is mathematically tailored for this task?",
-        options: {
-          A: "StandardScaler, to center the word frequencies around a mean of zero.",
-          B: "Normalizer, because it scales each data point independently so that its Euclidean length equals 1, isolating the angular relationships.",
-          C: "MinMaxScaler, to compress all token frequencies between 0 and 1 across the column axis.",
-          D: "RobustScaler, to eliminate the impact of rare vocabulary outliers across documents."
-        },
-        answer: "B",
-        explanation: "Normalizer acts horizontally across rows rather than columns, scaling each individual sample to have a unit norm (Euclidean length of 1). This is ideal when the magnitudes of the features are irrelevant or highly variable (e.g., document length), and only the direction or angle (such as Cosine Similarity) matters."
+        q: "المفهوم الاصطلاحي لخُلق 'الورع' كما نص عليه كتاب التربية الإسلامية في إضاءة (أتوقف) هو:",
+        options: [
+          "اجتناب الشبهات خوفاً من الوقوع في المحرمات",
+          "ترك الواجبات الشرعية خشية التعرض للرياء أمام الناس",
+          "التشدد في تحريم الطيبات والمباحات التي أحلها الله تعالى",
+          "الأخذ بالرخص الشرعية دائماً في غير حالات الضرورة"
+        ],
+        correct: 0,
+        rationale: "الورع في إضاءة الدرس: اجتناب الشبهات خوفاً من الوقوع في المحرمات."
       },
       {
         id: 8,
-        question: "Consider the following machine learning pipeline sequence:\n1. Load full dataset.\n2. Instantiate MinMaxScaler.\n3. Apply fit_transform() on the full dataset.\n4. Split the scaled data into training and testing sets using train_test_split.\nWhat structural flaw exists in this architectural design?",
-        options: {
-          A: "The pipeline will crash because MinMaxScaler cannot process un-split arrays.",
-          B: "It causes severe data leakage because information about the global maximum and minimum of the test set is used to transform the training set.",
-          C: "It alters the shape of the data arrays, causing a mismatch during model evaluation.",
-          D: "It forces the model to interpret the training data as an unsupervised clustering task."
-        },
-        answer: "B",
-        explanation: "Fitting a scaler on the entire dataset prior to splitting exposes the training set to statistical parameters (min/max values) belonging to the test set. This constitutes data leakage, artificially inflating validation performance while undermining the model’s true capability to generalize to independent data."
+        q: "شبه النبي ﷺ من يقع في المشتبهات بالراعي يرعى حول الحمى يوشك أن يرتع فيه؛ والعلة التربوية من ضرب هذا المثل:",
+        options: [
+          "بيان أن رعي الأغنام يتطلب حذراً شديداً من الذئاب",
+          "التأكيد على أن أرض الحمى خاصة بالسلاطين والملوك في الإسلام",
+          "أن من اعتاد التساهل في المشتبهات جَرّته نفسه وسَهُل عليه الوقوع في الحرام المحض",
+          "إباحة الاقتراب من المحرمات ما دام القلب خالياً من النية السيئة"
+        ],
+        correct: 2,
+        rationale: "بين الحديث أن النفس تسول للإنسان وتجره شيئاً فشيئاً؛ فالذي يتساهل في الشبهات يوشك أن يقع في الحرام."
       },
+
+      // Block 3 (Q9-12): د, أ, ج, ب
       {
         id: 9,
-        question: "During Exploratory Data Analysis (EDA) of a used car dataset, an analyst observes that 'Vehicle Mileage' and 'Vehicle Age (in years)' exhibit a near-perfect linear negative correlation. In terms of unsupervised data transformations, what is the most efficient architectural recommendation before feeding this data into a downstream algorithm?",
-        options: {
-          A: "Apply Normalizer to scale both features to a Euclidean length of 1.",
-          B: "Use a dimensionality reduction algorithm to merge the correlated features into a single latent feature representing 'Wear and Tear'.",
-          C: "Clone both features to double their mathematical weight during distance calculation.",
-          D: "Force the dataset through an association rule mining model to establish itemset transactions."
-        },
-        answer: "B",
-        explanation: "Strongly correlated features contain redundant information, which increases computational costs and can trigger the curse of dimensionality. Dimensionality reduction allows for feature merging (e.g., combining Mileage and Age into 'Wear and Tear'), which optimizes storage, speeds up execution, and preserves core information."
+        q: "كل الصور الآتية تُعد من صور 'الكفر الاعتقادي الأكبر' المخرج من ملة الإسلام، ما عدا:",
+        options: [
+          "إنكار ركن من أركان الإيمان كالإيمان بالملائكة أو باليوم الآخر",
+          "إنكار ركن من أركان الإسلام كفريضة الصلاة أو الزكاة",
+          "إنكار حكم قطعي معلوم من الدين بالضرورة كحرمة الربا أو الزنا",
+          "ترك صيام شهر رمضان تكاسلاً مع الإقرار بفرضيته ووجوبه"
+        ],
+        correct: 3,
+        rationale: "من ترك شيئاً من الواجبات تكاسلاً من غير إنكار لها ليس بكافر، وإنما هو مذنب وعاصٍ مرتكب لكبيرة."
       },
       {
         id: 10,
-        question: "When evaluating an unsupervised anomaly detection model during its deployment or 'Detection Phase', how does its operational mechanism contrast with its initial 'Training Phase'?",
-        options: {
-          A: "In the Training Phase, it dynamically maps labels to inputs; in the Detection Phase, it computes precision scores.",
-          B: "In the Training Phase, it learns the statistical boundaries of 'normal' data; in the Detection Phase, it evaluates new incoming instances against that established boundary to flag anomalies.",
-          C: "In the Training Phase, it clusters data using labels; in the Detection Phase, it discards those clusters entirely.",
-          D: "The phases are identical, as unsupervised models must continuously re-calculate their parameters for every new single input."
-        },
-        answer: "B",
-        explanation: "Unsupervised anomaly detection operates in a two-phase dichotomy: a Training Phase, where the system analyzes unlabeled data to establish a structural baseline of what constitutes 'normal' behavior, and a Detection Phase, where new operational instances are strictly evaluated against that baseline to determine if they deviate sufficiently to be classified as anomalies."
+        q: "شخص يطيل في صلاته ويحسن ركوعها وسجودها فقط حينما يراه الناس لينال مدحهم وثناءهم؛ هذا العمل يمثل شرعاً صورة من صور:",
+        options: [
+          "الشرك الأصغر (الرياء)",
+          "الشرك الأكبر المخرج من الملة",
+          "النفاق الاعتقادي المستوجب للخلود في النار",
+          "البدعة السيئة التي لا أصل لها"
+        ],
+        correct: 0,
+        rationale: "الرياء هو أن يقصد الإنسان بعبادته مدح الناس، وهو شرك أصغر لا يخرج صاحبه من الإسلام ولكنه معصية."
       },
       {
         id: 11,
-        question: "An analyst is performing Exploratory Data Analysis (EDA) on a noisy sensor dataset. They draw a series of representations to search for patterns and ask, 'What shapes can I see and why?' Which statistical approach does this informal, pattern-seeking behavior characterize?",
-        options: {
-          A: "Formal Hypothesis Testing via p-values.",
-          B: "Exploratory Data Analysis (EDA) as an exploratory approach to statistics using visualizations and robust measures.",
-          C: "Supervised Decision Boundary Optimization.",
-          D: "Association Rule Learning for transaction mapping."
-        },
-        answer: "B",
-        explanation: "EDA is defined as an informal and exploratory approach to statistics characterized by drawing different representations, searching for patterns, using graphs/charts, and leveraging robust measures to comprehend the data's underlying structure before formal modeling."
+        q: "من أمثلة 'الكفر العملي الذي يُخرج فاعله من ملة الإسلام' كما نص المنهاج:",
+        options: [
+          "اقتتال المسلمين وتنازعهم بالسلاح لقوله ﷺ: «وقتاله كفر»",
+          "شرب الخمر والسرقة مع إقرار الفاعل بحرمتها",
+          "سبّ الذات الإلهية، أو شتم أحد الرسل الكرام، أو الاستهزاء بالقرآن الكريم",
+          "عقوق الوالدين وشهادة الزور"
+        ],
+        correct: 2,
+        rationale: "الكفر العملي ينقسم لقسمين: كفر يخرج من الإسلام كمن سب الذات الإلهية أو شتم الرسل أو استهزأ بالقرآن، وكفر لا يخرج كارتكاب بعض الكبائر."
       },
       {
         id: 12,
-        question: "An SVM classifier utilizing an RBF kernel is trained on an unscaled dataset where Feature $X_1$ ranges from $0$ to $1$, and Feature $X_2$ ranges from $0$ to $100,000$. What is the direct operational impact on the support vectors chosen by the model?",
-        options: {
-          A: "The support vectors will be chosen completely at random due to numeric underflow.",
-          B: "Support vectors will be determined almost entirely by the values of Feature $X_2$ because its massive scale skews the distance computations inherent to the RBF kernel.",
-          C: "The model will automatically down-weight Feature $X_2$ to zero to balance the margin.",
-          D: "The decision boundary will become perfectly symmetric and centered at zero."
-        },
-        answer: "B",
-        explanation: "The RBF kernel computes exponential distance metrics between points. If features have profoundly mismatched scales, the feature with the vastly larger magnitude ($X_2$) will completely dominate the distance calculation, forcing the SVM to construct its support vectors and decision boundary almost entirely based on that single dimension, rendering $X_1$ irrelevant."
+        q: "الموقف الشرعي الدقيق من استخدام 'السُبحة الإلكترونية' أو السُبحة التقليدية في ذكر الله تعالى:",
+        options: [
+          "بدعة ضلالة سيئة محرمة لأنها لم تكن موجودة زمن النبي ﷺ",
+          "استحداث لوسيلة تعين على أمر الدين ولا تتعارض معه فليست من البدعة السيئة",
+          "شرك أصغر يلحق بالتمائم والتعاليق المحرمة",
+          "مكروهة تحريماً ويجب الاقتصار على الأصابع فقط دون استثناء"
+        ],
+        correct: 1,
+        rationale: "بين الكتاب في (أطبق تعلمي) أن السبحة ليست بدعة ضلالة لأنها وسيلة تعين على الذكر وأمر الدين ولا تتعارض معه."
       },
+
+      // Block 4 (Q13-16): ج, ب, د, أ
       {
         id: 13,
-        question: "An unsupervised learning system is applied to a retail dataset containing transaction records of customer purchases. The algorithm outputs the statement: '93% of people who purchased item A also purchased item B'. What specific category of unsupervised learning produced this result?",
-        options: {
-          A: "Dimensionality Reduction via feature extraction.",
-          B: "Anomaly Detection utilizing Z-score standardizations.",
-          C: "Association Rule Learning, aimed at finding meaningful relationships between features.",
-          D: "Single-Class Novelty Detection."
-        },
-        answer: "C",
-        explanation: "Association Rule Learning is a distinct branch of unsupervised learning explicitly designed to discover meaningful hidden dependencies, patterns, and co-occurrence relationships between different items or features in large datasets (e.g., market basket analysis)."
+        q: "يتسم التصور الإسلامي للكرامة الإنسانية بأنه:",
+        options: [
+          "خاص بالمسلمين فقط دون غيرهم من أتباع الديانات",
+          "مرتبط بالمكانة المالية والجاه الاجتماعي للشخص",
+          "مطلق للبشرية جمعاء دون تمييز بسبب الدين أو اللون أو العرق أو القدرة الجسدية",
+          "مقتصر على الذكور دون الإناث في المجتمع"
+        ],
+        correct: 2,
+        rationale: "نص الكتاب في إضاءة (أتوقف) على أن التصور الإسلامي يتسم بالعموم، فالتكريم مطلق للبشرية جمعاء دون أي تمييز."
       },
       {
         id: 14,
-        question: "A data science student decides to optimize a machine learning pipeline by executing separate scaling routines: they apply MinMaxScaler.fit_transform() to the training set, and a completely independent MinMaxScaler.fit_transform() to the test set. What is the technical consequence of this setup?",
-        options: {
-          A: "It ensures maximum accuracy because each dataset is scaled perfectly to its own native boundaries.",
-          B: "It distorts the spatial relationship between the training and testing sets, introducing artificial discrepancies that degrade model performance.",
-          C: "It changes the matrix shapes of the features, preventing the model from running.",
-          D: "It transforms the supervised learning objective into a feature merging optimization problem."
-        },
-        answer: "B",
-        explanation: "Scaling the test set independently using its own statistics shifts and stretches its points to fit a new coordinate system that is decoupled from the training set's space. This breaks the spatial consistency across the train/test split, leading to performance degradation because the model's learned decision boundaries no longer map to the same physical realities."
+        q: "دلالة قوله تعالى: ﴿إِنَّا عَرَضْنَا الْأَمَانَةَ عَلَى السَّمَاوَاتِ وَالْأَرْضِ وَالْجِبَالِ فَأَبَيْنَ أَن يَحْمِلْنَهَا وَأَشْفَقْنَ مِنْهَا وَحَمَلَهَا الْإِنسَانُ﴾ على مظاهر تكريم الله للإنسان:",
+        options: [
+          "خلق الإنسان في أحسن تقويم وتفضيله على سائر الكائنات",
+          "تكليفه بحمل الرسالة وتبليغها وتحمل المسؤولية",
+          "أمر الملائكة بالسجود لآدم عليه السلام تكريماً له",
+          "تسخير الكون والأفلاك والبحار لمنافعه المادية"
+        ],
+        correct: 1,
+        rationale: "الآية صريحة في مظهر 'تكليفه بحمل الرسالة وتبليغها وتحمل الأمانة'."
       },
       {
         id: 15,
-        question: "You are reviewing a tabular dataset where features represent demographic metrics. Feature $A$ has a mean of 50 and a standard deviation of 5. Feature $B$ has a mean of 1000 and a standard deviation of 200. After applying StandardScaler, what will be the exact mathematical mean ($\mu$) and variance ($\sigma^2$) of both features?",
-        options: {
-          A: "Mean = 0, Variance = 1 for both features.",
-          B: "Mean = 50, Variance = 1 for Feature A; Mean = 1000, Variance = 1 for Feature B.",
-          C: "Mean = 0, Variance = 5 for Feature A; Mean = 0, Variance = 200 for Feature B.",
-          D: "The ranges will compress strictly between 0 and 1, leaving means unchanged."
-        },
-        answer: "A",
-        explanation: "StandardScaler executes standardization (Z-score normalization), which systematically transforms any numeric feature by subtracting its mean and dividing by its standard deviation ($x_{stand} = \\frac{x - \\mu}{\\sigma}$). This process guarantees that the resulting distribution will be centered around a mean ($\mu$) of exactly $0$ with a standard deviation ($\sigma$) and variance ($\sigma^2$) of exactly $1$."
+        q: "تمتد الكرامة الإنسانية في الشريعة الإسلامية إلى ما بعد وفاة الإنسان، ويتجلى ذلك في تشريع:",
+        options: [
+          "إلزام الورثة ببناء النصب التذكارية للمتوفى",
+          "حرمان الزوجة من الميراث إكراماً لأولاد المتوفى",
+          "منع دفن الميت حتى يحضر جميع أقاربه من السفر",
+          "تغسيله وتطييبه وتكفينه والصلاة عليه وتشييعه ودفنه وتعزية أهله"
+        ],
+        correct: 3,
+        rationale: "ذكر المنهاج في (الإثراء والتوسع) أحكام تكريم الإنسان بعد موته: تغسيل، تطييب، تكفين، صلاة، دفن، وتعزية أهله."
       },
       {
         id: 16,
-        question: "Why does MinMaxScaler pose a significant operational risk when applied to datasets that contain unvalidated, high-magnitude anomalous values (outliers)?",
-        options: {
-          A: "Outliers cause the standard deviation to drop to zero, leading to division-by-zero errors.",
-          B: "The outlier will dictate the absolute minimum or maximum bound, causing the valid, normal data points to compress into a highly squeezed, dense range, destroying feature variance.",
-          C: "It forces the data to adopt a rigid Gaussian distribution, masking non-linear patterns.",
-          D: "It horizontally aligns the rows, preventing distance computations between samples."
-        },
-        answer: "B",
-        explanation: "Because MinMaxScaler depends strictly on the absolute minimum and maximum values within a feature column, an extreme outlier will widen the denominator ($max(x) - min(x)$) artificially. This forces the remaining typical values to be compressed into a tiny, constrained fractional space close to each other, severely reducing the model's ability to differentiate between normal samples."
+        q: "المبدأ الإسلامي لتحقيق الكرامة الإنسانية الذي يشير إليه قوله تعالى: ﴿لَا إِكْرَاهَ فِي الدِّينِ﴾ هو مبدأ:",
+        options: [
+          "الحرية (حرية الاعتقاد وممارسة الشعائر الدينية)",
+          "المساواة بين الناس في المناصب الإدارية",
+          "العدالة في توزيع الغنائم والأموال العامة",
+          "الأمن الداخلي من مخاطر الجريمة والسرقة"
+        ],
+        correct: 0,
+        rationale: "ذكر الدرس في مبادئ تحقيق الكرامة: الحرية، وأبرز صورها حرية الإنسان في الاعتقاد واستدل بالآية."
       },
+
+      // Block 5 (Q17-20): أ, د, ب, ج
       {
         id: 17,
-        question: "A junior engineer states that data preprocessing is entirely unnecessary for Unsupervised Learning because there are no target labels $(y)$ to protect from leakage. How should you professionally correct this misconception?",
-        options: {
-          A: "Explain that preprocessing is only needed to convert classification problems into regression problems.",
-          B: "Point out that many distance-based and structure-seeking unsupervised algorithms (like K-Means and PCA) are highly sensitive to feature scales; without scaling, features with larger ranges completely bias the structural discovery.",
-          C: "Explain that preprocessing is mandatory solely to reduce the row count of the training matrix.",
-          D: "Confirm that the statement is correct, as scaling is exclusively designed for supervised neural networks."
-        },
-        answer: "B",
-        explanation: "Unsupervised learning algorithms rely heavily on mathematical metrics like Euclidean distance to find structural patterns or clusters. If feature scales vary drastically, the algorithm becomes severely biased toward larger numerical dimensions, mistaking scale magnitude for structural importance. Preprocessing ensures equitable feature contribution."
+        q: "عرّف قانون الأحوال الشخصية الأردني عقد الزواج بأنه:",
+        options: [
+          "عقد بين رجل وامرأة تحل له شرعاً لتكوين أسرة",
+          "وعد بالزواج ومرحلة تمهيدية تسبق توثيق المحكمة الشرعية",
+          "اتفاق مالي يمنح الرجل حق إدارة أموال المرأة",
+          "رابطة مدنية مؤقتة تنتهي بانتهاء مدة العقد المحددة"
+        ],
+        correct: 0,
+        rationale: "تعريف قانون الأحوال الشخصية الأردني الوارد نصاً بالكتاب: 'عقد بين رجل وامرأة تحل له شرعاً لتكوين أسرة'."
       },
       {
         id: 18,
-        question: "When utilizing scikit-learn's API, what specific action is executed during the invocation of the .fit() method on a preprocessing scaler like StandardScaler?",
-        options: {
-          A: "The raw data array is instantly overwritten with standardized numbers.",
-          B: "The transformer analyzes the input array to calculate and store internal parameters, such as the mean ($\mu$) and standard deviation ($\sigma$), without altering the data.",
-          C: "The dataset is randomly split into training and test arrays using an internal seed.",
-          D: "A downstream supervised learning model is initialized and trained on the features."
-        },
-        answer: "B",
-        explanation: "The .fit() method is strictly an estimation step where the transformer observes the provided data matrix and extracts the necessary statistical properties (e.g., means, variances, min/max bounds) required for the transformation. No actual data modification or mapping occurs until a .transform() method is executed."
+        q: "الحكم الشرعي لعدول أحد الخاطبين عن الخِطبة إذا اعتقد عدم وجود مصلحة في هذا الزواج، والأثر المترتب عليه:",
+        options: [
+          "حرام شرعاً ويترتب عليه وقوع طلقة بائنة بينهما",
+          "مكروه ويترتب عليه إلزام الخاطب بدفع نصف المهر للزوجة فوراً",
+          "مندوب ولا يصح إلا بعد صدور قرار فسخ من القاضي الشرعي",
+          "مباح ولا يُعد ذلك طلاقاً؛ لأن عقد الزواج لم ينعقد بعد بالخطبة"
+        ],
+        correct: 3,
+        rationale: "الخطبة وعد بالزواج ولا ينعقد بها الزواج؛ لذا يباح العدول عنها ولا يعد طلاقاً."
       },
       {
         id: 19,
-        question: "A data scientist runs a t-SNE visualization algorithm on a complex, high-dimensional dataset. The resulting 2D scatter plot demonstrates that groups that were tightly clustered in the native high-dimensional space remain clustered and visibly distinct in the compressed representation. What primary purpose of unsupervised visualization does this fulfill?",
-        options: {
-          A: "It eliminates the need for any downstream supervised validation metrics.",
-          B: "It preserves essential structural relationships while reducing complexity, allowing humans to visually detect unexpected semantic patterns.",
-          C: "It forces the data into a single-class novelty distribution.",
-          D: "It merges correlated columns into a single latent index for fast memory allocation."
-        },
-        answer: "B",
-        explanation: "Visualization algorithms within unsupervised learning are explicitly designed to convert high-dimensional data into low-dimensional spaces (2D or 3D) while optimizing for the preservation of the original structure. This allows human analysts to visually interpret semantic clusters and uncover hidden structures."
+        q: "الحكمة الشرعية من سُنّية نظر الخاطبين أحدهما إلى الآخر كما جاء في حديث المغيرة رضي الله عنه: «انْظُرْ إِلَيْهَا فَإِنَّهُ أَحْرَى أَنْ يُؤْدَمَ بَيْنَكُمَا» هي:",
+        options: [
+          "إتمام شروط انعقاد العقد القانوني في المحكمة",
+          "أن النظر أدعى إلى حصول الألفة والمحبة والاتفاق بينهما",
+          "معرفة الثروة والمقتنيات المادية للخاطبين",
+          "إلغاء حق العدول عن الخطبة لأي طرف"
+        ],
+        correct: 1,
+        rationale: "بين الحديث النبوي أن النظر أحفظ للألفة؛ أي تكون بينهما المحبة والاتفاق."
       },
       {
         id: 20,
-        question: "Which of the following algorithms relies on a training process where each individual training example is accompanied by an explicit ground truth label, establishing a learned decision boundary to replicate labeling on new incoming data?",
-        options: {
-          A: "Unsupervised Association Rule Mining.",
-          B: "Supervised Learning.",
-          C: "Exploratory Dimensionality Reduction.",
-          D: "Hierarchical Cluster Binning."
-        },
-        answer: "B",
-        explanation: "Supervised learning is defined by its reliance on training examples that possess explicit ground truth labels. The model's objective is to learn a mapping function or decision boundary from these inputs to outputs, allowing it to predict labels for new, unseen testing data."
+        q: "الحكمة من إلزام المقبلين على الزواج في الأردن بإجراء الفحص الطبي قبل الزواج كما ورد في الكتاب:",
+        options: [
+          "تحديد عدد الأبناء وتنظيم النسل بصورة إجبارية",
+          "التأكد من التكافؤ المالي والاجتماعي بين الخاطبين",
+          "ضمان استقرار الزواج وسعادة الزوجين ومنع انتشار الأمراض الوراثية التي تضر بالنسل",
+          "استيفاء أركان صيغة الإيجاب والقبول في مجلس العقد"
+        ],
+        correct: 2,
+        rationale: "في الإثراء والتوسع: الفحص الطبي لضمان استقرار الزواج، وسعادة الزوجين، ومنع انتشار بعض الأمراض التي تضر بالنسل وتكلف المجتمع."
       },
+
+      // Block 6 (Q21-24): ج, أ, د, ب
       {
         id: 21,
-        question: "What is a key disadvantage of Supervised Learning when compared directly to the operational advantages of Unsupervised Learning?",
-        options: {
-          A: "It cannot be evaluated using metrics like Accuracy, Precision, or F1 Score.",
-          B: "No previous knowledge of the image or data area can be utilized during training.",
-          C: "It requires significant cost, human intervention, and time to select, vet, and label training data.",
-          D: "It is incapable of establishing linear decision boundaries across features."
-        },
-        answer: "C",
-        explanation: "Unlike unsupervised learning—which processes raw, unlabeled datasets directly—supervised learning requires a pre-labeled dataset. Selecting, verifying, and labeling data requires significant time, capital, and human effort, which represents a key operational disadvantage."
+        q: "مرتبة 'الجهاد بالنفس' (بمباشرة القتال وبذل الروح في سبيل الله دفاعاً عن الدين والوطن) هي مسؤولية:",
+        options: [
+          "الأفراد والجماعات بصفة شخصية دون الحاجة لإذن أحد",
+          "الجمعيات الأهلية والمنظمات الإنسانية المستقلة",
+          "الدولة لا الأفراد؛ إذ لا يحق لهم خوض غماره دون إذن ولي الأمر",
+          "العشائر والقبائل بالتنسيق مع أعيانها فقط"
+        ],
+        correct: 2,
+        rationale: "نص الكتاب صراحة: 'وهذه المرتبة من الجهاد هي من مسؤولية الدولة لا الأفراد؛ إذ لا يحق لهم خوض غماره من دون إذن ولي الأمر'."
       },
       {
         id: 22,
-        question: "An examiner presents an unlabeled data matrix consisting of features $X_1, X_2, X_3, \\dots, X_p$. There is no target column $Y$ present in the schema. Which core machine learning category is mathematically restricted to processing this specific structural layout?",
-        options: {
-          A: "Logistic Regression Analysis.",
-          B: "Linear Discriminant Evaluation.",
-          C: "Unsupervised Learning.",
-          D: "Supervised Classification."
-        },
-        answer: "C",
-        explanation: "Supervised learning requires both a feature matrix $X$ and a corresponding target/label vector $Y$. Unsupervised learning maps strictly to situations where the dataset contains no predefined outputs or targets, forcing the algorithm to find structural patterns purely from the input features."
+        q: "الأصل في الجهاد في سبيل الله أنه فرض كفاية، ولكنه يصبح 'فرض عين' في حالات محددة، منها:",
+        options: [
+          "إعلان الدولة النفير العام رسمياً أو تكليفها أشخاصاً محددين بذلك",
+          "وجود فائض مالي لدى الدولة يتيح تجهيز الجيوش",
+          "رغبة المقاتل في السفر لطلب العلم الشرعي خارج وطنه",
+          "إبداء الرأي والمشورة في وسائل الإعلام المقروءة"
+        ],
+        correct: 0,
+        rationale: "يصبح فرض عين في حالات معينة مثل إعلان الدولة النفير العام رسمياً أو تكليفها أشخاصاً بذلك لقوله تعالى ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا مَا لَكُمْ إِذَا قِيلَ لَكُمُ انفِرُوا فِي سَبِيلِ اللَّهِ﴾."
       },
       {
         id: 23,
-        question: "Under what condition is MinMaxScaler a mathematically superior choice over StandardScaler based on the assumptions of downstream models?",
-        options: {
-          A: "When the data must be centered perfectly at zero with an unconstrained variance.",
-          B: "When the downstream model makes strict assumptions regarding a Gaussian (Normal) distribution.",
-          C: "When the downstream model does not assume a specific statistical distribution but requires features bounded within a strict, uniform range, such as artificial neural networks or image processing pipelines.",
-          D: "When the data contains extreme, unvalidated macro-outliers that must be preserved without distortion."
-        },
-        answer: "C",
-        explanation: "MinMaxScaler is highly effective when the data distribution is unknown or non-Gaussian, and the downstream algorithm requires bounded inputs (e.g., neural networks to prevent gradient issues, or image processing where pixels are bound between $0$ and $1$). StandardScaler is better suited when the data is assumed to follow a Gaussian distribution."
+        q: "ورد في وصية النبي ﷺ للمجاهدين قوله: «... وَلا تَغْدِرُوا، وَلا تَغُلُّوا، وَلا تُمَثِّلُوا، وَلا تَقْتُلُوا وَلِيدًا». معنى «لا تَغُلُّوا» هو:",
+        options: [
+          "لا تتشددوا في الدين بالصوم المتواصل",
+          "لا تشوهوا جثث القتلى بعد المعركة",
+          "لا تقتلوا الأجراء العاملين على حفظ الدواب",
+          "لا تأخذوا من الغنائم دون علم ولي الأمر وإذنه"
+        ],
+        correct: 3,
+        rationale: "بين المعجم الصغير للحديث: تَغُلُّوا: تأخذوا من الغنائم دون علم ولي الأمر."
       },
       {
         id: 24,
-        question: "If an unsupervised algorithm is applied to a dataset to cluster faces, but focuses entirely on the camera angles and lighting conditions rather than the identities of the individuals, which major challenge of unsupervised learning is highlighted?",
-        options: {
-          A: "The extreme computational overhead of simple linear regression models.",
-          B: "The fact that there is no direct way to evaluate performance or guide the model toward a specific semantic interpretation without manual inspection.",
-          C: "The strict requirement that all inputs must be normalized with RobustScaler before split adjustments.",
-          D: "The system's inability to maintain a consistent matrix shape during transformations."
-        },
-        answer: "B",
-        explanation: "Because unsupervised learning algorithms operate without labels to guide them toward a specific context, they optimize purely for mathematical variation. If lighting and angles create larger statistical distances than facial identity, the model will cluster based on those features. This underscores why unsupervised tasks depend heavily on manual inspection and lack direct performance metrics."
+        q: "في الحادي والعشرين من آذار عام 1968م، سطرت القوات المسلحة الأردنية (الجيش العربي) ملحمة بطولية ردت فيها العدوان وألحقت بالاحتلال هزيمة مذلة في:",
+        options: [
+          "معركة باب الواد",
+          "معركة الكرامة",
+          "معركة حمراء الأسد",
+          "معركة مؤتة"
+        ],
+        correct: 1,
+        rationale: "وردت في صور مشرقة: معركة الكرامة في 21 آذار 1968م وتصدي الجيش العربي الأردني الباسل."
       },
+
+      // Block 7 (Q25-28): أ, د, ب, ج
       {
         id: 25,
-        question: "A diagnostic system is trained to recognize normal electrocardiogram (ECG) patterns. During an execution run, it encounters a completely new pattern that deviates significantly from the training data, and the system flags it as an outlier. Which technique does this scenario describe?",
-        options: {
-          A: "Association Rule Learning.",
-          B: "Feature Merging Optimization.",
-          C: "Anomaly Detection.",
-          D: "Supervised Regression."
-        },
-        answer: "C",
-        explanation: "Anomaly detection is defined as identifying rare or unusual instances in data that deviate significantly from established normal patterns. This process generally involves a training phase where the system learns what 'normal' data looks like, followed by a detection phase to flag anomalies."
+        q: "الصحابي الجليل الذي أشار على الخليفة أبي بكر الصديق رضي الله عنه بجمع القرآن الكريم في مصحف واحد بعد حروب الردة هو:",
+        options: [
+          "عمر بن الخطاب رضي الله عنه",
+          "عثمان بن عفان رضي الله عنه",
+          "حذيفة بن اليمان رضي الله عنه",
+          "زيد بن ثابت رضي الله عنه"
+        ],
+        correct: 0,
+        rationale: "أشار عمر بن الخطاب رضي الله عنه على أبي بكر الصديق بجمع القرآن بعد استشهاد عدد كبير من القراء في حروب الردة."
       },
       {
         id: 26,
-        question: "An engineering team decides to insert a dimensionality reduction algorithm into their production machine learning pipeline before passing the data into a high-dimensional supervised classification model. What is the primary operational and statistical justification for this specific architecture?",
-        options: {
-          A: "It changes the dataset structure by mapping labels to the feature matrix.",
-          B: "It guarantees that the data will fit a perfect Gaussian distribution.",
-          C: "It allows the pipeline to run much faster, reduces disk and memory space, and helps mitigate the risk of overfitting by fighting the curse of dimensionality.",
-          D: "It eliminates the need to execute train-test splits on the feature arrays."
-        },
-        answer: "C",
-        explanation: "Reducing the number of dimensions via an unsupervised transformation before feeding data into another algorithm allows it to run much faster, minimizes disk and memory footprint, and can improve performance by counteracting the curse of dimensionality."
+        q: "التابعيان اللذان قاما بنقط الحروف المتشابهة في المصحف الشريف لتمييز بعضها من بعض في عهد الخليفة عبد الملك بن مروان هما:",
+        options: [
+          "أبو الأسود الدؤلي وسعيد بن المسيب",
+          "الحسن البصري وقتادة بن دعامة",
+          "القرطبي والبيضاوي",
+          "يحيى بن يعمر ونصر بن عاصم"
+        ],
+        correct: 3,
+        rationale: "قام التابعيان يحيى بن يعمر ونصر بن عاصم بنقط الحروف المتشابهة زمن عبد الملك بن مروان."
       },
       {
         id: 27,
-        question: "A data scientist assumes that their dataset features follow a Gaussian distribution and decides to implement Z-score normalization. Which transformer should they instantiate, and what is its underlying mathematical formula?",
-        options: {
-          A: "MinMaxScaler; $x_{norm}=\\frac{x-min(x)}{max(x)-min(x)}$",
-          B: "StandardScaler; $x_{stand}=\\frac{x-mean(x)}{standard\\ deviation(x)}$",
-          C: "RobustScaler; $x_{robust}=\\frac{x-median(x)}{IQR(x)}$",
-          D: "Normalizer; $x_{norm}=\\frac{x}{\\Vert{}x\\Vert{}}$"
-        },
-        answer: "B",
-        explanation: "Z-score normalization is identical to standardization, which centers the data around a mean of 0 and a standard deviation of 1 using the formula $x_{stand}=\\frac{x-mean(x)}{standard\\ deviation(x)}$. In scikit-learn, this is implemented using StandardScaler."
+        q: "كتاب التفسير الذي اهتم مؤلفه بالجانب البلاغي في القرآن الكريم وفق ما ورد في درس جهود العلماء هو:",
+        options: [
+          "الجامع لأحكام القرآن للقرطبي",
+          "أنوار التنزيل وأسرار التأويل للبيضاوي",
+          "تفسير القرآن العظيم لابن كثير",
+          "البرهان في علوم القرآن للزركشي"
+        ],
+        correct: 1,
+        rationale: "ذكر الكتاب: واهتم آخرون بالجانب البلاغي مثل البيضاوي في كتابه (أنوار التنزيل)."
       },
       {
         id: 28,
-        question: "When invoking MinMaxScaler.fit(X_train) on a training matrix, why is it considered a strictly unsupervised operation despite being part of a pipeline that eventually solves a supervised classification task?",
-        options: {
-          A: "Because it shifts the data labels horizontally into the test partition.",
-          B: "Because the calculation relies entirely on the independent feature vectors ($X_{train}$) and completely ignores the ground truth target labels ($y_{train}$).",
-          C: "Because it automatically groups the targets into discrete spectral classes.",
-          D: "Because it changes the data array shape from a 2D matrix to a 1D vector."
-        },
-        answer: "B",
-        explanation: "Data preprocessing steps like scaling are inherently unsupervised operations because they compute their geometric transformation parameters (such as the minimum and maximum boundaries of features) solely from the input features ($X_{train}$) without utilizing target labels ($y_{train}$)."
+        q: "المصحف الشريف الذي جمعه زيد بن ثابت رضي الله عنه حُفِظ بعد وفاة أبي بكر وعمر رضي الله عنهما عند أم المؤمنين السيدة:",
+        options: [
+          "عائشة بنت أبي بكر رضي الله عنها",
+          "ميمونة بنت الحارث رضي الله عنها",
+          "حفصة بنت عمر رضي الله عنها",
+          "أم سلمة هند بنت أبي أمية رضي الله عنها"
+        ],
+        correct: 2,
+        rationale: "حفظ المصحف عند أبي بكر ثم عمر ثم أم المؤمنين السيدة حفصة بنت عمر رضي الله عنها."
       },
+
+      // Block 8 (Q29-32): ج, أ, د, ب
       {
         id: 29,
-        question: "A cybersecurity system is being trained to identify anomalous network packets. The training set contains a mix of regular traffic along with a minor, unknown percentage of malicious intrusions and system noise that have not been vetted. The model must learn the general pattern of normal traffic while isolating these rare deviations. What paradigm is being implemented?",
-        options: {
-          A: "Novelty Detection, because it assumes the training set is completely clean and pristine.",
-          B: "Association Rule Learning, because it prioritizes itemset transactions.",
-          C: "Anomaly Detection, because it deals with identifying rare or unusual instances from a noisy, unvetted dataset.",
-          D: "Dimensionality Reduction, because it combines correlated network features."
-        },
-        answer: "C",
-        explanation: "Anomaly detection is used to identify rare or unusual instances that deviate significantly from normal patterns and can handle training spaces that contain a baseline level of unvetted outliers or noise. Novelty detection, conversely, strictly mandates a clean training set free of unwanted instances."
+        q: "المفهوم الاصطلاحي لـ 'العزيمة' في الشريعة الإسلامية هو:",
+        options: [
+          "ما شرعه الله تعالى تخفيفاً على العباد في حالات خاصة استثناءً من الأصل",
+          "التطوع بالأعمال الصالحة والنوافل الزائدة عن الفرائض",
+          "أخذ المكلف بالأحكام الأصلية التي شرعها الله تعالى تشريعاً عاماً لجميع المسلمين",
+          "استنباط الأحكام التقديرية بالرأي والاجتهاد الفردي"
+        ],
+        correct: 2,
+        rationale: "العزيمة: أخذ المكلف بالأحكام الأصلية التي شرعها الله تعالى تشريعاً عاماً لجميع المسلمين."
       },
       {
         id: 30,
-        question: "An analyst generates scatter plots to test scaling protocols on a dataset. When scaling the test set independently from the training set, visually, what happens to the test set points relative to the training points?",
-        options: {
-          A: "The test points remain perfectly locked in their original spatial positions relative to the training points.",
-          B: "The test points are distorted and shifted incorrectly, changing their relative spatial layout compared to the original distribution.",
-          C: "The test points are completely erased from the visualization.",
-          D: "The test points automatically align into a perfectly straight horizontal line."
-        },
-        answer: "B",
-        explanation: "Scaling the training and test sets separately shifts and scales the test points based on its own independent statistics rather than the training frame's bounds. This introduces artificial distortions, visually altering the spatial relationships and distances between the two sets."
+        q: "حكم العمل بـ 'العزيمة' في الشريعة الإسلامية كأصل عام هو:",
+        options: [
+          "واجب؛ لأنها الأصل الثابت بالدليل الشرعي ولا يجوز تركها إلا لعذر شرعي",
+          "مندوب يثاب فاعله ولا يعاقب تاركه مطلقاً",
+          "مباح متساوٍ في الرتبة مع الرخصة في جميع الأحوال",
+          "مكروه عند وجود أي مشقة يسيرة كالصداع الخفيف"
+        ],
+        correct: 0,
+        rationale: "العمل بالعزيمة واجب؛ لأنها الأصل الثابت بالدليل الشرعي ولا يجوز تركها إلا لعذر شرعي."
       },
       {
         id: 31,
-        question: "Why are distance-based kernel functions, such as the Support Vector Machine's Radial Basis Function (RBF) kernel, deeply sensitive to unscaled feature ranges?",
-        options: {
-          A: "Because the RBF kernel relies on labels to calculate decision hyperplanes.",
-          B: "Because the RBF kernel depends on computing geometric distances between data points; without scaling, dimensions with numerically massive ranges contribute disproportionately to the distance metric, rendering smaller ranges obsolete.",
-          C: "Because it forces all features to drop to a variance of zero.",
-          D: "Because it transforms the classification task into an association rule sequence."
-        },
-        answer: "B",
-        explanation: "The RBF kernel computes exponential distance metrics between points. If one feature has a massive scale relative to others, its values dominate the distance calculations. This makes the kernel highly sensitive to that single dimension, leading to suboptimal decision boundaries."
+        q: "في حادثة تعذيب آل ياسر رضي الله عنهم على يد قريش، الموقف الذي يمثل 'الأخذ بالرخصة الشرعية' هو:",
+        options: [
+          "رفض ياسر رضي الله عنه النطق بكلمة الكفر واختياره الموت في سبيل الله",
+          "رفض سمية رضي الله عنها سب النبي ﷺ حتى نالت الشهادة بأول طعنة",
+          "صبر عمار على العذاب وموته تحت وطأة التعذيب",
+          "تلفظ عمار رضي الله عنه بكلمة الكفر بلسانه ليفلت من العذاب مع اطمئنان قلبه بالإيمان"
+        ],
+        correct: 3,
+        rationale: "أخذ عمار بالرخصة فنطق بها وقلبه مطمئن بالإيمان، وأنزل الله فيه: ﴿إِلَّا مَنْ أُكْرِهَ وَقَلْبُهُ مُطْمَئِنٌّ بِالْإِيمَانِ﴾."
       },
       {
         id: 32,
-        question: "A machine learning engineer is developing an image classification network where pixel intensities naturally range from 0 to 255. The downstream neural network requires all input values to sit within a strict, uniform bounded range to stabilize activation layers. Which scaling strategy should be selected?",
-        options: {
-          A: "A horizontal row-based Normalizer to enforce angular vectors.",
-          B: "MinMaxScaler, to cleanly transform the pixel feature ranges into a uniform scale between 0 and 1.",
-          C: "RobustScaler, to calculate median deviations of the pixels.",
-          D: "Avoid scaling entirely, as neural networks are immune to feature ranges."
-        },
-        answer: "B",
-        explanation: "MinMaxScaler is designed to rescale values into a common, bounded range (typically $[0,1]$ or $[-1,1]$). This is ideal for artificial neural networks and image processing tasks where bounded, uniform feature constraints are required."
+        q: "ضابط المشقة المعتبرة شرعاً التي تجلب التيسير وتوجب الرخصة والتخفيف:",
+        options: [
+          "المشقة المعتادة واليسيرة كالصداع الخفيف والزكام اليسير",
+          "المشقة غير المعتادة التي تفضي إلى ضرر فادح كذهاب النفس أو تلف عضو أو زيادة المرض",
+          "كراهية النفس لأداء الطاعات والتكاليف الشرعية",
+          "طلب الإنسان للراحة والتخلص من مشقة الوضوء بالماء البارد دون عذر"
+        ],
+        correct: 1,
+        rationale: "المشقة التي توجب التخفيف هي التي تفضي إلى ضرر بالإنسان مثل ذهاب نفسه أو تلف عضو أو زيادة مرضه أو تأخر شفائه."
       },
+
+      // Block 9 (Q33-36): أ, ب, د, ج
       {
         id: 33,
-        question: "A marketing director wants to discover which products are frequently co-purchased by analyzing retail basket data. The system generates an output indicating that customers who buy steak also tend to purchase potato chips and barbecue sauce. What is the primary operational value of this unsupervised learning application?",
-        options: {
-          A: "It provides high-accuracy predictive regression models for future pricing.",
-          B: "It offers actionable marketing insights, such as optimizing physical product placement by grouping associated items closer together.",
-          C: "It filters out manufacturing outliers from the dataset.",
-          D: "It compresses the dataset columns into a single latent index."
-        },
-        answer: "B",
-        explanation: "This scenario represents Association Rule Learning, which identifies meaningful relationships between different features. Its direct practical application is providing retail or marketing insights, such as deciding to place associated items closer together to increase sales."
+        q: "السبب المباشر لوقوع معركة مؤتة في السنة الثامنة للهجرة هو:",
+        options: [
+          "اعتراض أحد أمراء الروم طريق الحارث بن عمير الأزدي (رسول النبي ﷺ لحاكم بصرى) وقتله",
+          "نقض قريش لصلح الحديبية بإعانة بني بكر على خزاعة",
+          "اعتداء يهود خيبر على نساء المسلمين وقوافلهم التجارية",
+          "تحريض نصارى نجران للقبائل العربية على حصار المدينة المنورة"
+        ],
+        correct: 0,
+        rationale: "اعترض أحد أمراء الروم طريق الحارث بن عمير الأزدي وقتله مخالفاً عرف الرسل، فأمر النبي بتجهيز الجيش تأديباً وحفظاً للهيبة."
       },
       {
         id: 34,
-        question: "You apply an unsupervised clustering algorithm to group a collection of portrait photographs. Instead of grouping the images by the identity of the person, the algorithm clusters the photos based on the angle of the camera and the intensity of the background shadows. What core challenge of unsupervised learning does this underscore?",
-        options: {
-          A: "The mathematical inability of scikit-learn to handle image shapes.",
-          B: "The fact that without ground truth labels, there is no direct feedback loop or target to guide the model toward a specific semantic interpretation, making it heavily dependent on manual inspection.",
-          C: "The fact that StandardScaler always forces data into a closed range.",
-          D: "The computational failure of decision boundary equations."
-        },
-        answer: "B",
-        explanation: "Unsupervised learning algorithms operate without labels, meaning they evaluate structure based purely on mathematical variation. If camera angles create larger statistical variances than facial features, the model optimizes for angles. This highlights the challenge of having no direct way to evaluate semantic performance, requiring human inspection."
+        q: "قال رسول الله ﷺ موصياً جيش مؤتة بترتيب القيادة: «إِنْ قُتِلَ زَيْدٌ فَجَعْفَرٌ، وَإِنْ قُتِلَ جَعْفَرٌ فَـ...»:",
+        options: [
+          "خالد بن الوليد رضي الله عنه",
+          "عبد الله بن رواحة رضي الله عنه",
+          "سعد بن عبادة رضي الله عنه",
+          "الحارث بن عمير الأزدي رضي الله عنه"
+        ],
+        correct: 1,
+        rationale: "نص الحديث: «إن قُتل زيد فجعفر، وإن قتل جعفر فعبد الله بن رواحة»."
       },
       {
         id: 35,
-        question: "An analyst utilizes a t-SNE (t-Distributed Stochastic Neighbor Embedding) visualization routine on a tabular dataset. What is the exact purpose of this operation within an unsupervised learning workflow?",
-        options: {
-          A: "To train a highly accurate classifier using ground truth targets.",
-          B: "To convert high-dimensional feature spaces into 2D or 3D representations, preserving structural clusters so that humans can visually detect patterns.",
-          C: "To replace the need for separate training and testing splits.",
-          D: "To scale column means to exactly zero and variances to one."
-        },
-        answer: "B",
-        explanation: "Unsupervised visualization algorithms like t-SNE serve the explicit purpose of reducing high-dimensional data into 2D or 3D spaces. Their value lies in preserving the underlying structure, ensuring that clusters in the input space remain separate in the visualization for human pattern detection."
+        q: "الموقف البطولي الدال على الشجاعة الفائقة لعبد الله بن رواحة رضي الله عنه في مؤتة حين تردد الجيش في أرض معان:",
+        options: [
+          "اقتراحه إرسال وفد إلى قيصر الروم لعقد هدنة سريعة",
+          "إشارته بضرورة الانسحاب الفوري إلى المدينة لعدم التكافؤ",
+          "تغيير مواقع الجيش وتبديل الميمنة بالميسرة ليلاً",
+          "تحفيزه للجيش بقوله: «والله إن التي تكرهون للتي خرجتم تطلبون الشهادة.. فإنما هي إحدى الحسنيين»"
+        ],
+        correct: 3,
+        rationale: "شجع ابن رواحة الجيش في معان بقوله: «إن التي تكرهون للتي خرجتم تطلبون الشهادة... فإنما هي إحدى الحسنيين؛ إما ظهور وإما شهادة»."
       },
       {
         id: 36,
-        question: "If a dataset contains severe, erratic spikes due to measurement errors, why is StandardScaler considered mathematically vulnerable for this preprocessing task?",
-        options: {
-          A: "Because it strictly clamps all extreme values between 0 and 1.",
-          B: "Because it relies on the mean and standard deviation, parameters that are highly sensitive to extreme outliers, which can skew the resulting scale.",
-          C: "Because it acts horizontally across rows rather than vertically across columns.",
-          D: "Because it requires a target column $Y$ to calculate variance."
-        },
-        answer: "B",
-        explanation: "The mean and standard deviation are not robust to extreme outliers. A few massive anomalies will skew the mean and expand the standard deviation, distorting the standardization process for the normal data points. In such scenarios, RobustScaler (which uses the median and IQR) is preferred."
+        q: "الخطة المحكمة التي اتبعها القائد خالد بن الوليد رضي الله عنه في مؤتة لإنقاذ جيش المسلمين والانسحاب بسلام:",
+        options: [
+          "الاحتماء في حصون الكرك وطلب الإمدادات من المدينة المنورة",
+          "مباغتة جيش الروم ليلاً وإحراق معسكراتهم وخيامهم",
+          "تغيير ترتيب الجيش (المقدمة مؤخرة والميمنة ميسرة) وإثارة الغبار بالخيول لإيهامهم بوصول إمدادات",
+          "حفر خندق عميق حول سهل مؤتة لمنع خيول الروم من التقدم"
+        ],
+        correct: 2,
+        rationale: "غير خالد ترتيب الجيش فجعل المقدمة مؤخرة والمؤخرة مقدمة والميمنة ميسرة وأثار الغبار، فظن الروم أن مدداً جاء فأحجموا عن ملاحقتهم."
       },
+
+      // Block 10 (Q37-40): ب, د, أ, ج
       {
         id: 37,
-        question: "A script executes X_train_scaled = scaler.transform(X_train) using a fitted MinMaxScaler. When you print the shape of X_train_scaled, it is identical to X_train.shape. What does this imply about the transformation mechanism?",
-        options: {
-          A: "The transformer failed to run and skipped the data array entirely.",
-          B: "The transformation preserves the exact matrix shape and structure; only the individual feature values within the columns are shifted and scaled.",
-          C: "The data was compressed into a single latent vector.",
-          D: "The rows were transposed into columns."
-        },
-        answer: "B",
-        explanation: "When data is transformed via a preprocessing scaler, the transformed data retains the exact same shape as the original data. The structure remains untouched; only the underlying feature values are shifted and rescaled."
+        q: "إحدى المحرمات من النساء حُرمة مؤبدة بسبب 'المصاهرة'، ويثبت تحريمها بمجرد العقد على ابنتها ولو لم يدخل بها الزوج:",
+        options: [
+          "بنت الزوجة من زوج سابق (الربيبة)",
+          "أم الزوجة وجداتها",
+          "أخت الزوجة",
+          "عمة الزوجة"
+        ],
+        correct: 1,
+        rationale: "أم الزوجة وجداتها يحصل التحريم بمجرد العقد على الزوجة وإن لم يدخل بها لقوله تعالى ﴿وَأُمَّهَاتُ نِسَائِكُمْ﴾، بخلاف الربيبة التي تشترط الدخول."
       },
       {
         id: 38,
-        question: "According to comparative analysis in remote sensing, what is considered a distinct disadvantage of Unsupervised Classification when contrasted with Supervised approaches?",
-        options: {
-          A: "It requires extensive human effort to select training data before the model can run.",
-          B: "The resulting spectral classes do not necessarily represent the actual features on the ground, and it can take significant time to interpret them.",
-          C: "It is incapable of minimizing human error during the processing phase.",
-          D: "It cannot be executed unless the image data area is already thoroughly understood."
-        },
-        answer: "B",
-        explanation: "A major disadvantage of unsupervised approaches is that the discovered spectral classes or mathematical clusters do not automatically correspond to real-world features on the ground, requiring post-hoc human interpretation."
+        q: "الشروط المقررة في الشريعة الإسلامية لثبوت التحريم بالرضاع بين الطفل والمرأة المرضعة:",
+        options: [
+          "ثلاث رضعات مشبعات في أي مرحلة من مراحل عمر الإنسان",
+          "عشر رضعات متفرقات قبل بلوغ سن الفطام في خمس سنوات",
+          "رضعة واحدة تسد الجوع وتغني عن الطعام في العام الأول",
+          "خمس رضعات متفرقات خلال العامين الأولين من عمر الطفل"
+        ],
+        correct: 3,
+        rationale: "نص الكتاب صراحة: 'ولا يثبت التحريم بالرضاع إلا بخمس رضعات متفرقات خلال العامين الأولين من عمر الطفل'."
       },
       {
         id: 39,
-        question: "An analyst chooses to apply Hierarchical Clustering to segment visitors to a corporate blog based on browsing behavior. What unique structural advantage does this method provide over flat clustering schemes?",
-        options: {
-          A: "It automatically generates target labels for supervised regression models.",
-          B: "It can subdivide broad user groups into smaller, nested sub-categories, providing a multi-tiered structural breakdown.",
-          C: "It forces the data to sit strictly between a range of 0 and 1.",
-          D: "It relies entirely on calculating standard Z-scores across rows."
-        },
-        answer: "B",
-        explanation: "Hierarchical clustering allows for the subdivision of broad clusters into smaller, nested sub-categories. This structural feature makes it highly useful for discovering multi-tiered relationships within unlabeled data spaces."
+        q: "رجل طلق زوجته طلاقاً بائناً وانقضت عدتها، وأراد بعد ذلك الزواج بأختها. الحكم الشرعي لهذا الزواج:",
+        options: [
+          "يصح ومباح شرعاً؛ لأن تحريم الجمع بين الأختين تحريم مؤقت يزول بفراق الأولى وانقضاء عدتها",
+          "محرم تحريماً مؤبداً كالأم والبنت ولا يحل له أبداً",
+          "باطل ولا يصح إلا بعد أن تتزوج أختها المطلقة من رجل آخر",
+          "مكروه كراهة تحريمية ويوجب كفارة عتق رقبة"
+        ],
+        correct: 0,
+        rationale: "الجمع بين الأختين تحريم مؤقت لسبب عارض، فإذا زال السبب بطلاق الأولى وانقضاء عدتها أو موتها أصبح الزواج بالأخرى مباحاً."
       },
       {
         id: 40,
-        question: "A pipeline fits a MinMaxScaler on a training set where a specific feature's minimum is 10 and maximum is 50. The isolated test set contains a record with a value of 55 for that feature. What is the mathematical result when .transform() is applied to this test set record?",
-        options: {
-          A: "The value will be strictly clamped to 1.0 to fit the closed range.",
-          B: "The value will scale to $1.125$, demonstrating that test values can fall outside the $[0,1]$ range to maintain consistent scaling.",
-          C: "The value will trigger a division-by-zero runtime error.",
-          D: "The value will automatically reset to 0.0."
-        },
-        answer: "B",
-        explanation: "MinMaxScaler uses training statistics: $x_{norm} = \\frac{x - min(X_{train})}{max(X_{train}) - min(X_{train})}$. Plugging in the values: $\\frac{55 - 10}{50 - 10} = \\frac{45}{40} = 1.125$. Test values outside the training range correctly produce outputs beyond $[0,1]$ to preserve consistent geometry."
+        q: "رضع 'خالد' من السيدة 'فاطمة' خمس رضعات متفرقات في شهره السادس. أي حالات الزواج الآتية تُعد 'صحيحة ومباحة شرعاً' وفق أحكام الرضاع:",
+        options: [
+          "زواج خالد بـ 'عبير' ابنة السيدة فاطمة المرضعة",
+          "زواج خالد بأخت السيدة فاطمة (خالته من الرضاع)",
+          "زواج شقيق خالد من النسب بابنة فاطمة التي لم يرضع منها الشقيق",
+          "زواج خالد بأم فاطمة (جدته من الرضاع)"
+        ],
+        correct: 2,
+        rationale: "التحريم يقتصر فقط على الرضيع نفسه دون بقية إخوته من النسب؛ فيجوز لشقيق الرضيع الزواج بابنة المرضعة."
       },
+
+      // Block 11 (Q41-44): د, أ, ج, ب
       {
         id: 41,
-        question: "Under what scenario should an architect prioritize StandardScaler over MinMaxScaler based on the assumptions of downstream supervised learning models?",
-        options: {
-          A: "When the downstream model is a neural network requiring values strictly bounded between 0 and 1.",
-          B: "When the downstream model relies on distance or variance assumptions that perform more effectively if the features follow a Gaussian (Normal) distribution, such as linear regression, logistic regression, or linear discriminant analysis.",
-          C: "When the dataset has absolutely no outliers or noise.",
-          D: "When the absolute angles between rows are the only critical analytical metric."
-        },
-        answer: "B",
-        explanation: "StandardScaler standardizes features to follow a standard normal distribution ($\mu=0, \sigma=1$). This technique is highly effective when downstream models (like linear/logistic regression or LDA) assume or benefit from Gaussian distributions."
+        q: "توفي رسول الله ﷺ ودرعه مرهونة عند يهودي بثلاثين صاعاً من شعير؛ هذا الحدث دليل شرعي وتاريخي على مجال:",
+        options: [
+          "التعايش الديني وحرية العبادة",
+          "التعايش السياسي وإقرار المواطنة",
+          "التعايش الدولي وقواعد الحرب",
+          "التعايش الاقتصادي وإجازة التعامل المالي والمشاركة الاقتصادية مع غير المسلمين"
+        ],
+        correct: 3,
+        rationale: "استدل الكتاب برهن النبي درعه عند يهودي على 'التعايش الاقتصادي' وحق غير المسلمين في المشاركة بالحياة الاقتصادية."
       },
       {
         id: 42,
-        question: "How is the broad objective of Data Preprocessing formally defined as a critical step prior to machine learning?",
-        options: {
-          A: "A method to convert unsupervised clustering tasks directly into association rule mining.",
-          B: "A set of techniques applied to raw data to resolve inconsistencies, varying scales, noise, or missing values, thereby improving its quality and making it suitable for models.",
-          C: "The automated extraction of ground truth targets using unsupervised visualizations.",
-          D: "A protocol to ensure that data arrays are converted into 1D vectors."
-        },
-        answer: "B",
-        explanation: "Data Preprocessing is defined as a comprehensive set of techniques applied to raw data to improve its quality by addressing real-world data inconsistencies, noise, missing values, and varying scales, making it suitable for machine learning algorithms."
+        q: "تضمنت 'العهدة العمرية' التي كتبها أمير المؤمنين عمر بن الخطاب رضي الله عنه لأهل إيلياء أماناً شاملاً لكنائسهم وصلبانهم وأن لا يُكرهوا على دينهم. يجسد هذا الموقف مبدأ:",
+        options: [
+          "التعايش الإنساني وحرية الاعتقاد والكرامة الإنسانية لغير المسلمين",
+          "فرض الجزية التعسفية لإجبار الناس على الهجرة",
+          "التعايش المؤقت المشروط بتبديل لغة أهل إيلياء",
+          "العدالة القضائية في شؤون المعاملات التجارية والديون فقط"
+        ],
+        correct: 0,
+        rationale: "العهدة العمرية أعطتهم أماناً لأنفسهم وأموالهم وكنائسهم وألا يكرهوا على دينهم، وهي من أروع أمثلة التعايش الديني والإنساني."
       },
       {
         id: 43,
-        question: "Why does the performance evaluation of an unsupervised model represent a significantly higher challenge compared to a supervised model?",
-        options: {
-          A: "Because unsupervised models require massive amounts of pre-labeled validation data.",
-          B: "Because there are no ground truth labels or direct feedback mechanisms to measure accuracy, precision, or recall, making evaluation heavily dependent on manual inspection or structural metrics.",
-          C: "Because the data matrix changes its shape dynamically during every execution.",
-          D: "Because it is mathematically restricted from utilizing distance metrics like Euclidean space."
-        },
-        answer: "B",
-        explanation: "Supervised learning models can be verified directly against ground truth labels using metrics like accuracy, precision, and recall. Unsupervised learning models lack these labels, meaning there is no direct feedback loop on correctness, forcing reliance on manual inspection or secondary structural analysis."
+        q: "البند الذي ورد في وثيقة المدينة المنورة: «وإنه من تبعنا من يهود فإن له النصر والأسوة غير مظلومين ولا متناصر عليهم» يرسخ مفهوم:",
+        options: [
+          "التعايش الاقتصادي في الأسواق المشتركة",
+          "إسقاط القصاص والدية عن الجرائم الواقعة على غير المسلمين",
+          "التعايش السياسي وكفالة حق المواطنة لغير المسلمين داخل الدولة",
+          "التبعية الدينية وإلزامهم بأداء شعائر الإسلام"
+        ],
+        correct: 2,
+        rationale: "بين المنهاج في التعايش السياسي أن وثيقة المدينة كفلت حق المواطنة لغير المسلمين وأن لهم النصر والأسوة."
       },
       {
         id: 44,
-        question: "A junior developer builds a pipeline where they scale the training set and the test set independently using two separate scalers. What is the primary operational consequence during the evaluation phase?",
-        options: {
-          A: "The model will run twice as fast due to parallel memory allocation.",
-          B: "The test set will be mapped to a completely different feature range relative to what the model learned, leading directly to model performance degradation.",
-          C: "The data will automatically drop all features with zero variance.",
-          D: "The test matrix will transpose its columns into rows."
-        },
-        answer: "B",
-        explanation: "Scaling training and testing data using separate parameters breaks the consistency of the data distribution. This introduces artificial distortions and mismatched feature ranges, leading directly to model performance degradation during evaluation."
+        q: "المبادرة العالمية التي قدمتها المملكة الأردنية الهاشمية وأعلنها جلالة الملك عبد الله الثاني وتبنتها الأمم المتحدة في الأسبوع الأول من شهر شباط سنوياً هي:",
+        options: [
+          "رسالة عمان",
+          "مبادرة أسبوع الوئام بين الأديان",
+          "مبادرة كلمة سواء",
+          "مبادرة إعمار مساجد الصحابة"
+        ],
+        correct: 1,
+        rationale: "في الإثراء والتوسع: أسبوع الوئام بين الأديان أعلنه جلالة الملك عبد الله الثاني في الأمم المتحدة وتبنته عالمياً في الأسبوع الأول من شباط."
       },
+
+      // Block 12 (Q45-48): أ, ب, د, ج
       {
         id: 45,
-        question: "An engineer is developing a model to evaluate if incoming telemetry data from an aircraft belongs to the known operational distribution or if it represents an entirely foreign distribution. The base training set involves a multi-class dataset. Which framework maps directly to this task?",
-        options: {
-          A: "Single-Class Novelty Detection.",
-          B: "Multi-Class Out-of-Distribution (OOD) Detection.",
-          C: "Association Rule Transaction Mining.",
-          D: "Hierarchical Dimensionality Merging."
-        },
-        answer: "B",
-        explanation: "When the baseline dataset contains multiple classes (in-distribution) and the objective is to detect if new incoming data originates from a completely foreign distribution, it requires Out-of-Distribution (OOD) detection under a multi-class paradigm."
+        q: "دلالة قوله تعالى: ﴿وَآتُوا النِّسَاءَ صَدُقَاتِهِنَّ نِحْلَةً فَإِن طِبْنَ لَكُمْ عَن شَيْءٍ مِّنْهُ نَفْسًا فَكُلُوهُ هَنِيئًا مَّرِيئًا﴾:",
+        options: [
+          "حق المرأة في المهر وأنه عطية وهبة خالصة لها ليس لأحد أخذ شيء منه إلا بطيب نفس منها",
+          "وجوب تسليم المهر لوالد الزوجة ليتصرف فيه كيف يشاء",
+          "جواز إسقاط المهر في عقد الزواج إذا رغب الزوجان بذلك",
+          "اقتسام المهر مناصفة بين الزوج وأهل الزوجة عند الدخول"
+        ],
+        correct: 0,
+        rationale: "الآية صريحة في حق المرأة المالي المستقل بالمهر (الصداق)، وأنه نحلة (عطية وهبة عن طيب نفس) وليس لأحد أخذه إلا برضاها."
       },
       {
         id: 46,
-        question: "A baseline Support Vector Classifier (SVC) evaluated on an unscaled dataset achieves an accuracy of $0.63$. After applying proper MinMaxScaler preprocessing, accuracy increases to $0.97$. What does this massive performance leap mathematically demonstrate?",
-        options: {
-          A: "That scaling converts classification tasks into unsupervised clustering structures.",
-          B: "The immense operational impact of proper feature scaling on distance-sensitive models like SVMs, allowing them to construct balanced, optimal decision boundaries.",
-          C: "That MinMaxScaler automatically introduces ground truth labels to the dataset.",
-          D: "That unscaled datasets always cause matrix shapes to compress to zero."
-        },
-        answer: "B",
-        explanation: "Unscaled datasets can cause poor SVM performance because mismatched ranges distort distance computations. Proper scaling restores geometric balance, allowing the model to achieve an optimal decision boundary."
+        q: "نص قانون الأحوال الشخصية الأردني بخصوص نفقة الزوجة العاملة ذات المال (الموسرة) على أن:",
+        options: [
+          "نفقتها تسقط تماماً وتلزم بالإنفاق على البيت مناصفة مع زوجها",
+          "نفقتها واجبة على زوجها ولو كانت موسرة، ونفقة كل إنسان في ماله إلا الزوجة",
+          "نفقتها تنتقل إلى والدها أو إخوانها من الذكور في حال عملها",
+          "تستحق ربع النفقة فقط تقديراً لغيابها عن منزل الزوجية"
+        ],
+        correct: 1,
+        rationale: "نص القانون الوارد في إضاءة (أربط مع القانون): 'نفقة كل إنسان في ماله، إلا الزوجة؛ فنفقتها على زوجها، ولو كانت موسرة'."
       },
       {
         id: 47,
-        question: "When reviewing common preprocessing frameworks, which list represents techniques explicitly highlighted for data preparation?",
-        options: {
-          A: "Logistic Regression, Flat Clustering, and Hypothesis Testing.",
-          B: "Scaling, Feature Engineering, Dimensionality Reduction, Categorical Encoding, and Handling Missing Data.",
-          C: "Target Vector Extraction, Linear Spline Fitting, and p-value Optimization.",
-          D: "Gradient Descent Acceleration, t-SNE Clustering, and Supervised Margin Maximization."
-        },
-        answer: "B",
-        explanation: "Standard data preprocessing includes: Scaling (MinMax, Standardization, etc.), Feature Engineering, Dimensionality Reduction (PCA, LDA, Autoencoders), Encoding Categorical Variables, and Handling Missing Data."
+        q: "تُعد كل الآتية من الضوابط الشرعية المعتبرة لعمل المرأة في الإسلام، ما عدا:",
+        options: [
+          "الالتزام بالأحكام والآداب الشرعية في اللباس والتعامل",
+          "مناسبة العمل لطبيعة المرأة الفسيولوجية وخصوصيتها",
+          "ألا يتسبب العمل في التقصير بواجباتها الأسرية الأساسية",
+          "إلزام المرأة بالتنازل عن كامل راتبها لزوجها أو أبيها كشرط لاستمرار عملها"
+        ],
+        correct: 3,
+        rationale: "المرأة لها ذمة مالية مستقلة، وليس لأحد أخذ راتبها، وإلزامها بالتنازل ليس من ضوابط الشرع بل ظلم محرم."
       },
       {
         id: 48,
-        question: "Why is the Normalizer transformer considered highly specialized compared to column-based operations like StandardScaler?",
-        options: {
-          A: "Because it strictly requires a Gaussian distribution across columns.",
-          B: "Because it operates horizontally across rows, ensuring that each individual data point has a Euclidean length of 1, making it ideal when only angles and vector directions matter rather than absolute feature magnitudes.",
-          C: "Because it relies on calculating the median and interquartile range (IQR).",
-          D: "Because it automatically deletes rows that contain extreme outliers."
-        },
-        answer: "B",
-        explanation: "Unlike column-based tools, Normalizer acts horizontally to scale each sample independently so that its Euclidean length (norm) equals 1. This is useful when feature magnitudes are highly variable or irrelevant, and analysis relies strictly on vector angles."
+        q: "الحكم الشرعي لحرمان بعض الأسر بناتها من نصيبهن في الميراث الشرعي بحجة بقاء المال والعقارات داخل العشيرة:",
+        options: [
+          "مباح عرفاً إذا وافقت غالبية العشيرة وكبارها",
+          "مكروه شرعاً وتصح قسمة التركة وتلزم البنات بالصبر",
+          "محرم شرعاً واعتداء صريح على حق قطعي قرره الله تعالى في القرآن الكريم",
+          "جائز استثناء إذا كانت البنات متزوجات من رجال موسرين"
+        ],
+        correct: 2,
+        rationale: "أقرت الشريعة للمرأة حقها في الميراث بصرف النظر عن حالتها، وليس لأحد حرمانها، قال تعالى ﴿لِّلرِّجَالِ نَصِيبٌ... وَلِلنِّسَاءِ نَصِيبٌ﴾."
       },
+
+      // Block 13 (Q49-52): ج, أ, د, ب
       {
         id: 49,
-        question: "During Exploratory Data Analysis (EDA), what is the specific function of utilizing robust statistical measures and graphical representations?",
-        options: {
-          A: "To guarantee that the dataset contains zero outliers before training.",
-          B: "To identify general patterns, expose outliers, and reveal unexpected features of the data as an essential first step in any analysis.",
-          C: "To automatically optimize the hyperparameter $C$ of a Support Vector Machine.",
-          D: "To split the target column $Y$ from the feature matrix $X$."
-        },
-        answer: "B",
-        explanation: "EDA is an essential first step because it uses visualization and robust statistical measures to help data scientists identify general patterns, detect outliers, and discover unexpected structures within a dataset."
+        q: "دلالة التعبير القرآني بقوله تعالى: ﴿عِندَ رَبِّهِمْ يُرْزَقُونَ﴾ في وصف مكانة الشهداء:",
+        options: [
+          "بيان أن الشهداء يتناولون طعام أهل الدنيا وشرابهم بذاته",
+          "بيان أن الشهداء يرزقون النصر العسكري السريع في الدنيا",
+          "زيادة تكريم وتشريف للشهداء؛ فهم في منزلة القرب والفضل من الله تعالى",
+          "الدعوة إلى ترك العمل وطلب الشهادة لضمان الرزق المادي"
+        ],
+        correct: 2,
+        rationale: "بين الكتاب أن التعبير بـ ﴿عِندَ رَبِّهِمْ يُرْزَقُونَ﴾ فيه زيادة تكريم للشهداء؛ فهم في قرب من الله تعالى."
       },
       {
         id: 50,
-        question: "A data scientist needs to scale data where features are measured in completely different units (e.g., thousands vs. decimals). The downstream algorithm uses distance-based calculations. Why is feature scaling considered a mandatory step here?",
-        options: {
-          A: "To force all features to adopt the same standard deviation as the target column.",
-          B: "To ensure that each feature contributes equally to the model, preventing features with naturally larger numerical scales from biasing distance calculations.",
-          C: "To compress the dataset rows into a closed transaction format.",
-          D: "To convert the unsupervised structure into a multi-class novelty space."
-        },
-        answer: "B",
-        explanation: "Algorithms using distance metrics are inherently biased toward features with larger numerical magnitudes. Feature scaling standardizes these ranges, ensuring that each feature contributes equitably to geometric computations."
+        q: "الهدف والغاية التي من أجلها أمر النبي ﷺ المسلمين بالخروج إلى 'حمراء الأسد' غداة معركة أُحد بالرغم من جراحهم:",
+        options: [
+          "إرهاب قريش وإظهار قوة المسلمين وبأسهم وأن الجراح لم تفتّ في عضدهم، وثنيهم عن إعادة مهاجمة المدينة",
+          "جمع السلاح والغنائم التي تركها المشركون وراءهم في الوادي",
+          "محاصرة قوافل قريش التجارية المتجهة إلى بلاد الشام",
+          "عقد صلح تجاري جديد مع سادات مكة لتأمين حدود المدينة"
+        ],
+        correct: 0,
+        rationale: "أمر النبي بالخروج لكي يعلم المشركون أن المسلمين ما يزالون أقوياء، فلما خاف المشركون رجعوا لمكة."
       },
       {
         id: 51,
-        question: "Mathematical standardization transforms a feature vector $X$ into $X_{stand}$ using the formula $x_{stand} = \\frac{x - \\mu}{\\sigma}$. What are the precise statistical parameters of the resulting distribution?",
-        options: {
-          A: "$\\mu = 1$ and $\\sigma = 0$",
-          B: "$\\mu = 0$ and $\\sigma = 1$",
-          C: "$\\mu = 0$ and variance $\\sigma^2$ equal to the original feature variance",
-          D: "Bounded strictly within the range $[-1, 1]$"
-        },
-        answer: "B",
-        explanation: "StandardScaler executes Z-score normalization, which centers the feature distribution at an arithmetic mean ($\mu$) of exactly 0 and scales the standard deviation ($\sigma$) and variance ($\sigma^2$) to exactly 1."
+        q: "قال تعالى: ﴿الَّذِينَ قَالَ لَهُمُ النَّاسُ إِنَّ النَّاسَ قَدْ جَمَعُوا لَكُمْ فَاخْشَوْهُمْ فَزَادَهُمْ إِيمَانًا وَقَالُوا حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ﴾، معنى ﴿حَسْبُنَا اللَّهُ﴾:",
+        options: [
+          "نرجو من الله العفو عن تقصيرنا في المعركة",
+          "نسأل الله تعالى زيادة الأموال والعتاد العسكري",
+          "ننتظر معجزة خارقة تهلك المشركين دون قتال",
+          "يكفينا الله ناصراً ومعيناً وقادراً على كفايتنا شرور الأعداء"
+        ],
+        correct: 3,
+        rationale: "المعجم اللغوي في الآيات: حسبنا الله: يكفينا الله ناصراً ومعيناً."
       },
       {
         id: 52,
-        question: "When data contains extreme outliers that cannot be removed, RobustScaler scales the features using which specific robust statistical metrics?",
-        options: {
-          A: "The mean ($\mu$) and the standard deviation ($\sigma$)",
-          B: "The absolute minimum $min(x)$ and maximum $max(x)$",
-          C: "The median and the Interquartile Range ($IQR = Q_3 - Q_1$)",
-          D: "The Euclidean length $\\Vert{}x\\Vert{}_2 = 1$ across rows"
-        },
-        answer: "C",
-        explanation: "RobustScaler subtracts the median and divides by the Interquartile Range (IQR). Because median and IQR are non-parametric and resilient to extreme tails, this scaler prevents macro-outliers from distorting feature scaling."
+        q: "الصحابي الجليل الذي قال يوم أُحد حين انهزم الناس: «واهاً لريح الجنة يا سعد؛ إني لأجد ريحها دون أُحد»، ثم انغمس يقاتل حتى استشهد:",
+        options: [
+          "سعد بن معاذ رضي الله عنه",
+          "أنس بن النضر رضي الله عنه",
+          "عبد الله بن جبير رضي الله عنه",
+          "حمزة بن عبد المطلب رضي الله عنه"
+        ],
+        correct: 1,
+        rationale: "وردت في صور مشرقة: هو الصحابي الجليل أنس بن النضر رضي الله عنه، قاتل حتى قُتل فما عرفته إلا أخته ببنانه."
       },
+
+      // Block 14 (Q53-56): ب, د, أ, ج
       {
         id: 53,
-        question: "In a production pipeline using scikit-learn, what is the correct code sequence for preprocessing the training set ($X_{train}$) and test set ($X_{test}$) using MinMaxScaler without causing data leakage?",
-        options: {
-          A: "scaler.fit_transform(X_train) followed by scaler.fit_transform(X_test)",
-          B: "scaler.fit(X_test) followed by scaler.transform(X_train)",
-          C: "scaler.fit_transform(X_train) followed by scaler.transform(X_test)",
-          D: "scaler.fit(X_train + X_test) followed by scaler.transform(X_train)"
-        },
-        answer: "C",
-        explanation: "The correct protocol requires fitting the scaler solely on the training data (or using fit_transform(X_train) as a combined step) and then applying .transform(X_test) to the test set using those frozen parameters."
+        q: "الفرق الاصطلاحي الدقيق بين 'التبذير' و'الإسراف' في ضوء حديث النهي عن إضاعة المال:",
+        options: [
+          "التبذير خاص بإنفاق المال العام، بينما الإسراف خاص بإنفاق المال الخاص",
+          "التبذير إنفاق المال في المحرمات مهما قل، والإسراف إنفاقه في الأمور المشروعة بما يزيد على الحاجة",
+          "التبذير إنفاق المال الكثير في التجارة، بينما الإسراف الامتناع عن أداء الزكاة",
+          "التبذير خاص بتبديد الطعام، بينما الإسراف مقصور على استهلاك الكهرباء والماء"
+        ],
+        correct: 1,
+        rationale: "التبذير: إنفاق المال في المحرمات بصرف النظر عن مقداره. الإسراف: إنفاق المال في الأمور المشروعة بما يزيد على الحاجة."
       },
       {
         id: 54,
-        question: "Why is executing scaler.fit_transform(X_test) on a test dataset considered a major methodology violation?",
-        options: {
-          A: "It changes the number of columns in $X_{test}$.",
-          B: "It re-computes scaling statistics based on the test set's native distribution, isolating it from the training frame and causing spatial distortion during model evaluation.",
-          C: "It converts numeric floats into categorical string objects.",
-          D: "It forces the test set labels $y_{test}$ to be overwritten."
-        },
-        answer: "B",
-        explanation: "Calling fit_transform() on $X_{test}$ calculates new means/ranges specific to the test data. This breaks spatial alignment with the training space, leading to artificial distortion and model performance degradation."
+        q: "تتحقق 'مناصحة ولي الأمر' المشروعة التي يرضاها الله تعالى في حديث أبي هريرة رضي الله عنه من خلال:",
+        options: [
+          "التشهير بالحكام في منصات التواصل وبث مقاطع التخوين",
+          "الخروج المسلح على المجتمع وتعطيل المرافق والمنشآت العامة",
+          "اعتزال الشأن العام والسكوت التام عن المشورة والرأي",
+          "تقديم المشورة الصادقة النافعة بالحكمة والموعظة الحسنة وعبر المؤسسات الدستورية كالبرلمان"
+        ],
+        correct: 3,
+        rationale: "بين الدرس أن المناصحة تكون بتقديم الرأي الصائب والمشورة بالحكمة والموعظة، وقد تكون عبر مؤسسات الدولة كالبرلمان والأحزاب."
       },
       {
         id: 55,
-        question: "When instantiating scaler = MinMaxScaler(), what is the default target feature range parameter configured in scikit-learn?",
-        options: {
-          A: "feature_range=(-1, 1)",
-          B: "feature_range=(0, 1)",
-          C: "feature_range=(0, 100)",
-          D: "feature_range=(-inf, +inf)"
-        },
-        answer: "B",
-        explanation: "By default in scikit-learn, MinMaxScaler scales features into the closed interval $[0, 1]$."
+        q: "راوي حديث رضا الله تعالى «إن الله يرضى لكم ثلاثاً ويسخط لكم ثلاثاً» هو أبو هريرة رضي الله عنه، واسمه وتاريخ قدومه مهاجراً:",
+        options: [
+          "عبد الرحمن بن صخر الدوسي، وقدم مهاجراً في السنة السابعة للهجرة عام خيبر",
+          "النعمان بن بشير الأنصاري، وقدم مهاجراً في السنة الثانية للهجرة",
+          "عبد الله بن مسعود الهذلي، وقدم مهاجراً قبل فتح مكة بسنتين",
+          "زيد بن حارثة الكلبي، وكان رضي الله عنه أول من أسلم من الموالي"
+        ],
+        correct: 0,
+        rationale: "التعريف بالراوي: عبد الرحمن بن صخر الدوسي رضي الله عنه، قدم المدينة مهاجراً سنة 7هـ يوم خيبر وكان من أهل الصفة."
       },
       {
         id: 56,
-        question: "In a used car database, 'Vehicle Mileage' and 'Vehicle Age' are strongly correlated. Combining them into a single latent index called 'Wear and Tear' is an example of which unsupervised technique?",
-        options: {
-          A: "Feature Merging / Dimensionality Reduction",
-          B: "Single-Class Novelty Detection",
-          C: "Association Rule Transaction Mining",
-          D: "Z-score Standard Normalization"
-        },
-        answer: "A",
-        explanation: "Dimensionality reduction can be achieved via feature merging, where highly correlated attributes (e.g., Mileage and Age) are combined into a simplified representation ('Wear and Tear') to reduce dimensionality and computational cost."
+        q: "المقصود بـ 'كنز المال' المحرم شرعاً كما أوضحه درس الحديث الشريف:",
+        options: [
+          "ادخار جزء من المال المشروع لتزويج الأبناء أو بناء مسكن للأسرة",
+          "استثمار الأموال في المصانع والشركات الإنتاجية الوطنية",
+          "حبس المال وتجميده وعدم أداء زكاته المفروضة بعد وجوبها فيه",
+          "إنفاق المال في شراء الأطعمة والكماليات الزائدة عن الحاجة"
+        ],
+        correct: 2,
+        rationale: "كنز المال المحرم هو المال الذي لم تُؤدَّ زكاته بعد وجوبها فيه؛ أما الادخار لتحقيق غرض مع أداء الزكاة فليس كنـزاً."
       },
+
+      // Block 15 (Q57-60): أ, ج, ب, د
       {
         id: 57,
-        question: "Which of the following real-world applications maps directly to Unsupervised Anomaly Detection?",
-        options: {
-          A: "Predicting house prices using historical neighborhood sales.",
-          B: "Detecting fraudulent credit card transactions and identifying manufacturing defects.",
-          C: "Categorizing blog posts using human-assigned metadata tags.",
-          D: "Mapping street view house numbers to multi-class labels."
-        },
-        answer: "B",
-        explanation: "Detecting fraudulent transactions, identifying manufacturing defects, and filtering dataset outliers are core applications of Anomaly Detection."
+        q: "السبب المباشر الذي دفع النبي ﷺ إلى العزم على فتح مكة في السنة الثامنة للهجرة هو:",
+        options: [
+          "إعانة قريش لحلفائها بني بكر بالسلاح والرجال في اعتدائهم على خزاعة حليفة المسلمين فنقضوا صلح الحديبية",
+          "منع قريش للمسلمين من أداء مناسك الحج في العام الثامن للهجرة",
+          "مقتل سفير النبي ﷺ الحارث بن عمير الأزدي في وادي مر الظهران",
+          "تحريض أبي سفيان لقبائل هوازن وثقيف على غزو المدينة المنورة"
+        ],
+        correct: 0,
+        rationale: "أغارت بنو بكر على خزاعة وقتلت منهم وأمدتهم قريش بالسلاح والرجال فنقضت صلح الحديبية، فغضب النبي وعزم على الفتح."
       },
       {
         id: 58,
-        question: "How does Novelty Detection handle rare instances compared to Anomaly Detection?",
-        options: {
-          A: "Novelty detection tolerates noisy training sets, whereas anomaly detection requires labeled target arrays.",
-          B: "Novelty detection aims to identify new, valid patterns from a clean training set, whereas anomaly detection identifies deviations from standard baseline behavior in potentially noisy data.",
-          C: "Novelty detection is strictly supervised, whereas anomaly detection is unsupervised.",
-          D: "Novelty detection forces Euclidean vector lengths to equal 1."
-        },
-        answer: "B",
-        explanation: "Novelty detection focuses on recognizing new, unseen valid patterns and mandates a clean training set free of unwanted instances. Anomaly detection identifies deviations/outliers in data that may contain background noise."
+        q: "حين مر سعد بن عبادة رضي الله عنه بأبي سفيان يوم الفتح وقال: «اليوم يوم الملحمة اليوم تستحل الحرمة»، صحح النبي ﷺ هذا المفهوم قائلاً:",
+        options: [
+          "«اليوم يوم الغنائم ويوم الانتقام لشهداء أحد وبدر»",
+          "«اليوم نفتح مكة بالسيف ولا أمان لأحد من المشركين»",
+          "«اليوم يوم المرحمة، اليوم يُعز الله قريشاً، ويُعظم الله الكعبة»",
+          "«اليوم نضع الجزية على أهل مكة صاغرين»"
+        ],
+        correct: 2,
+        rationale: "في صور مشرقة: قال النبي ﷺ رداً على سعد: «اليوم يوم المرحمة، اليوم يعز الله قريشاً، ويعظم الله الكعبة»."
       },
       {
         id: 59,
-        question: "Why do distance-based algorithms exhibit bias toward features with numerically larger magnitudes if scaling is omitted?",
-        options: {
-          A: "Because larger numbers trigger floating-point overflow in Python.",
-          B: "Because mathematical distance formulas (e.g., Euclidean distance) assign greater weight to dimensions with larger absolute differences, allowing them to dominate the metric.",
-          C: "Because decision trees split exclusively on large ranges.",
-          D: "Because larger features automatically increase the row count of the array."
-        },
-        answer: "B",
-        explanation: "Unscaled distance calculations are dominated by features with large absolute ranges (e.g., salary in thousands vs. age in tens), biasing the model toward larger numerical features."
+        q: "الموقف النبوي الكريم الذي تجلى فيه خُلق الوفاء وإنزال الناس منازلهم يوم فتح مكة مع سدنة البيت الحرام:",
+        options: [
+          "أخذ مفاتيح الكعبة وتسليمها للعباس بن عبد المطلب رضي الله عنه",
+          "إبقاء مفاتيح الكعبة مع عثمان بن طلحة رضي الله عنه وقوله: «هاك مفتاحك يا عثمان اليوم يوم بر ووفاء»",
+          "تعيين بلال بن رباح رضي الله عنه سادناً ومسؤولاً عن مفاتيح الكعبة المشرفة",
+          "توزيع مفاتيح الكعبة بالتناوب بين قبائل مكة الكبرى"
+        ],
+        correct: 1,
+        rationale: "في صور مشرقة: دعا النبي عثمان بن طلحة وأبقى معه مفتاح الكعبة وقال: «هاك مفتاحك يا عثمان اليوم يوم بر ووفاء»."
       },
       {
         id: 60,
-        question: "How does scaling features influence the optimization hyperplane of a Support Vector Machine (SVM)?",
-        options: {
-          A: "It converts linear hyperplanes into non-linear decision trees.",
-          B: "It prevents large-magnitude features from skewing distance metrics, resulting in a balanced, symmetric decision boundary and optimal margin separation.",
-          C: "It eliminates the need to calculate support vectors.",
-          D: "It forces all support vectors to lie on the origin $(0,0)$."
-        },
-        answer: "B",
-        explanation: "Feature scaling prevents dominant features from distorting distance metrics, allowing SVMs to find optimal separating hyperplanes with balanced, symmetric margins."
+        q: "الشيخ الكبير المسنّ الذي أتى به ابنه أبو بكر الصديق رضي الله عنه إلى النبي ﷺ يوم الفتح ليعلن إسلامه، فقال النبي متواضعاً: «هلا تركت الشيخ في بيته حتى أكون أنا آتيه فيه»:",
+        options: [
+          "أبو سفيان بن حرب رضي الله عنه",
+          "سهيل بن عمرو رضي الله عنه",
+          "صفوان بن أمية رضي الله عنه",
+          "أبو قحافة (والد أبي بكر الصديق رضي الله عنه)"
+        ],
+        correct: 3,
+        rationale: "الشيخ المسن هو أبو قحافة والد أبي بكر رضي الله عنه، مسح النبي صدره وقال له أسلم فأسلم."
       },
+
+      // Block 16 (Q61-64): د, ب, أ, ج
       {
         id: 61,
-        question: "In classical machine learning, what fundamentally distinguishes Supervised Learning from Unsupervised Learning regarding dataset structure?",
-        options: {
-          A: "Supervised learning operates on feature matrices $X$ paired with target labels $Y$; Unsupervised learning processes feature matrices $X$ with no target $Y$.",
-          B: "Supervised learning processes un-split arrays; Unsupervised learning requires train-test splits.",
-          C: "Supervised learning uses unlabeled images; Unsupervised learning uses text labels.",
-          D: "Supervised learning is limited to 2D matrices; Unsupervised learning requires 3D tensors."
-        },
-        answer: "A",
-        explanation: "Supervised learning utilizes labeled datasets containing both inputs $X$ and ground truth targets $Y$. Unsupervised learning operates exclusively on unlabeled input features $X$ to uncover hidden structure."
+        q: "المفهوم الاصطلاحي لخاصية 'الإيجابية' في الشريعة الإسلامية كما ورد في الكتاب:",
+        options: [
+          "التساهل في إسقاط التكاليف الشرعية عند رغبة عامة الناس",
+          "حصر الاهتمام بأمور العبادات والشعائر التعبدية دون شؤون الدنيا",
+          "الجمود على التطبيقات التراثية القديمة ورفض التفاعل مع مستجدات العصر",
+          "قدرة الشريعة الإسلامية على التفاعل مع الواقع، وتقديم حلول للمشكلات التي يعانيها الناس لإسعادهم"
+        ],
+        correct: 3,
+        rationale: "نص الكتاب في الفهم والتحليل: الإيجابية تعني قدرة الشريعة الإسلامية على التفاعل مع الواقع وتقديم حلول للمشكلات التي يعانيها الناس؛ ما يؤدي إلى عيشهم بسعادة."
       },
       {
         id: 62,
-        question: "Which of the following is an explicit operational benefit of Dimensionality Reduction prior to model training?",
-        options: {
-          A: "It increases data disk storage requirements to preserve raw fidelity.",
-          B: "It reduces computational cost, speeds up training time, saves memory, and mitigates overfitting.",
-          C: "It generates synthetic ground-truth labels for unlabeled arrays.",
-          D: "It ensures all features follow a perfect normal distribution."
-        },
-        answer: "B",
-        explanation: "Dimensionality reduction simplifies data structures, making algorithms run faster, reducing memory/disk consumption, and improving model generalization by mitigating the curse of dimensionality."
+        q: "مظهر الإيجابية الذي يدل عليه قوله ﷺ: «إِنْ قَامَتِ السَّاعَةُ وَبِيَدِ أَحَدِكُمْ فَسِيلَةٌ فَلْيَغْرِسْهَا» هو:",
+        options: [
+          "إيجابية النظرة إلى النفس وبث الطمأنينة فيها",
+          "إيجابية النظرة إلى الحياة الدنيا بأنها دار عمل وعمارة مستمرة وعبادة لله تعالى",
+          "إيجابية النظرة إلى العلاقات الاجتماعية وإظهار الفرح في الأعياد",
+          "إيجابية التعامل مع المخالفين في العقيدة بالرفق والإحسان"
+        ],
+        correct: 1,
+        rationale: "استدل الكتاب بالحديث على 'إيجابية النظرة إلى الحياة الدنيا' وأن عمارة الأرض والعمل عبادة يتقرب بها المسلم إلى ربه."
       },
       {
         id: 63,
-        question: "In the Breast Cancer dataset case study, what are the exact sample counts after executing a standard train_test_split (80/20 or default 75/25 with random state 1 on 569 samples)?",
-        options: {
-          A: "500 training samples, 69 test samples",
-          B: "426 training samples, 143 test samples (out of 569 total samples)",
-          C: "300 training samples, 300 test samples",
-          D: "250 training samples, 250 test samples"
-        },
-        answer: "B",
-        explanation: "Loading the 569-sample Breast Cancer dataset and running standard train_test_split with random_state=1 yields 426 training samples and 143 test samples."
+        q: "دلالة قوله تعالى: ﴿قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَى أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا﴾ على مظاهر الإيجابية:",
+        options: [
+          "إيجابية النظرة إلى النفس ببث الرجاء ونبذ اليأس والقنوط عبر فتح باب التوبة دائماً للمذنبين",
+          "إيجابية النظرة إلى المستقبل بانتشار الإسلام في بيوت المدر والوبر",
+          "إيجابية النظرة إلى الناس بإدخال السرور على قلوبهم في المناسبات السعيدة",
+          "إيجابية الحوار بالحسنى مع أهل الكتاب في المجالس العامة"
+        ],
+        correct: 0,
+        rationale: "الآية استدل بها الكتاب على 'إيجابية النظرة إلى النفس' بنفي القنوط وبث الطمأنينة وقبول توبة العاصي."
       },
       {
         id: 64,
-        question: "When visual output of feature scaling is analyzed, how does Normalizer alter the geometric layout of 2D data points compared to MinMaxScaler?",
-        options: {
-          A: "It stretches points into a wide rectangle spanning $-10$ to $+10$.",
-          B: "It projects data points onto a unit circle/arc where each point has a Euclidean norm of 1.",
-          C: "It arranges points in a vertical straight line along the Y-axis.",
-          D: "It groups points into discrete square bins."
-        },
-        answer: "B",
-        explanation: "Normalizer scales each individual sample (row) to have unit norm ($\Vert{}x\Vert{}_2 = 1$), transforming data points onto a circular arc or spherical boundary centered at the origin."
+        q: "المبادرة التطوعية التي أطلقتها 'مؤسسة ولي العهد' في الأردن لتفعيل مشاركة الشباب في العمل التطوعي كأحد مظاهر الإيجابية هي:",
+        options: [
+          "منصة إدراك للتعليم الإلكتروني",
+          "مبادرة كلمة سواء للحوار الفكري",
+          "منصة نوى للعمل التطوعي",
+          "مبادرة حقك تعرف للتربية الإعلامية"
+        ],
+        correct: 2,
+        rationale: "ذكر الإثراء والتوسع: أطلقت مؤسسة ولي العهد مبادرة تطوعية (منصة نوى) لتفعيل مشاركة الشباب في العمل التطوعي."
       },
+
+      // Block 17 (Q65-68): ج, أ, د, ب
       {
         id: 65,
-        question: "What mathematical formula defines the row-wise transformation executed by Normalizer under the L2 norm?",
-        options: {
-          A: "$x_{new} = \\frac{x - \\mu}{\\sigma}$",
-          B: "$x_{new} = \\frac{x}{\\sqrt{\\sum x_i^2}}$",
-          C: "$x_{new} = \\frac{x - min(x)}{max(x) - min(x)}$",
-          D: "$x_{new} = x \\times \\sigma + \\mu$"
-        },
-        answer: "B",
-        explanation: "L2 normalization divides each feature vector by its Euclidean length ($\sqrt{\sum x_i^2}$), constraining each sample to a unit vector of length 1."
+        q: "سن أهلية الزواج المعتمد وفق أحكام قانون الأحوال الشخصية الأردني هو أن يكون الخاطبان قد أتما:",
+        options: [
+          "16 سنة شمسية",
+          "17 سنة شمسية",
+          "18 سنة شمسية",
+          "20 سنة شمسية"
+        ],
+        correct: 2,
+        rationale: "حدد قانون الأحوال الشخصية الأردني الأهلية بثماني عشرة سنة شمسية لكلا الزوجين."
       },
       {
         id: 66,
-        question: "Which of the following scenarios represents an application of Unsupervised Clustering?",
-        options: {
-          A: "Predicting house prices based on bedroom counts.",
-          B: "Automatically grouping social media photographs based on facial similarity.",
-          C: "Flagging spam emails using pre-labeled user feedback.",
-          D: "Fitting a linear regression line to stock market data."
-        },
-        answer: "B",
-        explanation: "Grouping unlabeled social media photographs into clusters based on facial features without predefined categories is a classic application of Unsupervised Clustering."
+        q: "يصح عقد الزواج في الشريعة الإسلامية بحضور وإشهاد:",
+        options: [
+          "شاهدين رجلين، أو رجل وامرأتين، تتوافر فيهم شروط الإسلام والبلوغ والعقل",
+          "شاهد واحد عدل بشرط أن يكون من محارم الزوجة",
+          "أربع نساء بالغات عاقلات مسلمات دون حضور أي رجل",
+          "شاهدين عدلين غير مسلمين في حال كان الزوجان مسلمين"
+        ],
+        correct: 0,
+        rationale: "اشترط الإسلام أن يشهد على كتابته شاهدان رجلان، أو رجل وامرأتان، والشروط: الإسلام، والبلوغ، والعقل."
       },
       {
         id: 67,
-        question: "What is an advantage of Unsupervised Classification over Supervised Classification?",
-        options: {
-          A: "Classes guaranteed to match real-world ground features perfectly.",
-          B: "No prior knowledge of the data area is required, and human error during initial processing is minimized.",
-          C: "Zero computational time required for interpretation.",
-          D: "Direct availability of accuracy metrics during training."
-        },
-        answer: "B",
-        explanation: "An advantage of unsupervised approaches is that no prior domain knowledge of the region/data is required, and potential human bias or labeling error during initial processing is minimized."
+        q: "زوجة اشترطت في عقد زواجها شرطاً مباحاً ينفعها ولا يضر بزوجها ولا يتعارض مع مقتضى العقد؛ كأن تكمل دراستها الجامعية، ورضي الزوج بذلك. الحكم الشرعي لهذا الشرط وأثره:",
+        options: [
+          "باطل ولاغٍ ولا يلزم الوفاء به لأن الزواج يلغي جميع الشروط السابقة",
+          "مكروه شرعاً ويفسد عقد الزواج من أصله",
+          "مستحب للزوج إن شاء وفى به وإن شاء تركه دون أي أثر قانوني",
+          "شرط صحيح ومعتبر شرعاً وقانوناً ويصبح ملزماً للزوج يجب عليه الوفاء به"
+        ],
+        correct: 3,
+        rationale: "نص الكتاب: فإن رضي الطرف الآخر بذلك صار الشرط ملزماً؛ لقوله ﷺ: «أحق الشروط أن توفوا به ما استحللتم به الفروج»."
       },
       {
         id: 68,
-        question: "In Supervised Learning, what does 'consistency in classes' refer to?",
-        options: {
-          A: "Ensuring all feature columns are scaled with MinMaxScaler.",
-          B: "The distribution, quality, and distinguishability of labeled data across different categories.",
-          C: "Forcing equal sample sizes across all feature matrices.",
-          D: "Removing all unscaled numeric values from $X_{train}$."
-        },
-        answer: "B",
-        explanation: "Consistency in classes refers to the degree of uniformity, quality, distribution, and distinguishability present within labeled target categories across tasks."
+        q: "جاءت فتاة إلى النبي ﷺ تشكو أن أباها زوجها من ابن أخيه ليرفع به خسيسته دون رضاها؛ فكان قضاء رسول الله ﷺ في أمرها:",
+        options: [
+          "إلزامها بطاعة والدها حتماً لأن للأب ولاية الإجبار المطلقة",
+          "أنه جعل الأمر إليها وخيّرها بين فسخ الزواج أو إمضائه واستمراره",
+          "معاقبة أبيها بالحبس وتغريم الزوج كامل المهر",
+          "إلزام الزوج بتطليقها دون النظر إلى رغبتها الشخصية"
+        ],
+        correct: 1,
+        rationale: "في الحديث الوارد: 'فجعل النبي ﷺ الأمر إليها، فقالت: قد أجزت ما صنع أبي ولكن أردت أن تعلم النساء أن ليس للآباء من الأمر شيء'."
       },
+
+      // Block 18 (Q69-72): ب, د, ج, أ
       {
         id: 69,
-        question: "What structural paradigm applies when an Out-of-Distribution (OOD) detection model evaluates data from an unknown distribution against a multi-class dataset like CIFAR-10?",
-        options: {
-          A: "Single-Class Anomaly Paradigm",
-          B: "Multi-Class Out-of-Distribution Paradigm",
-          C: "Bounded Association Rule Paradigm",
-          D: "Horizontal Row-Normalization Paradigm"
-        },
-        answer: "B",
-        explanation: "Evaluating whether unseen samples belong to a known multi-class dataset or an entirely foreign distribution falls under the Multi-Class Out-of-Distribution (OOD) Detection paradigm."
+        q: "نص قانون الأحوال الشخصية الأردني في المادة (170) على أن أولى الأشخاص وأحقهم بحضانة الطفل وتربيته حال قيام الزوجية وبعد الفرقة هي:",
+        options: [
+          "الأب في جميع الأحوال",
+          "الأم",
+          "الجدة لأب",
+          "العمة الشقيقة"
+        ],
+        correct: 1,
+        rationale: "نصت المادة (170) على أن الأم أحق بحضانة ولدها وتربيته حال الزوجية وبعد الفرقة."
       },
       {
         id: 70,
-        question: "You are designing an end-to-end Machine Learning pipeline handling real-world tabular data. What is the correct, leak-free sequence of preprocessing and modeling steps?",
-        options: {
-          A: "Fit Scaler on Full Dataset → Train Model → Split Data → Evaluate",
-          B: "Split Data (Train/Test) → Fit Scaler on Train → Transform Train & Test → Train Model on Scaled Train → Evaluate on Scaled Test",
-          C: "Transform Test Set → Fit Scaler on Test Set → Train Model → Evaluate",
-          D: "Fit Scaler on Test Set → Transform Train Set → Evaluate Model"
-        },
-        answer: "B",
-        explanation: "The strictly correct sequence to avoid data leakage is: Split Data into Train/Test, Fit Scaler solely on Train, Transform both Train and Test with that fitted Scaler, Train model on Scaled Train, and Evaluate on Scaled Test."
+        q: "الصحابية الجليلة التي عُرفت بأنها 'أول ممرضة في الإسلام'، وكلفها النبي ﷺ بمداواة الصحابي سعد بن معاذ رضي الله عنه في غزوة الخندق هي:",
+        options: [
+          "أم سليم بنت ملحان رضي الله عنها",
+          "أسماء بنت عميس رضي الله عنها",
+          "سكينة بنت الحسين رضي الله عنها",
+          "رفيدة الأسلمية رضي الله عنها"
+        ],
+        correct: 3,
+        rationale: "في صور مشرقة: كلف النبي رفيدة الأسلمية رضي الله عنها (أول ممرضة في الإسلام) بتمريض سعد بن معاذ رضي الله عنه."
+      },
+      {
+        id: 71,
+        q: "من مظاهر التخفيف والتيسير التي راعتها الشريعة الإسلامية في عبادة المرأة حفاظاً على حالتها الصحية والجسدية:",
+        options: [
+          "إسقاط وجوب إخراج زكاة أموالها الخاصة وحليها نهائياً",
+          "منعها من حضور صلاة العيدين مع جماعة المسلمين في المصلى",
+          "عدم إيجاب صلاة الجمعة عليها، وإعفاؤها من الصوم والصلاة في الحيض والنفاس مع قضاء الصوم لاحقاً",
+          "إسقاط فريضة الحج عنها مطلقاً حتى مع الاستطاعة"
+        ],
+        correct: 2,
+        rationale: "خفف عنها فلم يوجب حضور صلاة الجمعة، وأعفاها من الصوم والصلاة في النفاس والحيض على أن تقضي الصوم بعد ذلك."
+      },
+      {
+        id: 72,
+        q: "دلالة قوله تعالى: ﴿وَالَّذِينَ يَرْمُونَ الْمُحْصَنَاتِ ثُمَّ لَمْ يَأْتُوا بِأَرْبَعَةِ شُهَدَاءَ فَاجْلِدُوهُمْ ثَمَانِينَ جَلْدَةً وَلَا تَقْبَلُوا لَهُمْ شَهَادَةً أَبَدًا وَأُولَئِكَ هُمُ الْفَاسِقُونَ﴾ في الحقوق الاجتماعية للمرأة:",
+        options: [
+          "المحافظة على عرض المرأة وسمعتها وحمايتها من الافتراء والطعن بعقوبة رادعة",
+          "حرمان المرأة من حق التعليم والعمل في المؤسسات العامة",
+          "اشتراط أربعة شهداء في صحة عقد زواج الفتاة البكر",
+          "منع النساء من الإدلاء بالشهادة في القضايا المالية والحقوقية"
+        ],
+        correct: 0,
+        rationale: "استدل الكتاب بالآية على حق 'المحافظة على عرضها وسمعتها' وردع من يتهم الطاهرات بجلد ثمانين ورد الشهادة."
+      },
+
+      // Block 19 (Q73-76): أ, ب, د, ج
+      {
+        id: 73,
+        q: "خُتمت الآية الكريمة الدالة على خلق السماوات والأرض واختلاف ألسنة الناس وألوانهم بقوله تعالى: ﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّلْعَالِمِينَ﴾ للدلالة على:",
+        options: [
+          "أن إدراك الحكمة من هذا الخلق العظيم والتنوع البشري يختص به أصحاب العلم والبصيرة",
+          "أن التفكر في آيات الكون مقتصر على علماء الفلك واللغات فقط",
+          "أن اختلاف اللغات والألوان هو علة الشقاق والحروب بين البشر",
+          "وجوب تعلم المسلمين لغة واحدة فقط ونبذ سائر اللغات الأخرى"
+        ],
+        correct: 0,
+        rationale: "نص الكتاب: خُتمت بقوله ﴿لِّلْعَالِمِينَ﴾ أي إن في خلق السماوات واختلاف الألوان واللغات عبرة لكل ذي علم وبصيرة؛ ليدرك الحكمة من ذلك."
+      },
+      {
+        id: 74,
+        q: "الآية الكريمة من سورة الروم التي تشير إلى أن العلاقة الأصلية واللازمة للزواج هي السكن والمودة والرحمة هي:",
+        options: [
+          "﴿وَمِنْ آيَاتِهِ مَنَامُكُم بِاللَّيْلِ وَالنَّهَارِ وَابْتِغَاؤُكُم مِّن فَضْلِهِ﴾",
+          "﴿وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً﴾",
+          "﴿وَمِنْ آيَاتِهِ يُرِيكُمُ الْبَرْقَ خَوْفًا وَطَمَعًا وَيُنَزِّلُ مِنَ السَّمَاءِ مَاءً﴾",
+          "﴿وَمِنْ آيَاتِهِ خَلْقُ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافُ أَلْسِنَتِكُمْ وَأَلْوَانِكُمْ﴾"
+        ],
+        correct: 1,
+        rationale: "الآية (21) من سورة الروم صريحة في المودة والرحمة والسكنى الزوجية."
+      },
+      {
+        id: 75,
+        q: "في قوله تعالى: ﴿وَمِنْ آيَاتِهِ يُرِيكُمُ الْبَرْقَ خَوْفًا وَطَمَعًا﴾، المقصود بـ 'الخوف والطمع' عند تشكل البرق:",
+        options: [
+          "الخوف من الأعداء المتربصين، والطمع في الغنائم المادية",
+          "الخوف من الموت فجأة، والطمع في طول العمر بالدنيا",
+          "الخوف من الفقر والحاجة، والطمع في كنز الذهب والفضة",
+          "الخوف من أذى الصواعق والحرائق، والطمع في نزول الغيث وإحياء الأرض بالمطر"
+        ],
+        correct: 3,
+        rationale: "بين تفسير الآية أن الناس يخافون من الصواعق والضوء الذي يحدث من البرق، ويطمعون في الوقت نفسه في الغيث ونزول الماء."
+      },
+      {
+        id: 76,
+        q: "خُتمت الآية الكريمة الدالة على نعمة النوم ونعمة السعي في طلب الرزق بقوله تعالى:",
+        options: [
+          "﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ﴾",
+          "﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَعْقِلُونَ﴾",
+          "﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَسْمَعُونَ﴾",
+          "﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّلْعَالِمِينَ﴾"
+        ],
+        correct: 2,
+        rationale: "آية النوم والسعي ﴿وَمِنْ آيَاتِهِ مَنَامُكُم بِاللَّيْلِ وَالنَّهَارِ...﴾ خُتمت بـ ﴿إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَسْمَعُونَ﴾ لبيان أن هذه التوجيهات لا يعقلها إلا من يسمع ويتدبر."
+      },
+
+      // Block 20 (Q77-80): ج, أ, د, ب
+      {
+        id: 77,
+        q: "الحكم الشرعي للأخذ بالسنة النبوية الشريفة والعمل بأحكامها وهديها في الشريعة الإسلامية:",
+        options: [
+          "مستحب يثاب فاعله ولا يأثم من تركها مكتفياً بالقرآن",
+          "مباح متساوٍ مع الأخذ بالأعراف والتقاليد المحلية",
+          "واجب ومصدر ثانٍ ملزم للتشريع بإجماع علماء الأمة ولا يجوز تركها بدعوى الاكتفاء بالقرآن",
+          "خاص بالصحابة الكرام في حياة النبي ﷺ دون من بعدهم"
+        ],
+        correct: 2,
+        rationale: "أجمعت الأمة على حجية السنة وأنها المصدر الثاني، وأنه لا يجوز تركها بدعوى الاكتفاء بالقرآن؛ لأن ذلك يؤدي لتضييع الأحكام."
+      },
+      {
+        id: 78,
+        q: "من الأمثلة الصحيحة على دور السنة النبوية الشريفة في 'إضافة أحكام جديدة لم ترد في القرآن الكريم':",
+        options: [
+          "تحريم الجمع بين المرأة وعمتها أو خالتها في الزواج، وتحريم أكل الحُمُر الأهلية وكل ذي ناب من السباع",
+          "بيان كيفية أداء الصلوات الخمس وتحديد عدد ركعاتها وأوقاتها",
+          "تأكيد تحريم أكل أموال الناس بالباطل لقوله تعالى ﴿لَا تَأْكُلُوا أَمْوَالَكُم بَيْنَكُم بِالْبَاطِلِ﴾",
+          "تحديد مقدار الوصية بألا تزيد على الثلث"
+        ],
+        correct: 0,
+        rationale: "الجمع بين المرأة وعمتها، وأكل الحمر الأهلية وذي ناب من السباع، كلها أحكام جديدة أضافتها السنة ولم ترد في القرآن الكريم."
+      },
+      {
+        id: 79,
+        q: "بينت السنة النبوية الشريفة حكم 'الوصية' الذي ورد مجملاً في قوله تعالى ﴿مِن بَعْدِ وَصِيَّةٍ يُوصِي بِهَا أَوْ دَيْنٍ﴾، فقيدت مقدارها بألا تزيد عن:",
+        options: [
+          "نصف التركة المتروكة",
+          "ربع التركة المتروكة",
+          "خُمس التركة للفقراء والمساكين",
+          "الثلث لقوله ﷺ لسعد بن أبي وقاص: «الثُّلُثُ، وَالثُّلُثُ كَثِيرٌ»"
+        ],
+        correct: 3,
+        rationale: "حددت السنة النبوية مقدار الوصية بألا تزيد على الثلث كما في الحديث المتفق عليه: «الثلث، والثلث كثير»."
+      },
+      {
+        id: 80,
+        q: "استثنت السنة النبوية الشريفة من عموم تحريم الميتة والدم الوارد في القرآن الكريم ميتتين ودمين هما:",
+        options: [
+          "ميتة الطيور الجارحة والدم المسفوح",
+          "السمك (الحوت) والجراد، والكبد والطحال لقوله ﷺ: «أُحِلَّتْ لَنَا مَيْتَتَانِ وَدَمَانِ...»",
+          "ميتة الأنعام إذا تردت من جبل مع الدم الجامد",
+          "حيوانات البر الميتة بسبب الجوع مع الدم الخفيف"
+        ],
+        correct: 1,
+        rationale: "نص الحديث في الكتاب: «أحلت لنا ميتتان ودمان؛ فأما الميتتان فالحوت والجراد، وأما الدمان فالكبد والطحال»."
+      },
+
+      // Block 21 (Q81-84): ب, ج, أ, د
+      {
+        id: 81,
+        q: "المفهوم الاصطلاحي لـ 'العُرف' في الشريعة الإسلامية هو:",
+        options: [
+          "اتفاق جميع المجتهدين في عصر من العصور على حكم واقعة مستجدة",
+          "كل ما شاع بين الناس وتقبلوه من أقوال وأفعال وتصرفات لا تتعارض مع مبادئ الشريعة وأحكامها",
+          "ما يفرضه الحاكم على الرعية لتحقيق مصلحة مالية محددة",
+          "التقليد الأعمى للعادات الموروثة ولو خالفت النصوص القطعية"
+        ],
+        correct: 1,
+        rationale: "العرف: هو كل ما شاع بين الناس، وتقبلوه من أقوال وأفعال وتصرفات لا تتعارض مع مبادئ الشريعة الإسلامية وأحكامها."
+      },
+      {
+        id: 82,
+        q: "عادة جاهلية قديمة تعارف عليها بعض الناس ولكن الشريعة الإسلامية أبطلتها واعتبرتها 'عرفاً فاسداً' لمخالفتها لقوله تعالى ﴿وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَى﴾:",
+        options: [
+          "التعاون في دفع الدية في القتل الخطأ",
+          "تقسيم المهر في عقد الزواج إلى معجل ومؤجل",
+          "عادة 'الثأر' بقتل غير القاتل من أقاربه وعشيرته",
+          "حلف الفضول لنصرة المظلوم ورد الحقوق"
+        ],
+        correct: 2,
+        rationale: "ذكر الدرس عادة الثأر بأن يقتلوا غير القاتل؛ فهذا عرف فاسد يبطل العمل به لأنه يخالف النص الشرعي القطعي."
+      },
+      {
+        id: 83,
+        q: "القاعدة الفقهية الأساسية الدالة على حجية العرف واعتباره مصدراً معتبراً في المعاملات:",
+        options: [
+          "المعروف عُرفاً كالمشروط شَرطاً",
+          "اليقين لا يزول بالشك",
+          "المشقة تجلب التيسير",
+          "الضرورات تبيح المحظورات"
+        ],
+        correct: 0,
+        rationale: "القاعدة الفقهية الخاصة بالعرف: 'المعروف عُرفاً كالمشروط شَرطاً'."
+      },
+      {
+        id: 84,
+        q: "قال النبي ﷺ لهند بنت عتبة رضي الله عنها حين اشتكت شح زوجها: «خُذِي مَا يَكْفِيكِ وَوَلَدَكِ بِالْمَعْرُوفِ». دلالة لفظ 'بالمعروف' في الحديث:",
+        options: [
+          "بأخذ نصف ماله المودع سراً دون علمه",
+          "بالطلب منه بالحسنى أمام الناس في السوق",
+          "بالرجوع إلى القاضي لتحديد فلس واحد يومياً",
+          "بالمقدار الذي تعارف عليه الناس وأهل المجتمع في النفقة بما يلائم الحال"
+        ],
+        correct: 3,
+        rationale: "المعروف هنا هو العرف، أي المقدار الذي يتعارف عليه الناس في تقدير النفقة بحسب الكفاية."
+      },
+
+      // Block 22 (Q85-88): د, ب, أ, ج
+      {
+        id: 85,
+        q: "تُعد كل الآتية من 'الحقوق المشتركة بين الزوجين' في الإسلام، ما عدا:",
+        options: [
+          "حسن العشرة والمعاملة بالمعروف والرفق المتبادل",
+          "حفظ خصوصية العلاقة الزوجية وكتمان أسرار البيت",
+          "ثبوت التوارث وحرمة المصاهرة ونسب الأبناء",
+          "وجوب النفقة وتوفير المسكن والكسوة والعلاج"
+        ],
+        correct: 3,
+        rationale: "النفقة حق خاص بالزوجة على زوجها وليست من الحقوق المشتركة بينهما."
+      },
+      {
+        id: 86,
+        q: "قال رسول الله ﷺ: «إِنَّ مِنْ أَشَرِّ النَّاسِ عِنْدَ اللهِ مَنْزِلَةً يَوْمَ الْقِيَامَةِ، الرَّجُلَ يُفْضِي إِلَى امْرَأَتِهِ، وَتُفْضِي إِلَيْهِ، ثُمَّ يَنْشُرُ سِرَّهَا». يدل الحديث على حق مشترك هو:",
+        options: [
+          "حق الإنفاق المالي على طعام الأسرة",
+          "وجوب حفظ خصوصية العلاقة الزوجية وكتمان أسرارها",
+          "حق الاستئذان قبل الخروج من المنزل",
+          "حق السكن في بيت مستقل عن الأقارب"
+        ],
+        correct: 1,
+        rationale: "الحديث صريح في تجريم إفشاء أسرار الفراش والبيت ووجوب حفظ خصوصية العلاقة الزوجية."
+      },
+      {
+        id: 87,
+        q: "دلالة قول الصحابي الجليل عبد الله بن عباس رضي الله عنهما: «إِنِّي لَأُحِبُّ أَنْ أَتَزَيَّنَ لِلْمَرْأَةِ كَمَا أُحِبُّ أَنْ تَتَزَيَّنَ لِي»:",
+        options: [
+          "الاهتمام المتبادل والتجمل وحرص كل من الزوجين على أن يكون موضع اهتمام شريكه وسروره",
+          "وجوب شراء الحلي الذهبية للزوجة في كل عيد",
+          "كراهة تزيّن الرجل لزوجته والاقتصار على الثياب المبتذلة",
+          "إباحة لبس الحرير والذهب الطبيعي للرجال داخل المنزل"
+        ],
+        correct: 0,
+        rationale: "بين المنهاج أن دلالة قول ابن عباس هي الاهتمام المتبادل بين الزوجين وأن يكون كل منهما موضع اهتمام الآخر."
+      },
+      {
+        id: 88,
+        q: "حدود طاعة الزوجة لزوجها في الشريعة الإسلامية منضبطة شرعاً بـ:",
+        options: [
+          "الطاعة العمياء المطلقة حتى لو أمرها بقطيعة والديها أو ارتكاب المعاصي",
+          "طاعته في الشؤون المالية فقط دون إدارة شؤون المنزل والأبناء",
+          "طاعته بالمعروف فيما يرضي الله تعالى، ولا تجوز طاعته في معصية الخالق ولا بما لا تطيق",
+          "اشتراط موافقة أخيها الأكبر قبل امتثال أي أمر لزوجها"
+        ],
+        correct: 2,
+        rationale: "على الزوجة احترام زوجها وطاعته فيما يرضي الله تعالى (بالمعروف)، ولا طاعة في معصية الله ولا بما فيه عسف فوق طاقتها."
+      },
+
+      // Block 23 (Q89-92): ج, أ, ب, د
+      {
+        id: 89,
+        q: "المفهوم الاصطلاحي لـ 'تنظيم النسل' في الشريعة الإسلامية هو:",
+        options: [
+          "اتخاذ إجراءات طبية تمنع الحمل بصفة دائمة كاستئصال الرحم",
+          "تعمد إسقاط الحمل في غير موعده الطبيعي وبلا ضرورة طبية بأي وسيلة",
+          "اتخاذ وسيلة مشروعة لإيجاد مُدد زمنية متباعدة بين مرات الحمل لمصلحة معتبرة",
+          "إلزام الأسر بتشريع قانوني بعدم إنجاب أكثر من طفلين"
+        ],
+        correct: 2,
+        rationale: "تنظيم النسل: اتخاذ وسيلة مشروعة لإيجاد فترات زمنية متباعدة بين مرات الحمل."
+      },
+      {
+        id: 90,
+        q: "الحكم الشرعي لـ 'تحديد النسل' (اتخاذ إجراءات تمنع الحمل بصفة دائمة كاستئصال الرحم دون ضرورة طبية):",
+        options: [
+          "حرام شرعاً؛ لمخالفته مقاصد الشريعة في استمرار النسل، وتعارضه مع العقيدة إن كان خشية الفقر والرزق",
+          "مباح في جميع الأحوال متى رغبت المرأة في ذلك للتفرغ للعمل",
+          "سنة مستحبة لتوفير تكاليف المعيشة وضمان رفاهية الأولاد",
+          "مكروه كراهة تنزيهية ولا إثم على فاعله مطلقاً"
+        ],
+        correct: 0,
+        rationale: "تحديد النسل الدائم محرم لمناقضته مقصد حفظ النسل وتعارضه مع العقيدة لقوله تعالى ﴿نَّحْنُ نَرْزُقُهُمْ وَإِيَّاكُمْ﴾."
+      },
+      {
+        id: 91,
+        q: "حالة معتبرة شرعاً يُباح فيها 'تحديد النسل الدائم' استثناءً عملاً بقاعدة (الضرورات تبيح المحظورات):",
+        options: [
+          "رغبة الزوجين في عدم الإنجاب للحفاظ على رشاقة الزوجة ومظهرها",
+          "وجود مرض ضار ومُعدٍ في الزوجين أو أحدهما لا يمكن شفاؤه وينتقل للأولاد، أو خوف مؤكد على حياة الأم بتقرير طبيب ثقة",
+          "ضيق مساحة المنزل الحالي وتكاليف المدارس الخاصة المرتفعة",
+          "إنجاب أربعة ذكور والرغبة في الاكتفاء بهم"
+        ],
+        correct: 1,
+        rationale: "يباح تحديد النسل عند الضرورة الملجئة: كمرض معدٍ لا يرجى شفاؤه وينتقل للأولاد أو خطر محقق على حياة الأم يقرره طبيب ثقة."
+      },
+      {
+        id: 92,
+        q: "فاطمة امرأة تلد بعمليات قيصرية وتتابع الحمل يهدد صحتها، فاتفقت مع زوجها على استخدام وسيلة طبية آمنة للمباعدة بين الأحمال مدة 3 سنوات. يندرج هذا الفعل تحت:",
+        options: [
+          "الإجهاض المحرم شرعاً",
+          "تحديد النسل الممنوع شرعاً",
+          "العزل المحرم الذي نهت عنه السنة",
+          "تنظيم النسل المباح شرعاً لدفع الضرر ورعاية صحة الأم والطفل"
+        ],
+        correct: 3,
+        rationale: "المباعدة بين الأحمال بوسيلة مشروعة مؤقتة لدفع الضرر عن الأم ورعاية الطفل هو تنظيم نسل مباح شرعاً."
+      },
+
+      // Block 24 (Q93-96): د, ج, أ, ب
+      {
+        id: 93,
+        q: "المفهوم الاصطلاحي لـ 'الأمن الغذائي في الإسلام' هو:",
+        options: [
+          "تخزين جميع المحاصيل الزراعية في صوامع الدولة وبيعها عند اشتداد الغلاء",
+          "الاعتماد الكامل على استيراد الحبوب والمواد الأساسية من الأسواق العالمية",
+          "حظر تصدير المواد التموينية خارج حدود الدولة في جميع الأوقات",
+          "توفير الغذاء الصحي الكافي الذي يلبي حاجات أفراد المجتمع في مختلف الظروف"
+        ],
+        correct: 3,
+        rationale: "الأمن الغذائي: توفير الغذاء الصحي الكافي الذي يلبي حاجات أفراد المجتمع في مختلف الظروف."
+      },
+      {
+        id: 94,
+        q: "مر النبي ﷺ على كومة طعام فأدخل يده فيها فنالت بللاً، فقال لصاحبها: «أَفَلَا جَعَلْتَهُ فَوْقَ الطَّعَامِ كَيْ يَرَاهُ النَّاسُ، مَنْ غَشَّ فَلَيْسَ مِنِّي». يدل هذا الموقف على تدبير لحفظ الأمن الغذائي من خلال:",
+        options: [
+          "تحريم الاحتكار وتحديد الأسعار جبرياً",
+          "منع البيع على البيع والنجش في الأسواق",
+          "ضبط الأسواق وحمايتها من الغش والتدليس في جودة السلع الغذائية",
+          "فرض رسوم وضرائب جمركية على الحبوب المبللة"
+        ],
+        correct: 2,
+        rationale: "الحديث صريح في ضبط الأسواق وتحريم الغش والتدليس لضمان سلامة الأقوات وثقة المستهلك."
+      },
+      {
+        id: 95,
+        q: "تُشير وصية الخليفة أبي بكر الصديق رضي الله عنه لجيش أسامة بن زيد: «لا تُغْرِقُوا نَحْلاً وَلا تُحْرِقُوهُ، وَلا تَعْقِرُوا بَهِيمَةً، وَلا شَجَرَةً مُثْمِرَةً» إلى تشريع إسلامي يخدم الأمن الغذائي وهو:",
+        options: [
+          "حماية الثروة الزراعية والحيوانية والبيئية ومنع تدمير مصادر الغذاء حتى في ظروف الحرب",
+          "إلزام الأعداء بدفع غرامات مالية بدل الأشجار التالفة",
+          "تشجيع المقاتلين على صيد الطيور والبهائم في ساحة المعركة",
+          "قصر العمل في الزراعة على الأسرى والعمال الأجراء"
+        ],
+        correct: 0,
+        rationale: "وصية الصديق تدل على حماية مصادر الأمن الغذائي (الزراعة والأشجار والبهائم) ومنع إتلافها زمن القتال."
+      },
+      {
+        id: 96,
+        q: "قال رسول الله ﷺ: «مَنْ أَصْبَحَ مِنْكُمْ آمِنًا فِي سِرْبِهِ، مُعَافًى فِي جَسَدِهِ، عِنْدَهُ قُوتُ يَوْمِهِ، فَكَأَنَّمَا حِيزَتْ لَهُ الدُّنْيَا». معنى 'فِي سِرْبِهِ' في الحديث الشريف هو:",
+        options: [
+          "في ماشيته وإبله في المرعى الخصيب",
+          "في نفسه وأهله ومجتمعه وبيئته",
+          "في حانوته ودكانه التجاري في السوق",
+          "في سفره وترحاله بين المدن"
+        ],
+        correct: 1,
+        rationale: "معنى (آمناً في سربه): أي آمناً في نفسه وأهله ومجتمعه."
+      },
+
+      // Block 25 (Q97-100): أ, د, ج, ب
+      {
+        id: 97,
+        q: "المفهوم الاصطلاحي لـ 'الوحدة الوطنية' كما بينه المنهاج المدرسي هو:",
+        options: [
+          "تماسك أبناء الوطن وتحابهم وانتماؤهم لبلدهم والتفاني في خدمته والدفاع عنه دون النظر للاختلافات العرقية والدينية",
+          "إلغاء الخصوصيات الثقافية لجميع المكونات وإجبارهم على مذهب فقهي واحد",
+          "توحيد الأنظمة السياسية في العالم العربي تحت إدارة مركزية واحدة",
+          "تقديم مصلحة القبيلة والعشيرة على مصلحة أمن واستقرار الدولة"
+        ],
+        correct: 0,
+        rationale: "تعريف الوحدة الوطنية: تماسك أبناء الوطن وتحابهم وانتماؤهم لبلدهم والتفاني في خدمته والدفاع عنه دون النظر للاختلافات العرقية والدينية."
+      },
+      {
+        id: 98,
+        q: "قال رسول الله ﷺ محذراً من العصبية القبلية والنعرات العرقية: «دَعُوهَا فَإِنَّهَا مُنْتِنَةٌ». يدل هذا التوجيه النبوي على مبدأ وطني راسخ هو:",
+        options: [
+          "تحقيق التكافل المالي الموسمي في الأعياد",
+          "تطبيق مبدأ الشورى في تعيين القضاة والولاة",
+          "تشجيع التنافس القبلي في الانتخابات المحلية",
+          "محاربة كل صور التعصب والعنصرية والتمييز التي تمزق نسيج الوطن الواحد"
+        ],
+        correct: 3,
+        rationale: "الحديث صريح في محاربة التعصب والعنصرية والتفاخر بالأنساب لحفظ تماسك ووحدة المجتمع."
+      },
+      {
+        id: 99,
+        q: "من أبرز دعائم الوحدة الوطنية في الأردن التي نذرت نفسها للدفاع عن الوطن والتصدي لكل من يحاول المساس بأمنه واستقراره ومحاربة الفتن:",
+        options: [
+          "الشركات والمؤسسات الاستثمارية الخاصة",
+          "المجالس البلدية والغرف التجارية",
+          "القوات المسلحة الأردنية (الجيش العربي) والأجهزة الأمنية المختلفة",
+          "وسائل الإعلام الأجنبية المعتمدة في المملكة"
+        ],
+        correct: 2,
+        rationale: "نص الكتاب في دعائم الوحدة الوطنية على دور القوات المسلحة الأردنية (الجيش العربي) والأجهزة الأمنية في صون الوحدة والدفاع عن الوطن."
+      },
+      {
+        id: 100,
+        q: "أرسى النبي ﷺ الدعامة الأولى للوحدة الوطنية والمواطنة الصالحة عقب هجرته للمدينة المنورة من خلال وثيقة المدينة التي قررت أن:",
+        options: [
+          "المواطنة مقصورة على المهاجرين والأنصار فقط دون غيرهم من السكان",
+          "المسلمين وغيرهم من سكان المدينة كاليهود يشكلون مجتمعاً واحداً متكافئاً في الحقوق والواجبات بمقتضى الإقامة والالتزام بالوثيقة",
+          "غير المسلمين يُمنعون من تملك العقارات والعمل التجاري في المدينة",
+          "الخلافات القضائية تُحل وفق الأعراف الجاهلية السابقة دون الرجوع لحكم الشرع"
+        ],
+        correct: 1,
+        rationale: "وثيقة المدينة شملت المسلمين وغيرهم، وقررت أنهم أمة واحدة بمقتضى الإقامة والالتزام بالوثيقة وحفظت حقوق الجميع."
       }
     ];
 
     // State Management
-    let currentIndex = 0;
-    let isPracticeMode = true;
-    let userAnswers = {}; // { questionId: "A" | "B" | "C" | "D" }
+    const TOTAL_QUESTIONS = questionsData.length;
+    const TOTAL_TIME_SECONDS = 40 * 60; // 40 minutes = 2400 seconds
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+    let userAnswers = {}; // { questionId: selectedOptionIndex }
+    let isExamSubmitted = false;
 
     // DOM Elements
-    const qNumberEl = document.getElementById('qNumber');
-    const qTextEl = document.getElementById('qText');
-    const qOptionsEl = document.getElementById('qOptions');
-    const explanationBoxEl = document.getElementById('explanationBox');
-    const explanationTextEl = document.getElementById('explanationText');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const gridNavEl = document.getElementById('gridNav');
-    const scoreTrackerEl = document.getElementById('scoreTracker');
-    const progressBarEl = document.getElementById('progressBar');
-    const modeToggleBtn = document.getElementById('modeToggleBtn');
-    const modeBadgeEl = document.getElementById('modeBadge');
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const questionsContainer = document.getElementById('questionsContainer');
+    const navGrid = document.getElementById('navGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerContainer = document.getElementById('timerContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const answeredCounterText = document.getElementById('answeredCounterText');
+    const finishExamBtn = document.getElementById('finishExamBtn');
+    const confirmModal = document.getElementById('confirmModal');
+    const modalMsg = document.getElementById('modalMsg');
+    const cancelSubmitBtn = document.getElementById('cancelSubmitBtn');
+    const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
+    const resultsDashboard = document.getElementById('resultsDashboard');
+    const navToggle = document.getElementById('navToggle');
+    const navPanel = document.getElementById('navPanel');
 
-    // Initialize Sidebar Grid Navigation
-    function initSidebar() {
-      gridNavEl.innerHTML = '';
-      questionsData.forEach((q, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'grid-nav-btn';
-        btn.innerText = q.id;
-        btn.id = `nav-btn-${q.id}`;
-        btn.addEventListener('click', () => jumpToQuestion(index));
-        gridNavEl.appendChild(btn);
+    // Option Labels Map
+    const OPTION_CHARS = ['أ', 'ب', 'ج', 'د'];
+
+    // Initialize Exam
+    function initExam() {
+      renderQuestions();
+      renderNavGrid();
+      startTimer();
+      updateProgress();
+
+      // Listeners
+      finishExamBtn.addEventListener('click', promptSubmitModal);
+      cancelSubmitBtn.addEventListener('click', () => confirmModal.classList.remove('active'));
+      confirmSubmitBtn.addEventListener('click', () => {
+        confirmModal.classList.remove('active');
+        submitExam();
+      });
+
+      navToggle.addEventListener('click', () => {
+        navPanel.classList.toggle('open');
       });
     }
 
-    // Render Question
-    function renderQuestion() {
-      const q = questionsData[currentIndex];
+    // Render Questions Feed
+    function renderQuestions() {
+      questionsContainer.innerHTML = '';
+      questionsData.forEach((q, index) => {
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        card.id = `q-card-${q.id}`;
 
-      // Update Question Number & Text
-      qNumberEl.innerText = `Question ${q.id} of ${questionsData.length}`;
-      qTextEl.innerText = q.question;
-
-      // Render Options
-      qOptionsEl.innerHTML = '';
-      const selectedAns = userAnswers[q.id];
-
-      Object.entries(q.options).forEach(([key, text]) => {
-        const optionItem = document.createElement('div');
-        optionItem.className = 'option-item';
-
-        if (selectedAns) {
-          if (key === selectedAns) optionItem.classList.add('selected');
-          if (isPracticeMode) {
-            if (key === q.answer) optionItem.classList.add('correct');
-            if (key === selectedAns && selectedAns !== q.answer) optionItem.classList.add('incorrect');
-          }
-        }
-
-        optionItem.innerHTML = `
-          <span class="option-key">${key}.</span>
-          <span class="option-text">${text}</span>
+        const header = document.createElement('div');
+        header.className = 'q-header';
+        header.innerHTML = `
+          <span class="q-number">السؤال ${q.id}</span>
+          <div class="q-text">${q.q}</div>
         `;
+        card.appendChild(header);
 
-        optionItem.addEventListener('click', () => selectAnswer(q.id, key));
-        qOptionsEl.appendChild(optionItem);
+        const optionsList = document.createElement('div');
+        optionsList.className = 'options-list';
+
+        q.options.forEach((optText, optIdx) => {
+          const label = document.createElement('label');
+          label.className = 'option-label';
+          label.id = `opt-${q.id}-${optIdx}`;
+          label.innerHTML = `
+            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="handleSelectOption(${q.id}, ${optIdx})">
+            <span class="opt-symbol">${OPTION_CHARS[optIdx]}</span>
+            <span class="opt-text">${optText}</span>
+          `;
+          optionsList.appendChild(label);
+        });
+
+        card.appendChild(optionsList);
+
+        // Placeholder for rationale after submission
+        const rationaleDiv = document.createElement('div');
+        rationaleDiv.id = `rationale-${q.id}`;
+        card.appendChild(rationaleDiv);
+
+        questionsContainer.appendChild(card);
       });
+    }
 
-      // Explanation Box
-      if (isPracticeMode && selectedAns) {
-        explanationTextEl.innerText = q.explanation;
-        explanationBoxEl.classList.add('show');
-      } else {
-        explanationBoxEl.classList.remove('show');
-      }
-
-      // Sidebar Active Highlight
-      document.querySelectorAll('.grid-nav-btn').forEach(btn => btn.classList.remove('active'));
-      const activeNavBtn = document.getElementById(`nav-btn-${q.id}`);
-      if (activeNavBtn) activeNavBtn.classList.add('active');
-
-      // Re-trigger MathJax typesetting for equations
-      if (window.MathJax) {
-        MathJax.typesetPromise([qTextEl, qOptionsEl, explanationBoxEl]).catch(err => console.log(err));
-      }
-
-      // Update Navigation Buttons
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.innerText = currentIndex === questionsData.length - 1 ? 'Finish' : 'Next →';
+    // Render Nav Grid (1 to 100)
+    function renderNavGrid() {
+      navGrid.innerHTML = '';
+      questionsData.forEach(q => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn';
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = q.id;
+        btn.type = 'button';
+        btn.onclick = () => {
+          const targetCard = document.getElementById(`q-card-${q.id}`);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          if (window.innerWidth <= 992) {
+            navPanel.classList.remove('open');
+          }
+        };
+        navGrid.appendChild(btn);
+      });
     }
 
     // Handle Option Selection
-    function selectAnswer(qId, key) {
-      userAnswers[qId] = key;
-      updateStatus();
-      renderQuestion();
+    window.handleSelectOption = function(qId, optIdx) {
+      if (isExamSubmitted) return;
+
+      userAnswers[qId] = optIdx;
+
+      // Update Card State
+      const card = document.getElementById(`q-card-${qId}`);
+      if (card) {
+        card.classList.add('answered');
+        const labels = card.querySelectorAll('.option-label');
+        labels.forEach((lbl, idx) => {
+          if (idx === optIdx) {
+            lbl.classList.add('selected');
+          } else {
+            lbl.classList.remove('selected');
+          }
+        });
+      }
+
+      // Update Nav Grid
+      const navBtn = document.getElementById(`nav-btn-${qId}`);
+      if (navBtn) {
+        navBtn.classList.add('answered');
+      }
+
+      updateProgress();
+    };
+
+    // Update Progress Bar & Counters
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const pct = Math.round((answeredCount / TOTAL_QUESTIONS) * 100);
+      progressBar.style.width = `${pct}%`;
+      progressText.textContent = `${answeredCount} / ${TOTAL_QUESTIONS} (${pct}%)`;
+      answeredCounterText.textContent = `تمت الإجابة: ${answeredCount} من ${TOTAL_QUESTIONS}`;
     }
 
-    // Update Progress and Sidebar Styles
-    function updateStatus() {
-      let solvedCount = 0;
+    // Timer Implementation (40 mins countdown)
+    function startTimer() {
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+
+        if (timeRemaining <= 300) { // 5 mins left warning
+          timerContainer.classList.add('timer-warning');
+        }
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          alert('انتهى الوقت المحدد للاختبار (40 دقيقة)! سيتم تسليم الإجابات واحتساب النتيجة تلقائياً.');
+          submitExam();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+    }
+
+    // Prompt Submit Modal
+    function promptSubmitModal() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const remainingCount = TOTAL_QUESTIONS - answeredCount;
+
+      if (remainingCount > 0) {
+        modalMsg.innerHTML = `تنبيه: لقد أجبت عن <strong>${answeredCount}</strong> سؤالاً وبقي لديك <strong>${remainingCount}</strong> سؤالاً دون إجابة.<br>هل ترغب بالتسليم واحتساب النتيجة الآن؟`;
+      } else {
+        modalMsg.innerHTML = `رائع! لقد أجبت عن جميع الأسئلة الـ 100 بالكامل.<br>هل أنت متأكد من رغبتك في تسليم الامتحان واحتساب نتيجتك النهائية؟`;
+      }
+
+      confirmModal.classList.add('active');
+    }
+
+    // Final Exam Submission & Scoring
+    function submitExam() {
+      if (isExamSubmitted) return;
+      isExamSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Disable all inputs
+      const allInputs = document.querySelectorAll('input[type="radio"]');
+      allInputs.forEach(input => input.disabled = true);
+      finishExamBtn.disabled = true;
+      finishExamBtn.style.opacity = '0.5';
+      finishExamBtn.textContent = 'تم تسليم الامتحان';
+
+      // Calculate Scores
+      let correctAnswers = 0;
+      let wrongAnswers = 0;
+      let skipped = 0;
 
       questionsData.forEach(q => {
-        const userAns = userAnswers[q.id];
-        const btn = document.getElementById(`nav-btn-${q.id}`);
+        const studentChoice = userAnswers[q.id];
+        const card = document.getElementById(`q-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const rationaleDiv = document.getElementById(`rationale-${q.id}`);
 
-        if (userAns && btn) {
-          solvedCount++;
-          if (isPracticeMode) {
-            if (userAns === q.answer) {
-              btn.className = 'grid-nav-btn correct';
-            } else {
-              btn.className = 'grid-nav-btn incorrect';
-            }
+        if (card) {
+          card.classList.remove('answered');
+          const correctLabel = document.getElementById(`opt-${q.id}-${q.correct}`);
+          
+          if (studentChoice === undefined) {
+            skipped++;
+            card.classList.add('wrong-ans');
+            if (correctLabel) correctLabel.classList.add('is-correct');
+            if (navBtn) navBtn.style.background = '#94a3b8';
+          } else if (studentChoice === q.correct) {
+            correctAnswers++;
+            card.classList.add('correct-ans');
+            if (correctLabel) correctLabel.classList.add('is-correct');
+            if (navBtn) navBtn.style.background = 'var(--correct)';
           } else {
-            btn.className = 'grid-nav-btn active';
+            wrongAnswers++;
+            card.classList.add('wrong-ans');
+            const studentLabel = document.getElementById(`opt-${q.id}-${studentChoice}`);
+            if (studentLabel) studentLabel.classList.add('is-wrong');
+            if (correctLabel) correctLabel.classList.add('is-correct');
+            if (navBtn) navBtn.style.background = 'var(--wrong)';
+          }
+
+          // Inject Rationale
+          if (rationaleDiv) {
+            rationaleDiv.className = 'rationale-box';
+            rationaleDiv.innerHTML = `
+              <strong>الإجابة الصحيحة المعتمدة:</strong> (${OPTION_CHARS[q.correct]})<br>
+              <strong>التوجيه المعياري من المنهاج:</strong> ${q.rationale}
+            `;
           }
         }
       });
 
-      scoreTrackerEl.innerText = `${solvedCount} / ${questionsData.length} Solved`;
-      progressBarEl.style.width = `${(solvedCount / questionsData.length) * 100}%`;
+      // Show Results Dashboard
+      displayResults(correctAnswers, wrongAnswers, skipped);
     }
 
-    // Jump to specific question
-    function jumpToQuestion(index) {
-      currentIndex = index;
-      renderQuestion();
+    function displayResults(correct, wrong, skipped) {
+      const score = correct; // 1 mark per question
+      const timeSpentSec = TOTAL_TIME_SECONDS - Math.max(0, timeRemaining);
+      const spentMin = Math.floor(timeSpentSec / 60);
+      const spentSec = timeSpentSec % 60;
+
+      document.getElementById('scoreNum').textContent = score;
+      document.getElementById('correctCount').textContent = correct;
+      document.getElementById('wrongCount').textContent = wrong;
+      document.getElementById('skippedCount').textContent = skipped;
+      document.getElementById('timeSpent').textContent = `${String(spentMin).padStart(2, '0')}:${String(spentSec).padStart(2, '0')}`;
+      document.getElementById('scorePercentage').textContent = `النسبة المئوية: ${score}%`;
+
+      const feedback = document.getElementById('resultFeedback');
+      if (score >= 90) {
+        feedback.textContent = 'تقدير: ممتاز جداً (أداء استثنائي متفوق يعكس تمكناً عميقاً من المنهاج)';
+        feedback.style.color = 'var(--correct)';
+      } else if (score >= 80) {
+        feedback.textContent = 'تقدير: جيد جداً مرتفع (مستوى متميز ومتقن للمفاهيم الشرعية)';
+        feedback.style.color = '#15803d';
+      } else if (score >= 70) {
+        feedback.textContent = 'تقدير: جيد جداً (أداء طيب مع وجود بعض الدقائق الفقهية التي تحتاج لمراجعة)';
+        feedback.style.color = '#ca8a04';
+      } else if (score >= 50) {
+        feedback.textContent = 'تقدير: ناجح (تحتاج إلى تدقيق ومراجعة الفروق والمصطلحات الدقيقة بالمنهاج)';
+        feedback.style.color = '#ea580c';
+      } else {
+        feedback.textContent = 'تقدير: دون المستوى المطلوب (يُنصح بإعادة دراسة الكتاب والتركيز على الأدلة والأحكام)';
+        feedback.style.color = 'var(--wrong)';
+      }
+
+      resultsDashboard.style.display = 'block';
+      resultsDashboard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // Next/Prev Listeners
-    nextBtn.addEventListener('click', () => {
-      if (currentIndex < questionsData.length - 1) {
-        currentIndex++;
-        renderQuestion();
-      }
-    });
-
-    prevBtn.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        renderQuestion();
-      }
-    });
-
-    // Toggle Practice / Exam Mode
-    modeToggleBtn.addEventListener('click', () => {
-      isPracticeMode = !isPracticeMode;
-      modeToggleBtn.innerText = isPracticeMode ? 'Mode: Practice' : 'Mode: Exam';
-      modeBadgeEl.innerText = isPracticeMode ? 'Practice Mode' : 'Exam Mode';
-      updateStatus();
-      renderQuestion();
-    });
-
-    // Toggle Theme
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.body.setAttribute('data-theme', newTheme);
-      themeToggleBtn.innerText = newTheme === 'dark' ? '🌙 Dark' : '☀️ Light';
-    });
-
-    // Init App
-    initSidebar();
-    renderQuestion();
+    // Run on load
+    document.addEventListener('DOMContentLoaded', initExam);
   </script>
 </body>
 </html>
